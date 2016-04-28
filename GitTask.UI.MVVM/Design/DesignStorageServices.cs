@@ -41,8 +41,8 @@ namespace GitTask.UI.MVVM.Design
             {
                 new Task() { Id = 1, Title = "Zrob kanapki", DateCreated = DateTime.Now.AddDays(-100), Priority = TaskPriority.Major, Content = "Prosze Cie, zrobze kanapeczki",
                     AssignedMembers = new List<string> {"Aleksandra Zachwiej"}, AuthorName = "Mikołaj Sacha", CommentsIds = new List<int> {1}, State = "TO DO"},
-                new Task() { Id = 2, Title = "Dokonczyc aplikacje", DateCreated = DateTime.Now.AddDays(-100), Priority = TaskPriority.Critical, Content = "Najwyzszy czas to skonczyc!",
-                    AssignedMembers = new List<string> {"Mikołaj Sacha", "Jan Kowalski"}, AuthorName = "Marcin Nowak", CommentsIds = new List<int>(), State = "IN PROFRESS"},
+                new Task() { Id = 2, Title = "Dokonczyc aplikacje", DateCreated = DateTime.Now.AddDays(-100), Priority = TaskPriority.Critical, Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    AssignedMembers = new List<string> {"Mikołaj Sacha", "Jan Kowalski"}, AuthorName = "Marcin Nowak", CommentsIds = new List<int>(), State = "IN PROGRESS"},
                 new Task() { Id = 3, Title = "Przetestuj jakies cos", DateCreated = DateTime.Now.AddDays(-100), Priority = TaskPriority.Minor, Content = "Testy jednostkowe bla bla bla.",
                     AssignedMembers = new List<string> (), AuthorName = "Jan Kowalski", CommentsIds = new List<int>(), State = "FIXED"}
             });

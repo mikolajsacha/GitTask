@@ -3,39 +3,58 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
         xmlns:ignore="http://www.galasoft.ch/ignore"
+        d:DesignHeight="250"
+        d:DesignWidth="250"
         mc:Ignorable="d ignore">
 
-    <Grid Margin="0,5,0,5" Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition MinHeight="30" Height="Auto"/>
-            <RowDefinition Height="1"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="1"/>
-            <RowDefinition MinHeight="30" Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Title, Mode=OneWay}" FontSize="14" Foreground="DarkSlateGray" FontWeight="SemiBold" TextWrapping="Wrap" Margin="5"/>
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding AuthorName, Mode=OneWay}" FontSize="14" Foreground="SlateGray" Margin="5" TextAlignment="Right"/>
+    <Border x:Name="Main" Margin="0,5,0,5" Background="White" CornerRadius="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition MinHeight="30" Height="Auto"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition MinHeight="30" Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Title, Mode=OneWay}" FontSize="15" Foreground="DarkSlateGray" FontWeight="SemiBold" TextWrapping="Wrap" Margin="5"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding AuthorName, Mode=OneWay}" FontSize="14" Foreground="SlateGray" Margin="5" TextWrapping="Wrap" TextAlignment="Right"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0" Background="{Binding Priority, Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}">
+                <Grid.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="{Binding Priority, Converter={StaticResource TaskPriorityToStringConverter}, Mode=OneWay}"
+                               Foreground="{Binding Priority, Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}"
+                               FontSize="12" VerticalAlignment="Center" TextAlignment="Center" />
+                    </ToolTip>
+                </Grid.ToolTip>
+            </Grid>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Content, Converter={StaticResource TaskContentToShortStringConverter}, Mode=OneWay}" TextWrapping="Wrap" Margin="5" MinHeight="50">
+                <TextBlock.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="{Binding Content, Mode=OneWay}" TextWrapping="Wrap" MaxWidth="200" />
+                    </ToolTip>
+                </TextBlock.ToolTip>
+            </TextBlock>
+            <Grid Grid.Row="3" Grid.Column="0" Background="Gray"/>
+            <ItemsControl Grid.Row="4" Grid.Column="0" Margin="3,0,3,0" ItemsSource="{Binding AssignedMembers, Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <elements:InitialsBadge DataContext="{Binding Mode=OneWay}" Margin="2,3,2,3"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="0" Background="Gray"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Content, Mode=OneWay}" TextWrapping="Wrap" Margin="5" MinHeight="50"/>
-        <Grid Grid.Row="3" Grid.Column="0" Background="Gray"/>
-        <ItemsControl Grid.Row="4" Grid.Column="0" Margin="3,0,3,0" ItemsSource="{Binding AssignedMembers, Mode=OneWay}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}" Margin="2,5,2,5" FontSize="12" Foreground="SlateGray"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+    </Border>
 </UserControl>

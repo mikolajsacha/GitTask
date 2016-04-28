@@ -6,7 +6,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:ignore="http://www.galasoft.ch/ignore"
 			 xmlns:locator="clr-namespace:GitTask.UI.MVVM.Locator"
-			 StartupUri="View\MainWindow.xaml"
+             xmlns:converters="clr-namespace:GitTask.UI.MVVM.Converters"
+			 StartupUri="View\MainWindowView.xaml"
              mc:Ignorable="d ignore">
 
     <Application.Resources>
@@ -20,10 +21,15 @@
                     <sys:Double x:Key="WindowWidth">1024</sys:Double>
                     <sys:Double x:Key="WindowHeight">768</sys:Double>
 
-                    <sys:Double x:Key="HiddenTaskStateColumnWidth">30</sys:Double>
+                    <sys:Double x:Key="HiddenTaskStateColumnWidth">40</sys:Double>
                     <sys:Double x:Key="MinimumOpenedTaskStateColumnWidth">150</sys:Double>
 
                     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+                    <converters:NameToInitialsConverter x:Key="NameToInitialsConverter" />
+                    <converters:TaskPriorityToColorConverter x:Key="TaskPriorityToColorConverter" />
+                    <converters:TaskPriorityToStringConverter x:Key="TaskPriorityToStringConverter" />
+                    <converters:TaskContentToShortStringConverter x:Key="TaskContentToShortStringConverter" />
+                    <converters:ToUpperCaseConverter x:Key="ToUpperCaseConverter" />
                 </ResourceDictionary>
 
                 <ResourceDictionary Source="Skins\MainSkin.xaml" />

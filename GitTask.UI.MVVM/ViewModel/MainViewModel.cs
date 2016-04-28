@@ -12,7 +12,7 @@ namespace GitTask.UI.MVVM.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private const int DefaultOpenedColumnsCount = 4;
-        public ObservableCollection<TaskStateColumn> TaskStateColumns { get; }
+        public ObservableCollection<TaskStateColumnViewModel> TaskStateColumns { get; }
 
         private int _openedColumnsCount;
         public int OpenedColumnsCount
@@ -45,7 +45,7 @@ namespace GitTask.UI.MVVM.ViewModel
             _taskStateQueryService = taskStateQueryService;
             _taskQueryService = taskQueryService;
 
-            TaskStateColumns = new ObservableCollection<TaskStateColumn>();
+            TaskStateColumns = new ObservableCollection<TaskStateColumnViewModel>();
         }
 
         public void InitializeTaskStateColumns()
@@ -56,7 +56,7 @@ namespace GitTask.UI.MVVM.ViewModel
             foreach (var state in _taskStateQueryService.GetAll().OrderBy(x => x.Position))
             {
                 var isOpened = counter < DefaultOpenedColumnsCount;
-                var taskStateColumn = new TaskStateColumn(state, _taskQueryService, isOpened);
+                var taskStateColumn = new TaskStateColumnViewModel(state, _taskQueryService, isOpened);
                 taskStateColumn.PropertyChanged += TaskStateColumnOnPropertyChanged;
                 TaskStateColumns.Add(taskStateColumn);
                 counter++;

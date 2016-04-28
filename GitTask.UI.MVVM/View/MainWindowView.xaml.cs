@@ -8,29 +8,38 @@ using GitTask.UI.MVVM.ViewModel;
 
 namespace GitTask.UI.MVVM.View
 {
-    public partial class MainWindow
+    public partial class MainWindowView
     {
         private const int WindowBorderWidth = 16;
         private int _openedTaskStateColumnsCount;
         private int _hiddenTaskStateColumnsCount;
 
-        public MainWindow()
+        public MainWindowView()
         {
             InitializeComponent();
-            Closing += (s, e) => IocLocator.Cleanup();
+            Closing += OnClosing;
             SizeChanged += OnMainWindowSizeChanged;
             ((MainViewModel)DataContext).PropertyChanged += OnDataContextPropertyChanged;
             ((MainViewModel)DataContext).InitializeTaskStateColumns();
         }
 
+        private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
+        {
+            var mainViewModel = DataContext as MainViewModel;
+            if (mainViewModel != null && DataContext != null)
+            {
+                mainViewModel.PropertyChanged -= OnDataContextPropertyChanged;
+            }
+            IocLocator.Cleanup();
+        }
+
         private void OnDataContextPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (propertyChangedEventArgs.PropertyName == "HiddenColumnsCount")
-            {
-                _openedTaskStateColumnsCount = ((MainViewModel) DataContext).OpenedColumnsCount;
-                _hiddenTaskStateColumnsCount = ((MainViewModel) DataContext).HiddenColumnsCount;
-                SendDistributeTaskStateColumnsMessage();
-            }
+            if (propertyChangedEventArgs.PropertyName != "HiddenColumnsCount") return;
+
+            _openedTaskStateColumnsCount = ((MainViewModel)DataContext).OpenedColumnsCount;
+            _hiddenTaskStateColumnsCount = ((MainViewModel)DataContext).HiddenColumnsCount;
+            SendDistributeTaskStateColumnsMessage();
         }
 
         private void OnMainWindowSizeChanged(object sender, SizeChangedEventArgs sizeChangedEventArgs)

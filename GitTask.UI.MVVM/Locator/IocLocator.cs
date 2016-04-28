@@ -1,13 +1,12 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
+﻿using GalaSoft.MvvmLight.Ioc;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
-using GitTask.Json;
 using GitTask.Storage;
-using GitTask.Storage.Interface;
 using GitTask.UI.MVVM.Design;
 using GitTask.UI.MVVM.ViewModel;
+using GitTask.UI.MVVM.ViewModel.Footer;
+using GitTask.UI.MVVM.ViewModel.TaskDetails;
 using Microsoft.Practices.ServiceLocation;
 
 namespace GitTask.UI.MVVM.Locator
@@ -41,9 +40,11 @@ namespace GitTask.UI.MVVM.Locator
             SimpleIoc.Default.Register<IQueryService<Comment>, QueryService<Comment>>();
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<FooterViewModel>();
         }
 
         public static MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public static FooterViewModel FooterViewModel => ServiceLocator.Current.GetInstance<FooterViewModel>();
 
         public static void Cleanup()
         {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -7,7 +8,7 @@ using GitTask.Domain.Services.Interface;
 
 namespace GitTask.UI.MVVM.ViewModel.Main
 {
-    public class TaskStateColumn : ViewModelBase
+    public class TaskStateColumnViewModel : ViewModelBase
     {
         private readonly IQueryService<Task> _taskQueryService;
 
@@ -35,7 +36,7 @@ namespace GitTask.UI.MVVM.ViewModel.Main
 
         public bool IsHidden => !_isOpened;
 
-        public TaskStateColumn(TaskState taskState, IQueryService<Task> taskQueryService, bool isOpened)
+        public TaskStateColumnViewModel(TaskState taskState, IQueryService<Task> taskQueryService, bool isOpened)
         {
             _showColumnCommand = new RelayCommand(OnShowColumnCommand);
             _hideColumnCommand = new RelayCommand(OnHideColumnCommand);
@@ -50,7 +51,7 @@ namespace GitTask.UI.MVVM.ViewModel.Main
         public void LoadTasks()
         {
             Tasks.Clear();
-            foreach (var task in _taskQueryService.GetByProperty("State", TaskState.Name))
+            foreach (var task in _taskQueryService.GetByProperty("State", TaskState.Name).OrderBy(x => x.Priority))
             {
                 Tasks.Add(task);
             }

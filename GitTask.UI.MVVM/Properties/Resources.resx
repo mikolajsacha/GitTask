@@ -120,4 +120,22 @@
   <data name="Hide" xml:space="preserve">
     <value>Hide</value>
   </data>
+  <data name="PriorityBlocker" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="PriorityCritical" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="PriorityMajor" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="PriorityMedium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="PriorityMinor" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="TaskDetails" xml:space="preserve">
+    <value>Task Details</value>
+  </data>
 </root>

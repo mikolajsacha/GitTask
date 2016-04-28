@@ -68,5 +68,59 @@ namespace GitTask.UI.MVVM.Properties {
                 return ResourceManager.GetString("Hide", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blocker.
+        /// </summary>
+        public static string PriorityBlocker {
+            get {
+                return ResourceManager.GetString("PriorityBlocker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Critical.
+        /// </summary>
+        public static string PriorityCritical {
+            get {
+                return ResourceManager.GetString("PriorityCritical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Major.
+        /// </summary>
+        public static string PriorityMajor {
+            get {
+                return ResourceManager.GetString("PriorityMajor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medium.
+        /// </summary>
+        public static string PriorityMedium {
+            get {
+                return ResourceManager.GetString("PriorityMedium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minor.
+        /// </summary>
+        public static string PriorityMinor {
+            get {
+                return ResourceManager.GetString("PriorityMinor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task Details.
+        /// </summary>
+        public static string TaskDetails {
+            get {
+                return ResourceManager.GetString("TaskDetails", resourceCulture);
+            }
+        }
     }
 }

@@ -77,19 +77,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ToUpperCaseConverter.cs" />
+    <Compile Include="Converters\TaskContentToShortStringConverter.cs" />
+    <Compile Include="Converters\TaskPriorityToColorConverter.cs" />
+    <Compile Include="Converters\TaskPriorityToStringConverter.cs" />
+    <Compile Include="Converters\NameToInitialsConverter.cs" />
     <Compile Include="Design\DesignStorageServices.cs" />
     <Compile Include="Design\DesignStorageService.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
+    <Compile Include="ViewModel\Footer\FooterViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Locator\IocLocator.cs" />
-    <Compile Include="ViewModel\Main\TaskStateColumn.cs" />
+    <Compile Include="ViewModel\Main\TaskStateColumnViewModel.cs" />
+    <Compile Include="ViewModel\TaskDetails\TaskDetailsViewModel.cs" />
+    <Compile Include="View\Elements\InitialsBadge.xaml.cs">
+      <DependentUpon>InitialsBadge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Footer\FooterPartial.xaml.cs">
+      <DependentUpon>FooterPartial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Main\TaskStateColumnPartial.xaml.cs">
       <DependentUpon>TaskStateColumnPartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Main\TaskPartial.xaml.cs">
       <DependentUpon>TaskPartial.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\MainWindow.xaml">
+    <Compile Include="View\TaskDetails\TaskDetailsWindow.xaml.cs">
+      <DependentUpon>TaskDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\Elements\InitialsBadge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Footer\FooterPartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -97,8 +121,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="View\MainWindowView.xaml.cs">
+      <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Skins\MainSkin.xaml">
@@ -110,6 +134,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Main\TaskPartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TaskDetails\TaskDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

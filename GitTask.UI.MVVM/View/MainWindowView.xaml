@@ -1,0 +1,39 @@
+﻿<Window x:Class="GitTask.UI.MVVM.View.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:main="clr-namespace:GitTask.UI.MVVM.View.Main"
+        xmlns:footer="clr-namespace:GitTask.UI.MVVM.View.Footer"
+        mc:Ignorable="d ignore"
+        Height="{StaticResource WindowHeight}"
+        MinHeight="250"
+        MinWidth="300"
+        Width="{StaticResource WindowWidth}"
+        Title="{StaticResource AppTitle}"
+        DataContext="{Binding MainViewModel, Source={StaticResource Locator}, Mode=OneWay}"
+        Background="LightGray">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding TaskStateColumns, Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <main:TaskStateColumnPartial DataContext="{Binding}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <footer:FooterPartial Grid.Row="1"/>
+    </Grid>
+</Window>

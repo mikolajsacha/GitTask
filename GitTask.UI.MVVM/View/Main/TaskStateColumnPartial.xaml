@@ -6,6 +6,8 @@
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:mainView="clr-namespace:GitTask.UI.MVVM.View.Main"
         xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+        d:DesignWidth="250"
+        d:DesignHeight="768"
         mc:Ignorable="d ignore">
 
     <Grid>
@@ -16,10 +18,10 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{Binding TaskState.Name, Mode=OneWay}" FontSize="16" Foreground="Gray" FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center"/>
-            <Grid Grid.Row="1" Background="{Binding TaskState.Color, Mode=OneWay}" Margin="0,10,0,5"/>
-            <Button Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Command="{Binding HideColumnCommand, Mode=OneWay}">
-                <TextBlock Text="{x:Static prop:Resources.Hide}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+            <TextBlock Grid.Row="0" Text="{Binding TaskState.Name, Converter={StaticResource ToUpperCaseConverter}, Mode=OneWay}" Margin="0,5,0,0"  FontSize="17" Foreground="Gray" FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center"/>
+            <Border Grid.Row="1" Background="{Binding TaskState.Color, Mode=OneWay}" Margin="0,10,0,5" CornerRadius="3"/>
+            <Button Style="{StaticResource RoundedCornersButton}" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Command="{Binding HideColumnCommand, Mode=OneWay}">
+                <TextBlock Text="{Binding Source={x:Static prop:Resources.Hide}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
             </Button>
             <ItemsControl Grid.Row="3" ItemsSource="{Binding Tasks, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
@@ -34,21 +36,21 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
-        <Button Margin="2,0,2,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ShowColumnCommand, Mode=OneWay}"
+        <Button Style="{StaticResource RoundedCornersButton}" Margin="2,0,2,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ShowColumnCommand, Mode=OneWay}"
                 Visibility="{Binding IsHidden, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ItemsControl Grid.Row="0" ItemsSource="{Binding TaskState.Name, Mode=OneWay}" Margin="0,0,0,5">
+                <ItemsControl Grid.Row="0" ItemsSource="{Binding TaskState.Name, Converter={StaticResource ToUpperCaseConverter}, Mode=OneWay}" Margin="0,0,0,5">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Mode=OneWay}" FontSize="14" Foreground="Gray" FontWeight="Bold" TextAlignment="Center"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <Grid Grid.Row="1" Background="{Binding TaskState.Color, Mode=OneWay}" Margin="5"/>
+                <Border Grid.Row="1" Background="{Binding TaskState.Color, Mode=OneWay}" Margin="9" CornerRadius="4"/>
             </Grid>
         </Button>
     </Grid>
