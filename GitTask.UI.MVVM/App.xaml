@@ -1,0 +1,33 @@
+﻿<Application x:Class="GitTask.UI.MVVM.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:ignore="http://www.galasoft.ch/ignore"
+			 xmlns:locator="clr-namespace:GitTask.UI.MVVM.Locator"
+			 StartupUri="View\MainWindow.xaml"
+             mc:Ignorable="d ignore">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <locator:IocLocator x:Key="Locator"
+                             d:IsDataSource="True" />
+
+                    <sys:String x:Key="AppTitle">GitTask</sys:String>
+                    <sys:Double x:Key="WindowWidth">1024</sys:Double>
+                    <sys:Double x:Key="WindowHeight">768</sys:Double>
+
+                    <sys:Double x:Key="HiddenTaskStateColumnWidth">30</sys:Double>
+                    <sys:Double x:Key="MinimumOpenedTaskStateColumnWidth">150</sys:Double>
+
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+                </ResourceDictionary>
+
+                <ResourceDictionary Source="Skins\MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

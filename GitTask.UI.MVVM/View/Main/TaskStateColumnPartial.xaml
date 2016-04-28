@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="GitTask.UI.MVVM.View.Main.TaskStateColumnPartial"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:mainView="clr-namespace:GitTask.UI.MVVM.View.Main"
+        xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+        mc:Ignorable="d ignore">
+
+    <Grid>
+        <Grid Margin="2,0,2,0" Visibility="{Binding IsOpened, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="{Binding TaskState.Name, Mode=OneWay}" FontSize="16" Foreground="Gray" FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Center"/>
+            <Grid Grid.Row="1" Background="{Binding TaskState.Color, Mode=OneWay}" Margin="0,10,0,5"/>
+            <Button Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Command="{Binding HideColumnCommand, Mode=OneWay}">
+                <TextBlock Text="{x:Static prop:Resources.Hide}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+            </Button>
+            <ItemsControl Grid.Row="3" ItemsSource="{Binding Tasks, Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <mainView:TaskPartial DataContext="{Binding Mode=OneWay}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+        <Button Margin="2,0,2,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Command="{Binding ShowColumnCommand, Mode=OneWay}"
+                Visibility="{Binding IsHidden, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ItemsControl Grid.Row="0" ItemsSource="{Binding TaskState.Name, Mode=OneWay}" Margin="0,0,0,5">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Mode=OneWay}" FontSize="14" Foreground="Gray" FontWeight="Bold" TextAlignment="Center"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Grid Grid.Row="1" Background="{Binding TaskState.Color, Mode=OneWay}" Margin="5"/>
+            </Grid>
+        </Button>
+    </Grid>
+</UserControl>

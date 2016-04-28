@@ -1,0 +1,5 @@
+C:\Users\232000\documents\visual studio 2015\Projects\GitTask\GitTask.Domain\bin\Debug\GitTask.Domain.dll
+C:\Users\232000\documents\visual studio 2015\Projects\GitTask\GitTask.Domain\bin\Debug\GitTask.Domain.pdb
+C:\Users\232000\documents\visual studio 2015\Projects\GitTask\GitTask.Domain\obj\Debug\GitTask.Domain.csprojResolveAssemblyReference.cache
+C:\Users\232000\documents\visual studio 2015\Projects\GitTask\GitTask.Domain\obj\Debug\GitTask.Domain.dll
+C:\Users\232000\documents\visual studio 2015\Projects\GitTask\GitTask.Domain\obj\Debug\GitTask.Domain.pdb

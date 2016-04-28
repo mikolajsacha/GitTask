@@ -1,0 +1,7 @@
+C:\Users\232000\documents\visual studio 2015\Projects\GitTask\GitTask.Storage\bin\Debug\GitTask.Storage.dll
+C:\Users\232000\documents\visual studio 2015\Projects\GitTask\GitTask.Storage\bin\Debug\GitTask.Storage.pdb
+C:\Users\232000\documents\visual studio 2015\Projects\GitTask\GitTask.Storage\bin\Debug\GitTask.Domain.dll
+C:\Users\232000\documents\visual studio 2015\Projects\GitTask\GitTask.Storage\bin\Debug\GitTask.Domain.pdb
+C:\Users\232000\documents\visual studio 2015\Projects\GitTask\GitTask.Storage\obj\Debug\GitTask.Storage.csprojResolveAssemblyReference.cache
+C:\Users\232000\documents\visual studio 2015\Projects\GitTask\GitTask.Storage\obj\Debug\GitTask.Storage.dll
+C:\Users\232000\documents\visual studio 2015\Projects\GitTask\GitTask.Storage\obj\Debug\GitTask.Storage.pdb
