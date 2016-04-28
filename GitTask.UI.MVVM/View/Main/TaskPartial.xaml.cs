@@ -22,10 +22,10 @@ namespace GitTask.UI.MVVM.View.Main
 
         private void MainOnMouseDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
-            var task = DataContext as Task;
-            if (task == null) return;
+            var taskDetails = DataContext as TaskDetailsViewModel;
+            if (taskDetails == null) return;
 
-            var taskDetailsWindow = new TaskDetailsWindow(new TaskDetailsViewModel(task));
+            var taskDetailsWindow = new TaskDetailsWindow(taskDetails);
             taskDetailsWindow.ShowDialog();
         }
     }

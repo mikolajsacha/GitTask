@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
         xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
         d:DesignHeight="250"
         d:DesignWidth="250"
         mc:Ignorable="d ignore">
@@ -20,11 +21,11 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Grid.Column="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Task.Title, Mode=OneWay}" FontSize="15" Foreground="DarkSlateGray" FontWeight="SemiBold" TextWrapping="Wrap" Margin="5"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Task.AuthorName, Mode=OneWay}" FontSize="14" Foreground="SlateGray" Margin="5" TextWrapping="Wrap" TextAlignment="Right"/>
+                <elements:InitialsBadge Grid.Row="0" Grid.Column="1" DataContext="{Binding Author, Mode=OneWay}" Margin="3" VerticalAlignment="Center"/>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0" Background="{Binding Task.Priority, Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}">
                 <Grid.ToolTip>
@@ -43,7 +44,7 @@
                 </TextBlock.ToolTip>
             </TextBlock>
             <Grid Grid.Row="3" Grid.Column="0" Background="Gray"/>
-            <ItemsControl Grid.Row="4" Grid.Column="0" Margin="3,0,3,0" ItemsSource="{Binding AssignedMembers, Mode=OneWay}">
+            <ItemsControl Grid.Row="4" Grid.Column="0" Margin="2,0,2,0" ItemsSource="{Binding AssignedMembers, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal" />

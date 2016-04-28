@@ -5,20 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
         xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
         mc:Ignorable="d ignore"
-        d:DesignHeight="35"
+        d:DesignHeight="40"
         d:DesignWidth="1024"
         DataContext="{Binding FooterViewModel, Source={StaticResource Locator}, Mode=OneWay}">
 
-    <Grid Background="BlueViolet" MinHeight="35" MaxHeight="80">
+    <Grid Background="BlueViolet" MinHeight="40" MaxHeight="80">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Image Grid.Column="0" Width="30" Height="30" Source="{Binding CurrentUser.Avatar}"/>
-        <TextBlock Grid.Column="1" Text="{Binding CurrentUser.Name, Mode=OneWay}" Foreground="WhiteSmoke" FontSize="16" VerticalAlignment="Center" Margin="10,2,5,5"/>
+        <Image VerticalAlignment="Center" Grid.Column="0" Width="40" Height="40" Stretch="Fill" Source="{Binding CurrentUser.Avatar}"/>
+        <TextBlock Grid.Column="1" Text="{Binding CurrentUser.Name, Mode=OneWay}" Foreground="WhiteSmoke" FontSize="16" VerticalAlignment="Center" Margin="5,2,5,5"/>
         <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <ItemsControl Margin="5,2,5,5" ItemsSource="{Binding ProjectMembers, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
@@ -28,7 +29,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <elements:InitialsBadge DataContext="{Binding Mode=OneWay}" Margin="3,2,3,0"/>
+                        <elements:InitialsBadge DataContext="{Binding Mode=OneWay}" Margin="3,3,3,0"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

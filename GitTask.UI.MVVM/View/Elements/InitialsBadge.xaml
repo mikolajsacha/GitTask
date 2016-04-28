@@ -7,20 +7,20 @@
         mc:Ignorable="d ignore"
         Height="25"
         Width="25">
-    <Border Background="Gray" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Border Background="WhiteSmoke" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="{Binding Color, Mode=OneWay}">
         <Border.ToolTip>
-            <ToolTip>
-                <Grid Height="30">
+            <ToolTip Padding="0" BorderThickness="1" BorderBrush="{Binding Color, Mode=OneWay}">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Width="30" Height="30" Source="{Binding Avatar}"/>
-                    <TextBlock Grid.Column="1" Text="{Binding Name}" Foreground="DarkSlateGray" FontSize="14" VerticalAlignment="Center" TextAlignment="Center" />
+                    <Image Grid.Column="0" Width="45" Height="45" Source="{Binding Avatar}" Stretch="Fill" />
+                    <TextBlock Text="{Binding Name, Mode=OneWay}" Margin="10" Grid.Column="1" Foreground="DarkSlateGray" FontSize="15" VerticalAlignment="Center" TextAlignment="Center"/>
                 </Grid>
             </ToolTip>
         </Border.ToolTip>
-        <TextBlock Foreground="WhiteSmoke" FontSize="14" VerticalAlignment="Center" TextAlignment="Center" Margin="0,-2,0,0"
-                   Text="{Binding Name, Converter={StaticResource NameToInitialsConverter}}"/>
+        <TextBlock Foreground="Black" FontSize="13" VerticalAlignment="Center" TextAlignment="Center" Margin="0,-2,0,0"
+                   Text="{Binding Name, Converter={StaticResource NameToInitialsConverter}, Mode=OneWay}"/>
     </Border>
 </UserControl>

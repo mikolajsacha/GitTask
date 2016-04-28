@@ -55,7 +55,7 @@ namespace GitTask.UI.MVVM.View
             var allHiddenTaskStateColumnsWidth = hiddenTaskStateColumnWidth * _hiddenTaskStateColumnsCount;
             var minimumWidthOfAllOpenedTaskStateColumns = minimumOpenedTaskStateColumnWidth * _openedTaskStateColumnsCount;
             var allOpenedTaskStateColumnsWidth = Math.Max(minimumWidthOfAllOpenedTaskStateColumns,
-                Width - WindowBorderWidth - allHiddenTaskStateColumnsWidth);
+                RenderSize.Width - WindowBorderWidth - allHiddenTaskStateColumnsWidth);
             var newWidthForOpenTaskStateColumns = allOpenedTaskStateColumnsWidth / _openedTaskStateColumnsCount;
 
             Messenger.Default.Send(new DistributeTaskStateColumnsMessage

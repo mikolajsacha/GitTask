@@ -61,6 +61,24 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assigned to.
+        /// </summary>
+        public static string AssignedTo {
+            get {
+                return ResourceManager.GetString("AssignedTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Author.
+        /// </summary>
+        public static string Author {
+            get {
+                return ResourceManager.GetString("Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide.
         /// </summary>
         public static string Hide {
@@ -111,6 +129,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string PriorityMinor {
             get {
                 return ResourceManager.GetString("PriorityMinor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Member.
+        /// </summary>
+        public static string ProjectMember {
+            get {
+                return ResourceManager.GetString("ProjectMember", resourceCulture);
             }
         }
         

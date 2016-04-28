@@ -1,10 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
 using GalaSoft.MvvmLight;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
-using Microsoft.Practices.ServiceLocation;
 
 namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 {
@@ -14,15 +12,20 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
         private IQueryService<ProjectMember> _projectMemberQueryService;
 
         public Task Task { get; }
+        public ProjectMember Author { get; }
         public ObservableCollection<ProjectMember> AssignedMembers { get; }
 
-        public TaskDetailsViewModel(Task task)
+        public TaskDetailsViewModel(Task task, IQueryService<Task> taskQueryService, IQueryService<ProjectMember> projectMemberQueryService)
         {
             Task = task;
-            _taskQueryService = ServiceLocator.Current.GetInstance<IQueryService<Task>>();
-            _projectMemberQueryService = ServiceLocator.Current.GetInstance<IQueryService<ProjectMember>>();
-            AssignedMembers = new ObservableCollection<ProjectMember>(
-                _projectMemberQueryService.GetAll().Where(x => task.AssignedMembers.Contains(x.Name)));
+            _taskQueryService = taskQueryService;
+            _projectMemberQueryService = projectMemberQueryService;
+            AssignedMembers = new ObservableCollection<ProjectMember>();
+            foreach (var assignedMemberName in task.AssignedMembers)
+            {
+                AssignedMembers.Add(_projectMemberQueryService.GetByKey(assignedMemberName));
+            }
+            Author = _projectMemberQueryService.GetByKey(task.AuthorName);
         }
     }
 }
