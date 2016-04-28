@@ -23,22 +23,22 @@
                     <ColumnDefinition Width="1.5*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Title, Mode=OneWay}" FontSize="15" Foreground="DarkSlateGray" FontWeight="SemiBold" TextWrapping="Wrap" Margin="5"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding AuthorName, Mode=OneWay}" FontSize="14" Foreground="SlateGray" Margin="5" TextWrapping="Wrap" TextAlignment="Right"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Task.Title, Mode=OneWay}" FontSize="15" Foreground="DarkSlateGray" FontWeight="SemiBold" TextWrapping="Wrap" Margin="5"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Task.AuthorName, Mode=OneWay}" FontSize="14" Foreground="SlateGray" Margin="5" TextWrapping="Wrap" TextAlignment="Right"/>
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="0" Background="{Binding Priority, Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}">
+            <Grid Grid.Row="1" Grid.Column="0" Background="{Binding Task.Priority, Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}">
                 <Grid.ToolTip>
                     <ToolTip>
-                        <TextBlock Text="{Binding Priority, Converter={StaticResource TaskPriorityToStringConverter}, Mode=OneWay}"
-                               Foreground="{Binding Priority, Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}"
+                        <TextBlock Text="{Binding Task.Priority, Converter={StaticResource TaskPriorityToStringConverter}, Mode=OneWay}"
+                               Foreground="{Binding Task.Priority, Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}"
                                FontSize="12" VerticalAlignment="Center" TextAlignment="Center" />
                     </ToolTip>
                 </Grid.ToolTip>
             </Grid>
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Content, Converter={StaticResource TaskContentToShortStringConverter}, Mode=OneWay}" TextWrapping="Wrap" Margin="5" MinHeight="50">
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Task.Content, Converter={StaticResource TaskContentToShortStringConverter}, Mode=OneWay}" TextWrapping="Wrap" Margin="5" MinHeight="50">
                 <TextBlock.ToolTip>
                     <ToolTip>
-                        <TextBlock Text="{Binding Content, Mode=OneWay}" TextWrapping="Wrap" MaxWidth="200" />
+                        <TextBlock Text="{Binding Task.Content, Mode=OneWay}" TextWrapping="Wrap" MaxWidth="200" />
                     </ToolTip>
                 </TextBlock.ToolTip>
             </TextBlock>

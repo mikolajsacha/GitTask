@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using GitTask.Domain.Enum;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Task;
@@ -22,12 +23,13 @@ namespace GitTask.UI.MVVM.Design
             {
                 new Project() {Title = "Projekt 1", DateCreated = DateTime.Now.AddYears(-1)}
             });
+            var testImage = new BitmapImage(new Uri(@"C:\Users\232000\Documents\Visual Studio 2015\Projects\GitTask\GitTask.UI.MVVM\Design\cat.jpg"));
             DesignProjectMemberService = new DesignStorageService<ProjectMember>(new List<ProjectMember>
             {
-                new ProjectMember() { Name = "Mikołaj Sacha" },
-                new ProjectMember() { Name = "Jan Kowalski" },
-                new ProjectMember() { Name = "Marcin Nowak" },
-                new ProjectMember() { Name = "Aleksandra Zachwiej" }
+                new ProjectMember() { Name = "Mikołaj Sacha", Color = Brushes.DarkGreen, Avatar = testImage},
+                new ProjectMember() { Name = "Jan Kowalski", Color = Brushes.LimeGreen, Avatar = testImage},
+                new ProjectMember() { Name = "Marcin Nowak", Color = Brushes.DarkGray, Avatar = testImage},
+                new ProjectMember() { Name = "Aleksandra Zachwiej", Color = Brushes.CornflowerBlue, Avatar = testImage}
             });
             DesignTaskStateService = new DesignStorageService<TaskState>(new List<TaskState>
             {

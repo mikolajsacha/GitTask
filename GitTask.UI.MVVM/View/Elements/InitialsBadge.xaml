@@ -10,10 +10,17 @@
     <Border Background="Gray" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Border.ToolTip>
             <ToolTip>
-                <TextBlock Text="{Binding}" Foreground="DarkSlateGray" FontSize="14" VerticalAlignment="Center" TextAlignment="Center" />
+                <Grid Height="30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Width="30" Height="30" Source="{Binding Avatar}"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Name}" Foreground="DarkSlateGray" FontSize="14" VerticalAlignment="Center" TextAlignment="Center" />
+                </Grid>
             </ToolTip>
         </Border.ToolTip>
         <TextBlock Foreground="WhiteSmoke" FontSize="14" VerticalAlignment="Center" TextAlignment="Center" Margin="0,-2,0,0"
-                   Text="{Binding Converter={StaticResource NameToInitialsConverter}}"/>
+                   Text="{Binding Name, Converter={StaticResource NameToInitialsConverter}}"/>
     </Border>
 </UserControl>

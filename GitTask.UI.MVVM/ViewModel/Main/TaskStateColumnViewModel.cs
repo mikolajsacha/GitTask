@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
+using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
 namespace GitTask.UI.MVVM.ViewModel.Main
 {
@@ -13,7 +14,7 @@ namespace GitTask.UI.MVVM.ViewModel.Main
         private readonly IQueryService<Task> _taskQueryService;
 
         public TaskState TaskState { get; }
-        public ObservableCollection<Task> Tasks { get; }
+        public ObservableCollection<TaskDetailsViewModel> Tasks { get; }
 
         private readonly RelayCommand _showColumnCommand;
         public ICommand ShowColumnCommand => _showColumnCommand;
@@ -44,7 +45,7 @@ namespace GitTask.UI.MVVM.ViewModel.Main
             _isOpened = isOpened;
             TaskState = taskState;
             _taskQueryService = taskQueryService;
-            Tasks = new ObservableCollection<Task>();
+            Tasks = new ObservableCollection<TaskDetailsViewModel>();
             LoadTasks();
         }
 
@@ -53,7 +54,7 @@ namespace GitTask.UI.MVVM.ViewModel.Main
             Tasks.Clear();
             foreach (var task in _taskQueryService.GetByProperty("State", TaskState.Name).OrderBy(x => x.Priority))
             {
-                Tasks.Add(task);
+                Tasks.Add(new TaskDetailsViewModel(task));
             }
         }
 
