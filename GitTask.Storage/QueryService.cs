@@ -34,12 +34,12 @@ namespace GitTask.Storage
             InitializeDataFromStorage();
         }
 
-        private void InitializeDataFromStorage()
+        private async void InitializeDataFromStorage()
         {
             _recentlyChanged.Clear();
             _recentlyDeleted.Clear();
 
-            _data = GetKeySortedData(_storageService.GetAll().Result);
+            _data =  GetKeySortedData(await _storageService.GetAll());
 
             if (GetKeyType().IsAssignableFrom(typeof(int)))
             {

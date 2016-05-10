@@ -54,7 +54,8 @@ namespace GitTask.Storage
 
             foreach (var fileName in Directory.GetFiles(GetBasePath()).Where(fileName => fileName.EndsWith(FilesExtension)))
             {
-                result.AddLast(await _fileService.Load<TDataObject>(fileName));
+                var loadedDataObject = await _fileService.Load<TDataObject>(fileName);
+                result.AddLast(loadedDataObject);
             }
             return result;
         }

@@ -12,7 +12,7 @@ namespace GitTask.Git
             set
             {
                 _baseProjectPath = value;
-                BaseStoragePath = _baseProjectPath.TrimEnd('\\', '/') + "\\.git\\gittask";
+                BaseStoragePath = _baseProjectPath.TrimEnd('\\', '/') + "\\gittask";
                 IsProjectPathChosen = true;
                 ProjectPathChanged?.Invoke();
             }
@@ -23,7 +23,7 @@ namespace GitTask.Git
 
         public string GetPathForModel(Type modelType)
         {
-            return BaseStoragePath + "\\" + modelType;
+            return BaseStoragePath + "\\" + modelType.Name;
         }
 
         public event Action ProjectPathChanged;
