@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
-using GitTask.Domain.Model.Task;
 using GitTask.UI.MVVM.View.TaskDetails;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
 

@@ -79,11 +79,47 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please choose a folder containing git repository for your project.
+        /// </summary>
+        public static string ChooseRepositoryFolderExplanation {
+            get {
+                return ResourceManager.GetString("ChooseRepositoryFolderExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a name for your project.
+        /// </summary>
+        public static string EnterProjectName {
+            get {
+                return ResourceManager.GetString("EnterProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide.
         /// </summary>
         public static string Hide {
             get {
                 return ResourceManager.GetString("Hide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open repository.
+        /// </summary>
+        public static string OpenRepository {
+            get {
+                return ResourceManager.GetString("OpenRepository", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pending storage operations:.
+        /// </summary>
+        public static string PendingStorageOperations {
+            get {
+                return ResourceManager.GetString("PendingStorageOperations", resourceCulture);
             }
         }
         
@@ -138,6 +174,33 @@ namespace GitTask.UI.MVVM.Properties {
         public static string ProjectMember {
             get {
                 return ResourceManager.GetString("ProjectMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project setup.
+        /// </summary>
+        public static string ProjectSetup {
+            get {
+                return ResourceManager.GetString("ProjectSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repository not found.
+        /// </summary>
+        public static string RepositoryNotFound {
+            get {
+                return ResourceManager.GetString("RepositoryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Git repository has not been found. Please choose directory with existing Git repository..
+        /// </summary>
+        public static string RepositoryNotFoundExplanation {
+            get {
+                return ResourceManager.GetString("RepositoryNotFoundExplanation", resourceCulture);
             }
         }
         

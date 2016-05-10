@@ -7,15 +7,14 @@
 			 xmlns:ignore="http://www.galasoft.ch/ignore"
 			 xmlns:locator="clr-namespace:GitTask.UI.MVVM.Locator"
              xmlns:converters="clr-namespace:GitTask.UI.MVVM.Converters"
-			 StartupUri="View\MainWindowView.xaml"
+             StartupUri="View/MainWindow.xaml"
              mc:Ignorable="d ignore">
 
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
-                    <locator:IocLocator x:Key="Locator"
-                             d:IsDataSource="True" />
+                    <locator:IocLocator x:Key="Locator" d:IsDataSource="True"/>
 
                     <sys:String x:Key="AppTitle">GitTask</sys:String>
                     <sys:Double x:Key="WindowWidth">1024</sys:Double>
@@ -24,15 +23,15 @@
                     <sys:Double x:Key="HiddenTaskStateColumnWidth">40</sys:Double>
                     <sys:Double x:Key="MinimumOpenedTaskStateColumnWidth">150</sys:Double>
 
-                    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-                    <converters:NameToInitialsConverter x:Key="NameToInitialsConverter" />
-                    <converters:TaskPriorityToColorConverter x:Key="TaskPriorityToColorConverter" />
-                    <converters:TaskPriorityToStringConverter x:Key="TaskPriorityToStringConverter" />
-                    <converters:TaskContentToShortStringConverter x:Key="TaskContentToShortStringConverter" />
-                    <converters:ToUpperCaseConverter x:Key="ToUpperCaseConverter" />
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                    <converters:NameToInitialsConverter x:Key="NameToInitialsConverter"/>
+                    <converters:TaskPriorityToColorConverter x:Key="TaskPriorityToColorConverter"/>
+                    <converters:TaskPriorityToStringConverter x:Key="TaskPriorityToStringConverter"/>
+                    <converters:TaskContentToShortStringConverter x:Key="TaskContentToShortStringConverter"/>
+                    <converters:ToUpperCaseConverter x:Key="ToUpperCaseConverter"/>
                 </ResourceDictionary>
 
-                <ResourceDictionary Source="Skins\MainSkin.xaml" />
+                <ResourceDictionary Source="Skins\MainSkin.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

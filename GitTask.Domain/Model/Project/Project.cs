@@ -1,13 +1,12 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using GitTask.Domain.Attributes;
-using GitTask.Domain.Model.Interface;
 
 namespace GitTask.Domain.Model.Project
 {
     [Key("Title")]
-    public class Project : IWithCreationDate
+    public class Project
     {
         public string Title { get; set; }
-        public DateTime DateCreated { get; set; }
+        public List<string> ProjectMembersNotInRepository { get; set; }
     }
 }

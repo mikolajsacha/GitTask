@@ -34,7 +34,7 @@
                 <ToolTip>
                     <TextBlock Text="{Binding Task.Priority, Converter={StaticResource TaskPriorityToStringConverter}, Mode=OneWay}"
                                Foreground="{Binding Task.Priority, Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}"
-                               FontSize="12" VerticalAlignment="Center" TextAlignment="Center" />
+                               FontSize="12" VerticalAlignment="Center" TextAlignment="Center"/>
                 </ToolTip>
             </Grid.ToolTip>
         </Grid>
@@ -45,7 +45,7 @@
         <ItemsControl Grid.Row="4" Grid.Column="0" Margin="2,0,2,0" ItemsSource="{Binding AssignedMembers, Mode=OneWay}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" />
+                    <WrapPanel Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>

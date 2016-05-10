@@ -23,6 +23,17 @@ namespace GitTask.Json
             }
         }
 
+        public Task Delete(string filePath)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+            });
+        }
+
         public async Task<TDataObject> Load<TDataObject>(string filePath)
         {
             try

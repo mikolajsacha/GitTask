@@ -2,43 +2,35 @@
 using System.ComponentModel;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
-using GitTask.UI.MVVM.Locator;
 using GitTask.UI.MVVM.Messages;
-using GitTask.UI.MVVM.ViewModel;
+using GitTask.UI.MVVM.ViewModel.Main;
 
-namespace GitTask.UI.MVVM.View
+namespace GitTask.UI.MVVM.View.Main
 {
-    public partial class MainWindowView
+    public partial class TaskBoardPartial
     {
         private const int WindowBorderWidth = 16;
         private int _openedTaskStateColumnsCount;
         private int _hiddenTaskStateColumnsCount;
 
-        public MainWindowView()
+        public TaskBoardPartial()
         {
             InitializeComponent();
-            Closing += OnClosing;
             SizeChanged += OnMainWindowSizeChanged;
-            ((MainViewModel)DataContext).PropertyChanged += OnDataContextPropertyChanged;
-            ((MainViewModel)DataContext).InitializeTaskStateColumns();
-        }
 
-        private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
-        {
-            var mainViewModel = DataContext as MainViewModel;
-            if (mainViewModel != null && DataContext != null)
-            {
-                mainViewModel.PropertyChanged -= OnDataContextPropertyChanged;
-            }
-            IocLocator.Cleanup();
+            var model = DataContext as TaskBoardViewModel;
+            if (model == null) return;
+
+            model.PropertyChanged += OnDataContextPropertyChanged;
+            model.InitializeTaskStateColumns();
         }
 
         private void OnDataContextPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName != "HiddenColumnsCount") return;
 
-            _openedTaskStateColumnsCount = ((MainViewModel)DataContext).OpenedColumnsCount;
-            _hiddenTaskStateColumnsCount = ((MainViewModel)DataContext).HiddenColumnsCount;
+            _openedTaskStateColumnsCount = ((TaskBoardViewModel)DataContext).OpenedColumnsCount;
+            _hiddenTaskStateColumnsCount = ((TaskBoardViewModel)DataContext).HiddenColumnsCount;
             SendDistributeTaskStateColumnsMessage();
         }
 

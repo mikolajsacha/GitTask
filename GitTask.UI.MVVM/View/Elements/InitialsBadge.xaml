@@ -7,6 +7,17 @@
         mc:Ignorable="d ignore"
         Height="25"
         Width="25">
+
+    <UserControl.Resources>
+        <Style TargetType="Image" x:Name="AvatarStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Avatar}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
     <Border Background="WhiteSmoke" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="{Binding Color, Mode=OneWay}">
         <Border.ToolTip>
             <ToolTip Padding="0" BorderThickness="1" BorderBrush="{Binding Color, Mode=OneWay}">
@@ -15,7 +26,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Width="45" Height="45" Source="{Binding Avatar}" Stretch="Fill" />
+                    <Image Grid.Column="0" Width="45" Height="45" Source="{Binding Avatar}" Stretch="Fill"/>
                     <TextBlock Text="{Binding Name, Mode=OneWay}" Margin="10" Grid.Column="1" Foreground="DarkSlateGray" FontSize="15" VerticalAlignment="Center" TextAlignment="Center"/>
                 </Grid>
             </ToolTip>
