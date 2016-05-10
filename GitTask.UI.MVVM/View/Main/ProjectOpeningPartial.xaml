@@ -7,7 +7,7 @@
         xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
         mc:Ignorable="d ignore"
         DataContext="{Binding ProjectOpeningViewModel, Source={StaticResource Locator}, Mode=OneWay}"
-        Background="LightGray">
+        Background="Transparent">
 
     <Button Command="{Binding OpenSelectFolderDialogCommand, Mode=OneWay}" Style="{StaticResource RoundedCornersButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" Height="100">
         <TextBlock Text="{x:Static prop:Resources.OpenRepository}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>

@@ -31,11 +31,6 @@ namespace GitTask.UI.MVVM.ViewModel.Main
 
         private void OnOpenSelectFolderDialog()
         {
-            OpenProject();
-        }
-
-        private void OpenProject()
-        {
             try
             {
                 var projectPath = GetProjectPath();

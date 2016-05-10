@@ -35,7 +35,7 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
 
         private void ProjectQueryServiceOnElementAdded(Project project)
         {
-            ProjectName = project.Title;
+            ProjectName = project.Title; //TODO: sprawdzic, czemu sie nie wywoluje
         }
     }
 }

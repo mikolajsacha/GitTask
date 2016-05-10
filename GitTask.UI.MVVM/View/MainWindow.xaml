@@ -13,15 +13,19 @@
         Width="{StaticResource WindowWidth}"
         Title="{StaticResource AppTitle}"
         DataContext="{Binding MainViewModel, Source={StaticResource Locator}, Mode=OneWay}"
-        Background="Black">
+        Background="Gray">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <main:TaskBoardPartial Grid.Row="0" Visibility="{Binding IsTaskBoardVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"/>
-        <main:ProjectOpeningPartial Grid.Row="0" Visibility="{Binding IsProjectInitializerVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"/>
+        <Grid Grid.Row="0" Visibility="{Binding IsTaskBoardVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+            <main:TaskBoardPartial/>
+        </Grid>
+        <Grid Grid.Row="0" Visibility="{Binding IsProjectInitializerVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+            <main:ProjectOpeningPartial/>
+        </Grid>
         <footer:FooterPartial Grid.Row="1"/>
     </Grid>
 </Window>

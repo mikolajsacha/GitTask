@@ -30,7 +30,6 @@ namespace GitTask.UI.MVVM.ViewModel.Main
             {
                 _isOpened = value;
                 RaisePropertyChanged();
-                // ReSharper disable once ExplicitCallerInfoArgument
                 RaisePropertyChanged("IsHidden");
             }
         }
