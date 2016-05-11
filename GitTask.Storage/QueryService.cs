@@ -21,8 +21,8 @@ namespace GitTask.Storage
 
         public event Action<TModel> ElementAdded;
         public event Action<TModel> ElementUpdated;
-        public event Action<TModel> ElementDeleted;
-        public event Action ElementsCleared;
+        public event Action<object> ElementDeleted;
+        public event Action ElementsReloaded;
 
         public QueryService(IStorageService<TModel> storageService, IProjectPathsReadonlyService projectPathsService)
         {
@@ -46,7 +46,7 @@ namespace GitTask.Storage
                 _keyGeneratorService = new KeyGeneratorService(_data.Keys.Select(keyValue => (int)keyValue));
             }
 
-            ElementsCleared?.Invoke();
+            ElementsReloaded?.Invoke();
         }
 
         public IEnumerable<TModel> GetByProperty(string propertyName, object propertyValue)
@@ -64,12 +64,11 @@ namespace GitTask.Storage
             return _data.Values;
         }
 
-        public void Delete(TModel modelObject)
+        public void Delete(object keyValue)
         {
-            var modelObjectKeyValue = KeyAttribute.GetKeyValue(modelObject);
-            AssertKeyExists(modelObjectKeyValue);
-            RemoveFromCollection(modelObjectKeyValue);
-            ElementDeleted?.Invoke(modelObject);
+            AssertKeyExists(keyValue);
+            RemoveFromCollection(keyValue);
+            ElementDeleted?.Invoke(keyValue);
         }
 
         public TModel GetByKey(object keyValue)

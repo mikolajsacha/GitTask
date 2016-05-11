@@ -35,7 +35,8 @@ namespace GitTask.UI.MVVM.ViewModel.Main
         {
             _projectQueryService.AddNew(new Project
             {
-                Title = _projectName
+                Title = _projectName,
+                IsInitialized = true // TODO: kiedy koniec inicjalizacji?
             });
             await _projectQueryService.SaveChanges();
         }

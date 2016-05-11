@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using GitTask.Domain.Model.Project;
+using GitTask.Domain.Services.Interface;
 using GitTask.Repository.Services.Interface;
 using GitTask.UI.MVVM.Properties;
 using GitTask.UI.MVVM.View.Main;
@@ -15,18 +18,40 @@ namespace GitTask.UI.MVVM.ViewModel.Main
 
         private readonly IRepositoryService _repositoryService;
         private readonly IProjectPathsService _projectPathsService;
+        private readonly IQueryService<Project> _projectQueryService;
 
         private readonly RelayCommand _openSelectFolderDialogCommand;
         public ICommand OpenSelectFolderDialogCommand => _openSelectFolderDialogCommand;
 
 
         public ProjectOpeningViewModel(IRepositoryService repositoryService,
-                                       IProjectPathsService projectPathsService)
+                                       IProjectPathsService projectPathsService,
+                                       IQueryService<Project> projectQueryService)
         {
             _repositoryService = repositoryService;
             _projectPathsService = projectPathsService;
+            _projectQueryService = projectQueryService;
 
+            _projectQueryService.ElementsReloaded += ProjectQueryServiceOnElementsReloaded;
             _openSelectFolderDialogCommand = new RelayCommand(OnOpenSelectFolderDialog);
+        }
+
+        private void ProjectQueryServiceOnElementsReloaded()
+        {
+            if (_projectQueryService.GetAll().Any() && _projectQueryService.GetAll().First().IsInitialized) return;
+
+            ClearStorage();
+            _projectQueryService.SaveChanges();
+            var projectSetupWindow = new ProjectSetupWindow();
+            projectSetupWindow.ShowDialog();
+        }
+
+        private void ClearStorage()
+        {
+            foreach (var project in _projectQueryService.GetAll())
+            {
+                _projectQueryService.Delete(project.Title);
+            }
         }
 
         private void OnOpenSelectFolderDialog()
@@ -47,8 +72,6 @@ namespace GitTask.UI.MVVM.ViewModel.Main
             {
                 return;
             }
-            var projectSetupWindow = new ProjectSetupWindow();
-            projectSetupWindow.ShowDialog();
         }
 
         private static string GetProjectPath()

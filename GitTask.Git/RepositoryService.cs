@@ -27,7 +27,7 @@ namespace GitTask.Git
 
         public IEnumerable<string> GetAllCommitersNames()
         {
-            return _repository.Commits.Select(x => x.Author.Name).Distinct();
+            return _repository?.Commits.Select(x => x.Author.Name).Distinct() ?? new List<string>();
         }
 
         public bool RepositoryExists(string projectPath)

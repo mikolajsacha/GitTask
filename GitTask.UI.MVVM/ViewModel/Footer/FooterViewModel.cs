@@ -26,16 +26,23 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
 
         public FooterViewModel(IQueryService<Project> projectQueryService, IRepositoryService repositoryService)
         {
-            _projectName = projectQueryService.GetAll().First().Title;
+            var projects = projectQueryService.GetAll().ToList();
+            if (projects.Any())
+            {
+                _projectName = projects.First().Title;
+            }
             projectQueryService.ElementAdded += ProjectQueryServiceOnElementAdded;
 
             ProjectMembers = new ObservableCollection<string>(repositoryService.GetAllCommitersNames());
-            CurrentUser = ProjectMembers.First(); //TODO: wybrac/stworzyc uzytkownika
+            if (ProjectMembers.Any())
+            {
+                CurrentUser = ProjectMembers.First(); //TODO: wybrac/stworzyc uzytkownika
+            }
         }
 
         private void ProjectQueryServiceOnElementAdded(Project project)
         {
-            ProjectName = project.Title; //TODO: sprawdzic, czemu sie nie wywoluje
+            ProjectName = project.Title; //TODO: sprawdzic, czemu sie nie wywoluje == naprawic footer
         }
     }
 }
