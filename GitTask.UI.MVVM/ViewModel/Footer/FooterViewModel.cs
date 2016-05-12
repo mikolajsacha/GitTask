@@ -1,9 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using GitTask.Repository.Services.Interface;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
+using GitTask.UI.MVVM.Messages;
 
 namespace GitTask.UI.MVVM.ViewModel.Footer
 {
@@ -13,6 +15,8 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
         public ObservableCollection<string> ProjectMembers { get; }
 
         private string _projectName;
+        private string _currentUser;
+
         public string ProjectName
         {
             get { return _projectName; }
@@ -23,7 +27,15 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
             }
         }
 
-        public string CurrentUser { get; }
+        public string CurrentUser
+        {
+            get { return _currentUser; }
+            private set
+            {
+                _currentUser = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public FooterViewModel(IQueryService<Project> projectQueryService, IRepositoryService repositoryService)
         {
@@ -41,10 +53,12 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
             ProjectMembers = new ObservableCollection<string>();
             RepositoryServiceOnRepositoryInitalized();
 
-            if (ProjectMembers.Any())
-            {
-                CurrentUser = ProjectMembers.First(); //TODO: wybrac/stworzyc uzytkownika
-            }
+            Messenger.Default.Register<SetCurrentUserMessage>(this, OnSetCurrentUserMessage);
+        }
+
+        private void OnSetCurrentUserMessage(SetCurrentUserMessage currentUserMessage)
+        {
+            CurrentUser = currentUserMessage.CurrentUser;
         }
 
         private void RepositoryServiceOnRepositoryInitalized()

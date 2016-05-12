@@ -4,10 +4,13 @@ using System.Resources;
 using System.Windows.Forms;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
 using GitTask.Repository.Services.Interface;
+using GitTask.UI.MVVM.Messages;
 using GitTask.UI.MVVM.Properties;
+using GitTask.UI.MVVM.View.ProjectSettings;
 using ProjectSetupWindow = GitTask.UI.MVVM.View.ProjectSettings.ProjectSetupWindow;
 
 namespace GitTask.UI.MVVM.ViewModel.Main
@@ -38,20 +41,16 @@ namespace GitTask.UI.MVVM.ViewModel.Main
 
         private void ProjectQueryServiceOnElementsReloaded()
         {
-            if (_projectQueryService.GetAll().Any() && _projectQueryService.GetAll().First().IsInitialized) return;
-
-            ClearStorage();
-            _projectQueryService.SaveChanges();
-            var projectSetupWindow = new ProjectSetupWindow();
-            projectSetupWindow.ShowDialog();
-        }
-
-        private void ClearStorage()
-        {
-            foreach (var project in _projectQueryService.GetAll())
+            if (!_projectQueryService.GetAll().Any() || !_projectQueryService.GetAll().First().IsInitialized)
             {
-                _projectQueryService.Delete(project.Title);
+                var projectSetupWindow = new ProjectSetupWindow();
+                projectSetupWindow.ShowDialog();
             }
+
+            var setCurrentUserWindow = new SetCurrentUserWindow();
+            setCurrentUserWindow.ShowDialog();
+
+            Messenger.Default.Send(new ProjectInitializedMessage());
         }
 
         private void OnOpenSelectFolderDialog()
@@ -70,7 +69,6 @@ namespace GitTask.UI.MVVM.ViewModel.Main
             }
             catch (OperationCanceledException)
             {
-                return;
             }
         }
 

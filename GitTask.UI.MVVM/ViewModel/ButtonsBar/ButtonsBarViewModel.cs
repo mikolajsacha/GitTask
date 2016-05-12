@@ -2,8 +2,10 @@
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
+using GitTask.UI.MVVM.Messages;
 
 namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
 {
@@ -26,19 +28,19 @@ namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
             }
         }
 
-        public ButtonsBarViewModel(IQueryService<Project> projectQueryService)
+        public ButtonsBarViewModel()
         {
             _areButtonsEnabled = false;
-            projectQueryService.ElementAdded += ProjectQueryServiceOnElementAddedOrUpdated;
-            projectQueryService.ElementUpdated += ProjectQueryServiceOnElementAddedOrUpdated;
 
             _openProjectCommand = new RelayCommand(OnOpenProjectCommand);
             _addTaskCommand = new RelayCommand(OnAddTaskCommand);
+
+            Messenger.Default.Register<ProjectInitializedMessage>(this, OnProjectInitializedMessage);
         }
 
-        private void ProjectQueryServiceOnElementAddedOrUpdated(Project project)
+        private void OnProjectInitializedMessage(ProjectInitializedMessage projectInitializedMessage)
         {
-            AreButtonsEnabled = project.IsInitialized;
+            AreButtonsEnabled = true;
         }
 
         private void OnOpenProjectCommand()

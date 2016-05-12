@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
+using GitTask.UI.MVVM.View.ProjectSettings;
 
 namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
 {
@@ -36,7 +37,7 @@ namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
             _projectQueryService.AddNew(new Project
             {
                 Title = _projectName,
-                IsInitialized = true // TODO: kiedy koniec inicjalizacji?
+                IsInitialized = true
             });
             await _projectQueryService.SaveChanges();
         }

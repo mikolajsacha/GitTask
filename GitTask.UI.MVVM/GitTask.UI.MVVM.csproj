@@ -88,9 +88,12 @@
     <Compile Include="Converters\TaskPriorityToStringConverter.cs" />
     <Compile Include="Converters\NameToInitialsConverter.cs" />
     <Compile Include="Locator\IocModule.cs" />
+    <Compile Include="Messages\ProjectInitializedMessage.cs" />
+    <Compile Include="Messages\SetCurrentUserMessage.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
     <Compile Include="ViewModel\ButtonsBar\ButtonsBarViewModel.cs" />
     <Compile Include="ViewModel\Elements\ProjectMembersViewModel.cs" />
+    <Compile Include="ViewModel\ProjectSettings\SetCurrentUserViewModel.cs" />
     <Compile Include="ViewModel\TaskBoard\TaskBoardViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\ProjectSetupViewModel.cs" />
     <Compile Include="ViewModel\Elements\PendingStorageOperationsViewModel.cs" />
@@ -102,6 +105,9 @@
     </Compile>
     <Compile Include="View\Main\ProjectOpeningPartial.xaml.cs">
       <DependentUpon>ProjectOpeningPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProjectSettings\SetCurrentUserWindow.xaml.cs">
+      <DependentUpon>SetCurrentUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TaskBoard\TaskBoardPartial.xaml.cs">
       <DependentUpon>TaskBoardPartial.xaml</DependentUpon>
@@ -166,6 +172,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Main\ProjectOpeningPartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ProjectSettings\SetCurrentUserWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

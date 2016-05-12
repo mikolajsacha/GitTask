@@ -232,6 +232,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select current user from the list below:.
+        /// </summary>
+        public static string SetCurrentUserExplanation {
+            get {
+                return ResourceManager.GetString("SetCurrentUserExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task Details.
         /// </summary>
         public static string TaskDetails {
