@@ -15,14 +15,12 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Image VerticalAlignment="Center" Grid.Column="0" Width="40" Height="40" Stretch="Fill" Source="{Binding CurrentUser.Avatar}"/>
-        <TextBlock Grid.Column="1" Text="{Binding CurrentUser.Name, Mode=OneWay}" Foreground="WhiteSmoke" FontSize="16" VerticalAlignment="Center" Margin="5,2,5,5"/>
-        <storage:PendingStorageOperationsPartial Grid.Column="2" Margin="5,0,5,0"/>
-        <ScrollViewer Grid.Column="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <TextBlock Grid.Column="0" Text="{Binding CurrentUser, Mode=OneWay}" Foreground="WhiteSmoke" FontSize="16" VerticalAlignment="Center" Margin="5,2,5,5"/>
+        <storage:PendingStorageOperationsPartial Grid.Column="1" Margin="5,0,5,0"/>
+        <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <ItemsControl Margin="5,2,5,5" ItemsSource="{Binding ProjectMembers, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -36,6 +34,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <TextBlock Grid.Column="4" Text="{Binding ProjectName, Mode=OneWay}" FontStyle="Italic" Foreground="WhiteSmoke" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Margin="5,2,10,5"/>
+        <TextBlock Grid.Column="3" Text="{Binding ProjectName, Mode=OneWay}" FontStyle="Italic" Foreground="WhiteSmoke" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Margin="5,2,10,5"/>
     </Grid>
 </UserControl>

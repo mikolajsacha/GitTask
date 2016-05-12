@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using GalaSoft.MvvmLight;
 using GitTask.Repository.Services.Interface;
@@ -9,9 +10,10 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
 {
     public class FooterViewModel : ViewModelBase
     {
-        private string _projectName;
+        private readonly IRepositoryService _repositoryService;
         public ObservableCollection<string> ProjectMembers { get; }
 
+        private string _projectName;
         public string ProjectName
         {
             get { return _projectName; }
@@ -26,23 +28,38 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
 
         public FooterViewModel(IQueryService<Project> projectQueryService, IRepositoryService repositoryService)
         {
+            _repositoryService = repositoryService;
+
             var projects = projectQueryService.GetAll().ToList();
             if (projects.Any())
             {
                 _projectName = projects.First().Title;
             }
-            projectQueryService.ElementAdded += ProjectQueryServiceOnElementAdded;
 
-            ProjectMembers = new ObservableCollection<string>(repositoryService.GetAllCommitersNames());
+            projectQueryService.ElementAdded += ProjectQueryServiceOnElementAdded;
+            _repositoryService.RepositoryInitalized += RepositoryServiceOnRepositoryInitalized;
+
+            ProjectMembers = new ObservableCollection<string>();
+            RepositoryServiceOnRepositoryInitalized();
+
             if (ProjectMembers.Any())
             {
                 CurrentUser = ProjectMembers.First(); //TODO: wybrac/stworzyc uzytkownika
             }
         }
 
+        private void RepositoryServiceOnRepositoryInitalized()
+        {
+            ProjectMembers.Clear();
+            foreach (var commiter in _repositoryService.GetAllCommitersNames())
+            {
+                ProjectMembers.Add(commiter);
+            }
+        }
+
         private void ProjectQueryServiceOnElementAdded(Project project)
         {
-            ProjectName = project.Title; //TODO: sprawdzic, czemu sie nie wywoluje == naprawic footer
+            ProjectName = project.Title;
         }
     }
 }

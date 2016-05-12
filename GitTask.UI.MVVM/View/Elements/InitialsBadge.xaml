@@ -8,30 +8,13 @@
         Height="25"
         Width="25">
 
-    <UserControl.Resources>
-        <Style TargetType="Image" x:Name="AvatarStyle">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Avatar}" Value="{x:Null}">
-                    <Setter Property="Visibility" Value="Hidden"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
-
-    <Border Background="WhiteSmoke" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="{Binding Color, Mode=OneWay}">
+    <Border Background="WhiteSmoke" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="White">
         <Border.ToolTip>
-            <ToolTip Padding="0" BorderThickness="1" BorderBrush="{Binding Color, Mode=OneWay}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Width="45" Height="45" Source="{Binding Avatar}" Stretch="Fill"/>
-                    <TextBlock Text="{Binding Name, Mode=OneWay}" Margin="10" Grid.Column="1" Foreground="DarkSlateGray" FontSize="15" VerticalAlignment="Center" TextAlignment="Center"/>
-                </Grid>
+            <ToolTip Padding="0" BorderThickness="1" BorderBrush="White">
+                <TextBlock Text="{Binding Mode=OneWay}" Margin="10" Foreground="DarkSlateGray" FontSize="15" VerticalAlignment="Center" TextAlignment="Center"/>
             </ToolTip>
         </Border.ToolTip>
         <TextBlock Foreground="Black" FontSize="13" VerticalAlignment="Center" TextAlignment="Center" Margin="0,-2,0,0"
-                   Text="{Binding Name, Converter={StaticResource NameToInitialsConverter}, Mode=OneWay}"/>
+                   Text="{Binding Converter={StaticResource NameToInitialsConverter}, Mode=OneWay}"/>
     </Border>
 </UserControl>
