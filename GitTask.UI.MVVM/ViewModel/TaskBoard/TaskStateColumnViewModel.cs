@@ -7,7 +7,7 @@ using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
-namespace GitTask.UI.MVVM.ViewModel.Main
+namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 {
     public class TaskStateColumnViewModel : ViewModelBase
     {

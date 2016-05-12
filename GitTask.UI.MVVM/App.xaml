@@ -7,7 +7,7 @@
 			 xmlns:ignore="http://www.galasoft.ch/ignore"
 			 xmlns:locator="clr-namespace:GitTask.UI.MVVM.Locator"
              xmlns:converters="clr-namespace:GitTask.UI.MVVM.Converters"
-             StartupUri="View/MainWindow.xaml"
+             StartupUri="View/Main/MainWindow.xaml"
              mc:Ignorable="d ignore">
 
     <Application.Resources>

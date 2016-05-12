@@ -1,7 +1,9 @@
-﻿using GitTask.UI.MVVM.ViewModel;
+﻿using GitTask.UI.MVVM.ViewModel.ButtonsBar;
+using GitTask.UI.MVVM.ViewModel.Elements;
 using GitTask.UI.MVVM.ViewModel.Footer;
 using GitTask.UI.MVVM.ViewModel.Main;
-using GitTask.UI.MVVM.ViewModel.Storage;
+using GitTask.UI.MVVM.ViewModel.ProjectSettings;
+using GitTask.UI.MVVM.ViewModel.TaskBoard;
 using Ninject;
 
 namespace GitTask.UI.MVVM.Locator
@@ -21,6 +23,7 @@ namespace GitTask.UI.MVVM.Locator
         public static FooterViewModel FooterViewModel => Kernel.Get<FooterViewModel>();
         public static ProjectSetupViewModel ProjectSetupViewModel => Kernel.Get<ProjectSetupViewModel>();
         public static PendingStorageOperationsViewModel PendingStorageOperationsViewModel => Kernel.Get<PendingStorageOperationsViewModel>();
+        public static ButtonsBarViewModel ButtonsBarViewModel => Kernel.Get<ButtonsBarViewModel>();
 
         public static void Cleanup()
         {

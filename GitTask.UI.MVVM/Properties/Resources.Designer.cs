@@ -61,6 +61,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add task.
+        /// </summary>
+        public static string AddTask {
+            get {
+                return ResourceManager.GetString("AddTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assigned to.
         /// </summary>
         public static string AssignedTo {
@@ -102,6 +111,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string Hide {
             get {
                 return ResourceManager.GetString("Hide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open project.
+        /// </summary>
+        public static string OpenProject {
+            get {
+                return ResourceManager.GetString("OpenProject", resourceCulture);
             }
         }
         
@@ -201,6 +219,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string RepositoryNotFoundExplanation {
             get {
                 return ResourceManager.GetString("RepositoryNotFoundExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set current user.
+        /// </summary>
+        public static string SetCurrentUser {
+            get {
+                return ResourceManager.GetString("SetCurrentUser", resourceCulture);
             }
         }
         

@@ -4,7 +4,7 @@ using System.Linq;
 using GalaSoft.MvvmLight;
 using GitTask.Domain.Services.Interface;
 
-namespace GitTask.UI.MVVM.ViewModel.Storage
+namespace GitTask.UI.MVVM.ViewModel.Elements
 {
     public class PendingStorageOperationsViewModel : ViewModelBase
     {
@@ -28,13 +28,13 @@ namespace GitTask.UI.MVVM.ViewModel.Storage
             }
         }
 
-        public void OnStorageServiceStarted(string filePath)
+        private void OnStorageServiceStarted(string filePath)
         {
             PendingStorageSaveOperations.Add(filePath);
             RaisePropertiesChanged();
         }
 
-        public void OnStorageServiceFinished(string filePath)
+        private void OnStorageServiceFinished(string filePath)
         {
             PendingStorageSaveOperations.Remove(filePath);
             RaisePropertiesChanged();

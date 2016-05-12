@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="GitTask.UI.MVVM.View.Main.TaskBoardPartial"
+﻿<UserControl x:Class="GitTask.UI.MVVM.View.TaskBoard.TaskBoardPartial"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:main="clr-namespace:GitTask.UI.MVVM.View.Main"
+        xmlns:taskBoard="clr-namespace:GitTask.UI.MVVM.View.TaskBoard"
         mc:Ignorable="d ignore"
         DataContext="{Binding TaskBoardViewModel, Source={StaticResource Locator}, Mode=OneWay}"
         Background="LightGray">
@@ -18,7 +19,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <main:TaskStateColumnPartial DataContext="{Binding}"/>
+                    <taskBoard:TaskStateColumnPartial DataContext="{Binding}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

@@ -1,11 +1,9 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using GitTask.UI.MVVM.View.TaskDetails;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
-namespace GitTask.UI.MVVM.View.Main
+namespace GitTask.UI.MVVM.View.TaskBoard
 {
     public partial class TaskPartial
     {

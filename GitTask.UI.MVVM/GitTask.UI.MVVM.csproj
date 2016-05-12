@@ -89,26 +89,30 @@
     <Compile Include="Converters\NameToInitialsConverter.cs" />
     <Compile Include="Locator\IocModule.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
-    <Compile Include="ViewModel\Main\TaskBoardViewModel.cs" />
-    <Compile Include="ViewModel\Main\ProjectSetupViewModel.cs" />
-    <Compile Include="ViewModel\Storage\PendingStorageOperationsViewModel.cs" />
+    <Compile Include="ViewModel\ButtonsBar\ButtonsBarViewModel.cs" />
+    <Compile Include="ViewModel\TaskBoard\TaskBoardViewModel.cs" />
+    <Compile Include="ViewModel\ProjectSettings\ProjectSetupViewModel.cs" />
+    <Compile Include="ViewModel\Elements\PendingStorageOperationsViewModel.cs" />
+    <Compile Include="View\ButtonsBar\ButtonsBarPartial.xaml.cs">
+      <DependentUpon>ButtonsBarPartial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Main\ProjectOpeningPartial.xaml.cs">
       <DependentUpon>ProjectOpeningPartial.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Main\TaskBoardPartial.xaml.cs">
+    <Compile Include="View\TaskBoard\TaskBoardPartial.xaml.cs">
       <DependentUpon>TaskBoardPartial.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Main\ProjectSetupWindow.xaml.cs">
+    <Compile Include="View\ProjectSettings\ProjectSetupWindow.xaml.cs">
       <DependentUpon>ProjectSetupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PendingStorageOperations\PendingStorageOperationsPartial.xaml.cs">
+    <Compile Include="View\Elements\PendingStorageOperationsPartial.xaml.cs">
       <DependentUpon>PendingStorageOperationsPartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Main\ProjectOpeningViewModel.cs" />
     <Compile Include="ViewModel\Footer\FooterViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Main\MainViewModel.cs" />
     <Compile Include="Locator\IocLocator.cs" />
-    <Compile Include="ViewModel\Main\TaskStateColumnViewModel.cs" />
+    <Compile Include="ViewModel\TaskBoard\TaskStateColumnViewModel.cs" />
     <Compile Include="ViewModel\TaskDetails\TaskDetailsViewModel.cs" />
     <Compile Include="View\Elements\InitialsBadge.xaml.cs">
       <DependentUpon>InitialsBadge.xaml</DependentUpon>
@@ -116,15 +120,19 @@
     <Compile Include="View\Footer\FooterPartial.xaml.cs">
       <DependentUpon>FooterPartial.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Main\TaskStateColumnPartial.xaml.cs">
+    <Compile Include="View\TaskBoard\TaskStateColumnPartial.xaml.cs">
       <DependentUpon>TaskStateColumnPartial.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Main\TaskPartial.xaml.cs">
+    <Compile Include="View\TaskBoard\TaskPartial.xaml.cs">
       <DependentUpon>TaskPartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TaskDetails\TaskDetailsWindow.xaml.cs">
       <DependentUpon>TaskDetailsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ButtonsBar\ButtonsBarPartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Elements\InitialsBadge.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -133,7 +141,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="View\Main\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -141,7 +149,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
+    <Compile Include="View\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -153,23 +161,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Main\TaskBoardPartial.xaml">
+    <Page Include="View\TaskBoard\TaskBoardPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Main\ProjectSetupWindow.xaml">
+    <Page Include="View\ProjectSettings\ProjectSetupWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Main\TaskStateColumnPartial.xaml">
+    <Page Include="View\TaskBoard\TaskStateColumnPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Main\TaskPartial.xaml">
+    <Page Include="View\TaskBoard\TaskPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\PendingStorageOperations\PendingStorageOperationsPartial.xaml">
+    <Page Include="View\Elements\PendingStorageOperationsPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

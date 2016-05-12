@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GitTask.UI.MVVM.View.Main.TaskStateColumnPartial"
+﻿<UserControl x:Class="GitTask.UI.MVVM.View.TaskBoard.TaskStateColumnPartial"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,6 +6,7 @@
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:mainView="clr-namespace:GitTask.UI.MVVM.View.Main"
         xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+        xmlns:taskBoard="clr-namespace:GitTask.UI.MVVM.View.TaskBoard"
         d:DesignWidth="250"
         d:DesignHeight="768"
         mc:Ignorable="d ignore">
@@ -31,7 +32,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <mainView:TaskPartial DataContext="{Binding Mode=OneWay}"/>
+                        <taskBoard:TaskPartial DataContext="{Binding Mode=OneWay}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

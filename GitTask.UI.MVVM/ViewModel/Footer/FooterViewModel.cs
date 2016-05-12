@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using GalaSoft.MvvmLight;
 using GitTask.Repository.Services.Interface;

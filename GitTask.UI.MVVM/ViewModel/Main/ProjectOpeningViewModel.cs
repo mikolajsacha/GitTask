@@ -8,7 +8,7 @@ using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
 using GitTask.Repository.Services.Interface;
 using GitTask.UI.MVVM.Properties;
-using GitTask.UI.MVVM.View.Main;
+using ProjectSetupWindow = GitTask.UI.MVVM.View.ProjectSettings.ProjectSetupWindow;
 
 namespace GitTask.UI.MVVM.ViewModel.Main
 {

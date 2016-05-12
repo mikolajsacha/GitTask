@@ -6,10 +6,12 @@ using GitTask.Git;
 using GitTask.Json;
 using GitTask.Storage;
 using GitTask.Storage.Interface;
-using GitTask.UI.MVVM.ViewModel;
+using GitTask.UI.MVVM.ViewModel.ButtonsBar;
+using GitTask.UI.MVVM.ViewModel.Elements;
 using GitTask.UI.MVVM.ViewModel.Footer;
 using GitTask.UI.MVVM.ViewModel.Main;
-using GitTask.UI.MVVM.ViewModel.Storage;
+using GitTask.UI.MVVM.ViewModel.ProjectSettings;
+using GitTask.UI.MVVM.ViewModel.TaskBoard;
 using Ninject;
 
 namespace GitTask.UI.MVVM.Locator
@@ -47,6 +49,7 @@ namespace GitTask.UI.MVVM.Locator
             Bind<TaskBoardViewModel>().ToSelf().InSingletonScope();
             Bind<FooterViewModel>().ToSelf().InSingletonScope();
             Bind<ProjectSetupViewModel>().ToSelf().InSingletonScope();
+            Bind<ButtonsBarViewModel>().ToSelf().InSingletonScope();
         }
     }
 }

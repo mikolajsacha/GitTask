@@ -4,7 +4,7 @@ using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
 
-namespace GitTask.UI.MVVM.ViewModel.Main
+namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
 {
     public class ProjectSetupViewModel : ViewModelBase
     {

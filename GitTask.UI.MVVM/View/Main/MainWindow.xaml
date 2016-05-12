@@ -1,4 +1,4 @@
-﻿<Window x:Class="GitTask.UI.MVVM.View.MainWindow"
+﻿<Window x:Class="GitTask.UI.MVVM.View.Main.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,6 +6,8 @@
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:main="clr-namespace:GitTask.UI.MVVM.View.Main"
         xmlns:footer="clr-namespace:GitTask.UI.MVVM.View.Footer"
+        xmlns:taskBoard="clr-namespace:GitTask.UI.MVVM.View.TaskBoard"
+        xmlns:buttonsBar="clr-namespace:GitTask.UI.MVVM.View.ButtonsBar"
         mc:Ignorable="d ignore"
         Height="{StaticResource WindowHeight}"
         MinHeight="250"
@@ -16,16 +18,18 @@
         Background="Gray">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Visibility="{Binding IsTaskBoardVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
-            <main:TaskBoardPartial/>
+        <Grid Visibility="{Binding IsTaskBoardVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <taskBoard:TaskBoardPartial Grid.Row="0"/>
+            <buttonsBar:ButtonsBarPartial Grid.Row="1"/>
+            <footer:FooterPartial Grid.Row="2"/>
         </Grid>
-        <Grid Grid.Row="0" Visibility="{Binding IsProjectInitializerVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+        <Grid Visibility="{Binding IsProjectInitializerVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
             <main:ProjectOpeningPartial/>
         </Grid>
-        <footer:FooterPartial Grid.Row="1"/>
     </Grid>
 </Window>

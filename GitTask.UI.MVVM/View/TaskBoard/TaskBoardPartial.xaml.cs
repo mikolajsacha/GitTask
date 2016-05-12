@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
 using GitTask.UI.MVVM.Messages;
-using GitTask.UI.MVVM.ViewModel.Main;
+using GitTask.UI.MVVM.ViewModel.TaskBoard;
 
-namespace GitTask.UI.MVVM.View.Main
+namespace GitTask.UI.MVVM.View.TaskBoard
 {
     public partial class TaskBoardPartial
     {

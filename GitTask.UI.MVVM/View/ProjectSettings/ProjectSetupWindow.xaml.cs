@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using GitTask.UI.MVVM.ViewModel.Main;
+using GitTask.UI.MVVM.ViewModel.ProjectSettings;
 
-namespace GitTask.UI.MVVM.View.Main
+namespace GitTask.UI.MVVM.View.ProjectSettings
 {
     public partial class ProjectSetupWindow
     {

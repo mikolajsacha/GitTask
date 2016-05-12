@@ -1,4 +1,4 @@
-﻿namespace GitTask.UI.MVVM.View.PendingStorageOperations
+﻿namespace GitTask.UI.MVVM.View.Elements
 {
     public partial class PendingStorageOperationsPartial
     {

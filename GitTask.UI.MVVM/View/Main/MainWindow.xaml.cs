@@ -1,4 +1,4 @@
-﻿namespace GitTask.UI.MVVM.View
+﻿namespace GitTask.UI.MVVM.View.Main
 {
     public partial class MainWindow
     {

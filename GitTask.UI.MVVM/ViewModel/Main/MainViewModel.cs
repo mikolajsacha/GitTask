@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GitTask.Repository.Services.Interface;
 
-namespace GitTask.UI.MVVM.ViewModel
+namespace GitTask.UI.MVVM.ViewModel.Main
 {
     public class MainViewModel : ViewModelBase
     {

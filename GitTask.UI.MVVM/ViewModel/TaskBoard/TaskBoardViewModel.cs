@@ -6,7 +6,7 @@ using GalaSoft.MvvmLight;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
 
-namespace GitTask.UI.MVVM.ViewModel.Main
+namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 {
     public class TaskBoardViewModel : ViewModelBase
     {
