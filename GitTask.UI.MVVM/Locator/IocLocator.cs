@@ -24,6 +24,7 @@ namespace GitTask.UI.MVVM.Locator
         public static ProjectSetupViewModel ProjectSetupViewModel => Kernel.Get<ProjectSetupViewModel>();
         public static PendingStorageOperationsViewModel PendingStorageOperationsViewModel => Kernel.Get<PendingStorageOperationsViewModel>();
         public static ButtonsBarViewModel ButtonsBarViewModel => Kernel.Get<ButtonsBarViewModel>();
+        public static ProjectMembersViewModel ProjectMembersViewModel => Kernel.Get<ProjectMembersViewModel>();
 
         public static void Cleanup()
         {

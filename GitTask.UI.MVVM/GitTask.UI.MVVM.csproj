@@ -90,11 +90,15 @@
     <Compile Include="Locator\IocModule.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
     <Compile Include="ViewModel\ButtonsBar\ButtonsBarViewModel.cs" />
+    <Compile Include="ViewModel\Elements\ProjectMembersViewModel.cs" />
     <Compile Include="ViewModel\TaskBoard\TaskBoardViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\ProjectSetupViewModel.cs" />
     <Compile Include="ViewModel\Elements\PendingStorageOperationsViewModel.cs" />
     <Compile Include="View\ButtonsBar\ButtonsBarPartial.xaml.cs">
       <DependentUpon>ButtonsBarPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Elements\PendingStorageOperationsPartial.xaml.cs">
+      <DependentUpon>PendingStorageOperationsPartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Main\ProjectOpeningPartial.xaml.cs">
       <DependentUpon>ProjectOpeningPartial.xaml</DependentUpon>
@@ -105,8 +109,8 @@
     <Compile Include="View\ProjectSettings\ProjectSetupWindow.xaml.cs">
       <DependentUpon>ProjectSetupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Elements\PendingStorageOperationsPartial.xaml.cs">
-      <DependentUpon>PendingStorageOperationsPartial.xaml</DependentUpon>
+    <Compile Include="View\Footer\ProjectMembersInitialsList.xaml.cs">
+      <DependentUpon>ProjectMembersInitialsList.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Main\ProjectOpeningViewModel.cs" />
     <Compile Include="ViewModel\Footer\FooterViewModel.cs" />
@@ -134,6 +138,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Elements\InitialsBadge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Elements\PendingStorageOperationsPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -177,7 +185,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Elements\PendingStorageOperationsPartial.xaml">
+    <Page Include="View\Footer\ProjectMembersInitialsList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -214,9 +222,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\GitTask.Repository\GitTask.Repository.csproj">
       <Project>{537c0ce6-bb35-4150-bf90-774423909225}</Project>
