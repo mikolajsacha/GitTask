@@ -28,7 +28,7 @@ namespace GitTask.UI.MVVM.ViewModel.Main
 
         private void OnProjectPathChanged()
         {
-            IsTaskBoardVisible = true; //TODO: sprawdzic, dlaczego to nie pokazuje taskboarda
+            IsTaskBoardVisible = true;
         }
     }
 }

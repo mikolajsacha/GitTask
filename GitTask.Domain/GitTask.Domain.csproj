@@ -50,16 +50,20 @@
     <Compile Include="Exception\KeyAttributeNotDefinedException.cs" />
     <Compile Include="Exception\KeyPropertyNotExistsException.cs" />
     <Compile Include="Exception\KeyAttributeException.cs" />
-    <Compile Include="Model\Interface\IWithAuthor.cs" />
     <Compile Include="Model\Project\Project.cs" />
     <Compile Include="Model\Task\Comment.cs" />
     <Compile Include="Enum\TaskPriority.cs" />
-    <Compile Include="Model\Interface\IWithCreationDate.cs" />
     <Compile Include="Model\Task\Task.cs" />
     <Compile Include="Model\Task\TaskState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interface\IQueryService.cs" />
     <Compile Include="Services\Interface\IStorageService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GitTask.Repository\GitTask.Repository.csproj">
+      <Project>{537c0ce6-bb35-4150-bf90-774423909225}</Project>
+      <Name>GitTask.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

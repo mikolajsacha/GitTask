@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
+using GitTask.Domain.Enum;
 using GitTask.Domain.Model.Task;
+using GitTask.Repository.Model;
 
 namespace GitTask.UI.MVVM.Design
 {
@@ -14,7 +16,16 @@ namespace GitTask.UI.MVVM.Design
 
         public DesignTaskDetailsViewModel()
         {
-            //TODO
+            Task = new Task
+            {
+                Id = 0,
+                AssignedMembers = new[] { new ProjectMember("Jan Kowalski", "jankowalski@o2.pl"), new ProjectMember("Maciej Łoś", "losmaciej@hotmail.com"), },
+                Title = "Zrobić to i owo.",
+                Content = "Trzba koniecznie porobić to oraz owo!",
+                Priority = TaskPriority.Blocker,
+                CommentsIds = new[] { 0, 1 },
+                State = "TO DO"
+            };
         }
     }
 }

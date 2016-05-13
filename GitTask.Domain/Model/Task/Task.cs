@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GitTask.Domain.Attributes;
 using GitTask.Domain.Enum;
-using GitTask.Domain.Model.Interface;
+using GitTask.Repository.Model;
 
 namespace GitTask.Domain.Model.Task
 {
     [Key("Id")]
-    public class Task : IWithCreationDate, IWithAuthor
+    public class Task
     {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
 
-        [ForeignKey]
-        public string AuthorName { get; set; }
-
-        [ForeignKey]
-        public IEnumerable<string> AssignedMembers { get; set; }
-
-        public DateTime DateCreated { get; set; }
+        public IEnumerable<ProjectMember> AssignedMembers { get; set; }
         public TaskPriority Priority { get; set; }
 
         [ForeignKey]

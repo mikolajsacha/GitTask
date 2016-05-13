@@ -20,20 +20,22 @@ namespace GitTask.UI.MVVM.Design
         public bool IsHidden => !IsOpened;
 
         public DesignTaskStateColumnViewModel()
+            : this(new TaskState { Color = Brushes.Green, Name = "TO DO", Position = 0 })
+        {
+        }
+
+        public DesignTaskStateColumnViewModel(TaskState taskState)
         {
             ShowColumnCommand = new RelayCommand(OnShowColumnCommand);
             HideColumnCommand = new RelayCommand(OnHideColumnCommand);
 
-            TaskState = new TaskState
-            {
-                Color = Brushes.Green,
-                Name = "To do",
-                Position = 1
-            };
-
+            TaskState = taskState;
             Tasks = new ObservableCollection<DesignTaskDetailsViewModel>()
             {
-                //TODO
+                new DesignTaskDetailsViewModel(),
+                new DesignTaskDetailsViewModel(),
+                new DesignTaskDetailsViewModel(),
+                new DesignTaskDetailsViewModel()
             };
         }
 

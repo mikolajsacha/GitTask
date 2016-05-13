@@ -25,7 +25,8 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Task.Title, Mode=OneWay}" FontSize="15" Foreground="DarkSlateGray" FontWeight="SemiBold" TextWrapping="Wrap" Margin="5"/>
-                <elements:InitialsBadge Grid.Row="0" Grid.Column="1" DataContext="{Binding Task.Author, Mode=OneWay}" Margin="3" VerticalAlignment="Center"/>
+                <!-- TODO: get project author
+                <elements:InitialsBadge Grid.Row="0" Grid.Column="1" DataContext="{Binding Task.Author, Mode=OneWay}" Margin="3" VerticalAlignment="Center"/> -->
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0" Background="{Binding Task.Priority, Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}">
                 <Grid.ToolTip>

@@ -1,15 +1,11 @@
-﻿using System;
-using GitTask.Domain.Attributes;
-using GitTask.Domain.Model.Interface;
+﻿using GitTask.Domain.Attributes;
 
 namespace GitTask.Domain.Model.Task
 {
     [Key("Id")]
-    public class Comment : IWithAuthor
+    public class Comment
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        [ForeignKey]
-        public string AuthorName { get; set; }
     }
 }
