@@ -1,7 +1,9 @@
-﻿namespace GitTask.UI.MVVM.Messages
+﻿using GitTask.Repository.Model;
+
+namespace GitTask.UI.MVVM.Messages
 {
     public class SetCurrentUserMessage
     {
-        public string CurrentUser { get; set; }
+        public ProjectMember CurrentUser { get; set; }
     }
 }

@@ -4,7 +4,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:ignore="http://www.galasoft.ch/ignore"
+             xmlns:ignore="http://www.galasoft.ch/ignore"
 			 xmlns:locator="clr-namespace:GitTask.UI.MVVM.Locator"
              xmlns:converters="clr-namespace:GitTask.UI.MVVM.Converters"
              StartupUri="View/Main/MainWindow.xaml"
@@ -14,7 +14,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
-                    <locator:IocLocator x:Key="Locator" d:IsDataSource="True"/>
+                    <locator:IocLocator x:Key="Locator" d:IsDataSource="True"/> 
 
                     <sys:String x:Key="AppTitle">GitTask</sys:String>
                     <sys:Double x:Key="WindowWidth">1024</sys:Double>
@@ -29,6 +29,7 @@
                     <converters:TaskPriorityToStringConverter x:Key="TaskPriorityToStringConverter"/>
                     <converters:TaskContentToShortStringConverter x:Key="TaskContentToShortStringConverter"/>
                     <converters:ToUpperCaseConverter x:Key="ToUpperCaseConverter"/>
+                    <converters:ProjectMemberToBrushConverter x:Key="ProjectMemberToBrushConverter"/>
                 </ResourceDictionary>
 
                 <ResourceDictionary Source="Skins\MainSkin.xaml"/>

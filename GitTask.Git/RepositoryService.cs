@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using GitTask.Repository.Model;
 using GitTask.Repository.Services.Interface;
 
 namespace GitTask.Git
@@ -28,9 +29,13 @@ namespace GitTask.Git
             RepositoryInitalized?.Invoke();
         }
 
-        public IEnumerable<string> GetAllCommitersNames()
+        public IEnumerable<ProjectMember> GetAllCommiters()
         {
-            return _repository?.Commits.Select(x => x.Author.Name).Distinct() ?? new List<string>();
+            if (_repository == null) return new List<ProjectMember>();
+
+            return
+                _repository.Commits.Select(
+                    commit => new ProjectMember(commit.Committer.Name, commit.Committer.Email)).Distinct();
         }
 
         public bool RepositoryExists(string projectPath)

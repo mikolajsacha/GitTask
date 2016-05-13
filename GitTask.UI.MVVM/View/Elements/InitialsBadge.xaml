@@ -4,17 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         mc:Ignorable="d ignore"
         Height="25"
-        Width="25">
+        Width="25"
+        d:DataContext="{d:DesignInstance Type=design:DesignProjectMember, IsDesignTimeCreatable=True}">
 
-    <Border Background="WhiteSmoke" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="White">
+    <Border Background="WhiteSmoke" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1"
+            BorderBrush="{Binding Converter={StaticResource ProjectMemberToBrushConverter}, Mode=OneWay}">
         <Border.ToolTip>
-            <ToolTip Padding="0" BorderThickness="1" BorderBrush="White">
-                <TextBlock Text="{Binding Mode=OneWay}" Margin="10" Foreground="DarkSlateGray" FontSize="15" VerticalAlignment="Center" TextAlignment="Center"/>
+            <ToolTip Padding="0" BorderThickness="1" BorderBrush="{Binding Converter={StaticResource ProjectMemberToBrushConverter}, Mode=OneWay}">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Name, Mode=OneWay}" Margin="10" Foreground="DarkSlateGray" FontSize="15" VerticalAlignment="Center" TextAlignment="Center"/>
+                    <TextBlock Text="{Binding Email, Mode=OneWay}" Margin="10" Foreground="Gray" FontSize="13" FontStyle="Italic" VerticalAlignment="Center" TextAlignment="Center"/>
+                </StackPanel>
             </ToolTip>
         </Border.ToolTip>
         <TextBlock Foreground="Black" FontSize="13" VerticalAlignment="Center" TextAlignment="Center" Margin="0,-2,0,0"
-                   Text="{Binding Converter={StaticResource NameToInitialsConverter}, Mode=OneWay}"/>
+                   Text="{Binding Name, Converter={StaticResource NameToInitialsConverter}, Mode=OneWay}"/>
     </Border>
 </UserControl>

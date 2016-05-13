@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
         xmlns:footer="clr-namespace:GitTask.UI.MVVM.View.Footer"
+        xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
         d:DesignHeight="40"
         d:DesignWidth="1024"
-        DataContext="{Binding FooterViewModel, Source={StaticResource Locator}, Mode=OneWay}">
+        DataContext="{Binding FooterViewModel, Source={StaticResource Locator}, Mode=OneWay}"
+        d:DataContext="{d:DesignInstance Type=design:DesignFooterViewModel, IsDesignTimeCreatable=True}">
 
     <Grid Background="BlueViolet" MinHeight="40" MaxHeight="80">
         <Grid.ColumnDefinitions>
@@ -18,9 +20,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Text="{Binding CurrentUser, Mode=OneWay}" Foreground="WhiteSmoke" FontSize="16" VerticalAlignment="Center" Margin="5,2,5,5"/>
-        <elements:PendingStorageOperationsPartial Grid.Column="1" Margin="5,0,5,0"/>
-        <footer:ProjectMembersInitialsList Grid.Column="2" />
+        <TextBlock Grid.Column="0" Text="{Binding CurrentUser.Name, Mode=OneWay}" Foreground="WhiteSmoke" FontSize="16" VerticalAlignment="Center" Margin="5,2,5,5"/>
+        <elements:PendingStorageOperationsPartial Grid.Column="1" Margin="5,0,5,0" d:DataContext="{d:DesignInstance Type=design:DesignPendingStorageOperationsViewModel, IsDesignTimeCreatable=True}"/>
+        <footer:ProjectMembersInitialsList Grid.Column="2" d:DataContext="{d:DesignInstance Type=design:DesignProjectMembersViewModel, IsDesignTimeCreatable=True}" />
         <TextBlock Grid.Column="3" Text="{Binding ProjectName, Mode=OneWay}" FontStyle="Italic" Foreground="WhiteSmoke" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Margin="5,2,10,5"/>
     </Grid>
 </UserControl>

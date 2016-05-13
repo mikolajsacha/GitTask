@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+        xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         mc:Ignorable="d ignore"
         Width="400"
-        d:DesignHeight="600"
         Title="{x:Static prop:Resources.SetCurrentUser}"
         DataContext="{Binding SetCurrentUserViewModel, Source={StaticResource Locator}, Mode=OneWay}"
         Background="LightGray">
@@ -25,6 +25,7 @@
                           SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}},
                                          Path=DataContext.SelectedUser, Mode=OneWayToSource}"
                           DataContext="{Binding ProjectMembersViewModel, Source={StaticResource Locator}, Mode=OneWay}"
+                          d:DataContext="{d:DesignInstance Type=design:DesignProjectMembersViewModel, IsDesignTimeCreatable=True}"
                           ItemsSource="{Binding ProjectMembers, Mode=OneWay}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -33,7 +34,10 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Mode=OneWay}" Margin="3"/>
+                        <StackPanel Orientation="Vertical" Margin="3">
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" Margin="0,1,0,1"/>
+                            <TextBlock Text="{Binding Email, Mode=OneWay}" Margin="0,1,0,1"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

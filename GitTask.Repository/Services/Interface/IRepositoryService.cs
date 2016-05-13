@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GitTask.Repository.Model;
 
 namespace GitTask.Repository.Services.Interface
 {
@@ -7,7 +8,7 @@ namespace GitTask.Repository.Services.Interface
     {
         event Action RepositoryInitalized;
 
-        IEnumerable<string> GetAllCommitersNames();
+        IEnumerable<ProjectMember> GetAllCommiters();
         bool RepositoryExists(string projectPath);
     }
 }

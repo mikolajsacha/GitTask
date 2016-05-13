@@ -1,22 +1,16 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using GitTask.Repository.Services.Interface;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
+using GitTask.Repository.Model;
 using GitTask.UI.MVVM.Messages;
 
 namespace GitTask.UI.MVVM.ViewModel.Footer
 {
     public class FooterViewModel : ViewModelBase
     {
-        private readonly IRepositoryService _repositoryService;
-        public ObservableCollection<string> ProjectMembers { get; }
-
         private string _projectName;
-        private string _currentUser;
-
         public string ProjectName
         {
             get { return _projectName; }
@@ -27,7 +21,8 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
             }
         }
 
-        public string CurrentUser
+        private ProjectMember _currentUser;
+        public ProjectMember CurrentUser
         {
             get { return _currentUser; }
             private set
@@ -37,10 +32,8 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
             }
         }
 
-        public FooterViewModel(IQueryService<Project> projectQueryService, IRepositoryService repositoryService)
+        public FooterViewModel(IQueryService<Project> projectQueryService)
         {
-            _repositoryService = repositoryService;
-
             var projects = projectQueryService.GetAll().ToList();
             if (projects.Any())
             {
@@ -48,10 +41,6 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
             }
 
             projectQueryService.ElementAdded += ProjectQueryServiceOnElementAdded;
-            _repositoryService.RepositoryInitalized += RepositoryServiceOnRepositoryInitalized;
-
-            ProjectMembers = new ObservableCollection<string>();
-            RepositoryServiceOnRepositoryInitalized();
 
             Messenger.Default.Register<SetCurrentUserMessage>(this, OnSetCurrentUserMessage);
         }
@@ -59,15 +48,6 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
         private void OnSetCurrentUserMessage(SetCurrentUserMessage currentUserMessage)
         {
             CurrentUser = currentUserMessage.CurrentUser;
-        }
-
-        private void RepositoryServiceOnRepositoryInitalized()
-        {
-            ProjectMembers.Clear();
-            foreach (var commiter in _repositoryService.GetAllCommitersNames())
-            {
-                ProjectMembers.Add(commiter);
-            }
         }
 
         private void ProjectQueryServiceOnElementAdded(Project project)

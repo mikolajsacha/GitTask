@@ -82,11 +82,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ProjectMemberToBrushConverter.cs" />
     <Compile Include="Converters\ToUpperCaseConverter.cs" />
     <Compile Include="Converters\TaskContentToShortStringConverter.cs" />
     <Compile Include="Converters\TaskPriorityToColorConverter.cs" />
     <Compile Include="Converters\TaskPriorityToStringConverter.cs" />
     <Compile Include="Converters\NameToInitialsConverter.cs" />
+    <Compile Include="Design\DesignProjectMembersViewModel.cs" />
+    <Compile Include="Design\DesignProjectMember.cs" />
+    <Compile Include="Design\DesignPendingStorageOperationsViewModel.cs" />
+    <Compile Include="Design\DesignFooterViewModel.cs" />
+    <Compile Include="Design\DesignMainViewModel.cs" />
+    <Compile Include="Design\DesignTaskBoardViewModel.cs" />
+    <Compile Include="Design\DesignTaskStateColumnViewModel.cs" />
+    <Compile Include="Design\DesignTaskDetailsViewModel.cs" />
     <Compile Include="Locator\IocModule.cs" />
     <Compile Include="Messages\ProjectInitializedMessage.cs" />
     <Compile Include="Messages\SetCurrentUserMessage.cs" />

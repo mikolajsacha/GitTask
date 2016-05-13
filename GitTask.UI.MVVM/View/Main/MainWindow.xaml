@@ -8,6 +8,7 @@
         xmlns:footer="clr-namespace:GitTask.UI.MVVM.View.Footer"
         xmlns:taskBoard="clr-namespace:GitTask.UI.MVVM.View.TaskBoard"
         xmlns:buttonsBar="clr-namespace:GitTask.UI.MVVM.View.ButtonsBar"
+        xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         mc:Ignorable="d ignore"
         Height="{StaticResource WindowHeight}"
         MinHeight="250"
@@ -15,6 +16,7 @@
         Width="{StaticResource WindowWidth}"
         Title="{StaticResource AppTitle}"
         DataContext="{Binding MainViewModel, Source={StaticResource Locator}, Mode=OneWay}"
+        d:DataContext="{d:DesignInstance Type=design:DesignMainViewModel, IsDesignTimeCreatable=True}"
         Background="Gray">
 
     <Grid>

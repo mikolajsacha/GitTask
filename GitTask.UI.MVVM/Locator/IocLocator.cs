@@ -1,4 +1,5 @@
-﻿using GitTask.UI.MVVM.ViewModel.ButtonsBar;
+﻿using GalaSoft.MvvmLight;
+using GitTask.UI.MVVM.ViewModel.ButtonsBar;
 using GitTask.UI.MVVM.ViewModel.Elements;
 using GitTask.UI.MVVM.ViewModel.Footer;
 using GitTask.UI.MVVM.ViewModel.Main;
@@ -14,6 +15,8 @@ namespace GitTask.UI.MVVM.Locator
 
         static IocLocator()
         {
+            if (ViewModelBase.IsInDesignModeStatic) return;
+
             Kernel = new StandardKernel(new IocModule());
         }
 

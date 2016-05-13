@@ -2,14 +2,15 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using GitTask.Repository.Model;
 using GitTask.UI.MVVM.Messages;
 
 namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
 {
     public class SetCurrentUserViewModel : ViewModelBase
     {
-        private string _selectedUser;
-        public string SelectedUser
+        private ProjectMember _selectedUser;
+        public ProjectMember SelectedUser
         {
             get { return _selectedUser; }
             set

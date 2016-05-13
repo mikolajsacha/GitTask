@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
-        xmlns:mainView="clr-namespace:GitTask.UI.MVVM.View.Main"
         xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
         xmlns:taskBoard="clr-namespace:GitTask.UI.MVVM.View.TaskBoard"
         d:DesignWidth="250"

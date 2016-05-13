@@ -25,7 +25,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Task.Title, Mode=OneWay}" FontSize="15" Foreground="DarkSlateGray" FontWeight="SemiBold" TextWrapping="Wrap" Margin="5"/>
-                <elements:InitialsBadge Grid.Row="0" Grid.Column="1" DataContext="{Binding Author, Mode=OneWay}" Margin="3" VerticalAlignment="Center"/>
+                <elements:InitialsBadge Grid.Row="0" Grid.Column="1" DataContext="{Binding Task.Author, Mode=OneWay}" Margin="3" VerticalAlignment="Center"/>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0" Background="{Binding Task.Priority, Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}">
                 <Grid.ToolTip>
@@ -44,7 +44,7 @@
                 </TextBlock.ToolTip>
             </TextBlock>
             <Grid Grid.Row="3" Grid.Column="0" Background="Gray"/>
-            <ItemsControl Grid.Row="4" Grid.Column="0" Margin="2,0,2,0" ItemsSource="{Binding AssignedMembers, Mode=OneWay}">
+            <ItemsControl Grid.Row="4" Grid.Column="0" Margin="2,0,2,0" ItemsSource="{Binding Task.AssignedMembers, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal"/>

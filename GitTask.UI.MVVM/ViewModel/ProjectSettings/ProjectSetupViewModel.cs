@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
-using GitTask.UI.MVVM.View.ProjectSettings;
 
 namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
 {

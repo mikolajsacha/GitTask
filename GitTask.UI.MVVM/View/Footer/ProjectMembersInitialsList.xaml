@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
+        xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         mc:Ignorable="d ignore"
         Background="Transparent"
-        DataContext="{Binding ProjectMembersViewModel, Source={StaticResource Locator}, Mode=OneWay}">
+        DataContext="{Binding ProjectMembersViewModel, Source={StaticResource Locator}, Mode=OneWay}"
+        d:DataContext="{d:DesignInstance Type=design:DesignProjectMembersViewModel, IsDesignTimeCreatable=True}">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <ItemsControl Margin="5,2,5,5" ItemsSource="{Binding ProjectMembers, Mode=OneWay}">

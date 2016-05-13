@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+        xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         mc:Ignorable="d ignore"
         d:DesignHeight="40"
         Height="40"
         Background="BlueViolet"
-        DataContext="{Binding PendingStorageOperationsViewModel, Source={StaticResource Locator}, Mode=OneWay}">
+        DataContext="{Binding PendingStorageOperationsViewModel, Source={StaticResource Locator}, Mode=OneWay}"
+        d:DataContext="{d:DesignInstance Type=design:DesignPendingStorageOperationsViewModel, IsDesignTimeCreatable=True}">
 
     <StackPanel Visibility="{Binding AnyPendingStorageOperations, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                 Orientation="Horizontal" MinWidth="230">
