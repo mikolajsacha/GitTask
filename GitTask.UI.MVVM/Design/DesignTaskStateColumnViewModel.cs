@@ -16,7 +16,7 @@ namespace GitTask.UI.MVVM.Design
         public ICommand ShowColumnCommand { get; }
         public ICommand HideColumnCommand { get; }
 
-        public bool IsOpened = true;
+        public bool IsOpened { get; private set; }
         public bool IsHidden => !IsOpened;
 
         public DesignTaskStateColumnViewModel()
@@ -24,11 +24,12 @@ namespace GitTask.UI.MVVM.Design
         {
         }
 
-        public DesignTaskStateColumnViewModel(TaskState taskState)
+        public DesignTaskStateColumnViewModel(TaskState taskState, bool isOpened = true)
         {
             ShowColumnCommand = new RelayCommand(OnShowColumnCommand);
             HideColumnCommand = new RelayCommand(OnHideColumnCommand);
 
+            IsOpened = isOpened;
             TaskState = taskState;
             Tasks = new ObservableCollection<DesignTaskDetailsViewModel>()
             {

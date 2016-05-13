@@ -20,7 +20,7 @@ namespace GitTask.UI.MVVM.Design
                 new DesignTaskStateColumnViewModel(new TaskState {Color = Brushes.Red, Name = "IN PROGRESS", Position = 1}),
                 new DesignTaskStateColumnViewModel(new TaskState {Color = Brushes.Blue, Name = "TO BE TESTED", Position = 2}),
                 new DesignTaskStateColumnViewModel(new TaskState {Color = Brushes.Orange, Name = "DONE", Position = 3}),
-                new DesignTaskStateColumnViewModel(new TaskState {Color = Brushes.Gray, Name = "CLOSED", Position = 4})
+                new DesignTaskStateColumnViewModel(new TaskState {Color = Brushes.Gray, Name = "CLOSED", Position = 4}, false)
             };
         }
     }

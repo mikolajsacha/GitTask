@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
         xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
         d:DesignHeight="250"
         d:DesignWidth="250"
-        mc:Ignorable="d ignore">
+        mc:Ignorable="d ignore"
+        d:DataContext="{d:DesignInstance Type=design:DesignTaskDetailsViewModel, IsDesignTimeCreatable=True}">
 
     <Border x:Name="Main" Margin="0,5,0,5" Background="White" CornerRadius="5">
         <Grid>

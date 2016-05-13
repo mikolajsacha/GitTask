@@ -13,7 +13,7 @@ namespace GitTask.UI.MVVM.View.TaskBoard
         private int _openedTaskStateColumnsCount;
         private int _hiddenTaskStateColumnsCount;
 
-        public TaskBoardPartial() //TODO: podpiac design viewmodele w WPF
+        public TaskBoardPartial()
         {
             InitializeComponent();
             SizeChanged += OnTaskBoardSizeChanged;

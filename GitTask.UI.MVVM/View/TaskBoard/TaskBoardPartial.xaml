@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:taskBoard="clr-namespace:GitTask.UI.MVVM.View.TaskBoard"
+        xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         mc:Ignorable="d ignore"
         DataContext="{Binding TaskBoardViewModel, Source={StaticResource Locator}, Mode=OneWay}"
+        d:DataContext="{d:DesignInstance Type=design:DesignTaskBoardViewModel, IsDesignTimeCreatable=True}"
         Background="LightGray">
 
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
