@@ -41,7 +41,7 @@ namespace GitTask.UI.MVVM.ViewModel.Main
 
         private void ProjectQueryServiceOnElementsReloaded()
         {
-            if (!_projectQueryService.GetAll().Any() || !_projectQueryService.GetAll().First().IsInitialized)
+            if (!_projectQueryService.GetAll().Any())
             {
                 var projectSetupWindow = new ProjectSetupWindow();
                 projectSetupWindow.ShowDialog();

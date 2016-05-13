@@ -12,7 +12,6 @@ namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
         private readonly IQueryService<Project> _projectQueryService;
 
         private string _projectName;
-
         public string ProjectName
         {
             get { return _projectName; }
@@ -37,7 +36,6 @@ namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
             _projectQueryService.AddNew(new Project
             {
                 Title = _projectName,
-                IsInitialized = true
             });
             await _projectQueryService.SaveChanges();
         }
