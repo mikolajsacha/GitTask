@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using GalaSoft.MvvmLight;
-using GitTask.Repository.Services.Interface;
+﻿using GitTask.Repository.Services.Interface;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
@@ -14,6 +12,7 @@ using GitTask.UI.MVVM.ViewModel.Footer;
 using GitTask.UI.MVVM.ViewModel.Main;
 using GitTask.UI.MVVM.ViewModel.ProjectSettings;
 using GitTask.UI.MVVM.ViewModel.TaskBoard;
+using GitTask.UI.MVVM.ViewModel.TaskDetails;
 using Ninject;
 
 namespace GitTask.UI.MVVM.Locator
@@ -54,6 +53,7 @@ namespace GitTask.UI.MVVM.Locator
             Bind<ButtonsBarViewModel>().ToSelf().InSingletonScope();
             Bind<ProjectMembersViewModel>().ToSelf().InSingletonScope();
             Bind<SetCurrentUserViewModel>().ToSelf().InSingletonScope();
+            Bind<AddTaskViewModel>().ToSelf().InSingletonScope();
         }
     }
 }

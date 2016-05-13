@@ -47,10 +47,10 @@ namespace GitTask.UI.MVVM.ViewModel.Main
                 projectSetupWindow.ShowDialog();
             }
 
+            Messenger.Default.Send(new ProjectInitializedMessage());
+
             var setCurrentUserWindow = new SetCurrentUserWindow();
             setCurrentUserWindow.ShowDialog();
-
-            Messenger.Default.Send(new ProjectInitializedMessage());
         }
 
         private void OnOpenSelectFolderDialog()

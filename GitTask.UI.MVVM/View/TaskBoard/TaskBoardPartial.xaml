@@ -8,6 +8,8 @@
         xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         mc:Ignorable="d ignore"
         DataContext="{Binding TaskBoardViewModel, Source={StaticResource Locator}, Mode=OneWay}"
+        d:DesignHeight="730"
+        d:DesignWidth="1024"
         d:DataContext="{d:DesignInstance Type=design:DesignTaskBoardViewModel, IsDesignTimeCreatable=True}"
         Background="LightGray">
 

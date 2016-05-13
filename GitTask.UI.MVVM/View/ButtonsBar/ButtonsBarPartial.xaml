@@ -24,8 +24,10 @@
 
     <StackPanel Orientation="Horizontal" Margin="3" HorizontalAlignment="Right" MinHeight="40" MaxHeight="80">
         <Button Style="{StaticResource RoundedCornersButton}" Margin="3"
-                Command="{Binding OpenProjectCommand, Mode=OneWay}"
-                IsEnabled="{Binding AreButtonsEnabled, Mode=OneWay}">
+                DataContext="{Binding ProjectOpeningViewModel, Source={StaticResource Locator}, Mode=OneWay}"
+                Command="{Binding OpenSelectFolderDialogCommand, Mode=OneWay}"
+                IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},
+                                    Path=DataContext.AreButtonsEnabled, Mode=OneWay}">
             <TextBlock Style="{StaticResource ButtonText}"
                        Text="{Binding Source={x:Static prop:Resources.OpenProject}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}"/>
         </Button>

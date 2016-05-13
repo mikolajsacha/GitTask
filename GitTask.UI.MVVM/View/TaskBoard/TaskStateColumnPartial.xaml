@@ -8,7 +8,7 @@
         xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         xmlns:taskBoard="clr-namespace:GitTask.UI.MVVM.View.TaskBoard"
         d:DesignWidth="250"
-        d:DesignHeight="768"
+        d:DesignHeight="730"
         mc:Ignorable="d ignore"
         d:DataContext="{d:DesignInstance Type=design:DesignTaskStateColumnViewModel, IsDesignTimeCreatable=True}">
 

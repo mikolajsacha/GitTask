@@ -1,17 +1,14 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GitTask.UI.MVVM.Messages;
+using GitTask.UI.MVVM.View.TaskDetails;
 
 namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
 {
     public class ButtonsBarViewModel : ViewModelBase
     {
-        private readonly RelayCommand _openProjectCommand;
-        public ICommand OpenProjectCommand => _openProjectCommand;
-
         private readonly RelayCommand _addTaskCommand;
         public ICommand AddTaskCommand => _addTaskCommand;
 
@@ -30,7 +27,6 @@ namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
         {
             _areButtonsEnabled = false;
 
-            _openProjectCommand = new RelayCommand(OnOpenProjectCommand);
             _addTaskCommand = new RelayCommand(OnAddTaskCommand);
 
             Messenger.Default.Register<ProjectInitializedMessage>(this, OnProjectInitializedMessage);
@@ -41,14 +37,10 @@ namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
             AreButtonsEnabled = true;
         }
 
-        private void OnOpenProjectCommand()
-        {
-            throw new NotImplementedException();
-        }
-
         private void OnAddTaskCommand()
         {
-            throw new NotImplementedException();
+            var addTaskWindow = new AddTaskWindow();
+            addTaskWindow.Show();
         }
     }
 }
