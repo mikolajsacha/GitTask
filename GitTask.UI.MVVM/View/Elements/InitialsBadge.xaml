@@ -10,12 +10,13 @@
         Width="25"
         d:DataContext="{d:DesignInstance Type=design:DesignProjectMember, IsDesignTimeCreatable=True}">
 
-    <Border Background="WhiteSmoke" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1"
+    <Border Background="WhiteSmoke" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2"
             BorderBrush="{Binding Converter={StaticResource ProjectMemberToBrushConverter}, Mode=OneWay}">
         <Border.ToolTip>
             <ToolTip Padding="0" BorderThickness="1" BorderBrush="{Binding Converter={StaticResource ProjectMemberToBrushConverter}, Mode=OneWay}">
                 <StackPanel Orientation="Vertical" Margin="5">
-                    <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="DarkSlateGray" FontSize="15" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding Name, Mode=OneWay}" Foreground="{Binding Converter={StaticResource ProjectMemberToBrushConverter}, Mode=OneWay}"
+                               FontSize="15" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding Email, Mode=OneWay}" Foreground="Gray" FontSize="13" FontStyle="Italic" VerticalAlignment="Center"/>
                 </StackPanel>
             </ToolTip>

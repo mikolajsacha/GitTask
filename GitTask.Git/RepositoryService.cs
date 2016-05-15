@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using GitTask.Repository.Model;
 using GitTask.Repository.Services.Interface;
 
@@ -33,9 +34,25 @@ namespace GitTask.Git
         {
             if (_repository == null) return new List<ProjectMember>();
 
-            return
-                _repository.Commits.Select(
-                    commit => new ProjectMember(commit.Committer.Name, commit.Committer.Email)).Distinct();
+            var nameKeyedDictionary = new Dictionary<string, string>(); // key = name, value = email
+            var emailKeyedDictionary = new Dictionary<string, string>(); // key = email, value = name
+
+            // we want unique names, with each project member having the most up-to-date e-mail (from newest commit)
+            foreach (var committer in _repository.Commits.Select(commit => commit.Committer).OrderBy(committer => committer.When.DateTime))
+            {
+                nameKeyedDictionary[committer.Name] = committer.Email;
+                emailKeyedDictionary[committer.Email] = committer.Name;
+            }
+
+            var keysToRemove = (from nameKey in nameKeyedDictionary.Keys
+                                let emailValue = nameKeyedDictionary[nameKey]
+                                where emailKeyedDictionary[emailValue] != nameKey
+                                select nameKey);
+
+            var keysTomoveHashSet = new HashSet<string>(keysToRemove);
+
+            return nameKeyedDictionary.Where(commiterPair => !keysTomoveHashSet.Contains(commiterPair.Key)).
+                                             Select(commiterPair => new ProjectMember(commiterPair.Key, commiterPair.Value));
         }
 
         public bool RepositoryExists(string projectPath)
