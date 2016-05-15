@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+        xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
         xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         mc:Ignorable="d ignore"
         Width="400"
@@ -20,30 +21,10 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" Margin="10"
                    Text="{x:Static prop:Resources.SetCurrentUserExplanation}"/>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="500">
-            <ListBox x:Name="UsersList" Margin="10" SelectionMode="Single"
-                          SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}},
-                                         Path=DataContext.SelectedUser, Mode=OneWayToSource}"
-                          DataContext="{Binding ProjectMembersViewModel, Source={StaticResource Locator}, Mode=OneWay}"
-                          d:DataContext="{d:DesignInstance Type=design:DesignProjectMembersViewModel, IsDesignTimeCreatable=True}"
-                          ItemsSource="{Binding ProjectMembers, Mode=OneWay}">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical" Margin="3">
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" FontSize="13" Margin="0,1,0,1"/>
-                            <TextBlock Text="{Binding Email, Mode=OneWay}" FontSize="11" Foreground="#FF402222" Margin="5,1,0,1"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </ScrollViewer>
+        <elements:SelectUsersPartial Grid.Row="1" DataContext="{Binding SelectUsersViewModel, Mode=OneWay}"
+                                     d:DataContext="{d:DesignInstance Type=design:DesignSelectUsersViewModel, IsDesignTimeCreatable=True}"/>
         <Button x:Name="OkButton" Grid.Row="2" Width="140" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10"
-                IsEnabled="{Binding IsOkButtonEnabled, Mode=OneWay}" Style="{StaticResource RoundedCornersButton}">
+                IsEnabled="{Binding SelectUsersViewModel.AnyUserChosen, Mode=OneWay}" Style="{StaticResource RoundedCornersButton}">
             <TextBlock Text="OK" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="SemiBold" Foreground="DarkSlateGray"/>
         </Button>
     </Grid>

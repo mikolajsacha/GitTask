@@ -96,11 +96,13 @@
     <Compile Include="Design\DesignTaskBoardViewModel.cs" />
     <Compile Include="Design\DesignTaskStateColumnViewModel.cs" />
     <Compile Include="Design\DesignTaskDetailsViewModel.cs" />
+    <Compile Include="Design\DesignSelectUsersViewModel.cs" />
     <Compile Include="Locator\IocModule.cs" />
     <Compile Include="Messages\ProjectInitializedMessage.cs" />
     <Compile Include="Messages\SetCurrentUserMessage.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
     <Compile Include="ViewModel\ButtonsBar\ButtonsBarViewModel.cs" />
+    <Compile Include="ViewModel\Elements\SelectUsersViewModel.cs" />
     <Compile Include="ViewModel\Elements\ProjectMembersViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\SetCurrentUserViewModel.cs" />
     <Compile Include="ViewModel\TaskBoard\TaskBoardViewModel.cs" />
@@ -112,6 +114,9 @@
     </Compile>
     <Compile Include="View\Elements\PendingStorageOperationsPartial.xaml.cs">
       <DependentUpon>PendingStorageOperationsPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Elements\SelectUsersPartial.xaml.cs">
+      <DependentUpon>SelectUsersPartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Main\ProjectOpeningPartial.xaml.cs">
       <DependentUpon>ProjectOpeningPartial.xaml</DependentUpon>
@@ -161,6 +166,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Elements\PendingStorageOperationsPartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Elements\SelectUsersPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

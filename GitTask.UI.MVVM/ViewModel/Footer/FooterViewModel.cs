@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Project;
@@ -10,6 +11,8 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
 {
     public class FooterViewModel : ViewModelBase
     {
+        private readonly IQueryService<Project> _projectQueryService;
+
         private string _projectName;
         public string ProjectName
         {
@@ -34,15 +37,22 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
 
         public FooterViewModel(IQueryService<Project> projectQueryService)
         {
-            var projects = projectQueryService.GetAll().ToList();
-            if (projects.Any())
-            {
-                _projectName = projects.First().Title;
-            }
+            _projectQueryService = projectQueryService;
+            ProjectQueryServiceOnElementsReloaded();
 
             projectQueryService.ElementAdded += ProjectQueryServiceOnElementAdded;
+            projectQueryService.ElementsReloaded += ProjectQueryServiceOnElementsReloaded;
 
             Messenger.Default.Register<SetCurrentUserMessage>(this, OnSetCurrentUserMessage);
+        }
+
+        private void ProjectQueryServiceOnElementsReloaded()
+        {
+            var projects = _projectQueryService.GetAll().ToList();
+            if (projects.Any())
+            {
+                ProjectName = projects.First().Title;
+            }
         }
 
         private void OnSetCurrentUserMessage(SetCurrentUserMessage currentUserMessage)
