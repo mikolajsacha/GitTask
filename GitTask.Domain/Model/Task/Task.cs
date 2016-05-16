@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using GitTask.Domain.Attributes;
 using GitTask.Domain.Enum;
-using GitTask.Repository.Model;
+using GitTask.Domain.Model.Project;
 
 namespace GitTask.Domain.Model.Task
 {

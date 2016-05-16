@@ -21,7 +21,7 @@ namespace GitTask.Storage
 
         public event Action<TModel> ElementAdded;
         public event Action<TModel> ElementUpdated;
-        public event Action<object> ElementDeleted;
+        public event Action<TModel> ElementDeleted;
         public event Action ElementsReloaded;
 
         public QueryService(IStorageService<TModel> storageService, IProjectPathsReadonlyService projectPathsService)
@@ -67,8 +67,9 @@ namespace GitTask.Storage
         public void Delete(object keyValue)
         {
             AssertKeyExists(keyValue);
+            var removed = GetByKey(keyValue);
             RemoveFromCollection(keyValue);
-            ElementDeleted?.Invoke(keyValue);
+            ElementDeleted?.Invoke(removed);
         }
 
         public TModel GetByKey(object keyValue)

@@ -1,4 +1,4 @@
-﻿using GitTask.Repository.Model;
+﻿using GitTask.Domain.Model.Project;
 
 namespace GitTask.UI.MVVM.Messages
 {

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
-using GitTask.Repository.Model;
+using GitTask.Domain.Model.Project;
 using GitTask.UI.MVVM.ViewModel.Elements;
 
 namespace GitTask.UI.MVVM.View.TaskDetails

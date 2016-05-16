@@ -1,4 +1,4 @@
-﻿namespace GitTask.Repository.Model
+﻿namespace GitTask.Domain.Model.Project
 {
     public class ProjectMember
     {

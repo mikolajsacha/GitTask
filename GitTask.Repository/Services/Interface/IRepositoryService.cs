@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using GitTask.Repository.Model;
+using GitTask.Domain.Model.Project;
 
 namespace GitTask.Repository.Services.Interface
 {

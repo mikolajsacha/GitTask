@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using GitTask.Repository.Model;
+using GitTask.Domain.Model.Project;
 using GitTask.UI.MVVM.ViewModel.Elements;
 
 namespace GitTask.UI.MVVM.View.Elements

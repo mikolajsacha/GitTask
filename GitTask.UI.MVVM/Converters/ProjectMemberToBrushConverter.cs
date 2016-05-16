@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Media;
-using GitTask.Repository.Model;
+using GitTask.Domain.Model.Project;
 
 namespace GitTask.UI.MVVM.Converters
 {

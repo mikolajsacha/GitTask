@@ -5,6 +5,7 @@ using System.Linq;
 using GalaSoft.MvvmLight;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
+using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
 namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 {
@@ -45,22 +46,70 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             _taskStateQueryService = taskStateQueryService;
             _taskQueryService = taskQueryService;
 
+            _taskQueryService.ElementAdded += TaskQueryServiceOnElementAdded;
+            _taskQueryService.ElementUpdated += TaskQueryServiceOnElementUpdated;
+            _taskQueryService.ElementDeleted += TaskQueryServiceOnElementDeleted;
+
             _taskStateQueryService.ElementAdded += TaskStateQueryServiceOnElementChanged;
             _taskStateQueryService.ElementUpdated += TaskStateQueryServiceOnElementChanged;
             _taskStateQueryService.ElementDeleted += TaskStateQueryServiceOnElementChanged;
-            _taskStateQueryService.ElementsReloaded += TaskStateQueryServiceOnElementsReloaded;
+            _taskStateQueryService.ElementsReloaded += OnElementsReloaded;
+            _taskQueryService.ElementsReloaded += OnElementsReloaded;
 
             TaskStateColumns = new ObservableCollection<TaskStateColumnViewModel>();
+            InitializeExistingTasks();
         }
 
-        private void TaskStateQueryServiceOnElementsReloaded()
+        private void InitializeExistingTasks()
+        {
+            foreach (var taskStateColumn in TaskStateColumns)
+            {
+                taskStateColumn.Tasks.Clear();
+            }
+
+            foreach (var task in _taskQueryService.GetAll())
+            {
+                foreach (
+                    var taskStateColumn in
+                        TaskStateColumns.Where(taskStateColumn => taskStateColumn.TaskState.Name == task.State))
+                {
+                    taskStateColumn.Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService));
+                }
+            }
+        }
+
+        private void TaskQueryServiceOnElementAdded(Task task)
+        {
+            foreach (var taskStateColumn in TaskStateColumns.Where(taskStateColumn => taskStateColumn.TaskState.Name == task.State))
+            {
+                taskStateColumn.Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService));
+            }
+        }
+
+        private void TaskQueryServiceOnElementDeleted(Task task)
+        {
+            foreach (var taskStateColumn in TaskStateColumns.Where(taskStateColumn => taskStateColumn.TaskState.Name == task.State).ToList())
+            {
+                TaskStateColumns.Remove(taskStateColumn);
+            }
+        }
+
+        private void TaskQueryServiceOnElementUpdated(Task task)
+        {
+            TaskQueryServiceOnElementDeleted(task);
+            TaskQueryServiceOnElementAdded(task);
+        }
+
+        private void OnElementsReloaded()
         {
             InitializeTaskStateColumns();
+            InitializeExistingTasks();
         }
 
         private void TaskStateQueryServiceOnElementChanged(object taskState)
         {
             InitializeTaskStateColumns();
+            InitializeExistingTasks();
         }
 
         public void InitializeTaskStateColumns()

@@ -8,7 +8,7 @@ namespace GitTask.Domain.Services.Interface
     {
         event Action<TModel> ElementAdded;
         event Action<TModel> ElementUpdated;
-        event Action<object> ElementDeleted;
+        event Action<TModel> ElementDeleted;
         event Action ElementsReloaded;
 
         void AddNew(TModel modelObject);

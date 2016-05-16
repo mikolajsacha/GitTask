@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using GitTask.Repository.Model;
+using GitTask.Domain.Model.Project;
 using GitTask.Repository.Services.Interface;
 
 namespace GitTask.Git

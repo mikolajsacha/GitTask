@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GitTask.Domain.Enum;
+using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Task;
-using GitTask.Repository.Model;
 
 namespace GitTask.UI.MVVM.Design
 {

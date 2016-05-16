@@ -4,7 +4,6 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
-using GitTask.Repository.Model;
 using GitTask.UI.MVVM.Messages;
 
 namespace GitTask.UI.MVVM.ViewModel.Footer

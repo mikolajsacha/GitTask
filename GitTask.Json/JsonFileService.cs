@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using GitTask.Json.Exception;
 using GitTask.Storage.Interface;
@@ -11,6 +12,7 @@ namespace GitTask.Json
     {
         public async Task Save(object objectToBeSaved, string filePath)
         {
+            await Task.Run(() => { Thread.Sleep(5000); });
             var modelJson = JsonConvert.SerializeObject(objectToBeSaved);
             if (File.Exists(filePath))
             {

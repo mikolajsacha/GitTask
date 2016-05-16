@@ -1,6 +1,6 @@
-﻿using GitTask.Repository.Model;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
+using GitTask.Domain.Model.Project;
 
 namespace GitTask.UI.MVVM.Design
 {
