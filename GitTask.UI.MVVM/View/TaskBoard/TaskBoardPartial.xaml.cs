@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
@@ -9,7 +10,6 @@ namespace GitTask.UI.MVVM.View.TaskBoard
 {
     public partial class TaskBoardPartial
     {
-        private const int WindowBorderWidth = 16;
         private int _openedTaskStateColumnsCount;
         private int _hiddenTaskStateColumnsCount;
 
@@ -22,7 +22,19 @@ namespace GitTask.UI.MVVM.View.TaskBoard
             if (model == null) return;
 
             model.PropertyChanged += OnDataContextPropertyChanged;
+            model.TaskStateColumns.CollectionChanged += TaskStateColumnsOnCollectionChanged;
+
+            _openedTaskStateColumnsCount = ((TaskBoardViewModel)DataContext).OpenedColumnsCount;
+            _hiddenTaskStateColumnsCount = ((TaskBoardViewModel)DataContext).HiddenColumnsCount;
             model.InitializeTaskStateColumns();
+        }
+
+        private void TaskStateColumnsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            _openedTaskStateColumnsCount = ((TaskBoardViewModel)DataContext).OpenedColumnsCount;
+            _hiddenTaskStateColumnsCount = ((TaskBoardViewModel)DataContext).HiddenColumnsCount;
+
+            SendDistributeTaskStateColumnsMessage(RenderSize.Width);
         }
 
         private void OnDataContextPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -47,13 +59,15 @@ namespace GitTask.UI.MVVM.View.TaskBoard
             var allHiddenTaskStateColumnsWidth = hiddenTaskStateColumnWidth * _hiddenTaskStateColumnsCount;
             var minimumWidthOfAllOpenedTaskStateColumns = minimumOpenedTaskStateColumnWidth * _openedTaskStateColumnsCount;
             var allOpenedTaskStateColumnsWidth = Math.Max(minimumWidthOfAllOpenedTaskStateColumns,
-                newWidth - WindowBorderWidth - allHiddenTaskStateColumnsWidth);
+                newWidth - allHiddenTaskStateColumnsWidth);
             var newWidthForOpenTaskStateColumns = allOpenedTaskStateColumnsWidth / _openedTaskStateColumnsCount;
 
             Messenger.Default.Send(new DistributeTaskStateColumnsMessage
             {
                 OpenedTaskStateColumnWidth = newWidthForOpenTaskStateColumns
             });
+
+            ((TaskBoardViewModel)DataContext).CurrentOpenedTaskStateColumnWidth = newWidthForOpenTaskStateColumns;
         }
     }
 }

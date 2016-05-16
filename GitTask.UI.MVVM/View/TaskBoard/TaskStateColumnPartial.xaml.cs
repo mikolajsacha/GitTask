@@ -12,6 +12,19 @@ namespace GitTask.UI.MVVM.View.TaskBoard
             Messenger.Default.Register<DistributeTaskStateColumnsMessage>(this, OnDistributeTaskStateColumnsMessage);
             Unloaded += OnUnloaded;
             InitializeComponent();
+            OnDataContextChanged(null, new DependencyPropertyChangedEventArgs());
+            DataContextChanged += OnDataContextChanged;
+        }
+
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            if (!(DataContext is TaskStateColumnViewModel)) return;
+            var taskBoardPartialViewModel = Locator.IocLocator.TaskBoardViewModel;
+            OnDistributeTaskStateColumnsMessage(new DistributeTaskStateColumnsMessage
+            {
+                OpenedTaskStateColumnWidth = taskBoardPartialViewModel.CurrentOpenedTaskStateColumnWidth
+            });
+            DataContextChanged += OnDataContextChanged;
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs routedEventArgs)

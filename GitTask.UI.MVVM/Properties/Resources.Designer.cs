@@ -70,6 +70,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add task state.
+        /// </summary>
+        public static string AddTaskState {
+            get {
+                return ResourceManager.GetString("AddTaskState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assigned to.
         /// </summary>
         public static string AssignedTo {
@@ -106,6 +115,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Color:.
+        /// </summary>
+        public static string Color {
+            get {
+                return ResourceManager.GetString("Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Content:.
         /// </summary>
         public static string Content {
@@ -129,6 +147,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string Hide {
             get {
                 return ResourceManager.GetString("Hide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
@@ -246,6 +273,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string SelectPriority {
             get {
                 return ResourceManager.GetString("SelectPriority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SelectState.
+        /// </summary>
+        public static string SelectState {
+            get {
+                return ResourceManager.GetString("SelectState", resourceCulture);
             }
         }
         

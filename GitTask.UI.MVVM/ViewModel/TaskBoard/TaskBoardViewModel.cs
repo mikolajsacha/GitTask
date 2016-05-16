@@ -15,6 +15,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         private const int DefaultOpenedColumnsCount = 4;
         public ObservableCollection<TaskStateColumnViewModel> TaskStateColumns { get; }
+        public double CurrentOpenedTaskStateColumnWidth { get; set; }
 
         private int _openedColumnsCount;
         public int OpenedColumnsCount
@@ -44,7 +45,22 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             _taskStateQueryService = taskStateQueryService;
             _taskQueryService = taskQueryService;
 
+            _taskStateQueryService.ElementAdded += TaskStateQueryServiceOnElementChanged;
+            _taskStateQueryService.ElementUpdated += TaskStateQueryServiceOnElementChanged;
+            _taskStateQueryService.ElementDeleted += TaskStateQueryServiceOnElementChanged;
+            _taskStateQueryService.ElementsReloaded += TaskStateQueryServiceOnElementsReloaded;
+
             TaskStateColumns = new ObservableCollection<TaskStateColumnViewModel>();
+        }
+
+        private void TaskStateQueryServiceOnElementsReloaded()
+        {
+            InitializeTaskStateColumns();
+        }
+
+        private void TaskStateQueryServiceOnElementChanged(object taskState)
+        {
+            InitializeTaskStateColumns();
         }
 
         public void InitializeTaskStateColumns()

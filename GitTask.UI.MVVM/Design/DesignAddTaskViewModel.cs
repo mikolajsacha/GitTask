@@ -5,7 +5,7 @@ namespace GitTask.UI.MVVM.Design
 {
     public class DesignAddTaskViewModel : AddTaskViewModel
     {
-        public DesignAddTaskViewModel() : base(null)
+        public DesignAddTaskViewModel() : base(null, null)
         {
             Title = "Jakis Tytul";
             Content = "Zawartosc";

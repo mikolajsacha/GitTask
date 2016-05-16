@@ -14,7 +14,7 @@
         Background="LightGray">
 
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-        <ItemsControl ItemsSource="{Binding TaskStateColumns, Mode=OneWay}">
+        <ItemsControl x:Name="TaskStateColumnsItemsControl"  ItemsSource="{Binding TaskStateColumns, Mode=OneWay}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"/>

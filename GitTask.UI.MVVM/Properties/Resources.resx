@@ -192,4 +192,16 @@
   <data name="Title" xml:space="preserve">
     <value>Title:</value>
   </data>
+  <data name="SelectState" xml:space="preserve">
+    <value>SelectState</value>
+  </data>
+  <data name="AddTaskState" xml:space="preserve">
+    <value>Add task state</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Color:</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name:</value>
+  </data>
 </root>

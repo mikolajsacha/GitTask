@@ -76,6 +76,30 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.8\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -99,14 +123,17 @@
     <Compile Include="Design\DesignTaskStateColumnViewModel.cs" />
     <Compile Include="Design\DesignTaskDetailsViewModel.cs" />
     <Compile Include="Design\DesignSelectUsersViewModel.cs" />
+    <Compile Include="Design\DesignSelectTaskStateViewModel.cs" />
     <Compile Include="Locator\IocModule.cs" />
     <Compile Include="Messages\ProjectInitializedMessage.cs" />
     <Compile Include="Messages\SetCurrentUserMessage.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
     <Compile Include="ViewModel\ButtonsBar\ButtonsBarViewModel.cs" />
+    <Compile Include="ViewModel\Elements\SelectTaskStateViewModel.cs" />
     <Compile Include="ViewModel\Elements\SelectTaskPriorityViewModel.cs" />
     <Compile Include="ViewModel\Elements\SelectUsersViewModel.cs" />
     <Compile Include="ViewModel\Elements\ProjectMembersViewModel.cs" />
+    <Compile Include="ViewModel\ProjectSettings\AddTaskStateViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\SetCurrentUserViewModel.cs" />
     <Compile Include="ViewModel\TaskBoard\TaskBoardViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\ProjectSetupViewModel.cs" />
@@ -118,6 +145,9 @@
     <Compile Include="View\Elements\PendingStorageOperationsPartial.xaml.cs">
       <DependentUpon>PendingStorageOperationsPartial.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Elements\SelectTaskStatePartial.xaml.cs">
+      <DependentUpon>SelectTaskStatePartial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Elements\SelectTaskPriorityPartial.xaml.cs">
       <DependentUpon>SelectTaskPriorityPartial.xaml</DependentUpon>
     </Compile>
@@ -126,6 +156,9 @@
     </Compile>
     <Compile Include="View\Main\ProjectOpeningPartial.xaml.cs">
       <DependentUpon>ProjectOpeningPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProjectSettings\AddTaskStateWindow.xaml.cs">
+      <DependentUpon>AddTaskStateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProjectSettings\SetCurrentUserWindow.xaml.cs">
       <DependentUpon>SetCurrentUserWindow.xaml</DependentUpon>
@@ -139,9 +172,9 @@
     <Compile Include="View\Footer\ProjectMembersInitialsList.xaml.cs">
       <DependentUpon>ProjectMembersInitialsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Main\ProjectOpeningViewModel.cs" />
+    <Compile Include="ViewModel\Footer\Main\ProjectOpeningViewModel.cs" />
     <Compile Include="ViewModel\Footer\FooterViewModel.cs" />
-    <Compile Include="ViewModel\Main\MainViewModel.cs" />
+    <Compile Include="ViewModel\Footer\Main\MainViewModel.cs" />
     <Compile Include="Locator\IocLocator.cs" />
     <Compile Include="ViewModel\TaskBoard\TaskStateColumnViewModel.cs" />
     <Compile Include="ViewModel\TaskDetails\TaskDetailsViewModel.cs" />
@@ -178,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Elements\SelectTaskStatePartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Elements\SelectTaskPriorityPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -207,6 +244,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Main\ProjectOpeningPartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ProjectSettings\AddTaskStateWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

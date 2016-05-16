@@ -20,7 +20,7 @@ namespace GitTask.UI.MVVM.View.Elements
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var dataContext = DataContext as SelectUsersViewModel;
-            if (dataContext != null)
+            if (dataContext != null && dataContext.SelectionMode == "Multiple")
             {
                 dataContext.SelectedUsers.CollectionChanged += SelectedUsersOnCollectionChanged;
             }

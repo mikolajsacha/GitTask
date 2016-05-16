@@ -9,6 +9,7 @@
         xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         mc:Ignorable="d ignore"
         Width="400"
+        SizeToContent="Height"
         Title="{x:Static prop:Resources.SetCurrentUser}"
         DataContext="{Binding SetCurrentUserViewModel, Source={StaticResource Locator}, Mode=OneWay}"
         Background="LightGray">
@@ -17,13 +18,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" Margin="10"
                    Text="{x:Static prop:Resources.SetCurrentUserExplanation}"/>
         <elements:SelectUsersPartial Grid.Row="1" DataContext="{Binding SelectUsersViewModel, Mode=OneWay}"
                                      d:DataContext="{d:DesignInstance Type=design:DesignSelectUsersViewModel, IsDesignTimeCreatable=True}"/>
-        <Button x:Name="OkButton" Grid.Row="2" Width="140" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10"
+        <Button x:Name="OkButton" Grid.Row="2" Width="140" Height="40" HorizontalAlignment="Right" Margin="10"
                 IsEnabled="{Binding SelectUsersViewModel.AnyUserChosen, Mode=OneWay}" Style="{StaticResource RoundedCornersButton}">
             <TextBlock Text="OK" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="SemiBold" Foreground="DarkSlateGray"/>
         </Button>

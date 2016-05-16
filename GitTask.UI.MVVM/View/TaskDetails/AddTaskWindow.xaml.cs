@@ -13,6 +13,9 @@ namespace GitTask.UI.MVVM.View.TaskDetails
             SelectPriorityGrid.MouseEnter += delegate { SelectPriorityPopup.IsOpen = true; };
             SelectPriorityPopup.MouseLeave += delegate { SelectPriorityPopup.IsOpen = false; };
 
+            SelectStateGrid.MouseEnter += delegate { SelectStatePopup.IsOpen = true; };
+            SelectStatePopup.MouseLeave += delegate { SelectStatePopup.IsOpen = false; };
+
             SelectAssignedMembersPopup.MouseLeave += delegate { SelectAssignedMembersPopup.IsOpen = false; };
         }
 
@@ -30,6 +33,14 @@ namespace GitTask.UI.MVVM.View.TaskDetails
         private void AssignedMembersInitialsList_OnMouseEnter(object sender, MouseEventArgs e)
         {
             SelectAssignedMembersPopup.IsOpen = true;
+        }
+
+        private void AssignedMembersInitialsList_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!SelectAssignedMembersPopup.IsMouseOver)
+            {
+                SelectAssignedMembersPopup.IsOpen = false;
+            }
         }
     }
 }

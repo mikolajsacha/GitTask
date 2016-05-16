@@ -141,7 +141,7 @@ namespace GitTask.Storage
 
         private static Type GetKeyType()
         {
-            return KeyAttribute.GetKeyProperty(typeof(TModel)).GetType();
+            return KeyAttribute.GetKeyProperty(typeof(TModel)).PropertyType;
         }
 
         private static Dictionary<object, TModel> GetKeySortedData(IEnumerable<TModel> data)
