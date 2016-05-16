@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
 namespace GitTask.UI.MVVM.View.TaskDetails
@@ -12,7 +13,6 @@ namespace GitTask.UI.MVVM.View.TaskDetails
             SelectPriorityGrid.MouseEnter += delegate { SelectPriorityPopup.IsOpen = true; };
             SelectPriorityPopup.MouseLeave += delegate { SelectPriorityPopup.IsOpen = false; };
 
-            SelectAssignedMembersButton.Click += delegate { SelectAssignedMembersPopup.IsOpen = !SelectAssignedMembersPopup.IsOpen; };
             SelectAssignedMembersPopup.MouseLeave += delegate { SelectAssignedMembersPopup.IsOpen = false; };
         }
 
@@ -25,6 +25,11 @@ namespace GitTask.UI.MVVM.View.TaskDetails
             {
                 addTaskViewModel.OkCommand.Execute(new object());
             }
+        }
+
+        private void AssignedMembersInitialsList_OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            SelectAssignedMembersPopup.IsOpen = true;
         }
     }
 }

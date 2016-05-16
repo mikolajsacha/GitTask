@@ -81,13 +81,17 @@
             <Popup x:Name="SelectAssignedMembersPopup">
                 <elements:SelectUsersPartial DataContext="{Binding SelectUsersViewModel, Mode=OneTime}"/>
             </Popup>
-            <taskDetails:AssignedMembersInitialsList Grid.Column="0" DataContext="{Binding SelectUsersViewModel, Mode=OneTime}"/>
-            <Button Grid.Column="1" x:Name="SelectAssignedMembersButton" Height="40" Width="150" Margin="10" HorizontalAlignment="Right"
+            <taskDetails:AssignedMembersInitialsList Grid.Column="0" DataContext="{Binding SelectUsersViewModel, Mode=OneTime}"
+                                                     MouseEnter="AssignedMembersInitialsList_OnMouseEnter"/>
+            <TextBlock Grid.Column="0" Margin="10" TextAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16"
+                       Text="{Binding Source={x:Static prop:Resources.AssignMembers}}" FontStyle="Italic"
+                       Visibility="{Binding SelectUsersViewModel.AnyUserChosen, Converter={StaticResource BoolToVisibilityReverseConverter}}"/>
+            <Button Grid.Column="1" x:Name="SelectTaskStateButton" Height="40" Width="145" Margin="0,10,0,10" HorizontalAlignment="Right"
                 Style="{StaticResource RoundedCornersButton}">
-                <TextBlock Text="{Binding Source={x:Static prop:Resources.AssignMembers}, Converter={StaticResource ToUpperCaseConverter}}"
+                <TextBlock Text="SELECT STATE"
                        VerticalAlignment="Center" TextAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
             </Button>
-            <Button Grid.Column="2" x:Name="OkButton" Height="40" Width="150" Margin="10" HorizontalAlignment="Right"
+            <Button Grid.Column="2" x:Name="OkButton" Height="40" Width="145" Margin="10" HorizontalAlignment="Right"
                 Style="{StaticResource RoundedCornersButton}" IsEnabled="{Binding IsOkButtonEnabled, Mode=OneWay}">
                 <TextBlock Text="{Binding Source={x:Static prop:Resources.AddTask}, Converter={StaticResource ToUpperCaseConverter}}"
                        VerticalAlignment="Center" TextAlignment="Center" FontWeight="SemiBold" FontSize="16"/>

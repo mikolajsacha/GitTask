@@ -30,6 +30,7 @@
                     <converters:TaskContentToShortStringConverter x:Key="TaskContentToShortStringConverter"/>
                     <converters:ToUpperCaseConverter x:Key="ToUpperCaseConverter"/>
                     <converters:ProjectMemberToBrushConverter x:Key="ProjectMemberToBrushConverter"/>
+                    <converters:BoolToVisibilityReverseConverter x:Key="BoolToVisibilityReverseConverter"/>
                 </ResourceDictionary>
 
                 <ResourceDictionary Source="Skins\MainSkin.xaml"/>
