@@ -7,11 +7,11 @@
         xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         mc:Ignorable="d ignore"
         VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="500"
+        Background="Transparent"
         d:DataContext="{d:DesignInstance Type=design:DesignSelectUsersViewModel, IsDesignTimeCreatable=True}">
 
-    <ListBox x:Name="UsersList" Margin="10"
-                          SelectionMode="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}},
-                                         Path=DataContext.SelectionMode, Mode=OneTime}"
+    <ListBox x:Name="UsersList" SelectionMode="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}},
+                                                Path=DataContext.SelectionMode, Mode=OneTime}"
                           d:DataContext="{d:DesignInstance Type=design:DesignProjectMembersViewModel, IsDesignTimeCreatable=True}"
                           DataContext="{Binding ProjectMembersViewModel, Source={StaticResource Locator}, Mode=OneWay}" 
                           ItemsSource="{Binding ProjectMembers, Mode=OneWay}">

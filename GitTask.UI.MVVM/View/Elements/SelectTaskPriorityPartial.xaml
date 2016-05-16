@@ -1,0 +1,29 @@
+﻿<ScrollViewer x:Class="GitTask.UI.MVVM.View.Elements.SelectTaskPriorityPartial"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:elementsVm="clr-namespace:GitTask.UI.MVVM.ViewModel.Elements"
+        mc:Ignorable="d ignore"
+        VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="500"
+        d:DataContext="{d:DesignInstance Type=elementsVm:SelectTaskPriorityViewModel, IsDesignTimeCreatable=True}">
+
+    <ListBox SelectionMode="Single"
+             SelectedItem="{Binding SelectedTaskPriority, Mode=OneWayToSource}"
+             ItemsSource="{Binding AllTaskPriorities, Mode=OneWay}">
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <StackPanel Orientation="Horizontal" Margin="1">
+                    <Border Width="10" Height="10" CornerRadius="3" Margin="0,1,5,0" Background="{Binding Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}"/>
+                    <TextBlock Text="{Binding Converter={StaticResource TaskPriorityToStringConverter}, Mode=OneWay}" FontSize="13" Margin="0,1,0,1"/>
+                </StackPanel>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</ScrollViewer>

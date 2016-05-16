@@ -10,8 +10,8 @@ namespace GitTask.UI.MVVM.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is TaskPriority)) return null;
-            var priority = (TaskPriority)value;
+            if (!(value is TaskPriority?)) return null;
+            var priority = (TaskPriority?)value;
 
             switch (priority)
             {
@@ -26,7 +26,7 @@ namespace GitTask.UI.MVVM.Converters
                 case TaskPriority.Critical:
                     return Brushes.Red;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    return Brushes.Transparent;
             }
         }
 

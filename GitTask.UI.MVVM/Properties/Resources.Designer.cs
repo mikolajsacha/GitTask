@@ -79,6 +79,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assign members.
+        /// </summary>
+        public static string AssignMembers {
+            get {
+                return ResourceManager.GetString("AssignMembers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author.
         /// </summary>
         public static string Author {
@@ -93,6 +102,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string ChooseRepositoryFolderExplanation {
             get {
                 return ResourceManager.GetString("ChooseRepositoryFolderExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Content:.
+        /// </summary>
+        public static string Content {
+            get {
+                return ResourceManager.GetString("Content", resourceCulture);
             }
         }
         
@@ -223,6 +241,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select priority.
+        /// </summary>
+        public static string SelectPriority {
+            get {
+                return ResourceManager.GetString("SelectPriority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set current user.
         /// </summary>
         public static string SetCurrentUser {
@@ -246,6 +273,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string TaskDetails {
             get {
                 return ResourceManager.GetString("TaskDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title:.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

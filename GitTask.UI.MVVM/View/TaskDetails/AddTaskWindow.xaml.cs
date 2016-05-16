@@ -9,16 +9,21 @@ namespace GitTask.UI.MVVM.View.TaskDetails
         {
             InitializeComponent();
             OkButton.Click += OkButtonOnClick;
+            SelectPriorityGrid.MouseEnter += delegate { SelectPriorityPopup.IsOpen = true; };
+            SelectPriorityPopup.MouseLeave += delegate { SelectPriorityPopup.IsOpen = false; };
+
+            SelectAssignedMembersButton.Click += delegate { SelectAssignedMembersPopup.IsOpen = !SelectAssignedMembersPopup.IsOpen; };
+            SelectAssignedMembersPopup.MouseLeave += delegate { SelectAssignedMembersPopup.IsOpen = false; };
         }
 
         private void OkButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
         {
             Close();
-            var setCurrentUserViewModel = DataContext as AddTaskViewModel;
+            var addTaskViewModel = DataContext as AddTaskViewModel;
 
-            if (setCurrentUserViewModel != null && setCurrentUserViewModel.OkCommand.CanExecute(new object()))
+            if (addTaskViewModel != null && addTaskViewModel.OkCommand.CanExecute(new object()))
             {
-                setCurrentUserViewModel.OkCommand.Execute(new object());
+                addTaskViewModel.OkCommand.Execute(new object());
             }
         }
     }

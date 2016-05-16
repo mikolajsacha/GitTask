@@ -5,23 +5,93 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+        xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
+        xmlns:taskDetails="clr-namespace:GitTask.UI.MVVM.View.TaskDetails"
+        xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
         mc:Ignorable="d ignore"
         MinHeight="200"
         MinWidth="200"
         Height="400"
         Width="500"
         Title="{x:Static prop:Resources.AddTask}"
+        d:DataContext="{d:DesignInstance Type=design:DesignAddTaskViewModel, IsDesignTimeCreatable=True}"
         DataContext="{Binding AddTaskViewModel, Source={StaticResource Locator}, Mode=OneWay}">
+
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="PriorityTextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectTaskPriorityViewModel.TaskPriorityChosen}" Value="False">
+                    <Setter Property="Text" Value="{x:Static prop:Resources.SelectPriority}"/>
+                    <Setter Property="FontStyle" Value="Italic"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding SelectTaskPriorityViewModel.TaskPriorityChosen}" Value="True">
+                    <Setter Property="Text" Value="{Binding SelectTaskPriorityViewModel.SelectedTaskPriority, Converter={StaticResource TaskPriorityToStringConverter}, Mode=OneWay}"/>
+                    <Setter Property="FontStyle" Value="Normal"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 
     <Grid Background="White">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button x:Name="OkButton" Grid.Row="1" Height="50" Width="150" Margin="10" HorizontalAlignment="Right"
-                Style="{StaticResource RoundedCornersButton}" IsEnabled="{Binding IsOkButtonEnabled, Mode=OneWay}">
-            <TextBlock Text="{Binding Source={x:Static prop:Resources.AddTask}, Converter={StaticResource ToUpperCaseConverter}}"
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <TextBlock Text="{x:Static prop:Resources.Title}" VerticalAlignment="Center" FontSize="15" Margin="10,0,0,0" FontWeight="SemiBold"/>
+                <TextBox HorizontalAlignment="Left" Width="200" Height="40" Text="{Binding Title, Mode=OneWayToSource}"/>
+            </StackPanel>
+            <Grid x:Name="SelectPriorityGrid" Grid.Column="1" HorizontalAlignment="Right" Height="40" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions >
+                <Popup x:Name="SelectPriorityPopup">
+                    <elements:SelectTaskPriorityPartial DataContext="{Binding SelectTaskPriorityViewModel, Mode=OneTime}"/>
+                </Popup>
+                <Border Grid.Column="0" Width="20" Height="20" CornerRadius="3" Margin="5,2,5,0"
+                        Background="{Binding SelectTaskPriorityViewModel.SelectedTaskPriority, Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}"/>
+                <TextBlock Grid.Column="1" Style="{StaticResource PriorityTextBlock}"
+                           Margin="10" VerticalAlignment="Center" TextAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
+            </Grid>
+        </Grid>
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <TextBlock Text="{x:Static prop:Resources.Content}" VerticalAlignment="Center" FontSize="15" Margin="10,10,0,0" FontWeight="SemiBold"/>
+            <TextBox HorizontalAlignment="Stretch" Height="200" TextWrapping="Wrap" Text="{Binding Content, Mode=OneWayToSource}"/>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Popup x:Name="SelectAssignedMembersPopup">
+                <elements:SelectUsersPartial DataContext="{Binding SelectUsersViewModel, Mode=OneTime}"/>
+            </Popup>
+            <taskDetails:AssignedMembersInitialsList Grid.Column="0" DataContext="{Binding SelectUsersViewModel, Mode=OneTime}"/>
+            <Button Grid.Column="1" x:Name="SelectAssignedMembersButton" Height="40" Width="150" Margin="10" HorizontalAlignment="Right"
+                Style="{StaticResource RoundedCornersButton}">
+                <TextBlock Text="{Binding Source={x:Static prop:Resources.AssignMembers}, Converter={StaticResource ToUpperCaseConverter}}"
                        VerticalAlignment="Center" TextAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
-        </Button>
+            </Button>
+            <Button Grid.Column="2" x:Name="OkButton" Height="40" Width="150" Margin="10" HorizontalAlignment="Right"
+                Style="{StaticResource RoundedCornersButton}" IsEnabled="{Binding IsOkButtonEnabled, Mode=OneWay}">
+                <TextBlock Text="{Binding Source={x:Static prop:Resources.AddTask}, Converter={StaticResource ToUpperCaseConverter}}"
+                       VerticalAlignment="Center" TextAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

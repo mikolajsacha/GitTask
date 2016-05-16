@@ -123,11 +123,17 @@
   <data name="AssignedTo" xml:space="preserve">
     <value>Assigned to</value>
   </data>
+  <data name="AssignMembers" xml:space="preserve">
+    <value>Assign members</value>
+  </data>
   <data name="Author" xml:space="preserve">
     <value>Author</value>
   </data>
   <data name="ChooseRepositoryFolderExplanation" xml:space="preserve">
     <value>Please choose a folder containing git repository for your project</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content:</value>
   </data>
   <data name="EnterProjectName" xml:space="preserve">
     <value>Enter a name for your project</value>
@@ -171,6 +177,9 @@
   <data name="RepositoryNotFoundExplanation" xml:space="preserve">
     <value>Git repository has not been found. Please choose directory with existing Git repository.</value>
   </data>
+  <data name="SelectPriority" xml:space="preserve">
+    <value>Select priority</value>
+  </data>
   <data name="SetCurrentUser" xml:space="preserve">
     <value>Set current user</value>
   </data>
@@ -179,5 +188,8 @@
   </data>
   <data name="TaskDetails" xml:space="preserve">
     <value>Task Details</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title:</value>
   </data>
 </root>

@@ -88,6 +88,7 @@
     <Compile Include="Converters\TaskPriorityToColorConverter.cs" />
     <Compile Include="Converters\TaskPriorityToStringConverter.cs" />
     <Compile Include="Converters\NameToInitialsConverter.cs" />
+    <Compile Include="Design\DesignAddTaskViewModel.cs" />
     <Compile Include="Design\DesignProjectMembersViewModel.cs" />
     <Compile Include="Design\DesignProjectMember.cs" />
     <Compile Include="Design\DesignPendingStorageOperationsViewModel.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Messages\SetCurrentUserMessage.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
     <Compile Include="ViewModel\ButtonsBar\ButtonsBarViewModel.cs" />
+    <Compile Include="ViewModel\Elements\SelectTaskPriorityViewModel.cs" />
     <Compile Include="ViewModel\Elements\SelectUsersViewModel.cs" />
     <Compile Include="ViewModel\Elements\ProjectMembersViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\SetCurrentUserViewModel.cs" />
@@ -114,6 +116,9 @@
     </Compile>
     <Compile Include="View\Elements\PendingStorageOperationsPartial.xaml.cs">
       <DependentUpon>PendingStorageOperationsPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Elements\SelectTaskPriorityPartial.xaml.cs">
+      <DependentUpon>SelectTaskPriorityPartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Elements\SelectUsersPartial.xaml.cs">
       <DependentUpon>SelectUsersPartial.xaml</DependentUpon>
@@ -154,6 +159,9 @@
     <Compile Include="View\TaskDetails\AddTaskWindow.xaml.cs">
       <DependentUpon>AddTaskWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TaskDetails\AssignedMembersInitialsList.xaml.cs">
+      <DependentUpon>AssignedMembersInitialsList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TaskDetails\TaskDetailsWindow.xaml.cs">
       <DependentUpon>TaskDetailsWindow.xaml</DependentUpon>
     </Compile>
@@ -166,6 +174,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Elements\PendingStorageOperationsPartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Elements\SelectTaskPriorityPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -222,6 +234,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\TaskDetails\AddTaskWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TaskDetails\AssignedMembersInitialsList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

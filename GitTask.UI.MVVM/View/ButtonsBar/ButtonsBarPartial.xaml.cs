@@ -4,6 +4,7 @@
     {
         public ButtonsBarPartial()
         {
+            //TODO: button do dodawania nowego stanu
             InitializeComponent();
         }
     }

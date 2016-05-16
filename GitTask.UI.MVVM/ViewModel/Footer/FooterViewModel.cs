@@ -38,7 +38,11 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
         public FooterViewModel(IQueryService<Project> projectQueryService)
         {
             _projectQueryService = projectQueryService;
-            ProjectQueryServiceOnElementsReloaded();
+            var projects = _projectQueryService.GetAll().ToList();
+            if (projects.Any())
+            {
+                _projectName = projects.First().Title;
+            }
 
             projectQueryService.ElementAdded += ProjectQueryServiceOnElementAdded;
             projectQueryService.ElementsReloaded += ProjectQueryServiceOnElementsReloaded;
