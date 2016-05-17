@@ -15,10 +15,8 @@ namespace GitTask.Domain.Model.Task
         public IEnumerable<ProjectMember> AssignedMembers { get; set; }
         public TaskPriority Priority { get; set; }
 
-        [ForeignKey]
         public string State { get; set; }
 
-        [ForeignKey]
         public IEnumerable<int> CommentsIds { get; set; }
     }
 }

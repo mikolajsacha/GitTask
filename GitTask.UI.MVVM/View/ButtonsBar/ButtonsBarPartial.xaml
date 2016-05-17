@@ -23,7 +23,7 @@
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal" Margin="3" HorizontalAlignment="Right" MinHeight="40" MaxHeight="80">
-        <Button Style="{StaticResource RoundedCornersButton}" Margin="3"
+        <Button Style="{StaticResource RoundedCornersButton}" Margin="3" Width="130"
                 DataContext="{Binding ProjectOpeningViewModel, Source={StaticResource Locator}, Mode=OneWay}"
                 Command="{Binding OpenSelectFolderDialogCommand, Mode=OneWay}"
                 IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},
@@ -32,7 +32,14 @@
                        Text="{Binding Source={x:Static prop:Resources.OpenProject}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}"/>
         </Button>
 
-        <Button Style="{StaticResource RoundedCornersButton}" Margin="3"
+        <Button Style="{StaticResource RoundedCornersButton}" Margin="3" Width="130"
+                Command="{Binding AddTaskStateCommand, Mode=OneWay}"
+                IsEnabled="{Binding AreButtonsEnabled, Mode=OneWay}">
+            <TextBlock Style="{StaticResource ButtonText}"
+                       Text="{Binding Source={x:Static prop:Resources.AddTaskState}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}"/>
+        </Button>
+
+        <Button Style="{StaticResource RoundedCornersButton}" Margin="3" Width="130"
                 Command="{Binding AddTaskCommand, Mode=OneWay}"
                 IsEnabled="{Binding AreButtonsEnabled, Mode=OneWay}">
             <TextBlock Style="{StaticResource ButtonText}"
