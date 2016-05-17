@@ -19,6 +19,9 @@ namespace GitTask.UI.MVVM.Design
         public bool IsOpened { get; private set; }
         public bool IsHidden => !IsOpened;
 
+        public bool CanMoveLeft => true;
+        public bool CanMoveRight => true;
+
         public DesignTaskStateColumnViewModel()
             : this(new TaskState { Color = Brushes.Green, Name = "TO DO", Position = 0 })
         {

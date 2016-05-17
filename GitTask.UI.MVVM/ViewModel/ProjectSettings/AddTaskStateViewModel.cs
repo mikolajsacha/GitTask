@@ -73,7 +73,7 @@ namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
             await _taskStateQueryService.SaveChanges();
         }
 
-        private double GetLastTaskStatePosition()
+        private int GetLastTaskStatePosition()
         {
             return _taskStateQueryService.GetAll().Any() ? _taskStateQueryService.GetAll().Select(taskState => taskState.Position).Max() : 0;
         }

@@ -7,7 +7,7 @@ namespace GitTask.Domain.Model.Task
     public class TaskState
     {
         public string Name { get; set; }
-        public double Position { get; set; }
+        public int Position { get; set; }
 
         public Brush Color { get; set; }
     }

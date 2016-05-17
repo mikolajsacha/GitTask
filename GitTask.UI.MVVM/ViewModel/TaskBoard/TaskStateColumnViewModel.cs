@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
@@ -11,7 +12,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 {
     public class TaskStateColumnViewModel : ViewModelBase
     {
-        private readonly IQueryService<Task> _taskQueryService;
+        private readonly IQueryService<TaskState> _taskStateQueryService;
 
         public TaskState TaskState { get; }
         public ObservableCollection<TaskDetailsViewModel> Tasks { get; }
@@ -21,6 +22,12 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         private readonly RelayCommand _hideColumnCommand;
         public ICommand HideColumnCommand => _hideColumnCommand;
+
+        private readonly RelayCommand _moveColumnRightCommand;
+        public ICommand MoveColumnRightCommand => _moveColumnRightCommand;
+
+        private readonly RelayCommand _moveColumnLeftCommand;
+        public ICommand MoveColumnLeftCommand => _moveColumnLeftCommand;
 
         private bool _isOpened;
         public bool IsOpened
@@ -35,29 +42,26 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
         }
 
         public bool IsHidden => !_isOpened;
+        public bool CanMoveLeft { get; }
+        public bool CanMoveRight { get; }
 
         public TaskStateColumnViewModel(TaskState taskState,
-                                        IQueryService<Task> taskQueryService,
-                                        bool isOpened)
+                                        IQueryService<TaskState> taskStateQueryService,
+                                        bool isOpened, bool canMoveLeft, bool canMoveRight)
         {
-            _taskQueryService = taskQueryService;
+            _taskStateQueryService = taskStateQueryService;
             _isOpened = isOpened;
             TaskState = taskState;
 
             _showColumnCommand = new RelayCommand(OnShowColumnCommand);
             _hideColumnCommand = new RelayCommand(OnHideColumnCommand);
+            _moveColumnLeftCommand = new RelayCommand(OnMoveColumnLeftCommand);
+            _moveColumnRightCommand = new RelayCommand(OnMoveColumRightCommand);
+
+            CanMoveLeft = canMoveLeft;
+            CanMoveRight = canMoveRight;
 
             Tasks = new ObservableCollection<TaskDetailsViewModel>();
-            LoadTasks();
-        }
-
-        public void LoadTasks()
-        {
-            Tasks.Clear();
-            foreach (var task in _taskQueryService.GetByProperty("State", TaskState.Name).OrderBy(x => x.Priority))
-            {
-                Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService));
-            }
         }
 
         private void OnHideColumnCommand()
@@ -68,6 +72,37 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
         private void OnShowColumnCommand()
         {
             IsOpened = true;
+        }
+
+        private async void OnMoveColumnLeftCommand()
+        {
+            if (TaskState.Position == 0) return;
+
+            var leftTaskState = _taskStateQueryService.GetByProperty("Position", TaskState.Position - 1).First();
+
+            TaskState.Position--;
+            leftTaskState.Position++;
+
+            _taskStateQueryService.Update(TaskState);
+            _taskStateQueryService.Update(leftTaskState);
+            await _taskStateQueryService.SaveChanges();
+        }
+
+        private async void OnMoveColumRightCommand()
+        {
+            var rightTaskStateQueryResult = _taskStateQueryService.GetByProperty("Position", TaskState.Position - 1);
+            var taskStateQueryResult = rightTaskStateQueryResult as IList<TaskState> ?? rightTaskStateQueryResult.ToList();
+
+            if (!taskStateQueryResult.Any()) return;
+
+            var rightTaskState = taskStateQueryResult.First();
+
+            TaskState.Position--;
+            rightTaskState.Position++;
+
+            _taskStateQueryService.Update(TaskState);
+            _taskStateQueryService.Update(rightTaskState);
+            await _taskStateQueryService.SaveChanges();
         }
     }
 }
