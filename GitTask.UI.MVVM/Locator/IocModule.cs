@@ -26,14 +26,12 @@ namespace GitTask.UI.MVVM.Locator
             Bind<IStorageService<Project>>().To<StorageService<Project>>().InSingletonScope();
             Bind<IStorageService<TaskState>>().To<StorageService<TaskState>>().InSingletonScope();
             Bind<IStorageService<Task>>().To<StorageService<Task>>().InSingletonScope();
-            Bind<IStorageService<Comment>>().To<StorageService<Comment>>().InSingletonScope();
 
             Bind<IRepositoryService>().To<RepositoryService>().InSingletonScope();
 
             Bind<IQueryService<Project>>().To<QueryService<Project>>().InSingletonScope();
             Bind<IQueryService<TaskState>>().To<QueryService<TaskState>>().InSingletonScope();
             Bind<IQueryService<Task>>().To<QueryService<Task>>().InSingletonScope();
-            Bind<IQueryService<Comment>>().To<QueryService<Comment>>().InSingletonScope();
 
             Bind<PendingStorageOperationsViewModel>().ToSelf().InSingletonScope().WithConstructorArgument("storageServices",
                 new IStorageService[]
@@ -41,7 +39,6 @@ namespace GitTask.UI.MVVM.Locator
                    Kernel.Get<IStorageService<Project>>(),
                    Kernel.Get<IStorageService<TaskState>>(),
                    Kernel.Get<IStorageService<Task>>(),
-                   Kernel.Get<IStorageService<Comment>>()
                 });
 
             Bind<MainViewModel>().ToSelf().InSingletonScope();

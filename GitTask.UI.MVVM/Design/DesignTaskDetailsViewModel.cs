@@ -18,13 +18,11 @@ namespace GitTask.UI.MVVM.Design
         {
             Task = new Task
             {
-                Id = 0,
                 AssignedMembers = new[] { new ProjectMember("Jan Kowalski", "jankowalski@o2.pl"), new ProjectMember("Maciej Łoś", "losmaciej@hotmail.com"), },
                 Title = "Zrobić to i owo.",
                 Content = "Trzba koniecznie porobić to oraz owo!",
                 Priority = TaskPriority.Blocker,
-                CommentsIds = new[] { 0, 1 },
-                State = "TO DO"
+               State = "TO DO"
             };
         }
     }

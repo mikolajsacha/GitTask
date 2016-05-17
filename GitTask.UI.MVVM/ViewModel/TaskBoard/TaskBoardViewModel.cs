@@ -3,8 +3,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
+using GitTask.UI.MVVM.Messages;
+using GitTask.UI.MVVM.ViewModel.Elements;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
 namespace GitTask.UI.MVVM.ViewModel.TaskBoard
@@ -57,7 +60,19 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             _taskQueryService.ElementsReloaded += OnElementsReloaded;
 
             TaskStateColumns = new ObservableCollection<TaskStateColumnViewModel>();
+            Messenger.Default.Register<MoveTaskToTaskStateMessage>(this, OnMoveTaskToTaskStateMessage);
+
             InitializeExistingTasks();
+        }
+
+        private async void OnMoveTaskToTaskStateMessage(MoveTaskToTaskStateMessage message)
+        {
+            var task = _taskQueryService.GetByKey(message.TaskName);
+            TaskQueryServiceOnElementDeleted(task);
+
+            task.State = message.NewTaskStateName;
+            _taskQueryService.Update(task);
+            await _taskQueryService.SaveChanges();
         }
 
         private void InitializeExistingTasks()
@@ -80,17 +95,21 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         private void TaskQueryServiceOnElementAdded(Task task)
         {
-            foreach (var taskStateColumn in TaskStateColumns.Where(taskStateColumn => taskStateColumn.TaskState.Name == task.State))
-            {
-                taskStateColumn.Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService));
-            }
+            var taskColumn = TaskStateColumns.First(stateColumn => stateColumn.TaskState.Name == task.State);
+            taskColumn.Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService));
         }
 
         private void TaskQueryServiceOnElementDeleted(Task task)
         {
-            foreach (var taskStateColumn in TaskStateColumns.Where(taskStateColumn => taskStateColumn.TaskState.Name == task.State).ToList())
+            try
             {
-                TaskStateColumns.Remove(taskStateColumn);
+                var taskColumn = TaskStateColumns.First(stateColumn => stateColumn.TaskState.Name == task.State);
+                var taskViewModel = taskColumn.Tasks.First(taskVm => taskVm.Task.Title == task.Title);
+                taskColumn.Tasks.Remove(taskViewModel);
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
 

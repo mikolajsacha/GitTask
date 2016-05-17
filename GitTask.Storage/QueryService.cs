@@ -129,7 +129,7 @@ namespace GitTask.Storage
 
         private void UpdateCollection(object keyValue, TModel modelObject)
         {
-            _data.Add(keyValue, modelObject);
+            _data[keyValue] = modelObject;
             _recentlyChanged.Add(keyValue);
         }
 

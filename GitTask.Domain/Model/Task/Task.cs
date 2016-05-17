@@ -5,10 +5,9 @@ using GitTask.Domain.Model.Project;
 
 namespace GitTask.Domain.Model.Task
 {
-    [Key("Id")]
+    [Key("Title")]
     public class Task
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
 
@@ -16,7 +15,6 @@ namespace GitTask.Domain.Model.Task
         public TaskPriority Priority { get; set; }
 
         public string State { get; set; }
-
-        public IEnumerable<int> CommentsIds { get; set; }
+        public IEnumerable<string> Comments { get; set; }
     }
 }

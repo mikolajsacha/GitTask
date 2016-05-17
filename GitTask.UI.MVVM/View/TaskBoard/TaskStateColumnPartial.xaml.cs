@@ -43,5 +43,18 @@ namespace GitTask.UI.MVVM.View.TaskBoard
                 Width = (double)FindResource("HiddenTaskStateColumnWidth");
             }
         }
+
+        private void OnDrop(object sender, DragEventArgs e)
+        {
+            var dataContext = DataContext as TaskStateColumnViewModel;
+            if (dataContext == null) return;
+
+            if (!e.Data.GetDataPresent(DataFormats.StringFormat)) return;
+
+            var dataTask = e.Data.GetData(DataFormats.StringFormat) as string;
+            if (dataTask == null) return;
+
+            Messenger.Default.Send(new MoveTaskToTaskStateMessage() { TaskName = dataTask, NewTaskStateName = dataContext.TaskState.Name });
+        }
     }
 }

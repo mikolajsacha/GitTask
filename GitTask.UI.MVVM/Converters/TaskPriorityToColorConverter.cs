@@ -16,15 +16,15 @@ namespace GitTask.UI.MVVM.Converters
             switch (priority)
             {
                 case TaskPriority.Minor:
-                    return Brushes.LimeGreen;
+                    return Brushes.Blue;
                 case TaskPriority.Medium:
-                    return Brushes.Yellow;
+                    return Brushes.Green;
                 case TaskPriority.Major:
                     return Brushes.Orange;
                 case TaskPriority.Blocker:
-                    return Brushes.OrangeRed;
-                case TaskPriority.Critical:
                     return Brushes.Red;
+                case TaskPriority.Critical:
+                    return Brushes.DarkRed;
                 default:
                     return Brushes.Transparent;
             }

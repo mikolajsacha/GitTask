@@ -125,6 +125,7 @@
     <Compile Include="Design\DesignSelectUsersViewModel.cs" />
     <Compile Include="Design\DesignSelectTaskStateViewModel.cs" />
     <Compile Include="Locator\IocModule.cs" />
+    <Compile Include="Messages\MoveTaskToTaskStateMessage.cs" />
     <Compile Include="Messages\SetCurrentUserMessage.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
     <Compile Include="ViewModel\ButtonsBar\ButtonsBarViewModel.cs" />

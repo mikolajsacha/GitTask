@@ -53,7 +53,6 @@
     <Compile Include="Services\Interface\IProjectPathsService.cs" />
     <Compile Include="Model\Project\Project.cs" />
     <Compile Include="Model\Project\ProjectMember.cs" />
-    <Compile Include="Model\Task\Comment.cs" />
     <Compile Include="Enum\TaskPriority.cs" />
     <Compile Include="Model\Task\Task.cs" />
     <Compile Include="Model\Task\TaskState.cs" />
