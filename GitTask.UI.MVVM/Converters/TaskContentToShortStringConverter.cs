@@ -6,7 +6,7 @@ namespace GitTask.UI.MVVM.Converters
 {
     public class TaskContentToShortStringConverter : IValueConverter
     {
-        private const int MaxLength = 150;
+        private const int MaxLength = 50;
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
