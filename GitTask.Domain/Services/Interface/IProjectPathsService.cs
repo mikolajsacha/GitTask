@@ -1,4 +1,4 @@
-﻿namespace GitTask.Repository.Services.Interface
+﻿namespace GitTask.Domain.Services.Interface
 {
     public interface IProjectPathsService : IProjectPathsReadonlyService
     {

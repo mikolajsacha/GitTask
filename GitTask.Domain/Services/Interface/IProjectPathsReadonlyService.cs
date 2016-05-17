@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GitTask.Repository.Services.Interface
+namespace GitTask.Domain.Services.Interface
 {
     public interface IProjectPathsReadonlyService
     {

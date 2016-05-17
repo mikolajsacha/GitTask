@@ -1,5 +1,4 @@
-﻿using GitTask.Repository.Services.Interface;
-using GitTask.Domain.Model.Project;
+﻿using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
 using GitTask.Git;

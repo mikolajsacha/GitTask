@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitTask.Json", "GitTask.Jso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitTask.Git", "GitTask.Git\GitTask.Git.csproj", "{F76F9542-1A02-4859-9B30-C30B49E58AE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitTask.Repository", "GitTask.Repository\GitTask.Repository.csproj", "{537C0CE6-BB35-4150-BF90-774423909225}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{F76F9542-1A02-4859-9B30-C30B49E58AE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F76F9542-1A02-4859-9B30-C30B49E58AE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F76F9542-1A02-4859-9B30-C30B49E58AE9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{537C0CE6-BB35-4150-BF90-774423909225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{537C0CE6-BB35-4150-BF90-774423909225}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{537C0CE6-BB35-4150-BF90-774423909225}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{537C0CE6-BB35-4150-BF90-774423909225}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

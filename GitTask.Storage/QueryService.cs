@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GitTask.Repository.Services.Interface;
 using GitTask.Domain.Attributes;
 using GitTask.Domain.Services.Interface;
 using GitTask.Storage.Exception;
@@ -39,7 +38,7 @@ namespace GitTask.Storage
             _recentlyChanged.Clear();
             _recentlyDeleted.Clear();
 
-            _data =  GetKeySortedData(await _storageService.GetAll());
+            _data = GetKeySortedData(await _storageService.GetAll());
 
             if (GetKeyType().IsAssignableFrom(typeof(int)))
             {

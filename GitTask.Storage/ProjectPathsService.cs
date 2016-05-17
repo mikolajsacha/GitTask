@@ -1,7 +1,7 @@
 ﻿using System;
-using GitTask.Repository.Services.Interface;
+using GitTask.Domain.Services.Interface;
 
-namespace GitTask.Git
+namespace GitTask.Storage
 {
     public class ProjectPathsService : IProjectPathsService
     {

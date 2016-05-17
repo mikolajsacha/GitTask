@@ -125,7 +125,6 @@
     <Compile Include="Design\DesignSelectUsersViewModel.cs" />
     <Compile Include="Design\DesignSelectTaskStateViewModel.cs" />
     <Compile Include="Locator\IocModule.cs" />
-    <Compile Include="Messages\ProjectInitializedMessage.cs" />
     <Compile Include="Messages\SetCurrentUserMessage.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
     <Compile Include="ViewModel\ButtonsBar\ButtonsBarViewModel.cs" />
@@ -172,9 +171,9 @@
     <Compile Include="View\Footer\ProjectMembersInitialsList.xaml.cs">
       <DependentUpon>ProjectMembersInitialsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Footer\Main\ProjectOpeningViewModel.cs" />
+    <Compile Include="ViewModel\Main\ProjectOpeningViewModel.cs" />
     <Compile Include="ViewModel\Footer\FooterViewModel.cs" />
-    <Compile Include="ViewModel\Footer\Main\MainViewModel.cs" />
+    <Compile Include="ViewModel\Main\MainViewModel.cs" />
     <Compile Include="Locator\IocLocator.cs" />
     <Compile Include="ViewModel\TaskBoard\TaskStateColumnViewModel.cs" />
     <Compile Include="ViewModel\TaskDetails\TaskDetailsViewModel.cs" />
@@ -318,10 +317,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\GitTask.Repository\GitTask.Repository.csproj">
-      <Project>{537c0ce6-bb35-4150-bf90-774423909225}</Project>
-      <Name>GitTask.Repository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GitTask.Domain\GitTask.Domain.csproj">
       <Project>{47e272c3-58ce-4689-ba1c-ad0ba88f6551}</Project>
       <Name>GitTask.Domain</Name>

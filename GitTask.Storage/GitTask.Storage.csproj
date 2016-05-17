@@ -46,16 +46,13 @@
     <Compile Include="Exception\KeyAlreadyExistsException.cs" />
     <Compile Include="Exception\PropertyNotFoundException.cs" />
     <Compile Include="Interface\IFileService.cs" />
+    <Compile Include="ProjectPathsService.cs" />
     <Compile Include="QueryService.cs" />
     <Compile Include="KeyGeneratorService.cs" />
     <Compile Include="StorageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GitTask.Repository\GitTask.Repository.csproj">
-      <Project>{537c0ce6-bb35-4150-bf90-774423909225}</Project>
-      <Name>GitTask.Repository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GitTask.Domain\GitTask.Domain.csproj">
       <Project>{47E272C3-58CE-4689-BA1C-AD0BA88F6551}</Project>
       <Name>GitTask.Domain</Name>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GitTask.Domain.Model.Project;
 
-namespace GitTask.Repository.Services.Interface
+namespace GitTask.Domain.Services.Interface
 {
     public interface IRepositoryService
     {

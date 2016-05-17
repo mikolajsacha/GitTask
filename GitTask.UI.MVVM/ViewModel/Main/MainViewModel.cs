@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
-using GitTask.Repository.Services.Interface;
+using GitTask.Domain.Services.Interface;
 
 namespace GitTask.UI.MVVM.ViewModel.Main
 {

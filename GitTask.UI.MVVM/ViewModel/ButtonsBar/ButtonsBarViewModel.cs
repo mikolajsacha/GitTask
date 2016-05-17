@@ -1,8 +1,7 @@
 ﻿using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
-using GitTask.UI.MVVM.Messages;
+using GitTask.Domain.Services.Interface;
 using GitTask.UI.MVVM.View.ProjectSettings;
 using GitTask.UI.MVVM.View.TaskDetails;
 
@@ -27,17 +26,17 @@ namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
             }
         }
 
-        public ButtonsBarViewModel()
+        public ButtonsBarViewModel(IProjectPathsReadonlyService projectPathsService)
         {
             _areButtonsEnabled = false;
 
             _addTaskCommand = new RelayCommand(OnAddTaskCommand);
             _addTaskStateCommand = new RelayCommand(onAddTaskStateCommand);
 
-            Messenger.Default.Register<ProjectInitializedMessage>(this, OnProjectInitializedMessage);
+            projectPathsService.ProjectPathChanged += OnProjectPathChanged;
         }
 
-        private void OnProjectInitializedMessage(ProjectInitializedMessage projectInitializedMessage)
+        private void OnProjectPathChanged()
         {
             AreButtonsEnabled = true;
         }

@@ -4,11 +4,8 @@ using System.Resources;
 using System.Windows.Forms;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
-using GitTask.Repository.Services.Interface;
-using GitTask.UI.MVVM.Messages;
 using GitTask.UI.MVVM.Properties;
 using GitTask.UI.MVVM.View.ProjectSettings;
 using ProjectSetupWindow = GitTask.UI.MVVM.View.ProjectSettings.ProjectSetupWindow;
@@ -46,11 +43,6 @@ namespace GitTask.UI.MVVM.ViewModel.Main
                 var projectSetupWindow = new ProjectSetupWindow();
                 projectSetupWindow.ShowDialog();
             }
-
-            Messenger.Default.Send(new ProjectInitializedMessage());
-
-            var setCurrentUserWindow = new SetCurrentUserWindow();
-            setCurrentUserWindow.ShowDialog();
         }
 
         private void OnOpenSelectFolderDialog()
@@ -66,6 +58,9 @@ namespace GitTask.UI.MVVM.ViewModel.Main
                     projectPath = GetProjectPath();
                 }
                 _projectPathsService.BaseProjectPath = projectPath;
+
+                var setCurrentUserWindow = new SetCurrentUserWindow();
+                setCurrentUserWindow.ShowDialog();
             }
             catch (OperationCanceledException)
             {

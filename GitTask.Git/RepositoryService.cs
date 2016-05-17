@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using GitTask.Domain.Model.Project;
-using GitTask.Repository.Services.Interface;
+using GitTask.Domain.Services.Interface;
 
 namespace GitTask.Git
 {
@@ -29,29 +30,35 @@ namespace GitTask.Git
             RepositoryInitalized?.Invoke();
         }
 
-        public IEnumerable<ProjectMember> GetAllCommiters()
+        public async Task<IEnumerable<ProjectMember>> GetAllCommiters()
         {
-            if (_repository == null) return new List<ProjectMember>();
-
-            var nameKeyedDictionary = new Dictionary<string, string>(); // key = name, value = email
-            var emailKeyedDictionary = new Dictionary<string, string>(); // key = email, value = name
-
-            // we want unique names, with each project member having the most up-to-date e-mail (from newest commit)
-            foreach (var committer in _repository.Commits.Select(commit => commit.Committer).OrderBy(committer => committer.When.DateTime))
+            return await Task.Run(() =>
             {
-                nameKeyedDictionary[committer.Name] = committer.Email;
-                emailKeyedDictionary[committer.Email] = committer.Name;
-            }
+                if (_repository == null) return new List<ProjectMember>();
 
-            var keysToRemove = (from nameKey in nameKeyedDictionary.Keys
-                                let emailValue = nameKeyedDictionary[nameKey]
-                                where emailKeyedDictionary[emailValue] != nameKey
-                                select nameKey);
+                var nameKeyedDictionary = new Dictionary<string, string>(); // key = name, value = email
+                var emailKeyedDictionary = new Dictionary<string, string>(); // key = email, value = name
 
-            var keysTomoveHashSet = new HashSet<string>(keysToRemove);
+                // we want unique names, with each project member having the most up-to-date e-mail (from newest commit)
+                foreach (
+                    var committer in
+                        _repository.Commits.Select(commit => commit.Committer)
+                            .OrderBy(committer => committer.When.DateTime))
+                {
+                    nameKeyedDictionary[committer.Name] = committer.Email;
+                    emailKeyedDictionary[committer.Email] = committer.Name;
+                }
 
-            return nameKeyedDictionary.Where(commiterPair => !keysTomoveHashSet.Contains(commiterPair.Key)).
-                                             Select(commiterPair => new ProjectMember(commiterPair.Key, commiterPair.Value));
+                var keysToRemove = (from nameKey in nameKeyedDictionary.Keys
+                    let emailValue = nameKeyedDictionary[nameKey]
+                    where emailKeyedDictionary[emailValue] != nameKey
+                    select nameKey);
+
+                var keysTomoveHashSet = new HashSet<string>(keysToRemove);
+
+                return nameKeyedDictionary.Where(commiterPair => !keysTomoveHashSet.Contains(commiterPair.Key)).
+                    Select(commiterPair => new ProjectMember(commiterPair.Key, commiterPair.Value));
+            });
         }
 
         public bool RepositoryExists(string projectPath)

@@ -2,7 +2,7 @@
 using System.Linq;
 using GalaSoft.MvvmLight;
 using GitTask.Domain.Model.Project;
-using GitTask.Repository.Services.Interface;
+using GitTask.Domain.Services.Interface;
 
 namespace GitTask.UI.MVVM.ViewModel.Elements
 {
@@ -20,10 +20,11 @@ namespace GitTask.UI.MVVM.ViewModel.Elements
             RepositoryServiceOnRepositoryInitalized();
         }
 
-        private void RepositoryServiceOnRepositoryInitalized()
+        private async void RepositoryServiceOnRepositoryInitalized()
         {
             ProjectMembers.Clear();
-            foreach (var commiter in _repositoryService.GetAllCommiters().OrderBy(commiter => commiter.Name))
+            var allCommiters = await _repositoryService.GetAllCommiters();
+            foreach (var commiter in allCommiters.OrderBy(commiter => commiter.Name))
             {
                 ProjectMembers.Add(commiter);
             }
