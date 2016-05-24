@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
 using GitTask.UI.MVVM.Messages;
+using GitTask.UI.MVVM.ViewModel.Common;
 
 namespace GitTask.UI.MVVM.ViewModel.Footer
 {
@@ -34,7 +35,7 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
             }
         }
 
-        public FooterViewModel(IQueryService<Project> projectQueryService)
+        public FooterViewModel(IQueryService<Project> projectQueryService, RegistryViewModel registryViewModel)
         {
             _projectQueryService = projectQueryService;
             var projects = _projectQueryService.GetAll().ToList();
@@ -46,6 +47,7 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
             projectQueryService.ElementAdded += ProjectQueryServiceOnElementAdded;
             projectQueryService.ElementsReloaded += ProjectQueryServiceOnElementsReloaded;
 
+            CurrentUser = registryViewModel.CurrentProject.CurrentUser;
             Messenger.Default.Register<SetCurrentUserMessage>(this, OnSetCurrentUserMessage);
         }
 

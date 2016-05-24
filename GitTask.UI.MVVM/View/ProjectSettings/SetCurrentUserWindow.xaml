@@ -2,31 +2,53 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ignore="http://www.galasoft.ch/ignore"
-        xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
-        xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
         xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
-        mc:Ignorable="d ignore"
-        Width="400"
-        SizeToContent="Height"
+        xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
         Title="{x:Static prop:Resources.SetCurrentUser}"
-        DataContext="{Binding SetCurrentUserViewModel, Source={StaticResource Locator}, Mode=OneWay}"
-        Background="LightGray">
+        Width="400"
+        MaxHeight="700"
+        Background="LightGray"
+        DataContext="{Binding SetCurrentUserViewModel,
+                              Source={StaticResource Locator},
+                              Mode=OneWay}"
+        SizeToContent="Height"
+        mc:Ignorable="d ignore">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="18" Margin="10"
-                   Text="{x:Static prop:Resources.SetCurrentUserExplanation}"/>
-        <elements:SelectUsersPartial Grid.Row="1" DataContext="{Binding SelectUsersViewModel, Mode=OneWay}"
-                                     d:DataContext="{d:DesignInstance Type=design:DesignSelectUsersViewModel, IsDesignTimeCreatable=True}"/>
-        <Button x:Name="OkButton" Grid.Row="2" Width="140" Height="40" HorizontalAlignment="Right" Margin="10"
-                IsEnabled="{Binding SelectUsersViewModel.AnyUserChosen, Mode=OneWay}" Style="{StaticResource RoundedCornersButton}">
-            <TextBlock Text="OK" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="SemiBold" Foreground="DarkSlateGray"/>
+        <TextBlock Grid.Row="0"
+                   Margin="10"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   FontSize="18"
+                   Text="{x:Static prop:Resources.SetCurrentUserExplanation}" />
+        <elements:SelectUsersPartial Grid.Row="1"
+                                     d:DataContext="{d:DesignInstance Type=design:DesignSelectUsersViewModel,
+                                                                      IsDesignTimeCreatable=True}"
+                                     DataContext="{Binding SelectUsersViewModel,
+                                                           Mode=OneWay}" />
+        <Button x:Name="OkButton"
+                Grid.Row="2"
+                Width="140"
+                Height="40"
+                Margin="10"
+                HorizontalAlignment="Right"
+                IsEnabled="{Binding SelectUsersViewModel.AnyUserChosen,
+                                    Mode=OneWay}"
+                Style="{StaticResource RoundedCornersButton}">
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       FontWeight="SemiBold"
+                       Foreground="DarkSlateGray"
+                       Text="OK" />
         </Button>
     </Grid>
 </Window>

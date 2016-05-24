@@ -128,16 +128,18 @@
     <Compile Include="Messages\MoveTaskToTaskStateMessage.cs" />
     <Compile Include="Messages\SetCurrentUserMessage.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
+    <Compile Include="Model\RegistryProjectInformation.cs" />
+    <Compile Include="ViewModel\Common\RegistryViewModel.cs" />
     <Compile Include="ViewModel\ButtonsBar\ButtonsBarViewModel.cs" />
     <Compile Include="ViewModel\Elements\SelectTaskStateViewModel.cs" />
     <Compile Include="ViewModel\Elements\SelectTaskPriorityViewModel.cs" />
     <Compile Include="ViewModel\Elements\SelectUsersViewModel.cs" />
-    <Compile Include="ViewModel\Elements\ProjectMembersViewModel.cs" />
+    <Compile Include="ViewModel\Common\ProjectMembersViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\AddTaskStateViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\SetCurrentUserViewModel.cs" />
     <Compile Include="ViewModel\TaskBoard\TaskBoardViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\ProjectSetupViewModel.cs" />
-    <Compile Include="ViewModel\Elements\PendingStorageOperationsViewModel.cs" />
+    <Compile Include="ViewModel\Common\PendingStorageOperationsViewModel.cs" />
     <Compile Include="ViewModel\TaskDetails\AddTaskViewModel.cs" />
     <Compile Include="View\ButtonsBar\ButtonsBarPartial.xaml.cs">
       <DependentUpon>ButtonsBarPartial.xaml</DependentUpon>

@@ -2,63 +2,66 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ignore="http://www.galasoft.ch/ignore"
-        xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
-        xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
-        xmlns:taskDetails="clr-namespace:GitTask.UI.MVVM.View.TaskDetails"
         xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
-        mc:Ignorable="d ignore"
-        MinHeight="200"
-        MinWidth="200"
-        Height="400"
-        SizeToContent="Width"
-        MaxWidth="600"
+        xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+        xmlns:taskDetails="clr-namespace:GitTask.UI.MVVM.View.TaskDetails"
         Title="{x:Static prop:Resources.AddTask}"
-        d:DataContext="{d:DesignInstance Type=design:DesignAddTaskViewModel, IsDesignTimeCreatable=True}"
-        DataContext="{Binding AddTaskViewModel, Source={StaticResource Locator}, Mode=OneWay}">
+        Height="400"
+        MinWidth="200"
+        MinHeight="200"
+        MaxWidth="600"
+        d:DataContext="{d:DesignInstance Type=design:DesignAddTaskViewModel,
+                                         IsDesignTimeCreatable=True}"
+        DataContext="{Binding AddTaskViewModel,
+                              Source={StaticResource Locator},
+                              Mode=OneWay}"
+        SizeToContent="Width"
+        mc:Ignorable="d ignore">
 
     <Window.Resources>
         <Style TargetType="TextBox">
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Setter Property="TextAlignment" Value="Left"/>
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Padding" Value="10"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Top" />
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="10" />
         </Style>
-        <Style TargetType="TextBlock" x:Key="PriorityTextBlock">
+        <Style x:Key="PriorityTextBlock" TargetType="TextBlock">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding SelectTaskPriorityViewModel.TaskPriorityChosen}" Value="False">
-                    <Setter Property="Text" Value="{x:Static prop:Resources.SelectPriority}"/>
-                    <Setter Property="FontStyle" Value="Italic"/>
+                    <Setter Property="Text" Value="{x:Static prop:Resources.SelectPriority}" />
+                    <Setter Property="FontStyle" Value="Italic" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding SelectTaskPriorityViewModel.TaskPriorityChosen}" Value="True">
-                    <Setter Property="Text" Value="{Binding SelectTaskPriorityViewModel.SelectedTaskPriority, Converter={StaticResource TaskPriorityToStringConverter}, Mode=OneWay}"/>
-                    <Setter Property="FontStyle" Value="Normal"/>
+                    <Setter Property="Text" Value="{Binding SelectTaskPriorityViewModel.SelectedTaskPriority, Converter={StaticResource TaskPriorityToStringConverter}, Mode=OneWay}" />
+                    <Setter Property="FontStyle" Value="Normal" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style TargetType="TextBlock" x:Key="TaskStateTextBlock">
+        <Style x:Key="TaskStateTextBlock" TargetType="TextBlock">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding SelectTaskStateViewModel.TaskStateChosen}" Value="False">
-                    <Setter Property="Text" Value="{x:Static prop:Resources.SelectState}"/>
-                    <Setter Property="FontStyle" Value="Italic"/>
+                    <Setter Property="Text" Value="{x:Static prop:Resources.SelectState}" />
+                    <Setter Property="FontStyle" Value="Italic" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding SelectTaskStateViewModel.TaskStateChosen}" Value="True">
-                    <Setter Property="Text" Value="{Binding SelectTaskStateViewModel.SelectedTaskState.Name, Mode=OneWay}"/>
-                    <Setter Property="FontStyle" Value="Normal"/>
+                    <Setter Property="Text" Value="{Binding SelectTaskStateViewModel.SelectedTaskState.Name, Mode=OneWay}" />
+                    <Setter Property="FontStyle" Value="Normal" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style TargetType="Border" x:Key="SelectedTaskStateColorRectangle">
+        <Style x:Key="SelectedTaskStateColorRectangle" TargetType="Border">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding SelectTaskStateViewModel.TaskStateChosen}" Value="False">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Visibility" Value="Hidden"/>
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Visibility" Value="Hidden" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding SelectTaskStateViewModel.TaskStateChosen}" Value="True">
-                    <Setter Property="Background" Value="{Binding SelectTaskStateViewModel.SelectedTaskState.Color, Mode=OneWay}"/>
-                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="Background" Value="{Binding SelectTaskStateViewModel.SelectedTaskState.Color, Mode=OneWay}" />
+                    <Setter Property="Visibility" Value="Visible" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -66,74 +69,147 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <TextBlock Text="{x:Static prop:Resources.Title}" VerticalAlignment="Center" FontSize="15" Margin="10,0,0,0" FontWeight="SemiBold"/>
-                <TextBox HorizontalAlignment="Left" Width="200" Height="40" Text="{Binding Title, Mode=OneWayToSource}"/>
+                <TextBlock Margin="10,0,0,0"
+                           VerticalAlignment="Center"
+                           FontSize="15"
+                           FontWeight="SemiBold"
+                           Text="{x:Static prop:Resources.Title}" />
+                <TextBox Width="200"
+                         Height="40"
+                         HorizontalAlignment="Left"
+                         Text="{Binding Title,
+                                        Mode=OneWayToSource}" />
             </StackPanel>
-            <Grid x:Name="SelectPriorityGrid" Grid.Column="1" HorizontalAlignment="Right" Height="40" Margin="10">
+            <Grid x:Name="SelectPriorityGrid"
+                  Grid.Column="1"
+                  Height="40"
+                  Margin="10"
+                  HorizontalAlignment="Right"
+                  Background="Transparent">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
                 <Popup x:Name="SelectPriorityPopup">
-                    <elements:SelectTaskPriorityPartial DataContext="{Binding SelectTaskPriorityViewModel, Mode=OneTime}"/>
+                    <elements:SelectTaskPriorityPartial DataContext="{Binding SelectTaskPriorityViewModel, Mode=OneTime}" />
                 </Popup>
-                <Border Grid.Column="0" Width="20" Height="20" CornerRadius="3" Margin="5,2,5,0"
-                        Background="{Binding SelectTaskPriorityViewModel.SelectedTaskPriority, Converter={StaticResource TaskPriorityToColorConverter}, Mode=OneWay}"/>
-                <TextBlock Grid.Column="1" Style="{StaticResource PriorityTextBlock}"
-                           Margin="10" VerticalAlignment="Center" TextAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
+                <Border Grid.Column="0"
+                        Width="20"
+                        Height="20"
+                        Margin="5,2,5,0"
+                        Background="{Binding SelectTaskPriorityViewModel.SelectedTaskPriority,
+                                             Converter={StaticResource TaskPriorityToColorConverter},
+                                             Mode=OneWay}"
+                        CornerRadius="3" />
+                <TextBlock Grid.Column="1"
+                           Margin="10"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           Style="{StaticResource PriorityTextBlock}"
+                           TextAlignment="Center" />
             </Grid>
         </Grid>
         <StackPanel Grid.Row="1" Orientation="Vertical">
-            <TextBlock Text="{x:Static prop:Resources.Content}" VerticalAlignment="Center" FontSize="15" Margin="10,10,0,0" FontWeight="SemiBold"/>
-            <TextBox HorizontalAlignment="Stretch" Height="200" TextWrapping="Wrap" Text="{Binding Content, Mode=OneWayToSource}" AcceptsReturn="True" AcceptsTab="True" />
+            <TextBlock Margin="10,10,0,0"
+                       VerticalAlignment="Center"
+                       FontSize="15"
+                       FontWeight="SemiBold"
+                       Text="{x:Static prop:Resources.Content}" />
+            <TextBox Height="200"
+                     HorizontalAlignment="Stretch"
+                     AcceptsReturn="True"
+                     AcceptsTab="True"
+                     Text="{Binding Content,
+                                    Mode=OneWayToSource}"
+                     TextWrapping="Wrap" />
         </StackPanel>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Popup Grid.Column="0" x:Name="SelectAssignedMembersPopup">
-                <elements:SelectUsersPartial DataContext="{Binding SelectUsersViewModel, Mode=OneTime}"/>
+            <Popup x:Name="SelectAssignedMembersPopup" Grid.Column="0">
+                <elements:SelectUsersPartial DataContext="{Binding SelectUsersViewModel, Mode=OneTime}" />
             </Popup>
-            <TextBlock Grid.Column="0" Margin="10" TextAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16"
-                       Text="{Binding Source={x:Static prop:Resources.AssignMembers}}" FontStyle="Italic"
-                       Visibility="{Binding SelectUsersViewModel.AnyUserChosen, Converter={StaticResource BoolToVisibilityReverseConverter}}"/>
-            <taskDetails:AssignedMembersInitialsList Grid.Column="0" DataContext="{Binding SelectUsersViewModel, Mode=OneTime}"
-                                                     MouseEnter="AssignedMembersInitialsList_OnMouseEnter"
-                                                     MouseLeave="AssignedMembersInitialsList_OnMouseLeave"/>
-            <Grid x:Name="SelectStateGrid" Grid.Column="1" HorizontalAlignment="Right" Height="40" Margin="10">
+            <TextBlock Grid.Column="0"
+                       Margin="10"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       FontStyle="Italic"
+                       FontWeight="SemiBold"
+                       Text="{Binding Source={x:Static prop:Resources.AssignMembers}}"
+                       TextAlignment="Right"
+                       Visibility="{Binding SelectUsersViewModel.AnyUserChosen,
+                                            Converter={StaticResource BoolToVisibilityReverseConverter}}" />
+            <taskDetails:AssignedMembersInitialsList x:Name="AssignedMembersInitialsList"
+                                                     Grid.Column="0"
+                                                     DataContext="{Binding SelectUsersViewModel,
+                                                                           Mode=OneTime}" />
+            <Grid x:Name="SelectStateGrid"
+                  Grid.Column="1"
+                  Height="40"
+                  Margin="10"
+                  HorizontalAlignment="Right"
+                  Background="Transparent">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Popup x:Name="SelectStatePopup">
                     <StackPanel Orientation="Vertical">
-                        <elements:SelectTaskStatePartial DataContext="{Binding SelectTaskStateViewModel, Mode=OneTime}"/>
-                        <Button Style="{StaticResource RoundedCornersButton}" Width="120" Height="30" Command="{Binding AddTaskStateCommand}">
-                            <TextBlock Text="{Binding Source={x:Static prop:Resources.AddTaskState}, Converter={StaticResource ToUpperCaseConverter}}"
-                                       VerticalAlignment="Center" TextAlignment="Center"/>
+                        <elements:SelectTaskStatePartial DataContext="{Binding SelectTaskStateViewModel, Mode=OneTime}" />
+                        <Button Width="120"
+                                Height="30"
+                                Command="{Binding AddTaskStateCommand}"
+                                Style="{StaticResource RoundedCornersButton}">
+                            <TextBlock VerticalAlignment="Center"
+                                       Text="{Binding Source={x:Static prop:Resources.AddTaskState},
+                                                      Converter={StaticResource ToUpperCaseConverter}}"
+                                       TextAlignment="Center" />
                         </Button>
                     </StackPanel>
                 </Popup>
-                <Border Style="{StaticResource SelectedTaskStateColorRectangle}" Grid.Column="0" Width="20" Height="20" CornerRadius="3" Margin="5,2,5,0"/>
-                <TextBlock Grid.Column="1" Style="{StaticResource TaskStateTextBlock}"
-                           Margin="10" VerticalAlignment="Center" TextAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
+                <Border Grid.Column="0"
+                        Width="20"
+                        Height="20"
+                        Margin="5,2,5,0"
+                        CornerRadius="3"
+                        Style="{StaticResource SelectedTaskStateColorRectangle}" />
+                <TextBlock Grid.Column="1"
+                           Margin="10"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           Style="{StaticResource TaskStateTextBlock}"
+                           TextAlignment="Center" />
             </Grid>
-            <Button Grid.Column="2" x:Name="OkButton" Height="40" Width="145" Margin="10" HorizontalAlignment="Right"
-                Style="{StaticResource RoundedCornersButton}" IsEnabled="{Binding IsOkButtonEnabled, Mode=OneWay}">
-                <TextBlock Text="{Binding Source={x:Static prop:Resources.AddTask}, Converter={StaticResource ToUpperCaseConverter}}"
-                       VerticalAlignment="Center" TextAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
+            <Button x:Name="OkButton"
+                    Grid.Column="2"
+                    Width="145"
+                    Height="40"
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    IsEnabled="{Binding IsOkButtonEnabled,
+                                        Mode=OneWay}"
+                    Style="{StaticResource RoundedCornersButton}">
+                <TextBlock VerticalAlignment="Center"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           Text="{Binding Source={x:Static prop:Resources.AddTask},
+                                          Converter={StaticResource ToUpperCaseConverter}}"
+                           TextAlignment="Center" />
             </Button>
         </Grid>
     </Grid>

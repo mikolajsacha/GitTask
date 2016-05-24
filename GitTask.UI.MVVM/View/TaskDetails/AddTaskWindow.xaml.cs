@@ -11,21 +11,18 @@ namespace GitTask.UI.MVVM.View.TaskDetails
         {
             InitializeComponent();
             OkButton.Click += OkButtonOnClick;
+
             SelectPriorityGrid.MouseEnter += delegate { SelectPriorityPopup.IsOpen = true; };
+            SelectPriorityGrid.MouseLeave += SelectPriorityGrid_OnMouseLeave;
             SelectPriorityPopup.MouseLeave += delegate { SelectPriorityPopup.IsOpen = false; };
 
-            SelectStateGrid.MouseEnter += delegate { SelectStatePopup.IsOpen = true; };
-            SelectStatePopup.MouseLeave += SelectStatePopupOnMouseLeave;  
-
+            AssignedMembersInitialsList.MouseEnter += delegate { SelectAssignedMembersPopup.IsOpen = true; };
+            AssignedMembersInitialsList.MouseLeave += AssignedMembersInitialsList_OnMouseLeave;
             SelectAssignedMembersPopup.MouseLeave += delegate { SelectAssignedMembersPopup.IsOpen = false; };
-        }
 
-        private void SelectStatePopupOnMouseLeave(object sender, MouseEventArgs mouseEventArgs)
-        {
-            if (!SelectStatePopup.IsMouseOver)
-            {
-                SelectStatePopup.IsOpen = false;
-            }
+            SelectStateGrid.MouseEnter += delegate { SelectStatePopup.IsOpen = true; };
+            SelectStateGrid.MouseLeave += SelectStateGrid_OnMouseLeave;
+            SelectStatePopup.MouseLeave += delegate { SelectStatePopup.IsOpen = false; };
         }
 
         private void OkButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
@@ -39,16 +36,27 @@ namespace GitTask.UI.MVVM.View.TaskDetails
             }
         }
 
-        private void AssignedMembersInitialsList_OnMouseEnter(object sender, MouseEventArgs e)
-        {
-            SelectAssignedMembersPopup.IsOpen = true;
-        }
-
         private void AssignedMembersInitialsList_OnMouseLeave(object sender, MouseEventArgs e)
         {
             if (!SelectAssignedMembersPopup.IsMouseOver)
             {
                 SelectAssignedMembersPopup.IsOpen = false;
+            }
+        }
+
+        private void SelectPriorityGrid_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!SelectPriorityPopup.IsMouseOver)
+            {
+                SelectPriorityPopup.IsOpen = false;
+            }
+        }
+
+        private void SelectStateGrid_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!SelectStatePopup.IsMouseOver)
+            {
+                SelectStatePopup.IsOpen = false;
             }
         }
     }

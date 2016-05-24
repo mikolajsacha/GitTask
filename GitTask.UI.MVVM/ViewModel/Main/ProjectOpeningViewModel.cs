@@ -4,10 +4,13 @@ using System.Resources;
 using System.Windows.Forms;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
+using GitTask.UI.MVVM.Messages;
 using GitTask.UI.MVVM.Properties;
 using GitTask.UI.MVVM.View.ProjectSettings;
+using GitTask.UI.MVVM.ViewModel.Common;
 using ProjectSetupWindow = GitTask.UI.MVVM.View.ProjectSettings.ProjectSetupWindow;
 
 namespace GitTask.UI.MVVM.ViewModel.Main
@@ -19,6 +22,7 @@ namespace GitTask.UI.MVVM.ViewModel.Main
         private readonly IRepositoryService _repositoryService;
         private readonly IProjectPathsService _projectPathsService;
         private readonly IQueryService<Project> _projectQueryService;
+        private readonly RegistryViewModel _registryViewModel;
 
         private readonly RelayCommand _openSelectFolderDialogCommand;
         public ICommand OpenSelectFolderDialogCommand => _openSelectFolderDialogCommand;
@@ -26,11 +30,13 @@ namespace GitTask.UI.MVVM.ViewModel.Main
 
         public ProjectOpeningViewModel(IRepositoryService repositoryService,
                                        IProjectPathsService projectPathsService,
-                                       IQueryService<Project> projectQueryService)
+                                       IQueryService<Project> projectQueryService,
+                                       RegistryViewModel registryViewModel)
         {
             _repositoryService = repositoryService;
             _projectPathsService = projectPathsService;
             _projectQueryService = projectQueryService;
+            _registryViewModel = registryViewModel;
 
             _projectQueryService.ElementsReloaded += ProjectQueryServiceOnElementsReloaded;
             _openSelectFolderDialogCommand = new RelayCommand(OnOpenSelectFolderDialog);
@@ -38,11 +44,9 @@ namespace GitTask.UI.MVVM.ViewModel.Main
 
         private void ProjectQueryServiceOnElementsReloaded()
         {
-            if (!_projectQueryService.GetAll().Any())
-            {
-                var projectSetupWindow = new ProjectSetupWindow();
-                projectSetupWindow.ShowDialog();
-            }
+            if (_projectQueryService.GetAll().Any()) return;
+            var projectSetupWindow = new ProjectSetupWindow();
+            projectSetupWindow.ShowDialog();
         }
 
         private void OnOpenSelectFolderDialog()
@@ -59,8 +63,18 @@ namespace GitTask.UI.MVVM.ViewModel.Main
                 }
                 _projectPathsService.BaseProjectPath = projectPath;
 
-                var setCurrentUserWindow = new SetCurrentUserWindow();
-                setCurrentUserWindow.ShowDialog();
+                if (_registryViewModel.CurrentProject?.CurrentUser == null)
+                {
+                    var setCurrentUserWindow = new SetCurrentUserWindow();
+                    setCurrentUserWindow.ShowDialog();
+                }
+                else
+                {
+                    Messenger.Default.Send(new SetCurrentUserMessage
+                    {
+                        CurrentUser = _registryViewModel.CurrentProject.CurrentUser
+                    });
+                }
             }
             catch (OperationCanceledException)
             {

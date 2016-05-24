@@ -4,7 +4,7 @@ using System.Linq;
 using GalaSoft.MvvmLight;
 using GitTask.Domain.Services.Interface;
 
-namespace GitTask.UI.MVVM.ViewModel.Elements
+namespace GitTask.UI.MVVM.ViewModel.Common
 {
     public class PendingStorageOperationsViewModel : ViewModelBase
     {

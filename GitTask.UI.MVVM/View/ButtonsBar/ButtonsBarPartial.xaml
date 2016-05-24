@@ -1,49 +1,61 @@
 ﻿<UserControl x:Class="GitTask.UI.MVVM.View.ButtonsBar.ButtonsBarPartial"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ignore="http://www.galasoft.ch/ignore"
-        xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
-        mc:Ignorable="d ignore"
-        d:DesignHeight="50"
-        d:DesignWidth="1024"
-        DataContext="{Binding ButtonsBarViewModel, Source={StaticResource Locator}, Mode=OneWay}"
-        Background="Transparent">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ignore="http://www.galasoft.ch/ignore"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+             d:DesignHeight="50"
+             d:DesignWidth="1024"
+             Background="Transparent"
+             DataContext="{Binding ButtonsBarViewModel,
+                                   Source={StaticResource Locator},
+                                   Mode=OneWay}"
+             mc:Ignorable="d ignore">
 
     <UserControl.Resources>
-        <Style TargetType="TextBlock" x:Key="ButtonText">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Foreground" Value="#FF552244"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
+        <Style x:Key="ButtonText" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Foreground" Value="#FF552244" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style BasedOn="{StaticResource RoundedCornersButton}" TargetType="Button">
+            <Setter Property="Width" Value="140" />
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="IsEnabled" Value="{Binding AreButtonsEnabled, Mode=OneWay}" />
         </Style>
     </UserControl.Resources>
 
-    <StackPanel Orientation="Horizontal" Margin="3" HorizontalAlignment="Right" MinHeight="40" MaxHeight="80">
-        <Button Style="{StaticResource RoundedCornersButton}" Margin="3" Width="130"
-                DataContext="{Binding ProjectOpeningViewModel, Source={StaticResource Locator}, Mode=OneWay}"
-                Command="{Binding OpenSelectFolderDialogCommand, Mode=OneWay}"
-                IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},
-                                    Path=DataContext.AreButtonsEnabled, Mode=OneWay}">
-            <TextBlock Style="{StaticResource ButtonText}"
-                       Text="{Binding Source={x:Static prop:Resources.OpenProject}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}"/>
+    <StackPanel MinHeight="40"
+                MaxHeight="80"
+                Margin="3"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+        <Button Command="{Binding SetCurrentUserCommand, Mode=OneWay}">
+            <TextBlock Style="{StaticResource ButtonText}" Text="{Binding Source={x:Static prop:Resources.SetUser}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
         </Button>
 
-        <Button Style="{StaticResource RoundedCornersButton}" Margin="3" Width="130"
-                Command="{Binding AddTaskStateCommand, Mode=OneWay}"
-                IsEnabled="{Binding AreButtonsEnabled, Mode=OneWay}">
-            <TextBlock Style="{StaticResource ButtonText}"
-                       Text="{Binding Source={x:Static prop:Resources.AddTaskState}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}"/>
+        <Button Command="{Binding OpenSelectFolderDialogCommand,
+                                  Mode=OneWay}"
+                DataContext="{Binding ProjectOpeningViewModel,
+                                      Source={StaticResource Locator},
+                                      Mode=OneWay}"
+                IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                   AncestorType={x:Type UserControl}},
+                                    Path=DataContext.AreButtonsEnabled,
+                                    Mode=OneWay}">
+            <TextBlock Style="{StaticResource ButtonText}" Text="{Binding Source={x:Static prop:Resources.OpenProject}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
         </Button>
 
-        <Button Style="{StaticResource RoundedCornersButton}" Margin="3" Width="130"
-                Command="{Binding AddTaskCommand, Mode=OneWay}"
-                IsEnabled="{Binding AreButtonsEnabled, Mode=OneWay}">
-            <TextBlock Style="{StaticResource ButtonText}"
-                       Text="{Binding Source={x:Static prop:Resources.AddTask}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}"/>
+        <Button Command="{Binding AddTaskStateCommand, Mode=OneWay}">
+            <TextBlock Style="{StaticResource ButtonText}" Text="{Binding Source={x:Static prop:Resources.AddTaskState}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+        </Button>
+
+        <Button Command="{Binding AddTaskCommand, Mode=OneWay}">
+            <TextBlock Style="{StaticResource ButtonText}" Text="{Binding Source={x:Static prop:Resources.AddTask}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
         </Button>
     </StackPanel>
 </UserControl>

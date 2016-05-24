@@ -304,6 +304,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set User.
+        /// </summary>
+        public static string SetUser {
+            get {
+                return ResourceManager.GetString("SetUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task Details.
         /// </summary>
         public static string TaskDetails {

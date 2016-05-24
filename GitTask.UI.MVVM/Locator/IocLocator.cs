@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GitTask.UI.MVVM.ViewModel.ButtonsBar;
-using GitTask.UI.MVVM.ViewModel.Elements;
+using GitTask.UI.MVVM.ViewModel.Common;
 using GitTask.UI.MVVM.ViewModel.Footer;
 using GitTask.UI.MVVM.ViewModel.Main;
 using GitTask.UI.MVVM.ViewModel.ProjectSettings;
@@ -21,6 +21,7 @@ namespace GitTask.UI.MVVM.Locator
             Kernel = new StandardKernel(new IocModule());
         }
 
+
         public static MainViewModel MainViewModel => Kernel.Get<MainViewModel>();
         public static ProjectOpeningViewModel ProjectOpeningViewModel => Kernel.Get<ProjectOpeningViewModel>();
         public static TaskBoardViewModel TaskBoardViewModel => Kernel.Get<TaskBoardViewModel>();
@@ -32,6 +33,7 @@ namespace GitTask.UI.MVVM.Locator
         public static SetCurrentUserViewModel SetCurrentUserViewModel => Kernel.Get<SetCurrentUserViewModel>();
         public static AddTaskViewModel AddTaskViewModel => Kernel.Get<AddTaskViewModel>();
         public static AddTaskStateViewModel AddTaskStateViewModel => Kernel.Get<AddTaskStateViewModel>();
+        public static RegistryViewModel RegistryViewModel => Kernel.Get<RegistryViewModel>();
 
         public static void Cleanup()
         {

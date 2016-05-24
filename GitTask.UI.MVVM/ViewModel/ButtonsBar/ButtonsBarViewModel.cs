@@ -15,6 +15,9 @@ namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
         private readonly RelayCommand _addTaskStateCommand;
         public ICommand AddTaskStateCommand => _addTaskStateCommand;
 
+        private readonly RelayCommand _setCurrentUserCommand;
+        public ICommand SetCurrentUserCommand => _setCurrentUserCommand;
+
         private bool _areButtonsEnabled;
         public bool AreButtonsEnabled
         {
@@ -32,6 +35,7 @@ namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
 
             _addTaskCommand = new RelayCommand(OnAddTaskCommand);
             _addTaskStateCommand = new RelayCommand(onAddTaskStateCommand);
+            _setCurrentUserCommand = new RelayCommand(OnSetCurrentUserCommand);
 
             projectPathsService.ProjectPathChanged += OnProjectPathChanged;
         }
@@ -45,6 +49,12 @@ namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
         {
             var addTaskWindow = new AddTaskWindow();
             addTaskWindow.Show();
+        }
+
+        private void OnSetCurrentUserCommand()
+        {
+            var setCurrentUserWindow = new SetCurrentUserWindow();
+            setCurrentUserWindow.Show();
         }
 
         private void onAddTaskStateCommand()

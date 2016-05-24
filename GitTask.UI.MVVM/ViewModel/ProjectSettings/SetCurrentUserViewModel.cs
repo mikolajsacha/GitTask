@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -23,7 +22,7 @@ namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
 
         private void OnOkClick()
         {
-            Messenger.Default.Send(new SetCurrentUserMessage { CurrentUser = SelectUsersViewModel.SelectedUsers.First() });
+            Messenger.Default.Send(new SetCurrentUserMessage { CurrentUser = SelectUsersViewModel.LastSelectedUser });
         }
     }
 }

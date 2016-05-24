@@ -6,7 +6,7 @@ using GitTask.Json;
 using GitTask.Storage;
 using GitTask.Storage.Interface;
 using GitTask.UI.MVVM.ViewModel.ButtonsBar;
-using GitTask.UI.MVVM.ViewModel.Elements;
+using GitTask.UI.MVVM.ViewModel.Common;
 using GitTask.UI.MVVM.ViewModel.Footer;
 using GitTask.UI.MVVM.ViewModel.Main;
 using GitTask.UI.MVVM.ViewModel.ProjectSettings;
@@ -41,6 +41,7 @@ namespace GitTask.UI.MVVM.Locator
                    Kernel.Get<IStorageService<Task>>(),
                 });
 
+            Bind<RegistryViewModel>().ToSelf().InSingletonScope();
             Bind<MainViewModel>().ToSelf().InSingletonScope();
             Bind<ProjectOpeningViewModel>().ToSelf().InSingletonScope();
             Bind<TaskBoardViewModel>().ToSelf().InSingletonScope();
