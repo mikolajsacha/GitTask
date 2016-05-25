@@ -4,10 +4,11 @@ using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
 namespace GitTask.UI.MVVM.View.TaskDetails
 {
-    public partial class AddTaskWindow
+    public partial class EditTaskWindow
     {
-        public AddTaskWindow()
+        public EditTaskWindow(EditTaskViewModel editTaskViewModel)
         {
+            DataContext = editTaskViewModel;
             InitializeComponent();
             OkButton.Click += OkButtonOnClick;
 
@@ -27,11 +28,11 @@ namespace GitTask.UI.MVVM.View.TaskDetails
         private void OkButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
         {
             Close();
-            var addTaskViewModel = DataContext as AddTaskViewModel;
+            var editTaskViewModel = DataContext as EditTaskViewModel;
 
-            if (addTaskViewModel != null && addTaskViewModel.OkCommand.CanExecute(new object()))
+            if (editTaskViewModel != null && editTaskViewModel.OkCommand.CanExecute(new object()))
             {
-                addTaskViewModel.OkCommand.Execute(new object());
+                editTaskViewModel.OkCommand.Execute(new object());
             }
         }
 
@@ -56,6 +57,17 @@ namespace GitTask.UI.MVVM.View.TaskDetails
             if (!SelectStatePopup.IsMouseOver)
             {
                 SelectStatePopup.IsOpen = false;
+            }
+        }
+
+        private void RemoveButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Close();
+            var editTaskViewModel = DataContext as EditTaskViewModel;
+
+            if (editTaskViewModel != null && editTaskViewModel.DeleteCommand.CanExecute(new object()))
+            {
+                editTaskViewModel.DeleteCommand.Execute(new object());
             }
         }
     }

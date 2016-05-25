@@ -210,4 +210,10 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="EditTask" xml:space="preserve">
+    <value>Edit Task</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
 </root>

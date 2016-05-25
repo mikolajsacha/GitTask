@@ -1,4 +1,5 @@
-﻿using GitTask.UI.MVVM.ViewModel.TaskDetails;
+﻿using System.Windows;
+using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
 namespace GitTask.UI.MVVM.View.TaskDetails
 {
@@ -8,6 +9,18 @@ namespace GitTask.UI.MVVM.View.TaskDetails
         {
             DataContext = dataContext;
             InitializeComponent();
+            EditButton.Click += EditButtonOnClick;
+        }
+
+        private void EditButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            Close();
+            var taskDetailsViewModel = DataContext as TaskDetailsViewModel;
+
+            if (taskDetailsViewModel != null && taskDetailsViewModel.EditTaskCommand.CanExecute(new object()))
+            {
+                taskDetailsViewModel.EditTaskCommand.Execute(new object());
+            }
         }
     }
 }

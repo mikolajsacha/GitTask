@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +13,6 @@ namespace GitTask.UI.MVVM.View.Elements
         public SelectUsersPartial()
         {
             InitializeComponent();
-            OnDataContextChanged(null, new DependencyPropertyChangedEventArgs());
             UsersList.SelectionChanged += UsersListOnSelectionChanged;
             DataContextChanged += OnDataContextChanged;
         }
@@ -20,9 +20,26 @@ namespace GitTask.UI.MVVM.View.Elements
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var dataContext = DataContext as SelectUsersViewModel;
-            if (dataContext != null && dataContext.SelectionMode == "Multiple")
+            if (dataContext == null) return;
+
+            UsersList.SelectionMode = (SelectionMode)Enum.Parse(typeof(SelectionMode), dataContext.SelectionMode);
+
+            if (UsersList.SelectionMode == SelectionMode.Multiple)
             {
+                UsersList.SelectionChanged -= UsersListOnSelectionChanged;
+                UsersList.SelectedItems.Clear();
+                foreach (var user in dataContext.SelectedUsers)
+                {
+                    UsersList.SelectedItems.Add(user);
+                }
+                UsersList.SelectionChanged += UsersListOnSelectionChanged;
                 dataContext.SelectedUsers.CollectionChanged += SelectedUsersOnCollectionChanged;
+            }
+            else
+            {
+                UsersList.SelectionChanged -= UsersListOnSelectionChanged;
+                UsersList.SelectedItem = dataContext.LastSelectedUser;
+                UsersList.SelectionChanged += UsersListOnSelectionChanged;
             }
         }
 

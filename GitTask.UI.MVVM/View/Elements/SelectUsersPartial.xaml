@@ -23,7 +23,7 @@
              SelectionMode="{Binding RelativeSource={RelativeSource FindAncestor,
                                                                     AncestorType={x:Type ScrollViewer}},
                                      Path=DataContext.SelectionMode,
-                                     Mode=OneTime}">
+                                     Mode=OneWay}">
         <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
                 <StackPanel HorizontalAlignment="Stretch"

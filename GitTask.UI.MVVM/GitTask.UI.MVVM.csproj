@@ -141,6 +141,7 @@
     <Compile Include="ViewModel\TaskBoard\TaskBoardViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\ProjectSetupViewModel.cs" />
     <Compile Include="ViewModel\Common\PendingStorageOperationsViewModel.cs" />
+    <Compile Include="ViewModel\TaskDetails\EditTaskViewModel.cs" />
     <Compile Include="ViewModel\TaskDetails\AddTaskViewModel.cs" />
     <Compile Include="View\ButtonsBar\ButtonsBarPartial.xaml.cs">
       <DependentUpon>ButtonsBarPartial.xaml</DependentUpon>
@@ -192,6 +193,9 @@
     </Compile>
     <Compile Include="View\TaskBoard\TaskPartial.xaml.cs">
       <DependentUpon>TaskPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskDetails\EditTaskWindow.xaml.cs">
+      <DependentUpon>EditTaskWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TaskDetails\AddTaskWindow.xaml.cs">
       <DependentUpon>AddTaskWindow.xaml</DependentUpon>
@@ -278,6 +282,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\TaskDetails\EditTaskWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\TaskDetails\AddTaskWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -339,6 +347,9 @@
       <Project>{4b7a6646-b7f8-4d92-a032-c13fc8136f07}</Project>
       <Name>GitTask.Storage</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\remove.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

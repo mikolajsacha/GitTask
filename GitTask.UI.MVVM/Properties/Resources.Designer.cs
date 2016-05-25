@@ -142,6 +142,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Task.
+        /// </summary>
+        public static string EditTask {
+            get {
+                return ResourceManager.GetString("EditTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter a name for your project.
         /// </summary>
         public static string EnterProjectName {
@@ -273,6 +282,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string RepositoryNotFoundExplanation {
             get {
                 return ResourceManager.GetString("RepositoryNotFoundExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save changes.
+        /// </summary>
+        public static string SaveChanges {
+            get {
+                return ResourceManager.GetString("SaveChanges", resourceCulture);
             }
         }
         
