@@ -49,6 +49,7 @@ namespace GitTask.UI.MVVM.Locator
             Bind<ProjectSetupViewModel>().ToSelf().InSingletonScope();
             Bind<ButtonsBarViewModel>().ToSelf().InSingletonScope();
             Bind<ProjectMembersViewModel>().ToSelf().InSingletonScope();
+            Bind<ProjectMembersSetsViewModel>().ToSelf().InSingletonScope();
             Bind<SetCurrentUserViewModel>().ToSelf().InSingletonScope();
             Bind<AddTaskViewModel>().ToSelf().InSingletonScope();
             Bind<AddTaskStateViewModel>().ToSelf().InSingletonScope();

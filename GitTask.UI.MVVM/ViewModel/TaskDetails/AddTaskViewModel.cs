@@ -84,7 +84,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
             }
         }
 
-        private void OnAddTaskStateClick()
+        private static void OnAddTaskStateClick()
         {
             var addTaskStateWindow = new AddTaskStateWindow() { Owner = Application.Current.MainWindow };
             addTaskStateWindow.ShowDialog();
