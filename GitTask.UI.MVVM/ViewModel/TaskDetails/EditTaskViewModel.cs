@@ -1,10 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Enum;
-using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
 using GitTask.UI.MVVM.View.ProjectSettings;

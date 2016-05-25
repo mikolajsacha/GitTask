@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using GitTask.UI.MVVM.View.TaskDetails;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;

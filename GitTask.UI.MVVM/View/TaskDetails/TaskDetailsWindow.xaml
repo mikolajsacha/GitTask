@@ -10,7 +10,8 @@
         Width="300"
         Height="300"
         MinWidth="200"
-        MinHeight="200"
+        MinHeight="20"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d ignore">
 
     <Grid Background="White">

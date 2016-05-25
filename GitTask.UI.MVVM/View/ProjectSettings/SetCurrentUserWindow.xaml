@@ -15,6 +15,7 @@
                               Source={StaticResource Locator},
                               Mode=OneWay}"
         SizeToContent="Height"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d ignore">
 
     <Grid>
