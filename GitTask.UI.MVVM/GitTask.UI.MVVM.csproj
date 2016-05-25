@@ -126,6 +126,7 @@
     <Compile Include="Design\DesignSelectTaskStateViewModel.cs" />
     <Compile Include="Locator\IocModule.cs" />
     <Compile Include="Messages\MoveTaskToTaskStateMessage.cs" />
+    <Compile Include="Messages\DeleteTaskStateMessage.cs" />
     <Compile Include="Messages\SetCurrentUserMessage.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
     <Compile Include="Model\RegistryProjectInformation.cs" />
@@ -318,7 +319,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\arrow.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GitTask.Domain\GitTask.Domain.csproj">
       <Project>{47e272c3-58ce-4689-ba1c-ad0ba88f6551}</Project>

@@ -60,6 +60,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
             TaskStateColumns = new ObservableCollection<TaskStateColumnViewModel>();
             Messenger.Default.Register<MoveTaskToTaskStateMessage>(this, OnMoveTaskToTaskStateMessage);
+            Messenger.Default.Register<DeleteTaskStateMessage>(this, OnDeleteTaskStateMessage);
         }
 
         private async void OnMoveTaskToTaskStateMessage(MoveTaskToTaskStateMessage message)
@@ -70,6 +71,12 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             task.State = message.NewTaskStateName;
             _taskQueryService.Update(task);
             await _taskQueryService.SaveChanges();
+        }
+
+        private async void OnDeleteTaskStateMessage(DeleteTaskStateMessage message)
+        {
+            _taskStateQueryService.Delete(message.TaskState.Name);
+            await _taskStateQueryService.SaveChanges();
         }
 
         private void TaskQueryServiceOnElementAdded(Task task)

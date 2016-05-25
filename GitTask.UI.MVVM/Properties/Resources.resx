@@ -207,4 +207,7 @@
   <data name="SetUser" xml:space="preserve">
     <value>Set User</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
 </root>

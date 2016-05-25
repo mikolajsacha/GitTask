@@ -15,9 +15,13 @@ namespace GitTask.UI.MVVM.Design
 
         public ICommand ShowColumnCommand { get; }
         public ICommand HideColumnCommand { get; }
+        public ICommand MoveColumnLeftCommand { get; }
+        public ICommand MoveColumnRightCommand { get; }
+        public ICommand DeleteTaskStateCommand { get; }
 
         public bool IsOpened { get; private set; }
         public bool IsHidden => !IsOpened;
+        public bool CanBeDeleted => true;
 
         public bool CanMoveLeft => true;
         public bool CanMoveRight => true;
@@ -29,8 +33,11 @@ namespace GitTask.UI.MVVM.Design
 
         public DesignTaskStateColumnViewModel(TaskState taskState, bool isOpened = true)
         {
-            ShowColumnCommand = new RelayCommand(OnShowColumnCommand);
-            HideColumnCommand = new RelayCommand(OnHideColumnCommand);
+            ShowColumnCommand = new RelayCommand(() => { });
+            HideColumnCommand = new RelayCommand(() => { });
+            DeleteTaskStateCommand = new RelayCommand(() => { });
+            MoveColumnLeftCommand = new RelayCommand(() => { });
+            MoveColumnRightCommand = new RelayCommand(() => { });
 
             IsOpened = isOpened;
             TaskState = taskState;
@@ -41,16 +48,6 @@ namespace GitTask.UI.MVVM.Design
                 new DesignTaskDetailsViewModel(),
                 new DesignTaskDetailsViewModel()
             };
-        }
-
-        private void OnShowColumnCommand()
-        {
-            IsOpened = false;
-        }
-
-        private void OnHideColumnCommand()
-        {
-            IsOpened = false;
         }
     }
 }

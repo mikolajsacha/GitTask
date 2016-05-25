@@ -31,7 +31,7 @@ namespace GitTask.UI.MVVM.ViewModel.Common
                 }
                 catch (Exception)
                 {
-                    // ignored
+                    // Exception. We can't use registry
                 }
             }
         }
@@ -100,12 +100,11 @@ namespace GitTask.UI.MVVM.ViewModel.Common
             var userName = (string)_baseRegistryKey.GetValue("CurrentProjectUserName", null);
             var userEmail = (string)_baseRegistryKey.GetValue("CurrentProjectUserEmail", null);
             if (projectPath == null || userName == null || userEmail == null) return;
-            if ()
-                CurrentProject = new RegistryProjectInformation
-                {
-                    CurrentUser = new ProjectMember(userName, userEmail),
-                    ProjectPath = projectPath
-                };
+            CurrentProject = new RegistryProjectInformation
+            {
+                CurrentUser = new ProjectMember(userName, userEmail),
+                ProjectPath = projectPath
+            };
         }
     }
 }

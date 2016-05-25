@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
+using GitTask.UI.MVVM.Messages;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
 namespace GitTask.UI.MVVM.ViewModel.TaskBoard
@@ -29,6 +30,9 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
         private readonly RelayCommand _moveColumnLeftCommand;
         public ICommand MoveColumnLeftCommand => _moveColumnLeftCommand;
 
+        private readonly RelayCommand _deleteTaskStateCommand;
+        public ICommand DeleteTaskStateCommand => _deleteTaskStateCommand;
+
         private bool _isOpened;
         public bool IsOpened
         {
@@ -42,6 +46,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
         }
 
         public bool IsHidden => !_isOpened;
+        public bool CanBeDeleted => Tasks == null || Tasks.Count == 0;
         public bool CanMoveLeft { get; }
         public bool CanMoveRight { get; }
 
@@ -57,11 +62,13 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             _hideColumnCommand = new RelayCommand(OnHideColumnCommand);
             _moveColumnLeftCommand = new RelayCommand(OnMoveColumnLeftCommand);
             _moveColumnRightCommand = new RelayCommand(OnMoveColumRightCommand);
+            _deleteTaskStateCommand = new RelayCommand(OnDeleteTaskStateCommand);
 
             CanMoveLeft = canMoveLeft;
             CanMoveRight = canMoveRight;
 
             Tasks = new ObservableCollection<TaskDetailsViewModel>();
+            Tasks.CollectionChanged += (sender, args) => RaisePropertyChanged("CanBeDeleted");
         }
 
         private void OnHideColumnCommand()
@@ -74,14 +81,27 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             IsOpened = true;
         }
 
+        private void OnDeleteTaskStateCommand()
+        {
+            Messenger.Default.Send(new DeleteTaskStateMessage { TaskState = TaskState });
+        }
+
         private async void OnMoveColumnLeftCommand()
         {
-            if (TaskState.Position == 0) return;
+            var leftTaskStateQuery =
+                _taskStateQueryService.GetAll()
+                    .Where(taskState => taskState.Position < TaskState.Position)
+                    .OrderBy(taskState => taskState.Position);
 
-            var leftTaskState = _taskStateQueryService.GetByProperty("Position", TaskState.Position - 1).First();
+            var taskStateQueryResult = leftTaskStateQuery.ToList();
 
-            TaskState.Position--;
-            leftTaskState.Position++;
+            if (!taskStateQueryResult.Any()) return;
+
+            var leftTaskState = taskStateQueryResult.Last();
+
+            var temp = leftTaskState.Position;
+            leftTaskState.Position = TaskState.Position;
+            TaskState.Position = temp;
 
             _taskStateQueryService.Update(TaskState);
             _taskStateQueryService.Update(leftTaskState);
@@ -90,15 +110,20 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         private async void OnMoveColumRightCommand()
         {
-            var rightTaskStateQueryResult = _taskStateQueryService.GetByProperty("Position", TaskState.Position - 1);
-            var taskStateQueryResult = rightTaskStateQueryResult as IList<TaskState> ?? rightTaskStateQueryResult.ToList();
+            var rightTaskStateQueryResult =
+                _taskStateQueryService.GetAll()
+                    .Where(taskState => taskState.Position > TaskState.Position)
+                    .OrderBy(taskState => taskState.Position);
+
+            var taskStateQueryResult = rightTaskStateQueryResult.ToList();
 
             if (!taskStateQueryResult.Any()) return;
 
             var rightTaskState = taskStateQueryResult.First();
 
-            TaskState.Position--;
-            rightTaskState.Position++;
+            var temp = rightTaskState.Position;
+            rightTaskState.Position = TaskState.Position;
+            TaskState.Position = temp;
 
             _taskStateQueryService.Update(TaskState);
             _taskStateQueryService.Update(rightTaskState);
