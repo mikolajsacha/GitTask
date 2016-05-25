@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Model.Task;
@@ -26,7 +27,11 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 
         private void OnEditTaskCommand()
         {
-            var editTaskWindow = new EditTaskWindow(new EditTaskViewModel(Task, _taskQueryService, _taskStateQueryService));
+            var editTaskWindow =
+                new EditTaskWindow(new EditTaskViewModel(Task, _taskQueryService, _taskStateQueryService))
+                {
+                    Owner = Application.Current.MainWindow
+                };
             editTaskWindow.Show();
         }
     }

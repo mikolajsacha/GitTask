@@ -21,8 +21,8 @@ namespace GitTask.UI.MVVM.View.TaskBoard
             var taskDetails = DataContext as TaskDetailsViewModel;
             if (taskDetails == null) return;
 
-            var taskDetailsWindow = new TaskDetailsWindow(taskDetails);
-            taskDetailsWindow.ShowDialog();
+            var taskDetailsWindow = new TaskDetailsWindow(taskDetails) {Owner = Application.Current.MainWindow};
+            taskDetailsWindow.Show();
         }
 
         private void MainOnMouseLeave(object sender, MouseEventArgs e)

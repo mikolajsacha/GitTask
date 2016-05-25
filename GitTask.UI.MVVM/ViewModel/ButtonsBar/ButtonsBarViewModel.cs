@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Services.Interface;
@@ -47,19 +48,19 @@ namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
 
         private void OnAddTaskCommand()
         {
-            var addTaskWindow = new AddTaskWindow();
+            var addTaskWindow = new AddTaskWindow {Owner = Application.Current.MainWindow};
             addTaskWindow.Show();
         }
 
         private void OnSetCurrentUserCommand()
         {
-            var setCurrentUserWindow = new SetCurrentUserWindow();
+            var setCurrentUserWindow = new SetCurrentUserWindow {Owner = Application.Current.MainWindow};
             setCurrentUserWindow.Show();
         }
 
         private void onAddTaskStateCommand()
         {
-            var addTaskStateWindow = new AddTaskStateWindow();
+            var addTaskStateWindow = new AddTaskStateWindow {Owner = Application.Current.MainWindow};
             addTaskStateWindow.Show();
         }
     }

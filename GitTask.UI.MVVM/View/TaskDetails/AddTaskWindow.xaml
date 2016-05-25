@@ -19,7 +19,7 @@
                               Source={StaticResource Locator},
                               Mode=OneWay}"
         SizeToContent="Width"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterOwner"
         mc:Ignorable="d ignore">
 
     <Window.Resources>

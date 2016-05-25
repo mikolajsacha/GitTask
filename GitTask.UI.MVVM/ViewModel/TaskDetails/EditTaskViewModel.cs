@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -96,7 +97,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 
         private void OnAddTaskStateClick()
         {
-            var addTaskStateWindow = new AddTaskStateWindow();
+            var addTaskStateWindow = new AddTaskStateWindow { Owner = Application.Current.MainWindow };
             addTaskStateWindow.ShowDialog();
         }
 

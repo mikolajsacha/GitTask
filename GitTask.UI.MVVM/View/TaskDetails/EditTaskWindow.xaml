@@ -16,7 +16,7 @@
         d:DataContext="{d:DesignInstance Type=design:DesignAddTaskViewModel,
                                          IsDesignTimeCreatable=True}"
         SizeToContent="Width"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterOwner"
         mc:Ignorable="d ignore">
 
     <Window.Resources>
