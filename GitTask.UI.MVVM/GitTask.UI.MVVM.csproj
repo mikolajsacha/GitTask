@@ -124,14 +124,17 @@
     <Compile Include="Design\DesignTaskDetailsViewModel.cs" />
     <Compile Include="Design\DesignSelectUsersViewModel.cs" />
     <Compile Include="Design\DesignSelectTaskStateViewModel.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Locator\IocModule.cs" />
     <Compile Include="Messages\MoveTaskToTaskStateMessage.cs" />
     <Compile Include="Messages\DeleteTaskStateMessage.cs" />
-    <Compile Include="Messages\SetCurrentUserMessage.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
     <Compile Include="Model\RegistryProjectInformation.cs" />
+    <Compile Include="ViewModel\ActionBar\FiltersViewModel.cs" />
+    <Compile Include="ViewModel\Common\ProjectMembersSetsViewModel.cs" />
+    <Compile Include="ViewModel\Common\CurrentUserViewModel.cs" />
     <Compile Include="ViewModel\Common\RegistryViewModel.cs" />
-    <Compile Include="ViewModel\ButtonsBar\ButtonsBarViewModel.cs" />
+    <Compile Include="ViewModel\ActionBar\ButtonsViewModel.cs" />
     <Compile Include="ViewModel\Elements\SelectTaskStateViewModel.cs" />
     <Compile Include="ViewModel\Elements\SelectTaskPriorityViewModel.cs" />
     <Compile Include="ViewModel\Elements\SelectUsersViewModel.cs" />
@@ -143,8 +146,11 @@
     <Compile Include="ViewModel\Common\PendingStorageOperationsViewModel.cs" />
     <Compile Include="ViewModel\TaskDetails\EditTaskViewModel.cs" />
     <Compile Include="ViewModel\TaskDetails\AddTaskViewModel.cs" />
-    <Compile Include="View\ButtonsBar\ButtonsBarPartial.xaml.cs">
-      <DependentUpon>ButtonsBarPartial.xaml</DependentUpon>
+    <Compile Include="View\ActionBar\FiltersPartial.xaml.cs">
+      <DependentUpon>FiltersPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ActionBar\ButtonsPartial.xaml.cs">
+      <DependentUpon>ButtonsPartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Elements\PendingStorageOperationsPartial.xaml.cs">
       <DependentUpon>PendingStorageOperationsPartial.xaml</DependentUpon>
@@ -206,7 +212,11 @@
     <Compile Include="View\TaskDetails\TaskDetailsWindow.xaml.cs">
       <DependentUpon>TaskDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\ButtonsBar\ButtonsBarPartial.xaml">
+    <Page Include="View\ActionBar\FiltersPartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ActionBar\ButtonsPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -1,28 +1,53 @@
 ﻿<UserControl x:Class="GitTask.UI.MVVM.View.Footer.FooterPartial"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
-        xmlns:footer="clr-namespace:GitTask.UI.MVVM.View.Footer"
-        xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
-        xmlns:ignore="http://www.galasoft.ch/ignore"
-        mc:Ignorable="d ignore"
-        d:DesignHeight="40"
-        d:DesignWidth="1024"
-        DataContext="{Binding FooterViewModel, Source={StaticResource Locator}, Mode=OneWay}"
-        d:DataContext="{d:DesignInstance Type=design:DesignFooterViewModel, IsDesignTimeCreatable=True}">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
+             xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
+             xmlns:footer="clr-namespace:GitTask.UI.MVVM.View.Footer"
+             xmlns:ignore="http://www.galasoft.ch/ignore"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DataContext="{d:DesignInstance Type=design:DesignFooterViewModel,
+                                              IsDesignTimeCreatable=True}"
+             d:DesignHeight="40"
+             d:DesignWidth="1024"
+             DataContext="{Binding FooterViewModel,
+                                   Source={StaticResource Locator},
+                                   Mode=OneWay}"
+             mc:Ignorable="d ignore">
 
-    <Grid Background="BlueViolet" MinHeight="40" MaxHeight="80">
+    <Grid MinHeight="40"
+          MaxHeight="80"
+          Background="BlueViolet">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Text="{Binding CurrentUser.Name, Mode=OneWay}" Foreground="WhiteSmoke" FontSize="16" VerticalAlignment="Center" Margin="5,2,5,5"/>
-        <elements:PendingStorageOperationsPartial Grid.Column="1" Margin="5,0,5,0" d:DataContext="{d:DesignInstance Type=design:DesignPendingStorageOperationsViewModel, IsDesignTimeCreatable=True}"/>
+        <TextBlock Grid.Column="0"
+                   Margin="5,2,5,5"
+                   VerticalAlignment="Center"
+                   DataContext="{Binding CurrentUserViewModel,
+                                         Source={StaticResource Locator},
+                                         Mode=OneWay}"
+                   FontSize="16"
+                   Foreground="WhiteSmoke"
+                   Text="{Binding CurrentUser.Name,
+                                  Mode=OneWay}" />
+        <elements:PendingStorageOperationsPartial Grid.Column="1"
+                                                  Margin="5,0,5,0"
+                                                  d:DataContext="{d:DesignInstance Type=design:DesignPendingStorageOperationsViewModel,
+                                                                                   IsDesignTimeCreatable=True}" />
         <footer:ProjectMembersInitialsList Grid.Column="2" d:DataContext="{d:DesignInstance Type=design:DesignProjectMembersViewModel, IsDesignTimeCreatable=True}" />
-        <TextBlock Grid.Column="3" Text="{Binding ProjectName, Mode=OneWay}" FontStyle="Italic" Foreground="WhiteSmoke" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" Margin="5,2,10,5"/>
+        <TextBlock Grid.Column="3"
+                   Margin="5,2,10,5"
+                   VerticalAlignment="Center"
+                   FontSize="16"
+                   FontStyle="Italic"
+                   Foreground="WhiteSmoke"
+                   Text="{Binding ProjectName,
+                                  Mode=OneWay}"
+                   TextAlignment="Right" />
     </Grid>
 </UserControl>

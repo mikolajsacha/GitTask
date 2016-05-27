@@ -5,7 +5,7 @@ using GitTask.Git;
 using GitTask.Json;
 using GitTask.Storage;
 using GitTask.Storage.Interface;
-using GitTask.UI.MVVM.ViewModel.ButtonsBar;
+using GitTask.UI.MVVM.ViewModel.ActionBar;
 using GitTask.UI.MVVM.ViewModel.Common;
 using GitTask.UI.MVVM.ViewModel.Footer;
 using GitTask.UI.MVVM.ViewModel.Main;
@@ -41,18 +41,20 @@ namespace GitTask.UI.MVVM.Locator
                    Kernel.Get<IStorageService<Task>>(),
                 });
 
+            Bind<ProjectMembersViewModel>().ToSelf().InSingletonScope();
+            Bind<ProjectMembersSetsViewModel>().ToSelf().InSingletonScope();
+            Bind<CurrentUserViewModel>().ToSelf().InSingletonScope();
+            Bind<FiltersViewModel>().ToSelf().InSingletonScope();
             Bind<RegistryViewModel>().ToSelf().InSingletonScope();
             Bind<MainViewModel>().ToSelf().InSingletonScope();
             Bind<ProjectOpeningViewModel>().ToSelf().InSingletonScope();
             Bind<TaskBoardViewModel>().ToSelf().InSingletonScope();
             Bind<FooterViewModel>().ToSelf().InSingletonScope();
             Bind<ProjectSetupViewModel>().ToSelf().InSingletonScope();
-            Bind<ButtonsBarViewModel>().ToSelf().InSingletonScope();
-            Bind<ProjectMembersViewModel>().ToSelf().InSingletonScope();
-            Bind<ProjectMembersSetsViewModel>().ToSelf().InSingletonScope();
+            Bind<ButtonsViewModel>().ToSelf().InSingletonScope();
             Bind<SetCurrentUserViewModel>().ToSelf().InSingletonScope();
-            Bind<AddTaskViewModel>().ToSelf().InSingletonScope();
-            Bind<AddTaskStateViewModel>().ToSelf().InSingletonScope();
+            Bind<AddTaskStateViewModel>().ToSelf();
+            Bind<AddTaskViewModel>().ToSelf();
         }
     }
 }

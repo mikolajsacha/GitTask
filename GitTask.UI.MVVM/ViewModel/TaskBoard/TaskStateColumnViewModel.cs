@@ -7,13 +7,16 @@ using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
 using GitTask.UI.MVVM.Messages;
+using GitTask.UI.MVVM.ViewModel.ActionBar;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
+using Task = System.Threading.Tasks.Task;
 
 namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 {
     public class TaskStateColumnViewModel : ViewModelBase
     {
         private readonly IQueryService<TaskState> _taskStateQueryService;
+        private readonly FiltersViewModel _filtersViewModel;
 
         public TaskState TaskState { get; }
         public ObservableCollection<TaskDetailsViewModel> Tasks { get; }
@@ -52,9 +55,11 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         public TaskStateColumnViewModel(TaskState taskState,
                                         IQueryService<TaskState> taskStateQueryService,
+                                        FiltersViewModel filtersViewModel,
                                         bool isOpened, bool canMoveLeft, bool canMoveRight)
         {
             _taskStateQueryService = taskStateQueryService;
+            _filtersViewModel = filtersViewModel;
             _isOpened = isOpened;
             TaskState = taskState;
 
@@ -69,6 +74,41 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
             Tasks = new ObservableCollection<TaskDetailsViewModel>();
             Tasks.CollectionChanged += (sender, args) => RaisePropertyChanged("CanBeDeleted");
+            _filtersViewModel.FiltersUpdated += FiltersViewModelOnFiltersUpdated;
+        }
+
+        private async void FiltersViewModelOnFiltersUpdated()
+        {
+            await Task.Run(() =>
+            {
+                if (!_filtersViewModel.UnassignedFilter && !_filtersViewModel.CurrentUserFilter)
+                {
+                    foreach (var taskViewModel in Tasks)
+                    {
+                        taskViewModel.IsVisible = true;
+                    }
+                }
+                else
+                {
+                    foreach (var taskViewModel in Tasks)
+                    {
+                        if (_filtersViewModel.UnassignedFilter &&
+                             (taskViewModel.Task.AssignedMembers == null || !taskViewModel.Task.AssignedMembers.Any()))
+                        {
+                            taskViewModel.IsVisible = true;
+                        }
+                        else if (_filtersViewModel.CurrentUserFilter && taskViewModel.Task.AssignedMembers != null &&
+                                 taskViewModel.Task.AssignedMembers.Any(x => _filtersViewModel.FilteredUsers.Contains(x)))
+                        {
+                            taskViewModel.IsVisible = true;
+                        }
+                        else
+                        {
+                            taskViewModel.IsVisible = false;
+                        }
+                    }
+                }
+            });
         }
 
         private void OnHideColumnCommand()

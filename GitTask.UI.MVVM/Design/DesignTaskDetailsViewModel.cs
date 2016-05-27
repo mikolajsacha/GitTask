@@ -8,6 +8,7 @@ namespace GitTask.UI.MVVM.Design
     public class DesignTaskDetailsViewModel : ViewModelBase // based on GitTask.UI.MVVM.ViewModel.TaskDetails.TaskDetailsViewModel
     {
         public Task Task { get; }
+        public bool IsVisible => true;
 
         public DesignTaskDetailsViewModel(Task task)
         {

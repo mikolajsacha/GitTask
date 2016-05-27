@@ -48,11 +48,16 @@ namespace GitTask.UI.MVVM.View.TaskBoard
 
         private void OnTaskBoardSizeChanged(object sender, SizeChangedEventArgs sizeChangedEventArgs)
         {
-            SendDistributeTaskStateColumnsMessage(sizeChangedEventArgs.NewSize.Width);
+            if (sizeChangedEventArgs?.NewSize != null)
+            {
+                SendDistributeTaskStateColumnsMessage(sizeChangedEventArgs.NewSize.Width);
+            }
         }
 
         private void SendDistributeTaskStateColumnsMessage(double newWidth)
         {
+            if (!(DataContext is TaskBoardViewModel)) return;
+
             var hiddenTaskStateColumnWidth = (double)FindResource("HiddenTaskStateColumnWidth");
             var minimumOpenedTaskStateColumnWidth = (double)FindResource("MinimumOpenedTaskStateColumnWidth");
 
@@ -66,7 +71,7 @@ namespace GitTask.UI.MVVM.View.TaskBoard
             {
                 OpenedTaskStateColumnWidth = newWidthForOpenTaskStateColumns
             });
-
+            
             ((TaskBoardViewModel)DataContext).CurrentOpenedTaskStateColumnWidth = newWidthForOpenTaskStateColumns;
         }
     }

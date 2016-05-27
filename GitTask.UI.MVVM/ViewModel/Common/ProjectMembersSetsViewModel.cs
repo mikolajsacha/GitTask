@@ -22,20 +22,25 @@ namespace GitTask.UI.MVVM.ViewModel.Common
 
         public async Task<HashSet<ProjectMember>> Resolve(ProjectMember projectMember)
         {
-            if (_projectMembersSetsDictionary.ContainsKey(projectMember))
+            return await Task.Run(() =>
             {
-                return _projectMembersSets[_projectMembersSetsDictionary[projectMember]];
-            }
-            _projectMembersSets.Add(new HashSet<ProjectMember>());
+                if (_projectMembersSetsDictionary.ContainsKey(projectMember))
+                {
+                    return _projectMembersSets[_projectMembersSetsDictionary[projectMember]];
+                }
+                _projectMembersSets.Add(new HashSet<ProjectMember>());
 
-            foreach (var newProjectMember in from commiter in await _repositoryService.GetAllCommiters()
-                                             where commiter.Name == projectMember.Name || commiter.Email == projectMember.Email
-                                             select new ProjectMember(commiter.Name, projectMember.Email))
-            {
-                _projectMembersSetsDictionary.Add(newProjectMember, _projectMembersSets.Count - 1);
-                _projectMembersSets[_projectMembersSets.Count - 1].Add(newProjectMember);
-            }
-            return _projectMembersSets[_projectMembersSets.Count - 1];
+                foreach (var newProjectMember in
+                            (from commiter in _repositoryService.GetAllCommiters()
+                             where commiter.Name == projectMember.Name || commiter.Email == projectMember.Email
+                             select new ProjectMember(commiter.Name, projectMember.Email))
+                            .Where(newProjectMember => !_projectMembersSetsDictionary.ContainsKey(newProjectMember)))
+                {
+                    _projectMembersSetsDictionary.Add(newProjectMember, _projectMembersSets.Count - 1);
+                    _projectMembersSets[_projectMembersSets.Count - 1].Add(newProjectMember);
+                }
+                return _projectMembersSets[_projectMembersSets.Count - 1];
+            });
         }
     }
 }

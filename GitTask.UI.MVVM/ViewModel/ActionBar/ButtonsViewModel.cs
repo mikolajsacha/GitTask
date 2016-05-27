@@ -6,9 +6,9 @@ using GitTask.Domain.Services.Interface;
 using GitTask.UI.MVVM.View.ProjectSettings;
 using GitTask.UI.MVVM.View.TaskDetails;
 
-namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
+namespace GitTask.UI.MVVM.ViewModel.ActionBar
 {
-    public class ButtonsBarViewModel : ViewModelBase
+    public class ButtonsViewModel : ViewModelBase
     {
         private readonly RelayCommand _addTaskCommand;
         public ICommand AddTaskCommand => _addTaskCommand;
@@ -30,12 +30,12 @@ namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
             }
         }
 
-        public ButtonsBarViewModel(IProjectPathsReadonlyService projectPathsService)
+        public ButtonsViewModel(IProjectPathsReadonlyService projectPathsService)
         {
             _areButtonsEnabled = false;
 
             _addTaskCommand = new RelayCommand(OnAddTaskCommand);
-            _addTaskStateCommand = new RelayCommand(onAddTaskStateCommand);
+            _addTaskStateCommand = new RelayCommand(OnAddTaskStateCommand);
             _setCurrentUserCommand = new RelayCommand(OnSetCurrentUserCommand);
 
             projectPathsService.ProjectPathChanged += OnProjectPathChanged;
@@ -58,7 +58,7 @@ namespace GitTask.UI.MVVM.ViewModel.ButtonsBar
             setCurrentUserWindow.Show();
         }
 
-        private void onAddTaskStateCommand()
+        private void OnAddTaskStateCommand()
         {
             var addTaskStateWindow = new AddTaskStateWindow {Owner = Application.Current.MainWindow};
             addTaskStateWindow.Show();

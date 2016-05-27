@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
-using GitTask.UI.MVVM.Messages;
 using GitTask.UI.MVVM.Model;
 using Microsoft.Win32;
 
@@ -36,7 +34,9 @@ namespace GitTask.UI.MVVM.ViewModel.Common
             }
         }
 
-        public RegistryViewModel(IProjectPathsService projectPathsService, IRepositoryService repositoryService)
+        public RegistryViewModel(IProjectPathsService projectPathsService,
+                                 IRepositoryService repositoryService,
+                                 CurrentUserViewModel currentUserViewModel)
         {
             try
             {
@@ -52,9 +52,10 @@ namespace GitTask.UI.MVVM.ViewModel.Common
                 if (CurrentProject != null && repositoryService.RepositoryExists(CurrentProject.ProjectPath))
                 {
                     _projectPathsService.BaseProjectPath = CurrentProject.ProjectPath;
+                    currentUserViewModel.CurrentUser = CurrentProject.CurrentUser;
                 }
                 _projectPathsService.ProjectPathChanged += ProjectPathsServiceOnProjectPathChanged;
-                Messenger.Default.Register<SetCurrentUserMessage>(this, OnSetCurrentUserMessage);
+                currentUserViewModel.CurrentUserSet += CurrentUserViewModelOnCurrentUserSet; 
             }
             catch (Exception)
             {
@@ -62,12 +63,12 @@ namespace GitTask.UI.MVVM.ViewModel.Common
             }
         }
 
-        private void OnSetCurrentUserMessage(SetCurrentUserMessage message)
+        private void CurrentUserViewModelOnCurrentUserSet(ProjectMember currentUser)
         {
             CurrentProject = new RegistryProjectInformation
             {
                 ProjectPath = CurrentProject.ProjectPath,
-                CurrentUser = message.CurrentUser
+                CurrentUser = currentUser
             };
         }
 

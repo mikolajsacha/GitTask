@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
-using GitTask.UI.MVVM.Messages;
 using GitTask.UI.MVVM.ViewModel.Common;
 
 namespace GitTask.UI.MVVM.ViewModel.Footer
@@ -11,6 +10,7 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
     public class FooterViewModel : ViewModelBase
     {
         private readonly IQueryService<Project> _projectQueryService;
+        private readonly CurrentUserViewModel _currentUserViewModel;
 
         private string _projectName;
         public string ProjectName
@@ -23,20 +23,13 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
             }
         }
 
-        private ProjectMember _currentUser;
-        public ProjectMember CurrentUser
-        {
-            get { return _currentUser; }
-            private set
-            {
-                _currentUser = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public FooterViewModel(IQueryService<Project> projectQueryService, RegistryViewModel registryViewModel)
+        public FooterViewModel(IQueryService<Project> projectQueryService,
+                               RegistryViewModel registryViewModel,
+                               CurrentUserViewModel currentUserViewModel)
         {
             _projectQueryService = projectQueryService;
+            _currentUserViewModel = currentUserViewModel;
+
             var projects = _projectQueryService.GetAll().ToList();
             if (projects.Any())
             {
@@ -45,9 +38,6 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
 
             projectQueryService.ElementAdded += ProjectQueryServiceOnElementAdded;
             projectQueryService.ElementsReloaded += ProjectQueryServiceOnElementsReloaded;
-
-            CurrentUser = registryViewModel.CurrentProject.CurrentUser;
-            Messenger.Default.Register<SetCurrentUserMessage>(this, OnSetCurrentUserMessage);
         }
 
         private void ProjectQueryServiceOnElementsReloaded()
@@ -57,11 +47,6 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
             {
                 ProjectName = projects.First().Title;
             }
-        }
-
-        private void OnSetCurrentUserMessage(SetCurrentUserMessage currentUserMessage)
-        {
-            CurrentUser = currentUserMessage.CurrentUser;
         }
 
         private void ProjectQueryServiceOnElementAdded(Project project)

@@ -24,6 +24,7 @@ namespace GitTask.UI.MVVM.ViewModel.Main
         private readonly IProjectPathsService _projectPathsService;
         private readonly IQueryService<Project> _projectQueryService;
         private readonly RegistryViewModel _registryViewModel;
+        private readonly CurrentUserViewModel _currentUserViewModel;
 
         private readonly RelayCommand _openSelectFolderDialogCommand;
         public ICommand OpenSelectFolderDialogCommand => _openSelectFolderDialogCommand;
@@ -32,12 +33,14 @@ namespace GitTask.UI.MVVM.ViewModel.Main
         public ProjectOpeningViewModel(IRepositoryService repositoryService,
                                        IProjectPathsService projectPathsService,
                                        IQueryService<Project> projectQueryService,
-                                       RegistryViewModel registryViewModel)
+                                       RegistryViewModel registryViewModel,
+                                       CurrentUserViewModel currentUserViewModel)
         {
             _repositoryService = repositoryService;
             _projectPathsService = projectPathsService;
             _projectQueryService = projectQueryService;
             _registryViewModel = registryViewModel;
+            _currentUserViewModel = currentUserViewModel;
 
             _projectQueryService.ElementsReloaded += ProjectQueryServiceOnElementsReloaded;
             _openSelectFolderDialogCommand = new RelayCommand(OnOpenSelectFolderDialog);
@@ -64,18 +67,8 @@ namespace GitTask.UI.MVVM.ViewModel.Main
                 }
                 _projectPathsService.BaseProjectPath = projectPath;
 
-                if (_registryViewModel.CurrentProject?.CurrentUser == null)
-                {
-                    var setCurrentUserWindow = new SetCurrentUserWindow {Owner = Application.Current.MainWindow};
-                    setCurrentUserWindow.ShowDialog();
-                }
-                else
-                {
-                    Messenger.Default.Send(new SetCurrentUserMessage
-                    {
-                        CurrentUser = _registryViewModel.CurrentProject.CurrentUser
-                    });
-                }
+                var setCurrentUserWindow = new SetCurrentUserWindow { Owner = Application.Current.MainWindow };
+                setCurrentUserWindow.ShowDialog();
             }
             catch (OperationCanceledException)
             {

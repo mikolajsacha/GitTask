@@ -23,7 +23,7 @@ namespace GitTask.UI.MVVM.ViewModel.Common
         private async void RepositoryServiceOnRepositoryInitalized()
         {
             ProjectMembers.Clear();
-            var allCommiters = await _repositoryService.GetAllCommiters();
+            var allCommiters = await _repositoryService.GetAllMostRecentCommiters();
             foreach (var commiter in allCommiters.OrderBy(commiter => commiter.Name))
             {
                 ProjectMembers.Add(commiter);

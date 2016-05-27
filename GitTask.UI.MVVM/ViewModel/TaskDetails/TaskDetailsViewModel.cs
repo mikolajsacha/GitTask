@@ -15,11 +15,23 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
         public Task Task { get; }
 
         private readonly RelayCommand _editTaskCommand;
+        private bool _isVisible;
         public ICommand EditTaskCommand => _editTaskCommand;
+
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set
+            {
+                _isVisible = value; 
+                RaisePropertyChanged();
+            }
+        }
 
         public TaskDetailsViewModel(Task task, IQueryService<Task> taskQueryService, IQueryService<TaskState> taskStateQueryService)
         {
             Task = task;
+            _isVisible = true;
             _taskQueryService = taskQueryService;
             _taskStateQueryService = taskStateQueryService;
             _editTaskCommand = new RelayCommand(OnEditTaskCommand);
