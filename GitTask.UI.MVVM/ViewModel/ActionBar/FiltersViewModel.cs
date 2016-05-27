@@ -76,8 +76,16 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
             currentUserViewModel.CurrentUserSet += CurrentUserViewModelOnCurrentUserSet;
         }
 
-        private void CurrentUserViewModelOnCurrentUserSet(ProjectMember currentUser)
+        private async void CurrentUserViewModelOnCurrentUserSet(ProjectMember currentUser)
         {
+            if (_currentUserFilter && _currentUser != null)
+            {
+                await Task.Run(async () =>
+                {
+                    FilteredUsers = await _projectMembersSetsViewModel.Resolve(_currentUser);
+                    FiltersUpdated?.Invoke();
+                });
+            }
             _currentUser = currentUser;
             RaisePropertyChanged("IsCurrentUserFilterEnabled");
         }

@@ -79,6 +79,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Also known as....
+        /// </summary>
+        public static string AlsoKnownAs {
+            get {
+                return ResourceManager.GetString("AlsoKnownAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assigned to.
         /// </summary>
         public static string AssignedTo {

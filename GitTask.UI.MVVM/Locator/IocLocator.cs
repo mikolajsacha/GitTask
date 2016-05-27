@@ -21,7 +21,6 @@ namespace GitTask.UI.MVVM.Locator
             Kernel = new StandardKernel(new IocModule());
         }
 
-
         public static MainViewModel MainViewModel => Kernel.Get<MainViewModel>();
         public static ProjectOpeningViewModel ProjectOpeningViewModel => Kernel.Get<ProjectOpeningViewModel>();
         public static TaskBoardViewModel TaskBoardViewModel => Kernel.Get<TaskBoardViewModel>();
@@ -30,6 +29,7 @@ namespace GitTask.UI.MVVM.Locator
         public static PendingStorageOperationsViewModel PendingStorageOperationsViewModel => Kernel.Get<PendingStorageOperationsViewModel>();
         public static ButtonsViewModel ButtonsViewModel => Kernel.Get<ButtonsViewModel>();
         public static ProjectMembersViewModel ProjectMembersViewModel => Kernel.Get<ProjectMembersViewModel>();
+        public static ProjectMembersSetsViewModel ProjectMembersSetsViewModel => Kernel.Get<ProjectMembersSetsViewModel>();
         public static SetCurrentUserViewModel SetCurrentUserViewModel => Kernel.Get<SetCurrentUserViewModel>();
         public static AddTaskViewModel AddTaskViewModel => Kernel.Get<AddTaskViewModel>();
         public static AddTaskStateViewModel AddTaskStateViewModel => Kernel.Get<AddTaskStateViewModel>();
