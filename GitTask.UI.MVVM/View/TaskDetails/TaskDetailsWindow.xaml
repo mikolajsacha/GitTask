@@ -148,7 +148,7 @@
                 <Button x:Name="AddCommentButton"
                         Width="100"
                         Height="25"
-                        Margin="1,4,1,2"
+                        Margin="1"
                         HorizontalAlignment="Right"
                         Style="{StaticResource RoundedCornersButton}">
                     <TextBlock VerticalAlignment="Center"

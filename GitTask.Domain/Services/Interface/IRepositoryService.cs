@@ -9,8 +9,7 @@ namespace GitTask.Domain.Services.Interface
     {
         event Action RepositoryInitalized;
 
-        Task<IEnumerable<ProjectMember>> GetAllMostRecentCommiters();
-        IEnumerable<ProjectMember> GetAllCommiters();
+        Task<IEnumerable<ProjectMember>> GetAllUniqueCommiters();
         bool RepositoryExists(string projectPath);
     }
 }

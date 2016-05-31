@@ -1,14 +1,13 @@
 ﻿using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
 
 namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
 {
     public class ProjectSetupViewModel : ViewModelBase
     {
-        private readonly IQueryService<Project> _projectQueryService;
+        private readonly IProjectQueryService _projectQueryService;
 
         private string _projectName;
         public string ProjectName
@@ -24,7 +23,7 @@ namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
         private readonly RelayCommand _okCommand;
         public ICommand OkCommand => _okCommand;
 
-        public ProjectSetupViewModel(IQueryService<Project> projectQueryService)
+        public ProjectSetupViewModel(IProjectQueryService projectQueryService)
         {
             _projectQueryService = projectQueryService;
             _okCommand = new RelayCommand(OnOkClick);
@@ -32,10 +31,7 @@ namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
 
         private async void OnOkClick()
         {
-            _projectQueryService.AddNew(new Project
-            {
-                Title = _projectName,
-            });
+            _projectQueryService.SetTitle(_projectName);
             await _projectQueryService.SaveChanges();
         }
     }

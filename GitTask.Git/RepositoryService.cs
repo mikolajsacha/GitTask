@@ -30,42 +30,17 @@ namespace GitTask.Git
             RepositoryInitalized?.Invoke();
         }
 
-        public async Task<IEnumerable<ProjectMember>> GetAllMostRecentCommiters()
+        public async Task<IEnumerable<ProjectMember>> GetAllUniqueCommiters()
         {
             return await Task.Run(() =>
             {
                 if (_repository == null) return new List<ProjectMember>();
 
-                var nameKeyedDictionary = new Dictionary<string, string>(); // key = name, value = email
-                var emailKeyedDictionary = new Dictionary<string, string>(); // key = email, value = name
-
-                // we want unique names, with each project member having the most up-to-date e-mail (from newest commit)
-                foreach (
-                    var committer in
-                        _repository.Commits.Select(commit => commit.Committer)
-                            .OrderBy(committer => committer.When.DateTime))
-                {
-                    nameKeyedDictionary[committer.Name] = committer.Email;
-                    emailKeyedDictionary[committer.Email] = committer.Name;
-                }
-
-                var keysToRemove = (from nameKey in nameKeyedDictionary.Keys
-                                    let emailValue = nameKeyedDictionary[nameKey]
-                                    where emailKeyedDictionary[emailValue] != nameKey
-                                    select nameKey);
-
-                var keysTomoveHashSet = new HashSet<string>(keysToRemove);
-
-                return nameKeyedDictionary.Where(commiterPair => !keysTomoveHashSet.Contains(commiterPair.Key)).
-                    Select(commiterPair => new ProjectMember(commiterPair.Key, commiterPair.Value));
+                return _repository.Commits.Select(commit => commit.Committer)
+                       .OrderBy(committer => committer.When.DateTime)
+                       .Select(commiter => new ProjectMember(commiter.Name, commiter.Email))
+                       .Distinct();
             });
-        }
-
-        public IEnumerable<ProjectMember> GetAllCommiters()
-        {
-            return _repository?
-                .Commits.Select(commit => new ProjectMember(commit.Committer.Name, commit.Committer.Email))
-                ?? new List<ProjectMember>();
         }
 
         public bool RepositoryExists(string projectPath)

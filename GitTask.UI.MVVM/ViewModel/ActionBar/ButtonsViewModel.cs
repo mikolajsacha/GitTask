@@ -32,13 +32,12 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
 
         public ButtonsViewModel(IProjectPathsReadonlyService projectPathsService)
         {
-            _areButtonsEnabled = false;
-
             _addTaskCommand = new RelayCommand(OnAddTaskCommand);
             _addTaskStateCommand = new RelayCommand(OnAddTaskStateCommand);
             _setCurrentUserCommand = new RelayCommand(OnSetCurrentUserCommand);
 
             projectPathsService.ProjectPathChanged += OnProjectPathChanged;
+            _areButtonsEnabled = projectPathsService.IsProjectPathChosen;
         }
 
         private void OnProjectPathChanged()

@@ -7,6 +7,6 @@ namespace GitTask.Domain.Model.Project
     public class Project
     {
         public string Title { get; set; }
-        public List<string> ProjectMembersNotInRepository { get; set; }
+        public List<ProjectMember> ProjectMembersNotInRepository { get; set; }
     }
 }

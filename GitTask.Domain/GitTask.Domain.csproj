@@ -57,9 +57,11 @@
     <Compile Include="Model\Task\Task.cs" />
     <Compile Include="Model\Task\TaskState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Interface\IProjectQueryService.cs" />
     <Compile Include="Services\Interface\IQueryService.cs" />
     <Compile Include="Services\Interface\IRepositoryService.cs" />
     <Compile Include="Services\Interface\IStorageService.cs" />
+    <Compile Include="Services\ProjectMembersService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

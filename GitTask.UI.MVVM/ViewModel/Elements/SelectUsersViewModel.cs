@@ -1,7 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Project;
+using GitTask.UI.MVVM.Messages;
 
 namespace GitTask.UI.MVVM.ViewModel.Elements
 {
@@ -12,6 +16,9 @@ namespace GitTask.UI.MVVM.ViewModel.Elements
         public ProjectMember LastSelectedUser { get; private set; }
 
         private bool _anyUserChosen;
+        private string _addedUserName;
+        private string _addedUserEmail;
+
         public bool AnyUserChosen
         {
             get { return _anyUserChosen; }
@@ -22,6 +29,33 @@ namespace GitTask.UI.MVVM.ViewModel.Elements
             }
         }
 
+        public string AddedUserName
+        {
+            get { return _addedUserName; }
+            set
+            {
+                _addedUserName = value;
+                RaisePropertyChanged();
+                RaisePropertyChanged("AddUserButtonEnabled");
+            }
+        }
+
+        public string AddedUserEmail
+        {
+            get { return _addedUserEmail; }
+            set
+            {
+                _addedUserEmail = value;
+                RaisePropertyChanged();
+                RaisePropertyChanged("AddUserButtonEnabled");
+            }
+        }
+
+        public bool AddUserButtonEnabled => !(string.IsNullOrWhiteSpace(AddedUserEmail) || string.IsNullOrWhiteSpace(AddedUserEmail));
+
+        private readonly RelayCommand _addUserCommand;
+        public ICommand AddUserCommand => _addUserCommand;
+
         public SelectUsersViewModel(bool isMultipleSelection)
         {
             SelectionMode = isMultipleSelection ? "Multiple" : "Single";
@@ -29,6 +63,7 @@ namespace GitTask.UI.MVVM.ViewModel.Elements
             _anyUserChosen = false;
             SelectedUsers = new ObservableCollection<ProjectMember>();
             SelectedUsers.CollectionChanged += OnSelectedUsersOnCollectionChanged;
+            _addUserCommand = new RelayCommand(OnAddUserCommand);
         }
 
         private void OnSelectedUsersOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -38,6 +73,11 @@ namespace GitTask.UI.MVVM.ViewModel.Elements
                 LastSelectedUser = (ProjectMember)e.NewItems[e.NewItems.Count - 1];
             }
             AnyUserChosen = SelectedUsers != null && SelectedUsers.Count > 0;
+        }
+
+        private void OnAddUserCommand()
+        {
+            Messenger.Default.Send(new AddUserMessage { UserToBeAdded = new ProjectMember(AddedUserName, AddedUserEmail) });
         }
     }
 }

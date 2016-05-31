@@ -14,6 +14,8 @@ namespace GitTask.UI.MVVM.ViewModel.Common
         private RegistryKey _baseRegistryKey;
 
         private readonly IProjectPathsService _projectPathsService;
+        private readonly IRepositoryService _repositoryService;
+        private readonly CurrentUserViewModel _currentUserViewModel;
 
         private RegistryProjectInformation _currentProject;
         public RegistryProjectInformation CurrentProject
@@ -38,6 +40,13 @@ namespace GitTask.UI.MVVM.ViewModel.Common
                                  IRepositoryService repositoryService,
                                  CurrentUserViewModel currentUserViewModel)
         {
+            _projectPathsService = projectPathsService;
+            _repositoryService = repositoryService;
+            _currentUserViewModel = currentUserViewModel;
+        }
+
+        public void InitializeRegistry()
+        {
             try
             {
                 using (var registryKey = Registry.CurrentUser.OpenSubKey(BaseSubKeyName, RegistryKeyPermissionCheck.ReadWriteSubTree))
@@ -48,14 +57,13 @@ namespace GitTask.UI.MVVM.ViewModel.Common
                         ScanRegistry();
                     }
                 }
-                _projectPathsService = projectPathsService;
-                if (CurrentProject != null && repositoryService.RepositoryExists(CurrentProject.ProjectPath))
+                if (CurrentProject != null && _repositoryService.RepositoryExists(CurrentProject.ProjectPath))
                 {
                     _projectPathsService.BaseProjectPath = CurrentProject.ProjectPath;
-                    currentUserViewModel.CurrentUser = CurrentProject.CurrentUser;
+                    _currentUserViewModel.CurrentUser = CurrentProject.CurrentUser;
                 }
                 _projectPathsService.ProjectPathChanged += ProjectPathsServiceOnProjectPathChanged;
-                currentUserViewModel.CurrentUserSet += CurrentUserViewModelOnCurrentUserSet; 
+                _currentUserViewModel.CurrentUserSet += CurrentUserViewModelOnCurrentUserSet;
             }
             catch (Exception)
             {

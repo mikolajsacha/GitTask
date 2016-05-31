@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Resources;
 using System.Windows.Forms;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Services.Interface;
-using GitTask.UI.MVVM.Messages;
 using GitTask.UI.MVVM.Properties;
 using GitTask.UI.MVVM.View.ProjectSettings;
-using GitTask.UI.MVVM.ViewModel.Common;
 using Application = System.Windows.Application;
 using ProjectSetupWindow = GitTask.UI.MVVM.View.ProjectSettings.ProjectSetupWindow;
 
@@ -22,9 +18,6 @@ namespace GitTask.UI.MVVM.ViewModel.Main
 
         private readonly IRepositoryService _repositoryService;
         private readonly IProjectPathsService _projectPathsService;
-        private readonly IQueryService<Project> _projectQueryService;
-        private readonly RegistryViewModel _registryViewModel;
-        private readonly CurrentUserViewModel _currentUserViewModel;
 
         private readonly RelayCommand _openSelectFolderDialogCommand;
         public ICommand OpenSelectFolderDialogCommand => _openSelectFolderDialogCommand;
@@ -32,23 +25,18 @@ namespace GitTask.UI.MVVM.ViewModel.Main
 
         public ProjectOpeningViewModel(IRepositoryService repositoryService,
                                        IProjectPathsService projectPathsService,
-                                       IQueryService<Project> projectQueryService,
-                                       RegistryViewModel registryViewModel,
-                                       CurrentUserViewModel currentUserViewModel)
+                                       IProjectQueryService projectQueryService)
         {
             _repositoryService = repositoryService;
             _projectPathsService = projectPathsService;
-            _projectQueryService = projectQueryService;
-            _registryViewModel = registryViewModel;
-            _currentUserViewModel = currentUserViewModel;
 
-            _projectQueryService.ElementsReloaded += ProjectQueryServiceOnElementsReloaded;
+            projectQueryService.ProjectChanged += ProjectQueryServiceOnChanged;
             _openSelectFolderDialogCommand = new RelayCommand(OnOpenSelectFolderDialog);
         }
 
-        private void ProjectQueryServiceOnElementsReloaded()
+        private static void ProjectQueryServiceOnChanged(Project newProject)
         {
-            if (_projectQueryService.GetAll().Any()) return;
+            if (newProject != null) return;
             var projectSetupWindow = new ProjectSetupWindow { Owner = Application.Current.MainWindow };
             projectSetupWindow.ShowDialog();
         }

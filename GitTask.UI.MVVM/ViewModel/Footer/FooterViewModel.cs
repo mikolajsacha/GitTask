@@ -1,17 +1,10 @@
-﻿using System.Linq;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
-using GitTask.Domain.Model.Project;
+﻿using GalaSoft.MvvmLight;
 using GitTask.Domain.Services.Interface;
-using GitTask.UI.MVVM.ViewModel.Common;
 
 namespace GitTask.UI.MVVM.ViewModel.Footer
 {
     public class FooterViewModel : ViewModelBase
     {
-        private readonly IQueryService<Project> _projectQueryService;
-        private readonly CurrentUserViewModel _currentUserViewModel;
-
         private string _projectName;
         public string ProjectName
         {
@@ -23,35 +16,22 @@ namespace GitTask.UI.MVVM.ViewModel.Footer
             }
         }
 
-        public FooterViewModel(IQueryService<Project> projectQueryService,
-                               RegistryViewModel registryViewModel,
-                               CurrentUserViewModel currentUserViewModel)
+        public FooterViewModel(IProjectQueryService projectQueryService)
         {
-            _projectQueryService = projectQueryService;
-            _currentUserViewModel = currentUserViewModel;
-
-            var projects = _projectQueryService.GetAll().ToList();
-            if (projects.Any())
+            if (projectQueryService.Project != null)
             {
-                _projectName = projects.First().Title;
+                _projectName = projectQueryService.Project.Title;
             }
 
-            projectQueryService.ElementAdded += ProjectQueryServiceOnElementAdded;
-            projectQueryService.ElementsReloaded += ProjectQueryServiceOnElementsReloaded;
+            projectQueryService.ProjectTitleChanged += ProjectQueryServiceOnTitleChanged;
         }
 
-        private void ProjectQueryServiceOnElementsReloaded()
+        private void ProjectQueryServiceOnTitleChanged(string newTitle)
         {
-            var projects = _projectQueryService.GetAll().ToList();
-            if (projects.Any())
+            if (newTitle != null)
             {
-                ProjectName = projects.First().Title;
+                ProjectName = newTitle;
             }
-        }
-
-        private void ProjectQueryServiceOnElementAdded(Project project)
-        {
-            ProjectName = project.Title;
         }
     }
 }

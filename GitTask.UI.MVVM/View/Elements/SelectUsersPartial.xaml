@@ -5,46 +5,107 @@
              xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
              xmlns:ignore="http://www.galasoft.ch/ignore"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
              d:DataContext="{d:DesignInstance Type=design:DesignSelectUsersViewModel,
                                               IsDesignTimeCreatable=True}"
              Background="Transparent"
              mc:Ignorable="d ignore">
 
-    <ListBox x:Name="UsersList"
-             d:DataContext="{d:DesignInstance Type=design:DesignProjectMembersViewModel,
-                                              IsDesignTimeCreatable=True}"
-             DataContext="{Binding ProjectMembersViewModel,
-                                   Source={StaticResource Locator},
-                                   Mode=OneWay}"
-             ItemsSource="{Binding ProjectMembers,
-                                   Mode=OneWay}"
-             ScrollViewer.HorizontalScrollBarVisibility="Auto"
-             ScrollViewer.VerticalScrollBarVisibility="Auto"
-             SelectionMode="{Binding RelativeSource={RelativeSource FindAncestor,
-                                                                    AncestorType={x:Type UserControl}},
-                                     Path=DataContext.SelectionMode,
-                                     Mode=OneWay}">
-        <ListBox.ItemsPanel>
-            <ItemsPanelTemplate>
-                <StackPanel HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Orientation="Vertical" />
-            </ItemsPanelTemplate>
-        </ListBox.ItemsPanel>
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <StackPanel Margin="3" Orientation="Vertical">
-                    <TextBlock Margin="0,1,0,1"
-                               FontSize="13"
-                               Text="{Binding Name,
-                                              Mode=OneWay}" />
-                    <TextBlock Margin="5,1,0,1"
-                               FontSize="11"
-                               Foreground="#FF402222"
-                               Text="{Binding Email,
-                                              Mode=OneWay}" />
-                </StackPanel>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    Margin="0,2,0,2"
+                    Orientation="Vertical">
+            <TextBlock Margin="2" Text="Add new user:" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Margin="5,2,2,2"
+                           HorizontalAlignment="Right"
+                           Text="Name:" />
+                <TextBox Grid.Row="0"
+                         Grid.Column="1"
+                         Margin="2"
+                         Text="{Binding AddedUserName,
+                                        Mode=TwoWay,
+                                        UpdateSourceTrigger=PropertyChanged}" />
+                <Button Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="2"
+                        Width="40"
+                        Height="20"
+                        Margin="2,5,5,5"
+                        Command="{Binding AddUserCommand,
+                                          Mode=OneWay}"
+                        IsEnabled="{Binding AddUserButtonEnabled,
+                                            Mode=OneWay}"
+                        Style="{StaticResource RoundedCornersButton}">
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Text="{x:Static prop:Resources.Add}" />
+                </Button>
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Margin="5,2,2,2"
+                           HorizontalAlignment="Right"
+                           Text="E-mail:" />
+                <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         Margin="2"
+                         Text="{Binding AddedUserEmail,
+                                        Mode=TwoWay,
+                                        UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+        </StackPanel>
+        <ListBox x:Name="UsersList"
+                 Grid.Row="1"
+                 d:DataContext="{d:DesignInstance Type=design:DesignProjectMembersViewModel,
+                                                  IsDesignTimeCreatable=True}"
+                 DataContext="{Binding ProjectMembersViewModel,
+                                       Source={StaticResource Locator},
+                                       Mode=OneWay}"
+                 ItemsSource="{Binding ProjectMembers,
+                                       Mode=OneWay}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 SelectionMode="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                        AncestorType={x:Type UserControl}},
+                                         Path=DataContext.SelectionMode,
+                                         Mode=OneWay}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="3" Orientation="Vertical">
+                        <TextBlock Margin="0,1,0,1"
+                                   FontSize="13"
+                                   Text="{Binding Name,
+                                                  Mode=OneWay}" />
+                        <TextBlock Margin="5,1,0,1"
+                                   FontSize="11"
+                                   Foreground="#FF402222"
+                                   Text="{Binding Email,
+                                                  Mode=OneWay}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
 </UserControl>

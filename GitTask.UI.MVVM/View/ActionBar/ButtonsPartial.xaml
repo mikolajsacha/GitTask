@@ -43,10 +43,7 @@
                 DataContext="{Binding ProjectOpeningViewModel,
                                       Source={StaticResource Locator},
                                       Mode=OneWay}"
-                IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor,
-                                                                   AncestorType={x:Type UserControl}},
-                                    Path=DataContext.AreButtonsEnabled,
-                                    Mode=OneWay}">
+                IsEnabled="True">
             <TextBlock Style="{StaticResource ButtonText}" Text="{Binding Source={x:Static prop:Resources.OpenProject}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
         </Button>
 

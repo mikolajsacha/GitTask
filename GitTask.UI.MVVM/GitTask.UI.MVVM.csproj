@@ -154,6 +154,7 @@
     <Compile Include="Design\DesignSelectTaskStateViewModel.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Locator\IocModule.cs" />
+    <Compile Include="Messages\AddUserMessage.cs" />
     <Compile Include="Messages\MoveTaskToTaskStateMessage.cs" />
     <Compile Include="Messages\DeleteTaskStateMessage.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
