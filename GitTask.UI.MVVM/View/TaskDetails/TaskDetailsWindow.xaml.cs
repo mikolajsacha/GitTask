@@ -10,6 +10,27 @@ namespace GitTask.UI.MVVM.View.TaskDetails
             DataContext = dataContext;
             InitializeComponent();
             EditButton.Click += EditButtonOnClick;
+            AddCommentButton.Click += AddCommentButtonOnClick;
+            AddCommentPopup.LostFocus += AddCommentPopupOnLostFocus;
+        }
+
+        private void AddCommentPopupOnLostFocus(object sender, RoutedEventArgs routedEventArgs)
+        {
+            AddCommentPopup.IsOpen = false;
+            if (!AddCommentPopupButton.IsMouseOver) return;
+
+            var taskDetailsViewModel = DataContext as TaskDetailsViewModel;
+
+            if (taskDetailsViewModel != null && taskDetailsViewModel.AddCommentCommand.CanExecute(new object()))
+            {
+                taskDetailsViewModel.AddCommentCommand.Execute(new object());
+            }
+        }
+
+        private void AddCommentButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            AddCommentPopup.IsOpen = true;
+            AddCommentPopup.Focus();
         }
 
         private void EditButtonOnClick(object sender, RoutedEventArgs routedEventArgs)

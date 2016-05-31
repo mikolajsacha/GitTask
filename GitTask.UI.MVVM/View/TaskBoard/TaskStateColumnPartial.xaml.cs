@@ -35,6 +35,11 @@ namespace GitTask.UI.MVVM.View.TaskBoard
 
         private void OnDistributeTaskStateColumnsMessage(DistributeTaskStateColumnsMessage message)
         {
+            if (double.IsInfinity(message.OpenedTaskStateColumnWidth) ||
+                double.IsNaN(message.OpenedTaskStateColumnWidth))
+            {
+                return;
+            }
             if (((TaskStateColumnViewModel)DataContext).IsOpened)
             {
                 Width = message.OpenedTaskStateColumnWidth;

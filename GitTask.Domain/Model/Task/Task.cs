@@ -15,6 +15,6 @@ namespace GitTask.Domain.Model.Task
         public TaskPriority Priority { get; set; }
 
         public string State { get; set; }
-        public IEnumerable<string> Comments { get; set; }
+        public IList<string> Comments { get; set; }
     }
 }

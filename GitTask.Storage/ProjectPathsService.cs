@@ -12,7 +12,7 @@ namespace GitTask.Storage
             set
             {
                 _baseProjectPath = value;
-                BaseStoragePath = _baseProjectPath.TrimEnd('\\', '/') + "\\gittask";
+                BaseStoragePath = _baseProjectPath.TrimEnd('\\', '/') + "\\.gittask";
                 IsProjectPathChosen = true;
                 ProjectPathChanged?.Invoke();
             }

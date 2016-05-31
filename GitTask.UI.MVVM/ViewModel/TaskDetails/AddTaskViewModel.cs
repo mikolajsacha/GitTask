@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
@@ -99,8 +100,8 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
                 AssignedMembers = SelectUsersViewModel.SelectedUsers,
                 // ReSharper disable once PossibleInvalidOperationException
                 Priority = (TaskPriority)SelectTaskPriorityViewModel.SelectedTaskPriority,
-                State = SelectTaskStateViewModel.SelectedTaskState.Name
-
+                State = SelectTaskStateViewModel.SelectedTaskState.Name,
+                Comments = new List<string>()
             });
             await _taskQueryService.SaveChanges();
         }

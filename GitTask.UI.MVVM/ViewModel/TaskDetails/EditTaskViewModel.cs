@@ -110,8 +110,8 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
                 AssignedMembers = SelectUsersViewModel.SelectedUsers,
                 // ReSharper disable once PossibleInvalidOperationException
                 Priority = (TaskPriority)SelectTaskPriorityViewModel.SelectedTaskPriority,
-                State = SelectTaskStateViewModel.SelectedTaskState.Name
-
+                State = SelectTaskStateViewModel.SelectedTaskState.Name,
+                Comments = _task.Comments
             });
             await _taskQueryService.SaveChanges();
         }
