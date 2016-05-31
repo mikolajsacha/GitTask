@@ -43,28 +43,59 @@ namespace GitTask.UI.MVVM.ViewModel.Common
                 foreach (var key in _projectMembersSetsDictionary.Keys.Where(
                             key => key.Name == projectMember.Name || key.Email == projectMember.Email))
                 {
+                    _projectMembersSetsDictionary.Add(projectMember, _projectMembersSetsDictionary[key]);
                     return _projectMembersSets[_projectMembersSetsDictionary[key]];
                 }
 
                 _projectMembersSets.Add(new HashSet<ProjectMember>());
 
+                var namesHashSet = new HashSet<string>();
+                var emailsHashSet = new HashSet<string>();
+
                 foreach (var newProjectMember in
                             (from commiter in await _repositoryService.GetAllUniqueCommiters()
                              where commiter.Name == projectMember.Name || commiter.Email == projectMember.Email
-                             select new ProjectMember(commiter.Name, commiter.Email))
-                            .Where(newProjectMember => !_projectMembersSetsDictionary.ContainsKey(newProjectMember)))
+                               || namesHashSet.Contains(commiter.Name) || emailsHashSet.Contains(commiter.Email)
+                             select new ProjectMember(commiter.Name, commiter.Email)))
                 {
+                    if (!namesHashSet.Contains(newProjectMember.Name)) namesHashSet.Add(newProjectMember.Name);
+                    if (!emailsHashSet.Contains(newProjectMember.Email)) emailsHashSet.Add(newProjectMember.Email);
+                }
+
+                foreach (var newProjectMember in
+                            (from commiter in await _repositoryService.GetAllUniqueCommiters()
+                             where commiter.Name == projectMember.Name || commiter.Email == projectMember.Email
+                               || namesHashSet.Contains(commiter.Name) || emailsHashSet.Contains(commiter.Email)
+                             select new ProjectMember(commiter.Name, commiter.Email)))
+                {
+                    if (!namesHashSet.Contains(newProjectMember.Name)) namesHashSet.Add(newProjectMember.Name);
+                    if (!emailsHashSet.Contains(newProjectMember.Email)) emailsHashSet.Add(newProjectMember.Email);
+
                     _projectMembersSetsDictionary.Add(newProjectMember, _projectMembersSets.Count - 1);
                     _projectMembersSets[_projectMembersSets.Count - 1].Add(newProjectMember);
                 }
+
                 if (_projectQueryService.Project?.ProjectMembersNotInRepository != null)
                 {
                     foreach (var newProjectMember in _projectQueryService.Project.ProjectMembersNotInRepository
-                            .Where(member => member.Name == projectMember.Name || member.Email == projectMember.Email)
+                            .Where(member => member.Name == projectMember.Name || member.Email == projectMember.Email
+                                         || namesHashSet.Contains(member.Name) || emailsHashSet.Contains(member.Email))
                             .Select(member => new ProjectMember(member.Name, member.Email))
-                            .Where(newProjectMember => !_projectMembersSetsDictionary.ContainsKey(newProjectMember))
                             .Distinct())
                     {
+                        if (!namesHashSet.Contains(newProjectMember.Name)) namesHashSet.Add(newProjectMember.Name);
+                        if (!emailsHashSet.Contains(newProjectMember.Email)) emailsHashSet.Add(newProjectMember.Email);
+                    }
+
+                    foreach (var newProjectMember in _projectQueryService.Project.ProjectMembersNotInRepository
+                            .Where(member => member.Name == projectMember.Name || member.Email == projectMember.Email
+                                         || namesHashSet.Contains(member.Name) || emailsHashSet.Contains(member.Email))
+                            .Select(member => new ProjectMember(member.Name, member.Email))
+                            .Distinct())
+                    {
+                        if (!namesHashSet.Contains(newProjectMember.Name)) namesHashSet.Add(newProjectMember.Name);
+                        if (!emailsHashSet.Contains(newProjectMember.Email)) emailsHashSet.Add(newProjectMember.Email);
+
                         _projectMembersSetsDictionary.Add(newProjectMember, _projectMembersSets.Count - 1);
                         _projectMembersSets[_projectMembersSets.Count - 1].Add(newProjectMember);
                     }

@@ -30,9 +30,9 @@ namespace GitTask.UI.MVVM.ViewModel.Common
 
             _repositoryService.RepositoryInitalized += RepositoryServiceOnRepositoryInitalized;
             _projectQueryService.ProjectChanged += ProjectQueryServiceOnProjectChanged;
-            RepositoryServiceOnRepositoryInitalized();
             ProjectQueryServiceOnProjectChanged(projectQueryService.Project);
             Messenger.Default.Register<AddUserMessage>(this, OnAddUserMessage);
+            new Task(async () => await InitializeProjectMembers()).RunSynchronously();
         }
 
         private async void ProjectQueryServiceOnProjectChanged(Project project)
@@ -54,7 +54,7 @@ namespace GitTask.UI.MVVM.ViewModel.Common
             var usersFromRepo = await _repositoryService.GetAllUniqueCommiters();
 
             var allUsers = usersFromProject.Concat(usersFromRepo);
-            foreach (var user in await _projectMembersService.GetAllMostRecentUsers(allUsers))
+            foreach (var user in (await _projectMembersService.GetAllMostRecentUsers(allUsers)).OrderBy(pm => pm.Name))
             {
                 ProjectMembers.Add(user);
             }

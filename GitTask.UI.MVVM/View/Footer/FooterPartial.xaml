@@ -34,7 +34,31 @@
                    FontSize="16"
                    Foreground="WhiteSmoke"
                    Text="{Binding CurrentUser.Name,
-                                  Mode=OneWay}" />
+                                  Mode=OneWay}">
+            <TextBlock.ToolTip>
+                <ToolTip BorderBrush="{Binding CurrentUser,
+                                               Converter={StaticResource ProjectMemberToBrushConverter},
+                                               Mode=OneWay}"
+                         BorderThickness="1"
+                         Padding="0">
+                    <StackPanel Margin="5" Orientation="Vertical">
+                        <TextBlock VerticalAlignment="Center"
+                                   FontSize="15"
+                                   Foreground="{Binding CurrentUser,
+                                                        Converter={StaticResource ProjectMemberToBrushConverter},
+                                                        Mode=OneWay}"
+                                   Text="{Binding CurrentUser.Name,
+                                                  Mode=OneWay}" />
+                        <TextBlock VerticalAlignment="Center"
+                                   FontSize="13"
+                                   FontStyle="Italic"
+                                   Foreground="Gray"
+                                   Text="{Binding CurrentUser.Email,
+                                                  Mode=OneWay}" />
+                    </StackPanel>
+                </ToolTip>
+            </TextBlock.ToolTip>
+        </TextBlock>
         <elements:PendingStorageOperationsPartial Grid.Column="1"
                                                   Margin="5,0,5,0"
                                                   d:DataContext="{d:DesignInstance Type=design:DesignPendingStorageOperationsViewModel,
