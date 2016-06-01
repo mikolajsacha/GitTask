@@ -17,7 +17,6 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 {
     public class TaskBoardViewModel : ViewModelBase
     {
-        //TODO: !!!!! USUWAJA SIE TASKI JAK PRZESUWAM TASK STATE!! NIE LADUJA SIE TASKI!!!
         private readonly IQueryService<TaskState> _taskStateQueryService;
         private readonly IQueryService<Task> _taskQueryService;
         private readonly FiltersViewModel _filtersViewModel;
