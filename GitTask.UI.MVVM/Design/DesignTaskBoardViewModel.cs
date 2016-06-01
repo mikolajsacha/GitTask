@@ -8,6 +8,7 @@ namespace GitTask.UI.MVVM.Design
     public class DesignTaskBoardViewModel : ViewModelBase // based on GitTask.UI.MVVM.ViewModel.TaskBoard.TaskBoardViewModel
     {
         public ObservableCollection<DesignTaskStateColumnViewModel> TaskStateColumns { get; }
+        public bool IsLoading => false;
 
         public int OpenedColumnsCount => 4;
         public int HiddenColumnsCount => 1;

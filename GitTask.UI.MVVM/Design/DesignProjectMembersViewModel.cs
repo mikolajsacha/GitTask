@@ -7,6 +7,7 @@ namespace GitTask.UI.MVVM.Design
     public class DesignProjectMembersViewModel : ViewModelBase // based on GitTask.UI.MVVM.ViewModel.Elements.ProjectMembersViewModel
     {
         public ObservableCollection<ProjectMember> ProjectMembers { get; }
+        public bool IsLoading => false;
 
         public DesignProjectMembersViewModel()
         {

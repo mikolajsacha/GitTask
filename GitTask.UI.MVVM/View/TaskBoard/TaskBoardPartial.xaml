@@ -6,11 +6,14 @@
              xmlns:ignore="http://www.galasoft.ch/ignore"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:taskBoard="clr-namespace:GitTask.UI.MVVM.View.TaskBoard"
-             d:DataContext="{d:DesignInstance Type=design:DesignTaskBoardViewModel, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance Type=design:DesignTaskBoardViewModel,
+                                              IsDesignTimeCreatable=True}"
              d:DesignHeight="730"
              d:DesignWidth="1024"
              Background="LightGray"
-             DataContext="{Binding TaskBoardViewModel, Source={StaticResource Locator}, Mode=OneWay}"
+             DataContext="{Binding TaskBoardViewModel,
+                                   Source={StaticResource Locator},
+                                   Mode=OneWay}"
              mc:Ignorable="d ignore">
 
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">

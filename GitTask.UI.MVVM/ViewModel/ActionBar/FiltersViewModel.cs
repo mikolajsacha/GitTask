@@ -73,6 +73,7 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
             _areFiltersEnabled = projectPathsService.IsProjectPathChosen;
             projectPathsService.ProjectPathChanged += OnProjectPathChanged;
             currentUserViewModel.CurrentUserSet += CurrentUserViewModelOnCurrentUserSet;
+            _currentUser = currentUserViewModel.CurrentUser;
         }
 
         private async void CurrentUserViewModelOnCurrentUserSet(ProjectMember currentUser)

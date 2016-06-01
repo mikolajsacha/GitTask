@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls.Primitives;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using GitTask.Domain.Model.Project;
 using GitTask.UI.MVVM.Locator;
 
@@ -7,7 +6,7 @@ namespace GitTask.UI.MVVM.View.Elements
 {
     public partial class InitialsBadge
     {
-        private Popup _popup;
+        private AlsoKnownAsPopup _popup;
 
         public InitialsBadge()
         {
@@ -20,11 +19,13 @@ namespace GitTask.UI.MVVM.View.Elements
             var dataContext = DataContext as ProjectMember;
             if (dataContext == null) return;
 
-            var resolvedUsers = await IocLocator.ProjectMembersSetsViewModel.Resolve(dataContext);
-            _popup = new InitialsBadgePopup(resolvedUsers);
+            _popup = new AlsoKnownAsPopup { IsLoading = true };
+            _popup.MouseLeave += (o, args) => RemovePopup();
             MainGrid.Children.Add(_popup);
             _popup.IsOpen = true;
-            _popup.MouseLeave += (o, args) => RemovePopup();
+            var resolvedUsers = await IocLocator.ProjectMembersSetsViewModel.Resolve(dataContext);
+            _popup.ProjectMembers = resolvedUsers;
+            _popup.IsLoading = false;
         }
 
         private void OnMouseLeave(object sender, MouseEventArgs e)

@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
+using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Task;
@@ -122,11 +124,15 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         private void OnElementsReloaded()
         {
-            InitializeTaskStateColumns();
-            LoadTasks();
+            Reload();
         }
 
         private void TaskStateQueryServiceOnElementChanged(object taskState)
+        {
+            Reload();
+        }
+
+        private void Reload()
         {
             InitializeTaskStateColumns();
             LoadTasks();
@@ -134,6 +140,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         private void LoadTasks()
         {
+            if (TaskStateColumns == null || !TaskStateColumns.Any()) return;
             foreach (var taskStateColumn in TaskStateColumns)
             {
                 taskStateColumn.Tasks.Clear();
@@ -143,8 +150,14 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             {
                 try
                 {
+
                     var taskColumn = TaskStateColumns.First(taskStateColumn => taskStateColumn.TaskState.Name == task.State);
-                    taskColumn.Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService, _taskStateQueryService, _currentUserViewModel));
+                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                        new Action(() =>
+                        {
+                            taskColumn.Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService,
+                                _taskStateQueryService, _currentUserViewModel));
+                        }));
                 }
                 catch (Exception)
                 {
@@ -155,7 +168,11 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         public void InitializeTaskStateColumns()
         {
-            TaskStateColumns.Clear();
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                new Action(() =>
+                {
+                    TaskStateColumns.Clear();
+                }));
             var orderedTaskStates = _taskStateQueryService.GetAll().OrderBy(x => x.Position);
             var count = orderedTaskStates.Count();
             var counter = 0;
@@ -166,12 +183,20 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
                 var taskStateColumn = new TaskStateColumnViewModel(state, _taskStateQueryService, _filtersViewModel,
                                                                    isOpened, counter > 0, counter < count - 1);
                 taskStateColumn.PropertyChanged += TaskStateColumnOnPropertyChanged;
-                TaskStateColumns.Add(taskStateColumn);
+                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                    new Action(() =>
+                    {
+                        TaskStateColumns.Add(taskStateColumn);
+                    }));
                 counter++;
             }
 
-            OpenedColumnsCount = Math.Min(counter, DefaultOpenedColumnsCount);
-            HiddenColumnsCount = Math.Max(0, counter - OpenedColumnsCount);
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                new Action(() =>
+                {
+                    OpenedColumnsCount = Math.Min(counter, DefaultOpenedColumnsCount);
+                    HiddenColumnsCount = Math.Max(0, counter - OpenedColumnsCount);
+                }));
         }
 
         private void TaskStateColumnOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
+             xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
              xmlns:ignore="http://www.galasoft.ch/ignore"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
@@ -21,38 +22,11 @@
                 Visibility="{Binding AnyPendingStorageOperations,
                                      Converter={StaticResource BooleanToVisibilityConverter},
                                      Mode=OneWay}">
-        <Ellipse Width="36"
-                 Height="36"
-                 Margin="0,0,5,0"
-                 HorizontalAlignment="Center"
-                 VerticalAlignment="Center"
-                 Fill="Transparent"
-                 StrokeThickness="6">
-            <Ellipse.Stroke>
-                <LinearGradientBrush>
-                    <GradientStop Offset="0.4" Color="Black" />
-                    <GradientStop Offset="0.7" Color="Gray" />
-                    <GradientStop Offset="1" Color="White" />
-                </LinearGradientBrush>
-            </Ellipse.Stroke>
-            <Ellipse.RenderTransform>
-                <RotateTransform x:Name="EllipseRotateTransform" Angle="0" CenterX="18" CenterY="18" />
-            </Ellipse.RenderTransform>
-            <Ellipse.Triggers>
-                <EventTrigger RoutedEvent="Window.Loaded">
-                    <BeginStoryboard>
-                        <Storyboard RepeatBehavior="Forever">
-                            <DoubleAnimation BeginTime="0:0:0"
-                                             Duration="0:0:2"
-                                             From="0"
-                                             Storyboard.TargetName="EllipseRotateTransform"
-                                             Storyboard.TargetProperty="Angle"
-                                             To="360" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Ellipse.Triggers>
-        </Ellipse>
+        <elements:SpinningWheel Width="36"
+                                Height="36"
+                                Margin="0,0,5,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
         <TextBlock Margin="0,-2,0,0"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"

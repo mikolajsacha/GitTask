@@ -181,8 +181,11 @@
     <Compile Include="View\ActionBar\ButtonsPartial.xaml.cs">
       <DependentUpon>ButtonsPartial.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Elements\InitialsBadgePopup.xaml.cs">
-      <DependentUpon>InitialsBadgePopup.xaml</DependentUpon>
+    <Compile Include="View\Elements\AlsoKnownAsPopup.xaml.cs">
+      <DependentUpon>AlsoKnownAsPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Elements\SpinningWheel.xaml.cs">
+      <DependentUpon>SpinningWheel.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Elements\PendingStorageOperationsPartial.xaml.cs">
       <DependentUpon>PendingStorageOperationsPartial.xaml</DependentUpon>
@@ -252,11 +255,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Elements\InitialsBadgePopup.xaml">
+    <Page Include="View\Elements\AlsoKnownAsPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Elements\InitialsBadge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Elements\SpinningWheel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

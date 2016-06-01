@@ -16,7 +16,8 @@
                                    Mode=OneWay}"
              mc:Ignorable="d ignore">
 
-    <Grid MinHeight="40"
+    <Grid x:Name="MainGrid"
+          MinHeight="40"
           MaxHeight="80"
           Background="BlueViolet">
         <Grid.ColumnDefinitions>
@@ -25,7 +26,8 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0"
+        <TextBlock x:Name="CurrentUserTextBlock"
+                   Grid.Column="0"
                    Margin="5,2,5,5"
                    VerticalAlignment="Center"
                    DataContext="{Binding CurrentUserViewModel,
@@ -33,6 +35,8 @@
                                          Mode=OneWay}"
                    FontSize="16"
                    Foreground="WhiteSmoke"
+                   MouseDown="CurrentUserNameOnMouseDown"
+                   MouseLeave="CurrentUserNameOnMouseLeave"
                    Text="{Binding CurrentUser.Name,
                                   Mode=OneWay}">
             <TextBlock.ToolTip>

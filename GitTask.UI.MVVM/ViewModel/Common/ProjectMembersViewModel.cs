@@ -16,12 +16,24 @@ namespace GitTask.UI.MVVM.ViewModel.Common
         private readonly ProjectMembersService _projectMembersService;
         private readonly IRepositoryService _repositoryService;
         private readonly IProjectQueryService _projectQueryService;
+        private bool _isLoading;
         public ObservableCollection<ProjectMember> ProjectMembers { get; }
+
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public ProjectMembersViewModel(ProjectMembersService projectMembersService,
                                        IRepositoryService repositoryService,
                                        IProjectQueryService projectQueryService)
         {
+            _isLoading = false;
             _projectMembersService = projectMembersService;
             _repositoryService = repositoryService;
             _projectQueryService = projectQueryService;
@@ -47,6 +59,7 @@ namespace GitTask.UI.MVVM.ViewModel.Common
 
         private async Task InitializeProjectMembers()
         {
+            IsLoading = true;
             ProjectMembers.Clear();
 
             var usersFromProject = _projectQueryService.Project?.ProjectMembersNotInRepository ??
@@ -58,35 +71,28 @@ namespace GitTask.UI.MVVM.ViewModel.Common
             {
                 ProjectMembers.Add(user);
             }
+            IsLoading = false;
         }
 
         private async void OnAddUserMessage(AddUserMessage message)
         {
+            IsLoading = true;
             if (_projectQueryService.Project.ProjectMembersNotInRepository != null &&
                 _projectQueryService.Project.ProjectMembersNotInRepository.Contains(message.UserToBeAdded)) return;
 
             AddUserFromProject(message.UserToBeAdded);
 
             _projectQueryService.AddUser(message.UserToBeAdded);
+            IsLoading = false;
             await _projectQueryService.SaveChanges();
         }
 
         private void AddUserFromProject(ProjectMember user)
         {
-            var indexesToRemove = new List<int>();
-            for (var i = 0; i < ProjectMembers.Count; i++)
+            foreach(var member in ProjectMembers.Where(member => member.Name == user.Name || member.Email == user.Email).ToList())
             {
-                if (ProjectMembers[i].Name != user.Name ||
-                    ProjectMembers[i].Email != user.Email)
-                {
-                    indexesToRemove.Add(i);
-                }
+                ProjectMembers.Remove(member);
             }
-            foreach (var index in indexesToRemove)
-            {
-                ProjectMembers.RemoveAt(index);
-            }
-
             ProjectMembers.Add(user);
             ProjectMembers.Move(ProjectMembers.Count - 1, 0);
         }

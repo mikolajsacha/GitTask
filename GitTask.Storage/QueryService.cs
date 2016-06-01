@@ -30,6 +30,8 @@ namespace GitTask.Storage
             _recentlyDeleted = new HashSet<object>();
 
             projectPathsService.ProjectPathChanged += InitializeDataFromStorage;
+
+            _data = new Dictionary<object, TModel>();
             InitializeDataFromStorage();
         }
 
