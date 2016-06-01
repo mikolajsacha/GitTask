@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using GitTask.Domain.Model.Project;
+using GitTask.UI.MVVM.Locator;
 
 namespace GitTask.UI.MVVM.View.Elements
 {
@@ -19,6 +20,8 @@ namespace GitTask.UI.MVVM.View.Elements
             }
         }
 
+        public ProjectMember MainProjectMember { get; set; }
+
         public bool IsLoading
         {
             get { return _isLoading; }
@@ -29,9 +32,15 @@ namespace GitTask.UI.MVVM.View.Elements
             }
         }
 
-        public AlsoKnownAsPopup()
+        public AlsoKnownAsPopup(bool isSetUserButtonVisible = false)
         {
             InitializeComponent();
+            SetUserButton.Visibility = isSetUserButtonVisible ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private void SetUserButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            IocLocator.CurrentUserViewModel.CurrentUser = MainProjectMember;
         }
     }
 }

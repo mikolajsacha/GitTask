@@ -7,7 +7,6 @@ namespace GitTask.UI.MVVM.View.Elements
     public partial class InitialsBadge
     {
         private AlsoKnownAsPopup _popup;
-
         public InitialsBadge()
         {
             InitializeComponent();
@@ -18,8 +17,7 @@ namespace GitTask.UI.MVVM.View.Elements
             if (_popup != null) return;
             var dataContext = DataContext as ProjectMember;
             if (dataContext == null) return;
-
-            _popup = new AlsoKnownAsPopup { IsLoading = true };
+            _popup = new AlsoKnownAsPopup(true) { IsLoading = true, MainProjectMember = dataContext };
             _popup.MouseLeave += (o, args) => RemovePopup();
             MainGrid.Children.Add(_popup);
             _popup.IsOpen = true;
@@ -30,7 +28,7 @@ namespace GitTask.UI.MVVM.View.Elements
 
         private void OnMouseLeave(object sender, MouseEventArgs e)
         {
-            if (_popup != null && !_popup.IsMouseOver) RemovePopup();
+            if (_popup != null && !_popup.IsMouseOver && !_popup.IsLoading) RemovePopup();
         }
 
         private void RemovePopup()
@@ -38,5 +36,6 @@ namespace GitTask.UI.MVVM.View.Elements
             MainGrid.Children.Remove(_popup);
             _popup = null;
         }
+
     }
 }
