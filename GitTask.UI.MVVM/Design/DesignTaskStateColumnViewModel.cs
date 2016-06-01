@@ -19,7 +19,7 @@ namespace GitTask.UI.MVVM.Design
         public ICommand MoveColumnRightCommand { get; }
         public ICommand DeleteTaskStateCommand { get; }
 
-        public bool IsOpened { get; private set; }
+        public bool IsOpened { get; }
         public bool IsHidden => !IsOpened;
         public bool CanBeDeleted => true;
 

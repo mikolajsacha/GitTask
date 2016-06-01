@@ -9,7 +9,6 @@ namespace GitTask.UI.MVVM.View.TaskBoard
     {
         public TaskStateColumnPartial()
         {
-            //TODO: dodać strzałki do przesuwania task state'a
             Messenger.Default.Register<DistributeTaskStateColumnsMessage>(this, OnDistributeTaskStateColumnsMessage);
             Unloaded += OnUnloaded;
             InitializeComponent();
