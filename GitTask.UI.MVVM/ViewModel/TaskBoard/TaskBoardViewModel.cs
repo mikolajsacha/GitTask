@@ -17,6 +17,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 {
     public class TaskBoardViewModel : ViewModelBase
     {
+        //TODO: !!!!! USUWAJA SIE TASKI JAK PRZESUWAM TASK STATE!! NIE LADUJA SIE TASKI!!!
         private readonly IQueryService<TaskState> _taskStateQueryService;
         private readonly IQueryService<Task> _taskQueryService;
         private readonly FiltersViewModel _filtersViewModel;
@@ -152,12 +153,8 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
                 {
 
                     var taskColumn = TaskStateColumns.First(taskStateColumn => taskStateColumn.TaskState.Name == task.State);
-                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-                        new Action(() =>
-                        {
-                            taskColumn.Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService,
-                                _taskStateQueryService, _currentUserViewModel));
-                        }));
+                    taskColumn.Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService,
+                        _taskStateQueryService, _currentUserViewModel));
                 }
                 catch (Exception)
                 {
@@ -168,11 +165,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         public void InitializeTaskStateColumns()
         {
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-                new Action(() =>
-                {
-                    TaskStateColumns.Clear();
-                }));
+            TaskStateColumns.Clear();
             var orderedTaskStates = _taskStateQueryService.GetAll().OrderBy(x => x.Position);
             var count = orderedTaskStates.Count();
             var counter = 0;
@@ -183,20 +176,12 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
                 var taskStateColumn = new TaskStateColumnViewModel(state, _taskStateQueryService, _filtersViewModel,
                                                                    isOpened, counter > 0, counter < count - 1);
                 taskStateColumn.PropertyChanged += TaskStateColumnOnPropertyChanged;
-                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-                    new Action(() =>
-                    {
-                        TaskStateColumns.Add(taskStateColumn);
-                    }));
+                TaskStateColumns.Add(taskStateColumn);
                 counter++;
             }
 
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-                new Action(() =>
-                {
-                    OpenedColumnsCount = Math.Min(counter, DefaultOpenedColumnsCount);
-                    HiddenColumnsCount = Math.Max(0, counter - OpenedColumnsCount);
-                }));
+            OpenedColumnsCount = Math.Min(counter, DefaultOpenedColumnsCount);
+            HiddenColumnsCount = Math.Max(0, counter - OpenedColumnsCount);
         }
 
         private void TaskStateColumnOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
