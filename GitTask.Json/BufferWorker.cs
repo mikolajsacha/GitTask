@@ -4,7 +4,7 @@ namespace GitTask.Json
 {
     public static class BufferWorker
     {
-        private static readonly Encoding Encoding = Encoding.UTF8;
+        public static Encoding Encoding => Encoding.UTF8;
 
         public static string ToString(byte[] buffer)
         {

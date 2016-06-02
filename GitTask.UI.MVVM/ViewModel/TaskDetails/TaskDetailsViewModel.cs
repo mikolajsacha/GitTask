@@ -96,6 +96,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
         private async void ResolveHistory()
         {
             var creationDate = await _repositoryService.GetCreationDate(Task);
+            var entityChanges = await _repositoryService.GetHistory(Task);
             Application.Current.Dispatcher.Invoke(() =>
             {
                 CreationDate = creationDate.ToString("g");

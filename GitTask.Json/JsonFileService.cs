@@ -36,6 +36,11 @@ namespace GitTask.Json
             });
         }
 
+        public TDataObject ParseString<TDataObject>(string content)
+        {
+            return JsonConvert.DeserializeObject<TDataObject>(content);
+        }
+
         public async Task<TDataObject> Load<TDataObject>(string filePath)
         {
             try
@@ -55,7 +60,7 @@ namespace GitTask.Json
                     }
                 }
                 var modelJson = BufferWorker.ToString(bufferToRead);
-                return JsonConvert.DeserializeObject<TDataObject>(modelJson);
+                return ParseString<TDataObject>(modelJson);
             }
             catch (FileNotFoundException)
             {
