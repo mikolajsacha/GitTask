@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Project;
-using GitTask.Domain.Services;
 using GitTask.Domain.Services.Interface;
 using GitTask.UI.MVVM.Messages;
 
@@ -13,7 +12,6 @@ namespace GitTask.UI.MVVM.ViewModel.Common
 {
     public class ProjectMembersViewModel : ViewModelBase
     {
-        private readonly ProjectMembersService _projectMembersService;
         private readonly IRepositoryService _repositoryService;
         private readonly IProjectQueryService _projectQueryService;
         private bool _isLoading;
@@ -29,12 +27,10 @@ namespace GitTask.UI.MVVM.ViewModel.Common
             }
         }
 
-        public ProjectMembersViewModel(ProjectMembersService projectMembersService,
-                                       IRepositoryService repositoryService,
+        public ProjectMembersViewModel(IRepositoryService repositoryService,
                                        IProjectQueryService projectQueryService)
         {
             _isLoading = false;
-            _projectMembersService = projectMembersService;
             _repositoryService = repositoryService;
             _projectQueryService = projectQueryService;
 
@@ -66,8 +62,7 @@ namespace GitTask.UI.MVVM.ViewModel.Common
                                    new List<ProjectMember>();
             var usersFromRepo = await _repositoryService.GetAllUniqueCommiters();
 
-            var allUsers = usersFromProject.Concat(usersFromRepo);
-            foreach (var user in (await _projectMembersService.GetAllMostRecentUsers(allUsers)).OrderBy(pm => pm.Name))
+            foreach (var user in usersFromProject.Concat(usersFromRepo).Distinct().OrderBy(pm => pm.Name))
             {
                 ProjectMembers.Add(user);
             }

@@ -5,8 +5,9 @@
              xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
              xmlns:ignore="http://www.galasoft.ch/ignore"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             Width="25"
              Height="25"
+             MinWidth="25"
+             MaxWidth="40"
              d:DataContext="{d:DesignInstance Type=design:DesignProjectMember,
                                               IsDesignTimeCreatable=True}"
              mc:Ignorable="d ignore">

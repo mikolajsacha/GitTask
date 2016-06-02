@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Model.Task;
@@ -17,6 +18,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
     {
         private readonly IQueryService<Task> _taskQueryService;
         private readonly IQueryService<TaskState> _taskStateQueryService;
+        private readonly IRepositoryService _repositoryService;
         private readonly CurrentUserViewModel _currentUserViewModel;
         public Task Task { get; }
         public ObservableCollection<string> Comments { get; }
@@ -56,9 +58,21 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
             }
         }
 
+        private string _creationDate;
+        public string CreationDate
+        {
+            get { return _creationDate; }
+            set
+            {
+                _creationDate = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public TaskDetailsViewModel(Task task,
             IQueryService<Task> taskQueryService,
             IQueryService<TaskState> taskStateQueryService,
+            IRepositoryService repositoryService,
             CurrentUserViewModel currentUserViewModel)
         {
             Task = task;
@@ -69,10 +83,23 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
             _isVisible = true;
             _taskQueryService = taskQueryService;
             _taskStateQueryService = taskStateQueryService;
+            _repositoryService = repositoryService;
             _currentUserViewModel = currentUserViewModel;
             _editTaskCommand = new RelayCommand(OnEditTaskCommand);
             _addCommentCommand = new RelayCommand(OnAddCommentCommand);
             _removeCommentCommand = new RelayCommand<int>(OnRemoveCommentCommand);
+
+            //TODO: dodać przycisk do znajdowania historii (a nie robic to dla kazdego taska)
+            System.Threading.Tasks.Task.Run(() => ResolveHistory());
+        }
+
+        private async void ResolveHistory()
+        {
+            var creationDate = await _repositoryService.GetCreationDate(Task);
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                CreationDate = creationDate.ToString("g");
+            }, DispatcherPriority.Normal);
         }
 
         private async void OnAddCommentCommand()

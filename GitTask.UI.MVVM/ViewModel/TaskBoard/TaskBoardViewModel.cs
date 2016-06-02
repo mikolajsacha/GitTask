@@ -2,8 +2,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
-using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Task;
@@ -19,6 +17,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
     {
         private readonly IQueryService<TaskState> _taskStateQueryService;
         private readonly IQueryService<Task> _taskQueryService;
+        private readonly IRepositoryService _repositoryService;
         private readonly FiltersViewModel _filtersViewModel;
         private readonly CurrentUserViewModel _currentUserViewModel;
 
@@ -50,11 +49,13 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         public TaskBoardViewModel(IQueryService<TaskState> taskStateQueryService,
                                   IQueryService<Task> taskQueryService,
+                                  IRepositoryService repositoryService,
                                   FiltersViewModel filtersViewModel,
                                   CurrentUserViewModel currentUserViewModel)
         {
             _taskStateQueryService = taskStateQueryService;
             _taskQueryService = taskQueryService;
+            _repositoryService = repositoryService;
             _filtersViewModel = filtersViewModel;
             _currentUserViewModel = currentUserViewModel;
 
@@ -94,7 +95,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             try
             {
                 var taskColumn = TaskStateColumns.First(stateColumn => stateColumn.TaskState.Name == task.State);
-                taskColumn.Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService, _taskStateQueryService, _currentUserViewModel));
+                taskColumn.Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService, _taskStateQueryService, _repositoryService, _currentUserViewModel));
             }
             catch (Exception)
             {
@@ -153,7 +154,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
                     var taskColumn = TaskStateColumns.First(taskStateColumn => taskStateColumn.TaskState.Name == task.State);
                     taskColumn.Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService,
-                        _taskStateQueryService, _currentUserViewModel));
+                        _taskStateQueryService, _repositoryService, _currentUserViewModel));
                 }
                 catch (Exception)
                 {

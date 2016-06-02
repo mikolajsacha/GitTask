@@ -10,6 +10,7 @@ namespace GitTask.Domain.Services.Interface
         event Action RepositoryInitalized;
 
         Task<IEnumerable<ProjectMember>> GetAllUniqueCommiters();
+        Task<DateTime> GetCreationDate<TModel>(TModel modelObject);
         bool RepositoryExists(string projectPath);
     }
 }

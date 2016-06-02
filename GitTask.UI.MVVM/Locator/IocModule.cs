@@ -1,6 +1,5 @@
 ﻿using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Task;
-using GitTask.Domain.Services;
 using GitTask.Domain.Services.Interface;
 using GitTask.Git;
 using GitTask.Json;
@@ -21,7 +20,6 @@ namespace GitTask.UI.MVVM.Locator
     {
         public override void Load()
         {
-            Bind<ProjectMembersService>().ToSelf().InSingletonScope();
             Bind<IProjectPathsReadonlyService, IProjectPathsService>().To<ProjectPathsService>().InSingletonScope();
             Bind<IFileService>().To<JsonFileService>().InSingletonScope();
 

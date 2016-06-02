@@ -27,6 +27,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0"
                        Grid.Column="0"
@@ -39,6 +40,15 @@
                        TextWrapping="Wrap" />
             <TextBlock Grid.Row="0"
                        Grid.Column="1"
+                       Margin="3"
+                       VerticalAlignment="Bottom"
+                       FontSize="12"
+                       Foreground="DimGray"
+                       Text="{Binding CreationDate,
+                                      Mode=OneWay}"
+                       TextWrapping="Wrap" />
+            <TextBlock Grid.Row="0"
+                       Grid.Column="2"
                        Margin="3"
                        VerticalAlignment="Bottom"
                        FontSize="12"

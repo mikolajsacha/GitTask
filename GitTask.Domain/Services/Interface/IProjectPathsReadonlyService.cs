@@ -8,6 +8,7 @@ namespace GitTask.Domain.Services.Interface
 
         string BaseProjectPath { get; }
         string BaseStoragePath { get; }
+        string RelativeStoragePath { get; }
         bool IsProjectPathChosen { get; }
 
         string GetPathForModel(Type modelType);

@@ -9,6 +9,8 @@ namespace GitTask.Json
 {
     public class JsonFileService : IFileService
     {
+        public string FilesExtension => ".json";
+
         public async Task Save(object objectToBeSaved, string filePath)
         {
             var modelJson = JsonConvert.SerializeObject(objectToBeSaved);

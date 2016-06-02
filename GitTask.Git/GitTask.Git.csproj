@@ -59,6 +59,10 @@
       <Project>{47E272C3-58CE-4689-BA1C-AD0BA88F6551}</Project>
       <Name>GitTask.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitTask.Storage\GitTask.Storage.csproj">
+      <Project>{4b7a6646-b7f8-4d92-a032-c13fc8136f07}</Project>
+      <Name>GitTask.Storage</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

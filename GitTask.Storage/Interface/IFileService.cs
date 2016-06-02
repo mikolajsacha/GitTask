@@ -4,6 +4,8 @@ namespace GitTask.Storage.Interface
 {
     public interface IFileService
     {
+        string FilesExtension { get; }
+
         Task Save(object objectToBeSaved, string filePath);
         Task Delete(string filePath);
         Task<TDataObject> Load<TDataObject>(string filePath);

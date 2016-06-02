@@ -12,7 +12,6 @@ namespace GitTask.Storage
 {
     public class StorageService<TDataObject> : IStorageService<TDataObject>
     {
-        private const string FilesExtension = ".json";
         private readonly PropertyInfo _dataObjectKeyProperty;
 
         private readonly IFileService _fileService;
@@ -51,17 +50,24 @@ namespace GitTask.Storage
             var result = new LinkedList<TDataObject>();
             if (!Directory.Exists(GetBasePath())) return result;
 
-            foreach (var fileName in Directory.GetFiles(GetBasePath()).Where(fileName => fileName.EndsWith(FilesExtension)))
+            foreach (var fileName in Directory.GetFiles(GetBasePath()).Where(fileName => fileName.EndsWith(_fileService.FilesExtension)))
             {
-                var loadedDataObject = await _fileService.Load<TDataObject>(fileName);
-                result.AddLast(loadedDataObject);
+                try
+                {
+                    var loadedDataObject = await _fileService.Load<TDataObject>(fileName);
+                    result.AddLast(loadedDataObject);
+                }
+                catch (System.Exception)
+                {
+                    // probably incorrect .JSON, ignore file
+                }
             }
             return result;
         }
 
         private string GetFullPath(string fileName)
         {
-            return GetBasePath() + '\\' + fileName + FilesExtension;
+            return GetBasePath() + '\\' + fileName + _fileService.FilesExtension;
         }
 
         private string GetBasePath()

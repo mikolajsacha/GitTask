@@ -5,6 +5,8 @@ namespace GitTask.Storage
 {
     public class ProjectPathsService : IProjectPathsService
     {
+        public string RelativeStoragePath => ".gittask";
+
         private string _baseProjectPath;
         public string BaseProjectPath
         {
@@ -12,7 +14,7 @@ namespace GitTask.Storage
             set
             {
                 _baseProjectPath = value;
-                BaseStoragePath = _baseProjectPath.TrimEnd('\\', '/') + "\\.gittask";
+                BaseStoragePath = _baseProjectPath.TrimEnd('\\', '/') + "\\" + RelativeStoragePath;
                 IsProjectPathChosen = true;
                 ProjectPathChanged?.Invoke();
             }
