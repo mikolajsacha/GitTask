@@ -15,8 +15,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
-                   Margin="5"
+                   Margin="2"
                    FontSize="15"
+                   FontWeight="SemiBold"
+                   Foreground="#FF444444"
                    Text="{x:Static prop:Resources.AlsoKnownAs}" />
         <ScrollViewer Grid.Row="1"
                       HorizontalScrollBarVisibility="Auto"
@@ -24,7 +26,7 @@
             <ItemsControl x:Name="ProjectMembersItemsControl" ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Popup}, Path=ProjectMembers}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Margin="10"
+                        <StackPanel Margin="2"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     Orientation="Vertical" />
@@ -32,12 +34,12 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="3" Orientation="Vertical">
+                        <StackPanel Margin="0" Orientation="Vertical">
                             <TextBlock Margin="0,1,0,1"
                                        FontSize="13"
                                        Text="{Binding Name,
                                                       Mode=OneWay}" />
-                            <TextBlock Margin="5,1,0,1"
+                            <TextBlock Margin="3,1,0,1"
                                        FontSize="11"
                                        Foreground="#FF402222"
                                        Text="{Binding Email,
@@ -61,15 +63,16 @@
         </Grid>
         <Button x:Name="SetUserButton"
                 Grid.Row="2"
-                Width="70"
-                Height="20"
+                Margin="2"
+                HorizontalAlignment="Right"
                 Click="SetUserButton_OnClick"
-                Style="{StaticResource RoundedCornersButton}">
-            <TextBlock VerticalAlignment="Center"
-                       FontSize="13"
-                       Foreground="DarkSlateGray"
-                       Text="SET USER"
-                       TextAlignment="Center" />
+                Style="{StaticResource SmallIconButton}">
+            <Button.Resources>
+                <ImageSource x:Key="ImageSource">../../Icons/profile.png</ImageSource>
+            </Button.Resources>
+            <Button.ToolTip>
+                <TextBlock Text="{Binding Source={x:Static prop:Resources.SetCurrentUser}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+            </Button.ToolTip>
         </Button>
     </Grid>
 </Popup>

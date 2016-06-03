@@ -5,6 +5,7 @@
              xmlns:ignore="http://www.galasoft.ch/ignore"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="50"
              d:DesignWidth="1024"
              Background="Transparent"
@@ -14,28 +15,30 @@
              mc:Ignorable="d ignore">
 
     <UserControl.Resources>
-        <Style x:Key="ButtonText" TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="Foreground" Value="#FF552244" />
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-        </Style>
-        <Style BasedOn="{StaticResource RoundedCornersButton}" TargetType="Button">
-            <Setter Property="Width" Value="140" />
-            <Setter Property="Margin" Value="3" />
+        <Style BasedOn="{StaticResource SmallIconButton}" TargetType="Button">
             <Setter Property="IsEnabled" Value="{Binding AreButtonsEnabled, Mode=OneWay}" />
+            <Setter Property="Width" Value="32" />
+            <Setter Property="Height" Value="32" />
+            <Setter Property="Margin" Value="2,4,2,4" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush Stretch="Fill" TileMode="None" />
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
 
-    <StackPanel MinHeight="40"
-                MaxHeight="80"
-                Margin="3"
+    <StackPanel Margin="2,0,2,0"
                 HorizontalAlignment="Right"
                 Orientation="Horizontal">
         <Button Command="{Binding SetCurrentUserCommand, Mode=OneWay}">
-            <TextBlock Style="{StaticResource ButtonText}" Text="{Binding Source={x:Static prop:Resources.SetUser}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+            <Button.Resources>
+                <ImageSource x:Key="ImageSource">../../Icons/profile.png</ImageSource>
+            </Button.Resources>
+            <Button.ToolTip>
+                <TextBlock Text="{Binding Source={x:Static prop:Resources.SetUser}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+            </Button.ToolTip>
         </Button>
 
         <Button Command="{Binding OpenSelectFolderDialogCommand,
@@ -44,15 +47,22 @@
                                       Source={StaticResource Locator},
                                       Mode=OneWay}"
                 IsEnabled="True">
-            <TextBlock Style="{StaticResource ButtonText}" Text="{Binding Source={x:Static prop:Resources.OpenProject}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+            <Button.Resources>
+                <ImageSource x:Key="ImageSource">../../Icons/folder.png</ImageSource>
+            </Button.Resources>
+            <Button.ToolTip>
+                <TextBlock Text="{Binding Source={x:Static prop:Resources.OpenProject}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+            </Button.ToolTip>
         </Button>
 
         <Button Command="{Binding AddTaskStateCommand, Mode=OneWay}">
-            <TextBlock Style="{StaticResource ButtonText}" Text="{Binding Source={x:Static prop:Resources.AddTaskState}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
-        </Button>
-
-        <Button Command="{Binding AddTaskCommand, Mode=OneWay}">
-            <TextBlock Style="{StaticResource ButtonText}" Text="{Binding Source={x:Static prop:Resources.AddTask}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+            <Button.Resources>
+                <ImageSource x:Key="ImageSource">../../Icons/add.png</ImageSource>
+            </Button.Resources>
+            <Button.ToolTip>
+                <TextBlock Text="{Binding Source={x:Static prop:Resources.AddTaskState}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+            </Button.ToolTip>
         </Button>
     </StackPanel>
 </UserControl>
+

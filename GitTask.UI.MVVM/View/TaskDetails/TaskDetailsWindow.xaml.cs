@@ -17,7 +17,6 @@ namespace GitTask.UI.MVVM.View.TaskDetails
         private void AddCommentPopupOnLostFocus(object sender, RoutedEventArgs routedEventArgs)
         {
             AddCommentPopup.IsOpen = false;
-            if (!AddCommentPopupButton.IsMouseOver) return;
 
             var taskDetailsViewModel = DataContext as TaskDetailsViewModel;
 

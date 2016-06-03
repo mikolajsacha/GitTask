@@ -5,9 +5,8 @@
              xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
              xmlns:ignore="http://www.galasoft.ch/ignore"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             Height="25"
-             MinWidth="25"
-             MaxWidth="40"
+             Width="32"
+             Height="32"
              d:DataContext="{d:DesignInstance Type=design:DesignProjectMember,
                                               IsDesignTimeCreatable=True}"
              mc:Ignorable="d ignore">
@@ -18,7 +17,7 @@
             BorderBrush="{Binding Converter={StaticResource ProjectMemberToBrushConverter},
                                   Mode=OneWay}"
             BorderThickness="2"
-            CornerRadius="5"
+            CornerRadius="4"
             MouseDown="OnMouseDown"
             MouseLeave="OnMouseLeave">
         <Border.ToolTip>
@@ -45,7 +44,7 @@
         <Grid x:Name="MainGrid">
             <TextBlock Margin="0,-2,0,0"
                        VerticalAlignment="Center"
-                       FontSize="13"
+                       FontSize="16"
                        Foreground="Black"
                        Text="{Binding Name,
                                       Converter={StaticResource NameToInitialsConverter},

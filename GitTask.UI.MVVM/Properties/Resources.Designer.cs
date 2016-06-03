@@ -214,6 +214,24 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Move left.
+        /// </summary>
+        public static string MoveLeft {
+            get {
+                return ResourceManager.GetString("MoveLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move right.
+        /// </summary>
+        public static string MoveRight {
+            get {
+                return ResourceManager.GetString("MoveRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name:.
         /// </summary>
         public static string Name {
@@ -327,6 +345,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string RepositoryNotFoundExplanation {
             get {
                 return ResourceManager.GetString("RepositoryNotFoundExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolve history.
+        /// </summary>
+        public static string ResolveHistory {
+            get {
+                return ResourceManager.GetString("ResolveHistory", resourceCulture);
             }
         }
         

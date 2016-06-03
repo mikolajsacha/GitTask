@@ -1,14 +1,16 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using GitTask.Domain.Model.Task;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
 namespace GitTask.UI.MVVM.View.TaskDetails
 {
     public partial class AddTaskWindow
     {
-        public AddTaskWindow()
+        public AddTaskWindow(TaskState taskState)
         {
             InitializeComponent();
+            ((AddTaskViewModel) DataContext).SelectTaskStateViewModel.SelectedTaskState = taskState;
             OkButton.Click += OkButtonOnClick;
 
             SelectPriorityGrid.MouseEnter += delegate { SelectPriorityPopup.IsOpen = true; };

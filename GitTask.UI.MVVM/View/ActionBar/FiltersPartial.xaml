@@ -26,9 +26,7 @@
         </Style>
     </UserControl.Resources>
 
-    <StackPanel MinHeight="40"
-                MaxHeight="80"
-                Margin="3"
+    <StackPanel Margin="3"
                 HorizontalAlignment="Left"
                 Orientation="Horizontal">
         <CheckBox IsChecked="{Binding CurrentUserFilter, Mode=TwoWay}" IsEnabled="{Binding IsCurrentUserFilterEnabled, Mode=OneWay}" />

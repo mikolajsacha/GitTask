@@ -382,6 +382,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icons\add.png" />
+    <Resource Include="Icons\correct.png" />
+    <Resource Include="Icons\edit.png" />
+    <Resource Include="Icons\folder.png" />
+    <Resource Include="Icons\info.png" />
+    <Resource Include="Icons\leftarrow.png" />
+    <Resource Include="Icons\padnote.png" />
+    <Resource Include="Icons\profile.png" />
+    <Resource Include="Icons\rightarrow.png" />
+    <Resource Include="Icons\shapes.png" />
+    <Resource Include="Icons\speechbubble.png" />
     <Resource Include="Images\arrow.png" />
   </ItemGroup>
   <ItemGroup>
@@ -411,6 +422,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\graph.png" />
+    <Resource Include="Icons\hide.png" />
+    <Resource Include="Icons\trashbin.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

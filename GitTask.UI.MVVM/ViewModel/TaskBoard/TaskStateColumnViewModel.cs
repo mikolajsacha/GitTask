@@ -1,12 +1,15 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
 using GitTask.UI.MVVM.Messages;
+using GitTask.UI.MVVM.View.TaskDetails;
 using GitTask.UI.MVVM.ViewModel.ActionBar;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
 using Task = System.Threading.Tasks.Task;
@@ -15,11 +18,19 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 {
     public class TaskStateColumnViewModel : ViewModelBase
     {
+        private static readonly Brush BrushForOdd = new SolidColorBrush(new Color { A = 255, R = 250, G = 245, B = 250 });
+        private static readonly Brush BrushForEven = new SolidColorBrush(new Color { A = 255, R = 235, G = 230, B = 250 });
+
         private readonly IQueryService<TaskState> _taskStateQueryService;
         private readonly FiltersViewModel _filtersViewModel;
 
+        public Brush Background { get; private set; }
+
         public TaskState TaskState { get; }
         public ObservableCollection<TaskDetailsViewModel> Tasks { get; }
+
+        private readonly RelayCommand _addTaskCommand;
+        public ICommand AddTaskCommand => _addTaskCommand;
 
         private readonly RelayCommand _showColumnCommand;
         public ICommand ShowColumnCommand => _showColumnCommand;
@@ -55,7 +66,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         public TaskStateColumnViewModel(TaskState taskState,
                                         IQueryService<TaskState> taskStateQueryService,
-                                        FiltersViewModel filtersViewModel,
+                                        FiltersViewModel filtersViewModel, int number,
                                         bool isOpened, bool canMoveLeft, bool canMoveRight)
         {
             _taskStateQueryService = taskStateQueryService;
@@ -63,6 +74,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             _isOpened = isOpened;
             TaskState = taskState;
 
+            _addTaskCommand = new RelayCommand(OnAddTaskCommand);
             _showColumnCommand = new RelayCommand(OnShowColumnCommand);
             _hideColumnCommand = new RelayCommand(OnHideColumnCommand);
             _moveColumnLeftCommand = new RelayCommand(OnMoveColumnLeftCommand);
@@ -75,6 +87,18 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             Tasks = new ObservableCollection<TaskDetailsViewModel>();
             Tasks.CollectionChanged += (sender, args) => RaisePropertyChanged("CanBeDeleted");
             _filtersViewModel.FiltersUpdated += FiltersViewModelOnFiltersUpdated;
+            SetBackground(number);
+        }
+
+        private void SetBackground(int number)
+        {
+            Background = number % 2 == 0 ? BrushForEven : BrushForOdd;
+        }
+
+        private void OnAddTaskCommand()
+        {
+            var addTaskWindow = new AddTaskWindow(TaskState) { Owner = Application.Current.MainWindow };
+            addTaskWindow.Show();
         }
 
         private async void FiltersViewModelOnFiltersUpdated()

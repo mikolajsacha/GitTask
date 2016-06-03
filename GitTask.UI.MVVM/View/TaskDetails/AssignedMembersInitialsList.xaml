@@ -1,25 +1,30 @@
 ﻿<UserControl x:Class="GitTask.UI.MVVM.View.TaskDetails.AssignedMembersInitialsList"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ignore="http://www.galasoft.ch/ignore"
-        xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
-        xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
-        mc:Ignorable="d ignore"
-        Background="Transparent"
-        d:DataContext="{d:DesignInstance Type=design:DesignSelectUsersViewModel, IsDesignTimeCreatable=True}">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:design="clr-namespace:GitTask.UI.MVVM.Design"
+             xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
+             xmlns:ignore="http://www.galasoft.ch/ignore"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DataContext="{d:DesignInstance Type=design:DesignSelectUsersViewModel,
+                                              IsDesignTimeCreatable=True}"
+             Background="Transparent"
+             mc:Ignorable="d ignore">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-        <ItemsControl x:Name="UsersItemsControl"  Margin="5,2,5,5" ItemsSource="{Binding SelectedUsers, Mode=OneWay}">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <ItemsControl x:Name="UsersItemsControl" ItemsSource="{Binding SelectedUsers, Mode=OneWay}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <StackPanel HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <elements:InitialsBadge DataContext="{Binding Mode=OneWay}" Margin="3,3,3,0" MouseDown="InitialBadge_OnMouseDown"/>
+                    <elements:InitialsBadge Margin="2,0,2,0"
+                                            DataContext="{Binding Mode=OneWay}"
+                                            MouseDown="InitialBadge_OnMouseDown" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

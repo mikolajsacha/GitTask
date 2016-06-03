@@ -9,6 +9,7 @@ namespace GitTask.UI.MVVM.Design
 {
     public class DesignTaskStateColumnViewModel : ViewModelBase // based on GitTask.UI.MVVM.ViewModel.TaskBoard.TaskStateColumnViewModel
     {
+        public Brush Background => Brushes.LightGray;
 
         public TaskState TaskState { get; }
         public ObservableCollection<DesignTaskDetailsViewModel> Tasks { get; }
@@ -18,6 +19,7 @@ namespace GitTask.UI.MVVM.Design
         public ICommand MoveColumnLeftCommand { get; }
         public ICommand MoveColumnRightCommand { get; }
         public ICommand DeleteTaskStateCommand { get; }
+        public ICommand AddTaskCommand { get; }
 
         public bool IsOpened { get; }
         public bool IsHidden => !IsOpened;
@@ -38,6 +40,7 @@ namespace GitTask.UI.MVVM.Design
             DeleteTaskStateCommand = new RelayCommand(() => { });
             MoveColumnLeftCommand = new RelayCommand(() => { });
             MoveColumnRightCommand = new RelayCommand(() => { });
+            AddTaskCommand = new RelayCommand(() => { });
 
             IsOpened = isOpened;
             TaskState = taskState;

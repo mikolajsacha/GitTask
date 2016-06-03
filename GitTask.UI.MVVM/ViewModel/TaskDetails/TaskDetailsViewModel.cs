@@ -34,6 +34,8 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
                 RaisePropertyChanged("IsAddingCommentEnabled");
             }
         }
+        private readonly RelayCommand _resolveHistoryCommand;
+        public ICommand ResolveHistoryCommand => _resolveHistoryCommand;
 
         private readonly RelayCommand _addCommentCommand;
         public ICommand AddCommentCommand => _addCommentCommand;
@@ -88,15 +90,14 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
             _editTaskCommand = new RelayCommand(OnEditTaskCommand);
             _addCommentCommand = new RelayCommand(OnAddCommentCommand);
             _removeCommentCommand = new RelayCommand<int>(OnRemoveCommentCommand);
+            _resolveHistoryCommand = new RelayCommand(ResolveHistory);
 
-            //TODO: dodać przycisk do znajdowania historii (a nie robic to dla kazdego taska)
-            System.Threading.Tasks.Task.Run(() => ResolveHistory());
         }
 
         private async void ResolveHistory()
         {
+            //TODO:  wyświetlanie historii
             var creationDate = await _repositoryService.GetCreationDate(Task);
-            var entityChanges = await _repositoryService.GetHistory(Task);
             Application.Current.Dispatcher.Invoke(() =>
             {
                 CreationDate = creationDate.ToString("g");
@@ -105,6 +106,8 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 
         private async void OnAddCommentCommand()
         {
+            if (string.IsNullOrWhiteSpace(AddedComment)) return;
+
             if (Task.Comments == null)
             {
                 Task.Comments = new List<string>();

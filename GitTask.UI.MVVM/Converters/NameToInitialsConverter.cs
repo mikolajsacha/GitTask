@@ -7,7 +7,7 @@ namespace GitTask.UI.MVVM.Converters
 {
     public class NameToInitialsConverter : IValueConverter
     {
-        private const int MaxLength = 3;
+        private const int MaxLength = 2;
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

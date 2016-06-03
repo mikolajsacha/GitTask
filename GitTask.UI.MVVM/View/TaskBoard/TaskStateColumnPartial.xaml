@@ -15,35 +15,37 @@
 
     <Grid VerticalAlignment="Stretch"
           AllowDrop="True"
-          Background="LightGray"
+          Background="{Binding Background,
+                               Mode=OneWay}"
           Drop="OnDrop">
         <Grid Margin="2,0,2,0" Visibility="{Binding IsOpened, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="11" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
-                        Margin="0"
+                        Margin="1,5,0,1"
                         HorizontalAlignment="Left"
-                        Background="Transparent"
-                        BorderThickness="0"
                         Command="{Binding MoveColumnLeftCommand,
                                           Mode=OneWay}"
+                        Style="{StaticResource SmallIconButton}"
                         Visibility="{Binding CanMoveLeft,
                                              Converter={StaticResource BooleanToVisibilityConverter},
                                              Mode=OneWay}">
-                    <Image Width="20"
-                           Height="20"
-                           Source="../../Images/arrow.png" />
+                    <Button.Resources>
+                        <ImageSource x:Key="ImageSource">../../Icons/leftarrow.png</ImageSource>
+                    </Button.Resources>
+                    <Button.ToolTip>
+                        <TextBlock Text="{Binding Source={x:Static prop:Resources.MoveLeft}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+                    </Button.ToolTip>
                 </Button>
                 <TextBlock Grid.Column="1"
                            Margin="0,5,0,0"
@@ -56,45 +58,29 @@
                                           Mode=OneWay}"
                            TextAlignment="Center" />
                 <Button Grid.Column="2"
-                        Margin="0"
+                        Margin="0,5,1,1"
                         HorizontalAlignment="Right"
-                        Background="Transparent"
-                        BorderThickness="0"
                         Command="{Binding MoveColumnRightCommand,
                                           Mode=OneWay}"
+                        Style="{StaticResource SmallIconButton}"
                         Visibility="{Binding CanMoveRight,
                                              Converter={StaticResource BooleanToVisibilityConverter},
                                              Mode=OneWay}">
-                    <Image Width="20"
-                           Height="20"
-                           Source="../../Images/arrow.png">
-                        <Image.RenderTransform>
-                            <RotateTransform Angle="180" CenterX="10" CenterY="10" />
-                        </Image.RenderTransform>
-                    </Image>
+                    <Button.Resources>
+                        <ImageSource x:Key="ImageSource">../../Icons/rightarrow.png</ImageSource>
+                    </Button.Resources>
+                    <Button.ToolTip>
+                        <TextBlock Text="{Binding Source={x:Static prop:Resources.MoveRight}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+                    </Button.ToolTip>
                 </Button>
             </Grid>
 
             <Border Grid.Row="1"
-                    Margin="0,10,0,5"
+                    Margin="0,2,0,5"
                     Background="{Binding TaskState.Color,
                                          Mode=OneWay}"
                     CornerRadius="3" />
-            <Button Grid.Row="2"
-                    Margin="0,0,0,5"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Stretch"
-                    Command="{Binding HideColumnCommand,
-                                      Mode=OneWay}"
-                    Style="{StaticResource RoundedCornersButton}">
-                <TextBlock Margin="5"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Text="{Binding Source={x:Static prop:Resources.Hide},
-                                          Converter={StaticResource ToUpperCaseConverter},
-                                          Mode=OneTime}" />
-            </Button>
-            <ItemsControl Grid.Row="3" ItemsSource="{Binding Tasks, Mode=OneWay}">
+            <ItemsControl Grid.Row="2" ItemsSource="{Binding Tasks, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical" />
@@ -106,20 +92,53 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Button Grid.Row="4"
-                    Height="25"
-                    Margin="0,5,0,5"
-                    Command="{Binding DeleteTaskStateCommand,
-                                      Mode=OneWay}"
-                    Style="{StaticResource RoundedCornersButton}"
-                    Visibility="{Binding CanBeDeleted,
-                                         Converter={StaticResource BooleanToVisibilityConverter},
-                                         Mode=OneWay}">
-                <TextBlock VerticalAlignment="Center"
-                           FontSize="14"
-                           Text="{x:Static prop:Resources.Delete}"
-                           TextAlignment="Center" />
-            </Button>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1"
+                            Margin="2"
+                            Orientation="Horizontal">
+                    <Button Margin="1"
+                            Command="{Binding DeleteTaskStateCommand,
+                                              Mode=OneWay}"
+                            Style="{StaticResource SmallIconButton}"
+                            Visibility="{Binding CanBeDeleted,
+                                                 Converter={StaticResource BooleanToVisibilityConverter},
+                                                 Mode=OneWay}">
+                        <Button.Resources>
+                            <ImageSource x:Key="ImageSource">../../Icons/trashbin.png</ImageSource>
+                        </Button.Resources>
+                        <Button.ToolTip>
+                            <TextBlock Text="{Binding Source={x:Static prop:Resources.Delete}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Margin="1"
+                            Command="{Binding HideColumnCommand,
+                                              Mode=OneWay}"
+                            Style="{StaticResource SmallIconButton}">
+                        <Button.Resources>
+                            <ImageSource x:Key="ImageSource">../../Icons/hide.png</ImageSource>
+                        </Button.Resources>
+                        <Button.ToolTip>
+                            <TextBlock Text="{Binding Source={x:Static prop:Resources.Hide}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+                        </Button.ToolTip>
+                    </Button>
+                    <Button Margin="1"
+                            Command="{Binding AddTaskCommand,
+                                              Mode=OneWay}"
+                            Style="{StaticResource SmallIconButton}">
+                        <Button.Resources>
+                            <ImageSource x:Key="ImageSource">../../Icons/add.png</ImageSource>
+                        </Button.Resources>
+                        <Button.ToolTip>
+                            <TextBlock Text="{Binding Source={x:Static prop:Resources.AddTask}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+                        </Button.ToolTip>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </Grid>
         <Button Margin="2,0,2,0"
                 HorizontalContentAlignment="Stretch"

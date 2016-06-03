@@ -17,7 +17,6 @@
              mc:Ignorable="d ignore">
 
     <Grid x:Name="MainGrid"
-          MinHeight="40"
           MaxHeight="80"
           Background="BlueViolet">
         <Grid.ColumnDefinitions>

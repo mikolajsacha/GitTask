@@ -4,15 +4,11 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Services.Interface;
 using GitTask.UI.MVVM.View.ProjectSettings;
-using GitTask.UI.MVVM.View.TaskDetails;
 
 namespace GitTask.UI.MVVM.ViewModel.ActionBar
 {
     public class ButtonsViewModel : ViewModelBase
     {
-        private readonly RelayCommand _addTaskCommand;
-        public ICommand AddTaskCommand => _addTaskCommand;
-
         private readonly RelayCommand _addTaskStateCommand;
         public ICommand AddTaskStateCommand => _addTaskStateCommand;
 
@@ -32,7 +28,6 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
 
         public ButtonsViewModel(IProjectPathsReadonlyService projectPathsService)
         {
-            _addTaskCommand = new RelayCommand(OnAddTaskCommand);
             _addTaskStateCommand = new RelayCommand(OnAddTaskStateCommand);
             _setCurrentUserCommand = new RelayCommand(OnSetCurrentUserCommand);
 
@@ -43,12 +38,6 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
         private void OnProjectPathChanged()
         {
             AreButtonsEnabled = true;
-        }
-
-        private void OnAddTaskCommand()
-        {
-            var addTaskWindow = new AddTaskWindow {Owner = Application.Current.MainWindow};
-            addTaskWindow.Show();
         }
 
         private void OnSetCurrentUserCommand()

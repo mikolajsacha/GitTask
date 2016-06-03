@@ -173,7 +173,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             foreach (var state in orderedTaskStates)
             {
                 var isOpened = counter < DefaultOpenedColumnsCount;
-                var taskStateColumn = new TaskStateColumnViewModel(state, _taskStateQueryService, _filtersViewModel,
+                var taskStateColumn = new TaskStateColumnViewModel(state, _taskStateQueryService, _filtersViewModel, counter,
                                                                    isOpened, counter > 0, counter < count - 1);
                 taskStateColumn.PropertyChanged += TaskStateColumnOnPropertyChanged;
                 TaskStateColumns.Add(taskStateColumn);

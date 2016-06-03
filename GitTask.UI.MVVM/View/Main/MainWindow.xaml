@@ -26,12 +26,11 @@
     <Grid>
         <Grid Visibility="{Binding IsTaskBoardVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <taskBoard:TaskBoardPartial Grid.Row="0" />
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="0" Height="40">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -40,7 +39,8 @@
                 <actionBar:FiltersPartial Grid.Column="0" HorizontalAlignment="Left" />
                 <actionBar:ButtonsPartial Grid.Column="2" HorizontalAlignment="Right" />
             </Grid>
-            <footer:FooterPartial Grid.Row="2" />
+            <taskBoard:TaskBoardPartial Grid.Row="1" />
+            <footer:FooterPartial Grid.Row="2" MinHeight="40" />
         </Grid>
         <Grid Visibility="{Binding IsProjectInitializerVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
             <main:ProjectOpeningPartial />

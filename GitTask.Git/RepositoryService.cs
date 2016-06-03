@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using GitTask.Domain.Attributes;
 using GitTask.Domain.Model.Project;
@@ -98,8 +101,9 @@ namespace GitTask.Git
 
                         var entityCommitChange = new EntityCommitChange
                         {
-                            PropertyChanges = ResolveChanges<TModel>(parentBlob, childBlob).ToList(),
-                            Date = commit.Committer.When.DateTime
+                            PropertyChanges = ResolveChangesInBlob<TModel>(parentBlob, childBlob).ToList(),
+                            Date = commit.Committer.When.DateTime,
+                            Author = new ProjectMember(commit.Committer.Name, commit.Committer.Email)
                         };
                         if (entityCommitChange.PropertyChanges != null && entityCommitChange.PropertyChanges.Any())
                         {
@@ -116,7 +120,7 @@ namespace GitTask.Git
             });
         }
 
-        private IEnumerable<EntityPropertyChange> ResolveChanges<TModel>(Blob parentBlob, Blob childBlob)
+        private IEnumerable<EntityPropertyChange> ResolveChangesInBlob<TModel>(Blob parentBlob, Blob childBlob)
         {
             var parentContentStream = parentBlob.GetContentStream();
             var childContentStream = childBlob.GetContentStream();
@@ -145,20 +149,36 @@ namespace GitTask.Git
                 return null;
             }
 
-            var properties = typeof (TModel).GetProperties();
+            var properties = typeof(TModel).GetProperties();
 
             //TODO: Zmienić logikę dla kolekcji (tak, aby kolekcje o takich samych elementach nie byly wliczane do zmian)
             foreach (var property in typeof(TModel).GetProperties())
             {
                 var parentPropertyValue = property.GetValue(parentObject);
                 var childPropertyValue = property.GetValue(childObject);
-                if (!parentPropertyValue.Equals(childPropertyValue))
+                if (typeof(IEnumerable).IsAssignableFrom(property.PropertyType) && !AreEnumerablePropertiesEqual(parentPropertyValue, childPropertyValue))
+                {
+                    propertyChanges.Add(new EntityPropertyChange { OldValue = parentPropertyValue, PropertyName = property.Name });
+                }
+                else if (!parentPropertyValue.Equals(childPropertyValue))
                 {
                     propertyChanges.Add(new EntityPropertyChange { OldValue = parentPropertyValue, PropertyName = property.Name });
                 }
             }
 
             return propertyChanges;
+        }
+
+        private static bool AreEnumerablePropertiesEqual(object parentPropertyValue, object childPropertyValue)
+        {
+            var parentEnumerator = ((IEnumerable)parentPropertyValue).GetEnumerator();
+            var childEnumerator = ((IEnumerable)childPropertyValue).GetEnumerator();
+            while (parentEnumerator.MoveNext())
+            {
+                if (!childEnumerator.MoveNext()) return false; // child is shorter
+                if (!parentEnumerator.Current.Equals(childEnumerator.Current)) return false; // different element values
+            }
+            return !childEnumerator.MoveNext(); // check if child is longer;
         }
 
         public async Task<DateTime> GetCreationDate<TModel>(TModel modelObject)

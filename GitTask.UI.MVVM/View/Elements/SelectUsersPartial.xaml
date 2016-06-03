@@ -89,7 +89,10 @@
                      SelectionMode="{Binding RelativeSource={RelativeSource FindAncestor,
                                                                             AncestorType={x:Type UserControl}},
                                              Path=DataContext.SelectionMode,
-                                             Mode=OneWay}">
+                                             Mode=OneWay}"
+                     Visibility="{Binding IsLoading,
+                                          Mode=OneWay,
+                                          Converter={StaticResource BoolToVisibilityReverseConverter}}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel HorizontalAlignment="Stretch"
@@ -117,7 +120,7 @@
                   MinHeight="40"
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
-                  Background="#44444444"
+                  Background="Transparent"
                   Visibility="{Binding IsLoading,
                                        Mode=OneWay,
                                        Converter={StaticResource BooleanToVisibilityConverter}}">
