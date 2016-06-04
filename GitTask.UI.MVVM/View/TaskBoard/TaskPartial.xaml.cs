@@ -1,30 +1,28 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
-using GitTask.UI.MVVM.View.TaskDetails;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
 namespace GitTask.UI.MVVM.View.TaskBoard
 {
     public partial class TaskPartial
     {
-        private readonly RelayCommand _showDetailsCommand;
-        public ICommand ShowDetailsCommand => _showDetailsCommand;
-
         public TaskPartial()
         {
-            _showDetailsCommand = new RelayCommand(ShowTaskDetails);
             InitializeComponent();
-            Main.MouseDown += MainOnMouseDown;
+            Content.MouseDown += MainOnMouseDown;
             Main.MouseLeave += MainOnMouseLeave;
+            AddCommentButton.Click += AddCommentButtonOnClick;
+            AddCommentPopup.LostFocus += AddCommentPopupOnLostFocus;
         }
 
         private void MainOnMouseDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
         {
-            if (mouseButtonEventArgs?.ClickCount > 1)
-            {
-                ShowTaskDetails();
-            }
+            if (!(mouseButtonEventArgs?.ClickCount > 1)) return;
+
+            var taskDetails = DataContext as TaskDetailsViewModel;
+            if (taskDetails == null) return;
+
+            taskDetails.IsFullContentVisible = !taskDetails.IsFullContentVisible;
         }
 
         private void MainOnMouseLeave(object sender, MouseEventArgs e)
@@ -41,13 +39,22 @@ namespace GitTask.UI.MVVM.View.TaskBoard
             DragDrop.DoDragDrop(dependencyObject, taskDetails.Task.Title, DragDropEffects.Move);
         }
 
-        private void ShowTaskDetails()
+        private void AddCommentPopupOnLostFocus(object sender, RoutedEventArgs routedEventArgs)
         {
-            var taskDetails = DataContext as TaskDetailsViewModel;
-            if (taskDetails == null) return;
+            AddCommentPopup.IsOpen = false;
 
-            var taskDetailsWindow = new TaskDetailsWindow(taskDetails) { Owner = Application.Current.MainWindow };
-            taskDetailsWindow.Show();
+            var taskDetailsViewModel = DataContext as TaskDetailsViewModel;
+
+            if (taskDetailsViewModel != null && taskDetailsViewModel.AddCommentCommand.CanExecute(new object()))
+            {
+                taskDetailsViewModel.AddCommentCommand.Execute(new object());
+            }
+        }
+
+        private void AddCommentButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            AddCommentPopup.IsOpen = true;
+            AddCommentPopup.Focus();
         }
     }
 }

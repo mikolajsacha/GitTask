@@ -5,21 +5,21 @@ using System.Windows.Data;
 
 namespace GitTask.UI.MVVM.Converters
 {
-    public class BoolToVisibilityConverter : IValueConverter
+    public class BoolToVisibilityReverseConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var isVisible = value as bool?;
-            if (isVisible == null) return false;
+            var isHidden = value as bool?;
+            if (isHidden == null) return false;
 
-            return isVisible == true ? Visibility.Visible : Visibility.Collapsed;
+            return isHidden == true ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var visibility = value as Visibility?;
 
-            return visibility == Visibility.Collapsed;
+            return visibility == Visibility.Hidden;
         }
     }
 }

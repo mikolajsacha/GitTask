@@ -23,6 +23,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
         public Task Task { get; }
         public ObservableCollection<string> Comments { get; }
 
+
         private string _addedComment;
         public string AddedComment
         {
@@ -48,6 +49,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 
         public bool IsAddingCommentEnabled => !string.IsNullOrWhiteSpace(AddedComment);
         public bool AnyComments => Comments != null && Comments.Any();
+        public bool CommentsVisible => AnyComments && _isFullContentVisible;
 
         private bool _isVisible;
         public bool IsVisible
@@ -57,6 +59,18 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
             {
                 _isVisible = value;
                 RaisePropertyChanged();
+            }
+        }
+
+        private bool _isFullContentVisible;
+        public bool IsFullContentVisible
+        {
+            get { return _isFullContentVisible; }
+            set
+            {
+                _isFullContentVisible = value;
+                RaisePropertyChanged();
+                RaisePropertyChanged("CommentsVisible");
             }
         }
 
@@ -77,10 +91,11 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
             IRepositoryService repositoryService,
             CurrentUserViewModel currentUserViewModel)
         {
+            _isFullContentVisible = false;
             Task = task;
 
             Comments = new ObservableCollection<string>(Task.Comments);
-            Comments.CollectionChanged += (sender, args) => RaisePropertyChanged("AnyComments");
+            Comments.CollectionChanged += (sender, args) => { RaisePropertyChanged("AnyComments"); RaisePropertyChanged("CommentsVisible"); };
 
             _isVisible = true;
             _taskQueryService = taskQueryService;
@@ -96,12 +111,15 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 
         private async void ResolveHistory()
         {
-            //TODO:  wyświetlanie historii
-            var creationDate = await _repositoryService.GetCreationDate(Task);
-            Application.Current.Dispatcher.Invoke(() =>
+            var taskHistory = await _repositoryService.GetHistory(Task);
+            if (taskHistory == null)
             {
-                CreationDate = creationDate.ToString("g");
-            }, DispatcherPriority.Normal);
+                //TODO: alert: brak historii
+                return;
+            }
+            //TODO: sprawdzic, czemu data sie czasami kasuje po zmniejszeniu taska
+            //TODO: Wyswietlanie historii taska
+            CreationDate = taskHistory.CreationDate.ToString("g");
         }
 
         private async void OnAddCommentCommand()
@@ -113,7 +131,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
                 Task.Comments = new List<string>();
             }
 
-            var signedComment = $"{AddedComment} ({_currentUserViewModel.CurrentUser.Name}, {DateTime.Now})";
+            var signedComment = $"{AddedComment} ({DateTime.Now})";
 
             Task.Comments.Add(signedComment);
             Comments.Add(signedComment);

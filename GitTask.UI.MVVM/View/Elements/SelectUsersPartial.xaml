@@ -17,64 +17,60 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0"
-                    Margin="0,2,0,2"
-                    Background="White"
-                    Orientation="Vertical">
-            <TextBlock Margin="2" Text="Add new user:" />
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0"
-                           Grid.Column="0"
-                           Margin="5,2,2,2"
-                           HorizontalAlignment="Right"
+        <Grid Grid.Row="0"
+              Margin="0"
+              Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       Margin="2"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Text="{x:Static prop:Resources.Name}" />
+            <TextBox Grid.Row="0"
+                     Grid.Column="1"
+                     Height="20"
+                     Margin="2"
+                     Text="{Binding AddedUserName,
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+            <Button Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="2"
+                    Width="40"
+                    Height="20"
+                    Margin="2"
+                    Command="{Binding AddUserCommand,
+                                      Mode=OneWay}"
+                    IsEnabled="{Binding AddUserButtonEnabled,
+                                        Mode=OneWay}"
+                    Style="{StaticResource RoundedCornersButton}">
+                <TextBlock HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           Text="Name:" />
-                <TextBox Grid.Row="0"
-                         Grid.Column="1"
-                         Height="15"
-                         Margin="2"
-                         Text="{Binding AddedUserName,
-                                        Mode=TwoWay,
-                                        UpdateSourceTrigger=PropertyChanged}" />
-                <Button Grid.Row="0"
-                        Grid.RowSpan="2"
-                        Grid.Column="2"
-                        Width="40"
-                        Height="20"
-                        Margin="2,5,5,5"
-                        Command="{Binding AddUserCommand,
-                                          Mode=OneWay}"
-                        IsEnabled="{Binding AddUserButtonEnabled,
-                                            Mode=OneWay}"
-                        Style="{StaticResource RoundedCornersButton}">
-                    <TextBlock HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Text="{x:Static prop:Resources.Add}" />
-                </Button>
-                <TextBlock Grid.Row="1"
-                           Grid.Column="0"
-                           Margin="5,2,2,2"
-                           HorizontalAlignment="Right"
-                           VerticalAlignment="Center"
-                           Text="E-mail:" />
-                <TextBox Grid.Row="1"
-                         Grid.Column="1"
-                         Height="15"
-                         Margin="2"
-                         Text="{Binding AddedUserEmail,
-                                        Mode=TwoWay,
-                                        UpdateSourceTrigger=PropertyChanged}" />
-            </Grid>
-        </StackPanel>
+                           Text="{x:Static prop:Resources.Add}" />
+            </Button>
+            <TextBlock Grid.Row="1"
+                       Grid.Column="0"
+                       Margin="2"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Text="{x:Static prop:Resources.Email}" />
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Height="20"
+                     Margin="2"
+                     Text="{Binding AddedUserEmail,
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
         <Grid Grid.Row="1"
               d:DataContext="{d:DesignInstance Type=design:DesignProjectMembersViewModel,
                                                IsDesignTimeCreatable=True}"
@@ -82,6 +78,7 @@
                                     Source={StaticResource Locator},
                                     Mode=OneWay}">
             <ListBox x:Name="UsersList"
+                     BorderThickness="0"
                      ItemsSource="{Binding ProjectMembers,
                                            Mode=OneWay}"
                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
@@ -102,7 +99,7 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="3" Orientation="Vertical">
+                        <StackPanel Margin="0" Orientation="Vertical">
                             <TextBlock Margin="0,1,0,1"
                                        FontSize="13"
                                        Text="{Binding Name,
@@ -123,7 +120,7 @@
                   Background="Transparent"
                   Visibility="{Binding IsLoading,
                                        Mode=OneWay,
-                                       Converter={StaticResource BooleanToVisibilityConverter}}">
+                                       Converter={StaticResource BoolToVisibilityConverter}}">
                 <elements:SpinningWheel Width="36"
                                         Height="36"
                                         Margin="0,0,5,0"

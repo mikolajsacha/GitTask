@@ -4,5 +4,6 @@
     {
         public string PropertyName;
         public object OldValue;
+        public object NewValue;
     }
 }

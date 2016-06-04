@@ -134,6 +134,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityReverseConverter.cs" />
     <Compile Include="Converters\ProjectMemberToBrushConverter.cs" />
     <Compile Include="Converters\ToUpperCaseConverter.cs" />
@@ -244,9 +245,6 @@
     <Compile Include="View\TaskDetails\AssignedMembersInitialsList.xaml.cs">
       <DependentUpon>AssignedMembersInitialsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TaskDetails\TaskDetailsWindow.xaml.cs">
-      <DependentUpon>TaskDetailsWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="View\ActionBar\FiltersPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -347,10 +345,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\TaskDetails\TaskDetailsWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -427,6 +421,11 @@
     <Resource Include="Icons\graph.png" />
     <Resource Include="Icons\hide.png" />
     <Resource Include="Icons\trashbin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\white\add.png" />
+    <Resource Include="Icons\white\folder.png" />
+    <Resource Include="Icons\white\profile.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

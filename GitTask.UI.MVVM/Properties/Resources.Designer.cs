@@ -79,6 +79,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new user.
+        /// </summary>
+        public static string AddNewUser {
+            get {
+                return ResourceManager.GetString("AddNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add task.
         /// </summary>
         public static string AddTask {
@@ -192,6 +201,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string EditTask {
             get {
                 return ResourceManager.GetString("EditTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E-mail.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
             }
         }
         

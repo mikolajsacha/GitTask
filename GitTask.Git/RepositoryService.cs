@@ -151,18 +151,17 @@ namespace GitTask.Git
 
             var properties = typeof(TModel).GetProperties();
 
-            //TODO: Zmienić logikę dla kolekcji (tak, aby kolekcje o takich samych elementach nie byly wliczane do zmian)
             foreach (var property in typeof(TModel).GetProperties())
             {
                 var parentPropertyValue = property.GetValue(parentObject);
                 var childPropertyValue = property.GetValue(childObject);
                 if (typeof(IEnumerable).IsAssignableFrom(property.PropertyType) && !AreEnumerablePropertiesEqual(parentPropertyValue, childPropertyValue))
                 {
-                    propertyChanges.Add(new EntityPropertyChange { OldValue = parentPropertyValue, PropertyName = property.Name });
+                    propertyChanges.Add(new EntityPropertyChange { OldValue = parentPropertyValue, NewValue = childPropertyValue, PropertyName = property.Name });
                 }
                 else if (!parentPropertyValue.Equals(childPropertyValue))
                 {
-                    propertyChanges.Add(new EntityPropertyChange { OldValue = parentPropertyValue, PropertyName = property.Name });
+                    propertyChanges.Add(new EntityPropertyChange { OldValue = parentPropertyValue, NewValue = childPropertyValue, PropertyName = property.Name });
                 }
             }
 

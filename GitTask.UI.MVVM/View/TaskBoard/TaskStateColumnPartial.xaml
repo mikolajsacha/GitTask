@@ -10,7 +10,7 @@
              d:DataContext="{d:DesignInstance Type=design:DesignTaskStateColumnViewModel,
                                               IsDesignTimeCreatable=True}"
              d:DesignHeight="730"
-             d:DesignWidth="250"
+             d:DesignWidth="260"
              mc:Ignorable="d ignore">
 
     <Grid VerticalAlignment="Stretch"
@@ -18,10 +18,10 @@
           Background="{Binding Background,
                                Mode=OneWay}"
           Drop="OnDrop">
-        <Grid Margin="2,0,2,0" Visibility="{Binding IsOpened, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+        <Grid Margin="2,0,2,0" Visibility="{Binding IsOpened, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="11" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -38,7 +38,7 @@
                                           Mode=OneWay}"
                         Style="{StaticResource SmallIconButton}"
                         Visibility="{Binding CanMoveLeft,
-                                             Converter={StaticResource BooleanToVisibilityConverter},
+                                             Converter={StaticResource BoolToVisibilityConverter},
                                              Mode=OneWay}">
                     <Button.Resources>
                         <ImageSource x:Key="ImageSource">../../Icons/leftarrow.png</ImageSource>
@@ -64,7 +64,7 @@
                                           Mode=OneWay}"
                         Style="{StaticResource SmallIconButton}"
                         Visibility="{Binding CanMoveRight,
-                                             Converter={StaticResource BooleanToVisibilityConverter},
+                                             Converter={StaticResource BoolToVisibilityConverter},
                                              Mode=OneWay}">
                     <Button.Resources>
                         <ImageSource x:Key="ImageSource">../../Icons/rightarrow.png</ImageSource>
@@ -74,21 +74,20 @@
                     </Button.ToolTip>
                 </Button>
             </Grid>
-
             <Border Grid.Row="1"
-                    Margin="0,2,0,5"
+                    Margin="0,2,0,4"
                     Background="{Binding TaskState.Color,
                                          Mode=OneWay}"
                     CornerRadius="3" />
             <ItemsControl Grid.Row="2" ItemsSource="{Binding Tasks, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical" />
+                        <WrapPanel />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <taskBoard:TaskPartial Margin="0,0,0,5" DataContext="{Binding Mode=OneWay}" />
+                        <taskBoard:TaskPartial Margin="2" DataContext="{Binding Mode=OneWay}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -106,7 +105,7 @@
                                               Mode=OneWay}"
                             Style="{StaticResource SmallIconButton}"
                             Visibility="{Binding CanBeDeleted,
-                                                 Converter={StaticResource BooleanToVisibilityConverter},
+                                                 Converter={StaticResource BoolToVisibilityConverter},
                                                  Mode=OneWay}">
                         <Button.Resources>
                             <ImageSource x:Key="ImageSource">../../Icons/trashbin.png</ImageSource>
@@ -147,7 +146,7 @@
                                   Mode=OneWay}"
                 Style="{StaticResource RoundedCornersButton}"
                 Visibility="{Binding IsHidden,
-                                     Converter={StaticResource BooleanToVisibilityConverter},
+                                     Converter={StaticResource BoolToVisibilityConverter},
                                      Mode=OneWay}">
             <Grid Margin="5">
                 <Grid.RowDefinitions>

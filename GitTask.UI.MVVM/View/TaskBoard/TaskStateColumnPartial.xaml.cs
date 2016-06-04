@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using GitTask.UI.MVVM.Messages;
 using GitTask.UI.MVVM.ViewModel.TaskBoard;

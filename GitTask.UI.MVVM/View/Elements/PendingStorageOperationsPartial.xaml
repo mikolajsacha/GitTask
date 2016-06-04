@@ -20,7 +20,7 @@
     <StackPanel MinWidth="230"
                 Orientation="Horizontal"
                 Visibility="{Binding AnyPendingStorageOperations,
-                                     Converter={StaticResource BooleanToVisibilityConverter},
+                                     Converter={StaticResource BoolToVisibilityConverter},
                                      Mode=OneWay}">
         <elements:SpinningWheel Width="36"
                                 Height="36"

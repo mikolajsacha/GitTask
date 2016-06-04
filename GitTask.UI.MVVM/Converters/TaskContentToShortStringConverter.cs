@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 using System.Windows.Data;
 
 namespace GitTask.UI.MVVM.Converters
@@ -15,9 +17,12 @@ namespace GitTask.UI.MVVM.Converters
 
             if (taskContent.Length > MaxLength)
             {
-                return taskContent.Substring(0, MaxLength - 3) + "...";
+                taskContent = taskContent.Substring(0, MaxLength - 3) + "...";
             }
-            return taskContent;
+            var splitContent = taskContent.Split('\n').Take(2);
+            var mergedContent = new StringBuilder();
+            foreach (var word in splitContent) mergedContent.Append(word);
+            return mergedContent;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

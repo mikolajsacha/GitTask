@@ -243,4 +243,10 @@
   <data name="ResolveHistory" xml:space="preserve">
     <value>Resolve history</value>
   </data>
+  <data name="AddNewUser" xml:space="preserve">
+    <value>Add new user</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
 </root>

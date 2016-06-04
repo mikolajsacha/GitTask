@@ -24,13 +24,15 @@
         mc:Ignorable="d ignore">
 
     <Grid>
-        <Grid Visibility="{Binding IsTaskBoardVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+        <Grid Visibility="{Binding IsTaskBoardVisible, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Height="40">
+            <Grid Grid.Row="0"
+                  Height="40"
+                  Background="Black">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -40,9 +42,9 @@
                 <actionBar:ButtonsPartial Grid.Column="2" HorizontalAlignment="Right" />
             </Grid>
             <taskBoard:TaskBoardPartial Grid.Row="1" />
-            <footer:FooterPartial Grid.Row="2" MinHeight="40" />
+            <footer:FooterPartial Grid.Row="2" />
         </Grid>
-        <Grid Visibility="{Binding IsProjectInitializerVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
+        <Grid Visibility="{Binding IsProjectInitializerVisible, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
             <main:ProjectOpeningPartial />
         </Grid>
     </Grid>
