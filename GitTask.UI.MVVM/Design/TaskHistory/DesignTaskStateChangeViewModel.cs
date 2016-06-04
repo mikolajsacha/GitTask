@@ -1,15 +1,13 @@
-﻿using System.Windows.Media;
-using GitTask.Domain.Model.Task;
+﻿using GitTask.Domain.Model.Task;
 using GitTask.UI.MVVM.ViewModel.TaskHistory;
 
 namespace GitTask.UI.MVVM.Design.TaskHistory
 {
-    public class DesignTaskStateChangeViewModel : TaskStateChangeViewModel
+    public class DesignTaskStateChangeViewModel : BaseChangeViewModel<string>
     {
-        public DesignTaskStateChangeViewModel() : base(new TaskState { Name = "TO DO", Color = Brushes.Green, Position = 0 },
-                                                       new TaskState { Name = "IN PROGRESS", Color = Brushes.Red, Position = 1 })
-        {
-           
-        }
+        public TaskState OldTaskState { get; set; }
+        public TaskState NewTaskState { get; set; }
+
+        public DesignTaskStateChangeViewModel() : base("TO DO", "IN PROGRESS") { }
     }
 }

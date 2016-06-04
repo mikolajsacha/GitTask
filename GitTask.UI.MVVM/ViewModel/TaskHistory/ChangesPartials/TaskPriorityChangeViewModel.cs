@@ -1,7 +1,6 @@
-﻿using GalaSoft.MvvmLight;
-using GitTask.Domain.Enum;
+﻿using GitTask.Domain.Enum;
 
-namespace GitTask.UI.MVVM.ViewModel.TaskHistory
+namespace GitTask.UI.MVVM.ViewModel.TaskHistory.ChangesPartials
 {
     public class TaskPriorityChangeViewModel : BaseChangeViewModel<TaskPriority>
     {

@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-using GitTask.UI.MVVM.ViewModel.TaskHistory;
+﻿using GitTask.UI.MVVM.ViewModel.TaskHistory.ChangesPartials;
 
 namespace GitTask.UI.MVVM.Design.TaskHistory
 {

@@ -79,11 +79,20 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Added project members:.
+        ///   Looks up a localized string similar to Added assigned members:.
         /// </summary>
-        public static string AddedProjectMembers {
+        public static string AddedAssignedMembers {
             get {
-                return ResourceManager.GetString("AddedProjectMembers", resourceCulture);
+                return ResourceManager.GetString("AddedAssignedMembers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Added comments:.
+        /// </summary>
+        public static string AddedComments {
+            get {
+                return ResourceManager.GetString("AddedComments", resourceCulture);
             }
         }
         
@@ -313,6 +322,24 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New value:.
+        /// </summary>
+        public static string NewValue {
+            get {
+                return ResourceManager.GetString("NewValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old value:.
+        /// </summary>
+        public static string OldValue {
+            get {
+                return ResourceManager.GetString("OldValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open project.
         /// </summary>
         public static string OpenProject {
@@ -403,11 +430,20 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removed project members:.
+        ///   Looks up a localized string similar to Removed assigned members:.
         /// </summary>
-        public static string RemovedProjectMembers {
+        public static string RemovedAssignedMembers {
             get {
-                return ResourceManager.GetString("RemovedProjectMembers", resourceCulture);
+                return ResourceManager.GetString("RemovedAssignedMembers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed comments:.
+        /// </summary>
+        public static string RemovedComments {
+            get {
+                return ResourceManager.GetString("RemovedComments", resourceCulture);
             }
         }
         
@@ -435,6 +471,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string ResolveHistory {
             get {
                 return ResourceManager.GetString("ResolveHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolve project history.
+        /// </summary>
+        public static string ResolveProjectHistory {
+            get {
+                return ResourceManager.GetString("ResolveProjectHistory", resourceCulture);
             }
         }
         
@@ -498,6 +543,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string TaskDetails {
             get {
                 return ResourceManager.GetString("TaskDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task history.
+        /// </summary>
+        public static string TaskHistory {
+            get {
+                return ResourceManager.GetString("TaskHistory", resourceCulture);
             }
         }
         

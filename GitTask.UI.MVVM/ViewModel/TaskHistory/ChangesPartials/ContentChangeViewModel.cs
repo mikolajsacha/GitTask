@@ -1,4 +1,4 @@
-﻿namespace GitTask.UI.MVVM.ViewModel.TaskHistory
+﻿namespace GitTask.UI.MVVM.ViewModel.TaskHistory.ChangesPartials
 {
     public class ContentChangeViewModel : BaseChangeViewModel<string>
     {

@@ -39,30 +39,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="TaskStateTextBlock" TargetType="TextBlock">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding SelectTaskStateViewModel.TaskStateChosen}" Value="False">
-                    <Setter Property="Text" Value="{x:Static prop:Resources.SelectState}" />
-                    <Setter Property="FontStyle" Value="Italic" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding SelectTaskStateViewModel.TaskStateChosen}" Value="True">
-                    <Setter Property="Text" Value="{Binding SelectTaskStateViewModel.SelectedTaskState.Name, Mode=OneWay}" />
-                    <Setter Property="FontStyle" Value="Normal" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="SelectedTaskStateColorRectangle" TargetType="Border">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding SelectTaskStateViewModel.TaskStateChosen}" Value="False">
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="Visibility" Value="Hidden" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding SelectTaskStateViewModel.TaskStateChosen}" Value="True">
-                    <Setter Property="Background" Value="{Binding SelectTaskStateViewModel.SelectedTaskState.Color, Mode=OneWay}" />
-                    <Setter Property="Visibility" Value="Visible" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
     </Window.Resources>
 
     <Grid Background="White">
@@ -174,32 +150,18 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Popup x:Name="SelectStatePopup">
-                    <StackPanel Orientation="Vertical">
-                        <elements:SelectTaskStatePartial DataContext="{Binding SelectTaskStateViewModel, Mode=OneTime}" />
-                        <Button Width="120"
-                                Height="30"
-                                Command="{Binding AddTaskStateCommand}"
-                                Style="{StaticResource RoundedCornersButton}">
-                            <TextBlock VerticalAlignment="Center"
-                                       Text="{Binding Source={x:Static prop:Resources.AddTaskState},
-                                                      Converter={StaticResource ToUpperCaseConverter}}"
-                                       TextAlignment="Center" />
-                        </Button>
-                    </StackPanel>
-                </Popup>
                 <Border Grid.Column="0"
                         Width="20"
                         Height="20"
                         Margin="2"
-                        CornerRadius="3"
-                        Style="{StaticResource SelectedTaskStateColorRectangle}" />
+                        Background="{Binding TaskState.Color}"
+                        CornerRadius="3" />
                 <TextBlock Grid.Column="1"
                            Margin="4"
                            VerticalAlignment="Center"
                            FontSize="16"
                            FontWeight="SemiBold"
-                           Style="{StaticResource TaskStateTextBlock}"
+                           Text="{Binding TaskState.Name}"
                            TextAlignment="Center" />
             </Grid>
             <Button x:Name="OkButton"

@@ -32,6 +32,22 @@
     <StackPanel Margin="2,0,2,0"
                 HorizontalAlignment="Right"
                 Orientation="Horizontal">
+        <Button Command="{Binding ResolveHistoryCommand, Mode=OneWay}">
+            <Button.Resources>
+                <ImageSource x:Key="ImageSource">../../Icons/white/graph.png</ImageSource>
+            </Button.Resources>
+            <Button.ToolTip>
+                <TextBlock Text="{Binding Source={x:Static prop:Resources.ResolveProjectHistory}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+            </Button.ToolTip>
+        </Button>
+        <Button Command="{Binding AddTaskStateCommand, Mode=OneWay}">
+            <Button.Resources>
+                <ImageSource x:Key="ImageSource">../../Icons/white/add.png</ImageSource>
+            </Button.Resources>
+            <Button.ToolTip>
+                <TextBlock Text="{Binding Source={x:Static prop:Resources.AddTaskState}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+            </Button.ToolTip>
+        </Button>
         <Button Command="{Binding SetCurrentUserCommand, Mode=OneWay}">
             <Button.Resources>
                 <ImageSource x:Key="ImageSource">../../Icons/white/profile.png</ImageSource>
@@ -40,7 +56,6 @@
                 <TextBlock Text="{Binding Source={x:Static prop:Resources.SetUser}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
             </Button.ToolTip>
         </Button>
-
         <Button Command="{Binding OpenSelectFolderDialogCommand,
                                   Mode=OneWay}"
                 DataContext="{Binding ProjectOpeningViewModel,
@@ -52,15 +67,6 @@
             </Button.Resources>
             <Button.ToolTip>
                 <TextBlock Text="{Binding Source={x:Static prop:Resources.OpenProject}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
-            </Button.ToolTip>
-        </Button>
-
-        <Button Command="{Binding AddTaskStateCommand, Mode=OneWay}">
-            <Button.Resources>
-                <ImageSource x:Key="ImageSource">../../Icons/white/add.png</ImageSource>
-            </Button.Resources>
-            <Button.ToolTip>
-                <TextBlock Text="{Binding Source={x:Static prop:Resources.AddTaskState}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
             </Button.ToolTip>
         </Button>
     </StackPanel>

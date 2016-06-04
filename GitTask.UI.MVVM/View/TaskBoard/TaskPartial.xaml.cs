@@ -9,7 +9,8 @@ namespace GitTask.UI.MVVM.View.TaskBoard
         public TaskPartial()
         {
             InitializeComponent();
-            Content.MouseDown += MainOnMouseDown;
+            ContentGrid.MouseDown += MainOnMouseDown;
+            CommentsScrollViewer.MouseDown += MainOnMouseDown;
             Main.MouseLeave += MainOnMouseLeave;
             AddCommentButton.Click += AddCommentButtonOnClick;
             AddCommentPopup.LostFocus += AddCommentPopupOnLostFocus;

@@ -15,6 +15,9 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
         private readonly RelayCommand _setCurrentUserCommand;
         public ICommand SetCurrentUserCommand => _setCurrentUserCommand;
 
+        private readonly RelayCommand _resolveHistoryCommand;
+        public ICommand ResolveHistoryCommand => _resolveHistoryCommand;
+
         private bool _areButtonsEnabled;
         public bool AreButtonsEnabled
         {
@@ -28,6 +31,7 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
 
         public ButtonsViewModel(IProjectPathsReadonlyService projectPathsService)
         {
+            _resolveHistoryCommand = new RelayCommand(OnResolveHistoryCommand);
             _addTaskStateCommand = new RelayCommand(OnAddTaskStateCommand);
             _setCurrentUserCommand = new RelayCommand(OnSetCurrentUserCommand);
 
@@ -38,6 +42,11 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
         private void OnProjectPathChanged()
         {
             AreButtonsEnabled = true;
+        }
+
+        private void OnResolveHistoryCommand()
+        {
+            
         }
 
         private void OnSetCurrentUserCommand()

@@ -31,6 +31,7 @@
                     <converters:TaskContentToShortStringConverter x:Key="TaskContentToShortStringConverter" />
                     <converters:ToUpperCaseConverter x:Key="ToUpperCaseConverter" />
                     <converters:ProjectMemberToBrushConverter x:Key="ProjectMemberToBrushConverter" />
+                    <converters:IsNullConverter x:Key="IsNullConverter" />
                 </ResourceDictionary>
                 <ResourceDictionary Source="Skins\MainSkin.xaml" />
             </ResourceDictionary.MergedDictionaries>

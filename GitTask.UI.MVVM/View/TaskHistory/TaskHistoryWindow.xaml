@@ -1,0 +1,59 @@
+﻿<Window x:Class="GitTask.UI.MVVM.View.TaskHistory.TaskHistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:designTaskHistory="clr-namespace:GitTask.UI.MVVM.Design.TaskHistory"
+        xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+        xmlns:taskHistory="clr-namespace:GitTask.UI.MVVM.View.TaskHistory"
+        Title="{x:Static prop:Resources.TaskHistory}"
+        MinWidth="250"
+        MaxWidth="400"
+        MaxHeight="500"
+        d:DataContext="{d:DesignInstance Type=designTaskHistory:DesignTaskHistoryViewModel,
+                                         IsDesignTimeCreatable=True}"
+        SizeToContent="WidthAndHeight"
+        mc:Ignorable="d ignore">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+            <elements:InitialsBadge Margin="2" DataContext="{Binding Author, Mode=OneWay}" />
+            <TextBlock Margin="2"
+                       VerticalAlignment="Center"
+                       FontSize="17"
+                       FontWeight="SemiBold"
+                       Foreground="DarkSlateGray"
+                       Text="{Binding CreationDate,
+                                      Mode=OneWay}" />
+        </StackPanel>
+        <Grid Grid.Row="1" Background="Black" />
+        <ScrollViewer Grid.Row="2"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <ItemsControl>
+                <ItemsControl ItemsSource="{Binding CommitChanges, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <taskHistory:CommitChangesPartial Margin="2" DataContext="{Binding Mode=OneWay}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ItemsControl>
+        </ScrollViewer>
+
+    </Grid>
+</Window>

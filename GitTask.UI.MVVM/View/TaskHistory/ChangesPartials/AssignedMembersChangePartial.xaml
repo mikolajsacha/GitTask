@@ -14,9 +14,9 @@
         <TextBlock.ToolTip>
             <ToolTip>
                 <StackPanel Orientation="Vertical">
-                    <Grid Visibility="{Binding AnyMembersRemoved, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
-                        <TextBlock Text="{x:Static prop:Resources.RemovedProjectMembers}" />
-                        <ItemsControl Margin="0,2,0,2" ItemsSource="{Binding AddedMembers, Mode=OneWay}">
+                    <StackPanel Orientation="Vertical" Visibility="{Binding AnyObjectsRemoved, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                        <TextBlock FontWeight="SemiBold" Text="{x:Static prop:Resources.RemovedAssignedMembers}" />
+                        <ItemsControl Margin="0,2,0,2" ItemsSource="{Binding RemovedObjects, Mode=OneWay}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal" />
@@ -28,10 +28,10 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                    </Grid>
-                    <Grid Visibility="{Binding AnyMembersAdded, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
-                        <TextBlock Text="{x:Static prop:Resources.AddedProjectMembers}" />
-                        <ItemsControl Margin="0,2,0,2" ItemsSource="{Binding RemovedMembers, Mode=OneWay}">
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Visibility="{Binding AnyObjectsAdded, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                        <TextBlock FontWeight="SemiBold" Text="{x:Static prop:Resources.AddedAssignedMembers}" />
+                        <ItemsControl Margin="0,2,0,2" ItemsSource="{Binding AddedObjects, Mode=OneWay}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal" />
@@ -43,7 +43,7 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                    </Grid>
+                    </StackPanel>
                 </StackPanel>
             </ToolTip>
         </TextBlock.ToolTip>

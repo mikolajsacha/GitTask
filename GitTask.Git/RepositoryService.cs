@@ -155,9 +155,12 @@ namespace GitTask.Git
             {
                 var parentPropertyValue = property.GetValue(parentObject);
                 var childPropertyValue = property.GetValue(childObject);
-                if (typeof(IEnumerable).IsAssignableFrom(property.PropertyType) && !AreEnumerablePropertiesEqual(parentPropertyValue, childPropertyValue))
+                if (typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
                 {
-                    propertyChanges.Add(new EntityPropertyChange { OldValue = parentPropertyValue, NewValue = childPropertyValue, PropertyName = property.Name });
+                    if (!AreEnumerablePropertiesEqual(parentPropertyValue, childPropertyValue))
+                    {
+                        propertyChanges.Add(new EntityPropertyChange { OldValue = parentPropertyValue, NewValue = childPropertyValue, PropertyName = property.Name });
+                    }
                 }
                 else if (!parentPropertyValue.Equals(childPropertyValue))
                 {

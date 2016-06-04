@@ -99,7 +99,7 @@
                     </ToolTip>
                 </Grid.ToolTip>
             </Grid>
-            <Grid x:Name="Content"
+            <Grid x:Name="ContentGrid"
                   Grid.Row="2"
                   Grid.Column="0"
                   Margin="2">
@@ -133,6 +133,7 @@
                           HorizontalAlignment="Center"
                           HorizontalScrollBarVisibility="Disabled"
                           VerticalScrollBarVisibility="Auto"
+                          x:Name="CommentsScrollViewer"
                           Visibility="{Binding CommentsVisible,
                                                Mode=OneWay,
                                                Converter={StaticResource BoolToVisibilityConverter}}">

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using GitTask.Domain.Model.Project;
-using GitTask.UI.MVVM.ViewModel.TaskHistory;
+using GitTask.UI.MVVM.ViewModel.TaskHistory.ChangesPartials;
 
 namespace GitTask.UI.MVVM.Design.TaskHistory
 {

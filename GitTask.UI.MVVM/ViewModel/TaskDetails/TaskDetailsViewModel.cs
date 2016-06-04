@@ -9,7 +9,8 @@ using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
 using GitTask.UI.MVVM.View.TaskDetails;
-using GitTask.UI.MVVM.ViewModel.Common;
+using GitTask.UI.MVVM.View.TaskHistory;
+using GitTask.UI.MVVM.ViewModel.TaskHistory;
 
 namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 {
@@ -18,10 +19,8 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
         private readonly IQueryService<Task> _taskQueryService;
         private readonly IQueryService<TaskState> _taskStateQueryService;
         private readonly IRepositoryService _repositoryService;
-        private readonly CurrentUserViewModel _currentUserViewModel;
         public Task Task { get; }
         public ObservableCollection<string> Comments { get; }
-
 
         private string _addedComment;
         public string AddedComment
@@ -87,8 +86,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
         public TaskDetailsViewModel(Task task,
             IQueryService<Task> taskQueryService,
             IQueryService<TaskState> taskStateQueryService,
-            IRepositoryService repositoryService,
-            CurrentUserViewModel currentUserViewModel)
+            IRepositoryService repositoryService)
         {
             _isFullContentVisible = false;
             Task = task;
@@ -100,12 +98,10 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
             _taskQueryService = taskQueryService;
             _taskStateQueryService = taskStateQueryService;
             _repositoryService = repositoryService;
-            _currentUserViewModel = currentUserViewModel;
             _editTaskCommand = new RelayCommand(OnEditTaskCommand);
             _addCommentCommand = new RelayCommand(OnAddCommentCommand);
             _removeCommentCommand = new RelayCommand<int>(OnRemoveCommentCommand);
             _resolveHistoryCommand = new RelayCommand(ResolveHistory);
-
         }
 
         private async void ResolveHistory()
@@ -113,12 +109,13 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
             var taskHistory = await _repositoryService.GetHistory(Task);
             if (taskHistory == null)
             {
-                //TODO: alert: brak historii
+                MessageBox.Show("No task history in repository.");
                 return;
             }
-            //TODO: sprawdzic, czemu data sie czasami kasuje po zmniejszeniu taska
-            //TODO: Wyswietlanie historii taska
             CreationDate = taskHistory.CreationDate.ToString("g");
+            var taskHistoryViewModel = new TaskHistoryViewModel(taskHistory, _taskStateQueryService);
+            var taskHistoryWindow = new TaskHistoryWindow(taskHistoryViewModel) { Owner = Application.Current.MainWindow };
+            taskHistoryWindow.Show();
         }
 
         private async void OnAddCommentCommand()
@@ -130,10 +127,8 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
                 Task.Comments = new List<string>();
             }
 
-            var signedComment = $"{AddedComment} ({DateTime.Now})";
-
-            Task.Comments.Add(signedComment);
-            Comments.Add(signedComment);
+            Task.Comments.Add(AddedComment);
+            Comments.Add(AddedComment);
             AddedComment = "";
             _taskQueryService.Update(Task);
             await _taskQueryService.SaveChanges();

@@ -18,9 +18,9 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 
         public SelectUsersViewModel SelectUsersViewModel { get; }
         public SelectTaskPriorityViewModel SelectTaskPriorityViewModel { get; }
-        public SelectTaskStateViewModel SelectTaskStateViewModel { get; }
 
         public string Title => _task.Title;
+        public TaskState TaskState { get; }
 
         private string _content;
         public string Content
@@ -36,7 +36,6 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 
         public bool IsOkButtonEnabled =>
             !string.IsNullOrWhiteSpace(_content) &&
-            SelectTaskStateViewModel.TaskStateChosen &&
             SelectTaskPriorityViewModel.TaskPriorityChosen;
 
         private readonly RelayCommand _okCommand;
@@ -51,6 +50,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
         public EditTaskViewModel(Task task, IQueryService<Task> taskQueryService, IQueryService<TaskState> taskStateQueryService)
         {
             _task = task;
+            TaskState = taskStateQueryService.GetByKey(task.State);
 
             _taskQueryService = taskQueryService;
             _okCommand = new RelayCommand(OnOkClick);
@@ -58,7 +58,6 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
             _deleteCommand = new RelayCommand(OnDeleteClick);
 
             SelectUsersViewModel = new SelectUsersViewModel(true);
-            SelectTaskStateViewModel = new SelectTaskStateViewModel(taskStateQueryService);
             SelectTaskPriorityViewModel = new SelectTaskPriorityViewModel();
 
             _content = _task.Content;
@@ -66,19 +65,8 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
             {
                 SelectUsersViewModel.SelectedUsers.Add(user);
             }
-            SelectTaskStateViewModel.SelectedTaskState = taskStateQueryService.GetByKey(_task.State);
             SelectTaskPriorityViewModel.SelectedTaskPriority = _task.Priority;
-
-            SelectTaskStateViewModel.PropertyChanged += SelectTaskStateViewModelOnPropertyChanged;
             SelectTaskPriorityViewModel.PropertyChanged += SelectTaskPriorityViewModelOnPropertyChanged;
-        }
-
-        private void SelectTaskStateViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-        {
-            if (propertyChangedEventArgs.PropertyName == "TaskStateChosen")
-            {
-                RaisePropertyChanged("IsOkButtonEnabled");
-            }
         }
 
         private void SelectTaskPriorityViewModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -110,7 +98,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
                 AssignedMembers = SelectUsersViewModel.SelectedUsers,
                 // ReSharper disable once PossibleInvalidOperationException
                 Priority = (TaskPriority)SelectTaskPriorityViewModel.SelectedTaskPriority,
-                State = SelectTaskStateViewModel.SelectedTaskState.Name,
+                State = _task.State,
                 Comments = _task.Comments
             });
             await _taskQueryService.SaveChanges();
