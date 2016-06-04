@@ -79,7 +79,9 @@
                     Background="{Binding TaskState.Color,
                                          Mode=OneWay}"
                     CornerRadius="3" />
-            <ItemsControl Grid.Row="2" ItemsSource="{Binding Tasks, Mode=OneWay}">
+
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding Tasks, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -91,6 +93,7 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+                        </ScrollViewer>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

@@ -180,40 +180,6 @@ namespace GitTask.Git
             return !childEnumerator.MoveNext(); // check if child is longer;
         }
 
-        public async Task<DateTime> GetCreationDate<TModel>(TModel modelObject)
-        {
-            return await Task.Run(() =>
-            {
-                if (_repository == null) return DateTime.Now;
-
-                var objectPath = GetObjectPath(modelObject);
-                foreach (var commit in _repository.Commits.QueryBy(new CommitFilter { FirstParentOnly = true }))
-                {
-                    try
-                    {
-                        if (!commit.Parents.Any())
-                        {
-                            return commit.Tree.Any(treeEntry => treeEntry.Path == objectPath) ? commit.Committer.When.DateTime : DateTime.Now;
-                        }
-
-                        var parentCommit = commit.Parents.First();
-                        var treeChanges = _repository.Diff.Compare<TreeChanges>(parentCommit.Tree, commit.Tree, new CompareOptions());
-                        if (treeChanges.Where(treeEntryChanges => treeEntryChanges.Path == objectPath)
-                                         .Any(treeEntryChanges => treeEntryChanges.Exists && !treeEntryChanges.OldExists))
-                        {
-                            return commit.Committer.When.DateTime;
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        // exception while lazy loading commit parents. Skip commit
-                    }
-                }
-
-                return DateTime.Now;
-            });
-        }
-
         public bool RepositoryExists(string projectPath)
         {
             return projectPath != null && Directory.Exists(projectPath) && Repository.IsValid(projectPath);

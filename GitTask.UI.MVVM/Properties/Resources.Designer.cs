@@ -79,6 +79,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added project members:.
+        /// </summary>
+        public static string AddedProjectMembers {
+            get {
+                return ResourceManager.GetString("AddedProjectMembers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new user.
         /// </summary>
         public static string AddNewUser {
@@ -138,6 +147,51 @@ namespace GitTask.UI.MVVM.Properties {
         public static string Author {
             get {
                 return ResourceManager.GetString("Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed assigned members.
+        /// </summary>
+        public static string ChangedAssignedMembers {
+            get {
+                return ResourceManager.GetString("ChangedAssignedMembers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed task comments.
+        /// </summary>
+        public static string ChangedTaskComments {
+            get {
+                return ResourceManager.GetString("ChangedTaskComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed task content.
+        /// </summary>
+        public static string ChangedTaskContent {
+            get {
+                return ResourceManager.GetString("ChangedTaskContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed task priority.
+        /// </summary>
+        public static string ChangedTaskPriority {
+            get {
+                return ResourceManager.GetString("ChangedTaskPriority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed task state.
+        /// </summary>
+        public static string ChangedTaskState {
+            get {
+                return ResourceManager.GetString("ChangedTaskState", resourceCulture);
             }
         }
         
@@ -345,6 +399,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string ProjectSetup {
             get {
                 return ResourceManager.GetString("ProjectSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed project members:.
+        /// </summary>
+        public static string RemovedProjectMembers {
+            get {
+                return ResourceManager.GetString("RemovedProjectMembers", resourceCulture);
             }
         }
         
