@@ -92,6 +92,12 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             {
                 var taskColumn = TaskStateColumns.First(stateColumn => stateColumn.TaskState.Name == task.State);
                 taskColumn.Tasks.Add(new TaskDetailsViewModel(task, _taskQueryService, _taskStateQueryService, _repositoryService));
+                var tasks = taskColumn.Tasks.ToList();
+                taskColumn.Tasks.Clear();
+                foreach (var taskVm in tasks.OrderByDescending(x=> x.Task.Priority).ThenBy(x => x.Task.Title))
+                {
+                    taskColumn.Tasks.Add(taskVm);
+                }
             }
             catch (Exception)
             {
@@ -143,7 +149,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
                 taskStateColumn.Tasks.Clear();
             }
 
-            foreach (var task in _taskQueryService.GetAll())
+            foreach (var task in _taskQueryService.GetAll().OrderByDescending(x => x.Priority).ThenBy(x => x.Title))
             {
                 try
                 {

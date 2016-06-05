@@ -13,7 +13,7 @@
         <TextBlock.ToolTip>
             <ToolTip>
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{x:Static prop:Resources.TaskStatesBefore}" />
+                    <TextBlock FontWeight="SemiBold" Text="{x:Static prop:Resources.TaskStatesBefore}" />
                     <ItemsControl Margin="0,2,0,2" ItemsSource="{Binding OldValue, Mode=OneWay}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -29,7 +29,7 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <TextBlock Text="{x:Static prop:Resources.TaskStatesAfter}" />
+                    <TextBlock FontWeight="SemiBold" Text="{x:Static prop:Resources.TaskStatesAfter}" />
                     <ItemsControl Margin="0,2,0,2" ItemsSource="{Binding NewValue, Mode=OneWay}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

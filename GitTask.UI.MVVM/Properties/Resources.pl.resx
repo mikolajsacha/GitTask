@@ -310,7 +310,7 @@
     <value>Zmiany w stanach zadań</value>
   </data>
   <data name="TaskStatesAfter" xml:space="preserve">
-    <value>Stany zadań przed:</value>
+    <value>Stany zadań po:</value>
   </data>
   <data name="TaskStatesBefore" xml:space="preserve">
     <value>Stany zadań przed:</value>
