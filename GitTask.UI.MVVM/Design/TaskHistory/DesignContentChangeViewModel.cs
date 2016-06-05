@@ -1,4 +1,4 @@
-﻿using GitTask.UI.MVVM.ViewModel.TaskHistory.ChangesPartials;
+﻿using GitTask.UI.MVVM.ViewModel.History.TaskHistory.ChangesPartials;
 
 namespace GitTask.UI.MVVM.Design.TaskHistory
 {

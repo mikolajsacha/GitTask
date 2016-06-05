@@ -34,6 +34,7 @@
                     <converters:IsNullConverter x:Key="IsNullConverter" />
                 </ResourceDictionary>
                 <ResourceDictionary Source="Skins\MainSkin.xaml" />
+                <ResourceDictionary Source="Skins\Scrollbar.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,19 +1,50 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Messaging;
+using GitTask.UI.MVVM.Locator;
+using GitTask.UI.MVVM.Messages;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
 namespace GitTask.UI.MVVM.View.TaskBoard
 {
     public partial class TaskPartial
     {
+        private const double DefaultWidth = 250;
+
         public TaskPartial()
         {
             InitializeComponent();
             ContentGrid.MouseDown += MainOnMouseDown;
-            CommentsScrollViewer.MouseDown += MainOnMouseDown;
+            CommentsPanel.MouseDown += MainOnMouseDown;
             Main.MouseLeave += MainOnMouseLeave;
             AddCommentButton.Click += AddCommentButtonOnClick;
             AddCommentPopup.LostFocus += AddCommentPopupOnLostFocus;
+            Messenger.Default.Register<DistributeTaskStateColumnsMessage>(this, OnDistributeTaskStateColumnsMessage);
+            var currentTaskStateColumnWidth = IocLocator.TaskBoardViewModel.CurrentOpenedTaskStateColumnWidth;
+            OnDistributeTaskStateColumnsMessage(new DistributeTaskStateColumnsMessage
+            {
+                OpenedTaskStateColumnWidth = currentTaskStateColumnWidth
+            });
+        }
+
+        private void OnDistributeTaskStateColumnsMessage(DistributeTaskStateColumnsMessage message)
+        {
+            var columnWidth = message.OpenedTaskStateColumnWidth;
+
+            if (double.IsInfinity(columnWidth) ||
+                double.IsNaN(columnWidth))
+            {
+                return;
+            }
+
+            if (columnWidth <= DefaultWidth)
+            {
+                Width = columnWidth - 10;
+                return;
+            }
+            var tasksPerColumn = Math.Max(Math.Floor((columnWidth - 10) / DefaultWidth), 1);
+            Width = Math.Floor((columnWidth - 10) / tasksPerColumn);
         }
 
         private void MainOnMouseDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using GitTask.Domain.Enum;
-using GitTask.Domain.Model.Repository;
-using GitTask.UI.MVVM.ViewModel.TaskHistory;
+using GitTask.Domain.Model.Repository.EntityHistory;
+using GitTask.UI.MVVM.ViewModel.History.TaskHistory;
 
 namespace GitTask.UI.MVVM.Design.TaskHistory
 {

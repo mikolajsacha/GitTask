@@ -1,6 +1,6 @@
 ﻿using System;
 using GitTask.Domain.Model.Project;
-using GitTask.UI.MVVM.ViewModel.TaskHistory.ChangesPartials;
+using GitTask.UI.MVVM.ViewModel.History.TaskHistory.ChangesPartials;
 
 namespace GitTask.UI.MVVM.Design.TaskHistory
 {
@@ -9,7 +9,7 @@ namespace GitTask.UI.MVVM.Design.TaskHistory
         public ProjectMember Author { get; private set; }
         public string CreationDate { get; private set; }
 
-        public AssignedMembersChangeViewModel AssignedMembersChangeViewModel { get; set; }
+        public DesignProjectMembersChangeViewModel AssignedMembersChangeViewModel { get; set; }
         public CommentsChangeViewModel CommentsChangeViewModel { get; set; }
         public ContentChangeViewModel ContentChangeViewModel { get; set; }
         public TaskPriorityChangeViewModel TaskPriorityChangeViewModel { get; set; }

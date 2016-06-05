@@ -115,7 +115,9 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0"
                     Margin="2"
-                    MouseDown="RemoveButton_MouseDown"
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                     AncestorType={x:Type Window}},
+                                      Path=DeleteCommand}"
                     Style="{StaticResource SmallIconButton}">
                 <Button.Resources>
                     <ImageSource x:Key="ImageSource">../../Icons/trashbin.png</ImageSource>

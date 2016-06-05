@@ -2,7 +2,7 @@
 using GitTask.Domain.Services.Interface;
 using GitTask.Storage.Exception;
 
-namespace GitTask.UI.MVVM.ViewModel.TaskHistory.ChangesPartials
+namespace GitTask.UI.MVVM.ViewModel.History.TaskHistory.ChangesPartials
 {
     public class TaskStateChangeViewModel : BaseChangeViewModel<string>
     {

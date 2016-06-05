@@ -1,4 +1,4 @@
-﻿namespace GitTask.Domain.Model.Repository
+﻿namespace GitTask.Domain.Model.Repository.EntityHistory
 {
     public class EntityPropertyChange
     {

@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 
-namespace GitTask.UI.MVVM.ViewModel.TaskHistory
+namespace GitTask.UI.MVVM.ViewModel.History
 {
     public class BaseChangeViewModel<T> : ViewModelBase
     {

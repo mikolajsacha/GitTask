@@ -1,5 +1,5 @@
 ﻿using GitTask.Domain.Model.Task;
-using GitTask.UI.MVVM.ViewModel.TaskHistory;
+using GitTask.UI.MVVM.ViewModel.History;
 
 namespace GitTask.UI.MVVM.Design.TaskHistory
 {

@@ -1,10 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using GitTask.Domain.Model.Project;
-using GitTask.Domain.Model.Repository;
+using GitTask.Domain.Model.Repository.EntityHistory;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
 
-namespace GitTask.UI.MVVM.ViewModel.TaskHistory
+namespace GitTask.UI.MVVM.ViewModel.History.TaskHistory
 {
     public class TaskHistoryViewModel
     {

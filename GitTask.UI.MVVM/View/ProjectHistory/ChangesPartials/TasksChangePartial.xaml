@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="GitTask.UI.MVVM.View.ProjectHistory.ChangesPartials.TasksChangePartial"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:designProjectHistory="clr-namespace:GitTask.UI.MVVM.Design.ProjectHistory"
+             xmlns:ignore="http://www.galasoft.ch/ignore"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+             d:DataContext="{d:DesignInstance Type=designProjectHistory:DesignTaskChangesViewModel,
+                                              IsDesignTimeCreatable=True}"
+             mc:Ignorable="d ignore">
+    <TextBlock Text="{x:Static prop:Resources.ChangesInTasks}">
+        <TextBlock.ToolTip>
+            <ToolTip>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" Visibility="{Binding AnyRemovedTasks, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                        <TextBlock FontWeight="SemiBold" Text="{x:Static prop:Resources.RemovedTasks}" />
+                        <ItemsControl Margin="0,2,0,2" ItemsSource="{Binding RemovedTasks, Mode=OneWay}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="2,1,2,1" Text="{Binding Mode=OneWay}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Visibility="{Binding AnyAddedTasks, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                        <TextBlock FontWeight="SemiBold" Text="{x:Static prop:Resources.AddedTasks}" />
+                        <ItemsControl Margin="0,2,0,2" ItemsSource="{Binding AddedTasks, Mode=OneWay}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="2,1,2,1" Text="{Binding Mode=OneWay}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </StackPanel>
+            </ToolTip>
+        </TextBlock.ToolTip>
+    </TextBlock>
+</UserControl>

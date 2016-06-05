@@ -154,8 +154,12 @@
     <Compile Include="Design\DesignTaskDetailsViewModel.cs" />
     <Compile Include="Design\DesignSelectUsersViewModel.cs" />
     <Compile Include="Design\DesignSelectTaskStateViewModel.cs" />
+    <Compile Include="Design\ProjectHistory\DesignTaskChangesViewModel.cs" />
+    <Compile Include="Design\ProjectHistory\DesignTaskStatesChangesViewModel.cs" />
+    <Compile Include="Design\ProjectHistory\DesignProjectCommitChangesViewModel.cs" />
+    <Compile Include="Design\ProjectHistory\DesignProjectHistoryViewModel.cs" />
     <Compile Include="Design\TaskHistory\DesignCommitChangesViewModel.cs" />
-    <Compile Include="Design\TaskHistory\DesignAssignedMembersChangeViewModel.cs" />
+    <Compile Include="Design\TaskHistory\DesignProjectMembersChangeViewModel.cs" />
     <Compile Include="Design\TaskHistory\DesignCommentsChangeViewModel.cs" />
     <Compile Include="Design\TaskHistory\DesignContentChangeViewModel.cs" />
     <Compile Include="Design\TaskHistory\DesignTaskPriorityChangeViewModel.cs" />
@@ -177,6 +181,10 @@
     <Compile Include="ViewModel\Elements\SelectTaskPriorityViewModel.cs" />
     <Compile Include="ViewModel\Elements\SelectUsersViewModel.cs" />
     <Compile Include="ViewModel\Common\ProjectMembersViewModel.cs" />
+    <Compile Include="ViewModel\History\ProjectHistory\ChangesPartials\TaskChangesViewModel.cs" />
+    <Compile Include="ViewModel\History\ProjectHistory\ChangesPartials\TaskStatesChangesViewModel.cs" />
+    <Compile Include="ViewModel\History\ProjectHistory\ProjectCommitChangesViewModel.cs" />
+    <Compile Include="ViewModel\History\ProjectHistory\ProjectHistoryViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\AddTaskStateViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\SetCurrentUserViewModel.cs" />
     <Compile Include="ViewModel\TaskBoard\TaskBoardViewModel.cs" />
@@ -184,15 +192,15 @@
     <Compile Include="ViewModel\Common\PendingStorageOperationsViewModel.cs" />
     <Compile Include="ViewModel\TaskDetails\EditTaskViewModel.cs" />
     <Compile Include="ViewModel\TaskDetails\AddTaskViewModel.cs" />
-    <Compile Include="ViewModel\TaskHistory\BaseCollectionChangeViewModel.cs" />
-    <Compile Include="ViewModel\TaskHistory\BaseChangeViewModel.cs" />
-    <Compile Include="ViewModel\TaskHistory\CommitChangesViewModel.cs" />
-    <Compile Include="ViewModel\TaskHistory\TaskHistoryViewModel.cs" />
-    <Compile Include="ViewModel\TaskHistory\ChangesPartials\TaskStateChangeViewModel.cs" />
-    <Compile Include="ViewModel\TaskHistory\ChangesPartials\TaskPriorityChangeViewModel.cs" />
-    <Compile Include="ViewModel\TaskHistory\ChangesPartials\ContentChangeViewModel.cs" />
-    <Compile Include="ViewModel\TaskHistory\ChangesPartials\CommentsChangeViewModel.cs" />
-    <Compile Include="ViewModel\TaskHistory\ChangesPartials\AssignedMembersChangeViewModel.cs" />
+    <Compile Include="ViewModel\History\BaseCollectionChangeViewModel.cs" />
+    <Compile Include="ViewModel\History\BaseChangeViewModel.cs" />
+    <Compile Include="ViewModel\History\TaskHistory\CommitChangesViewModel.cs" />
+    <Compile Include="ViewModel\History\TaskHistory\TaskHistoryViewModel.cs" />
+    <Compile Include="ViewModel\History\TaskHistory\ChangesPartials\TaskStateChangeViewModel.cs" />
+    <Compile Include="ViewModel\History\TaskHistory\ChangesPartials\TaskPriorityChangeViewModel.cs" />
+    <Compile Include="ViewModel\History\TaskHistory\ChangesPartials\ContentChangeViewModel.cs" />
+    <Compile Include="ViewModel\History\TaskHistory\ChangesPartials\CommentsChangeViewModel.cs" />
+    <Compile Include="ViewModel\History\ProjectMembersChangeViewModel.cs" />
     <Compile Include="View\ActionBar\FiltersPartial.xaml.cs">
       <DependentUpon>FiltersPartial.xaml</DependentUpon>
     </Compile>
@@ -219,6 +227,21 @@
     </Compile>
     <Compile Include="View\Main\ProjectOpeningPartial.xaml.cs">
       <DependentUpon>ProjectOpeningPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProjectHistory\ChangesPartials\TaskStatesChangePartial.xaml.cs">
+      <DependentUpon>TaskStatesChangePartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProjectHistory\ChangesPartials\TasksChangePartial.xaml.cs">
+      <DependentUpon>TasksChangePartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProjectHistory\ChangesPartials\ProjectMembersChangePartial.xaml.cs">
+      <DependentUpon>ProjectMembersChangePartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProjectHistory\ProjectCommitChangesPartial.xaml.cs">
+      <DependentUpon>ProjectCommitChangesPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProjectHistory\ProjectHistoryWindow.xaml.cs">
+      <DependentUpon>ProjectHistoryWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProjectSettings\AddTaskStateWindow.xaml.cs">
       <DependentUpon>AddTaskStateWindow.xaml</DependentUpon>
@@ -262,17 +285,14 @@
     <Compile Include="View\TaskDetails\AssignedMembersInitialsList.xaml.cs">
       <DependentUpon>AssignedMembersInitialsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TaskHistory\TaskHistoryWindow.xaml.cs">
-      <DependentUpon>TaskHistoryWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TaskHistory\CommitChangesPartial.xaml.cs">
-      <DependentUpon>CommitChangesPartial.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\TaskHistory\ChangesPartials\AssignedMembersChangePartial.xaml.cs">
       <DependentUpon>AssignedMembersChangePartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TaskHistory\ChangesPartials\CommentsChangePartial.xaml.cs">
       <DependentUpon>CommentsChangePartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskHistory\ChangesPartials\ContentChangePartial.xaml.cs">
+      <DependentUpon>ContentChangePartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TaskHistory\ChangesPartials\TaskPriorityChangePartial.xaml.cs">
       <DependentUpon>TaskPriorityChangePartial.xaml</DependentUpon>
@@ -280,9 +300,16 @@
     <Compile Include="View\TaskHistory\ChangesPartials\TaskStateChangePartial.xaml.cs">
       <DependentUpon>TaskStateChangePartial.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TaskHistory\ChangesPartials\ContentChangePartial.xaml.cs">
-      <DependentUpon>ContentChangePartial.xaml</DependentUpon>
+    <Compile Include="View\TaskHistory\TaskHistoryWindow.xaml.cs">
+      <DependentUpon>TaskHistoryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TaskHistory\CommitChangesPartial.xaml.cs">
+      <DependentUpon>CommitChangesPartial.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Skins\Scrollbar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ActionBar\FiltersPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -343,6 +370,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\ProjectHistory\ChangesPartials\TaskStatesChangePartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ProjectHistory\ChangesPartials\TasksChangePartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ProjectHistory\ChangesPartials\ProjectMembersChangePartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ProjectHistory\ProjectCommitChangesPartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ProjectHistory\ProjectHistoryWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ProjectSettings\AddTaskStateWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -383,19 +430,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\TaskHistory\TaskHistoryWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\TaskHistory\CommitChangesPartial.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\TaskHistory\ChangesPartials\AssignedMembersChangePartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\TaskHistory\ChangesPartials\CommentsChangePartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TaskHistory\ChangesPartials\ContentChangePartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -407,7 +450,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\TaskHistory\ChangesPartials\ContentChangePartial.xaml">
+    <Page Include="View\TaskHistory\TaskHistoryWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TaskHistory\CommitChangesPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -496,6 +543,7 @@
   <ItemGroup>
     <Resource Include="Icons\white\graph.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

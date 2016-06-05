@@ -13,7 +13,7 @@
 
     <Border HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Background="WhiteSmoke"
+            Background="White"
             BorderBrush="{Binding Converter={StaticResource ProjectMemberToBrushConverter},
                                   Mode=OneWay}"
             BorderThickness="2"

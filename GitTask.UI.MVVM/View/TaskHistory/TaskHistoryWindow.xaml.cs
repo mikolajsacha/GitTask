@@ -1,4 +1,4 @@
-﻿using GitTask.UI.MVVM.ViewModel.TaskHistory;
+﻿using GitTask.UI.MVVM.ViewModel.History.TaskHistory;
 
 namespace GitTask.UI.MVVM.View.TaskHistory
 {

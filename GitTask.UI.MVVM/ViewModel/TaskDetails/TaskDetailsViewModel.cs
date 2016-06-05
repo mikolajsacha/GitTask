@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -10,7 +9,7 @@ using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
 using GitTask.UI.MVVM.View.TaskDetails;
 using GitTask.UI.MVVM.View.TaskHistory;
-using GitTask.UI.MVVM.ViewModel.TaskHistory;
+using GitTask.UI.MVVM.ViewModel.History.TaskHistory;
 
 namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 {
@@ -106,7 +105,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 
         private async void ResolveHistory()
         {
-            var taskHistory = await _repositoryService.GetHistory(Task);
+            var taskHistory = await _repositoryService.GetEntityHistory(Task);
             if (taskHistory == null)
             {
                 MessageBox.Show("No task history in repository.");

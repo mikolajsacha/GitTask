@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace GitTask.UI.MVVM.ViewModel.TaskHistory
+namespace GitTask.UI.MVVM.ViewModel.History
 {
     public class BaseCollectionChangeViewModel<T> : BaseChangeViewModel<IEnumerable<T>>
     {

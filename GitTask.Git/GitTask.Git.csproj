@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HistoryResolvingService.cs" />
     <Compile Include="RepositoryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -58,10 +59,6 @@
     <ProjectReference Include="..\GitTask.Domain\GitTask.Domain.csproj">
       <Project>{47E272C3-58CE-4689-BA1C-AD0BA88F6551}</Project>
       <Name>GitTask.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GitTask.Json\GitTask.Json.csproj">
-      <Project>{7472e706-139e-4ed6-a73c-d32d135f5664}</Project>
-      <Name>GitTask.Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\GitTask.Storage\GitTask.Storage.csproj">
       <Project>{4b7a6646-b7f8-4d92-a032-c13fc8136f07}</Project>

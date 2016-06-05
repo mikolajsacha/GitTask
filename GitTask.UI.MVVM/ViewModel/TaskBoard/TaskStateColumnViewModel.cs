@@ -147,6 +147,8 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         private void OnDeleteTaskStateCommand()
         {
+            var messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButton.YesNo);
+            if (messageBoxResult != MessageBoxResult.Yes) return;
             Messenger.Default.Send(new DeleteTaskStateMessage { TaskState = TaskState });
         }
 

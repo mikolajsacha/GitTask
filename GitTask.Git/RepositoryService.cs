@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using GitTask.Domain.Attributes;
 using GitTask.Domain.Model.Project;
-using GitTask.Domain.Model.Repository;
+using GitTask.Domain.Model.Repository.EntityHistory;
+using GitTask.Domain.Model.Repository.ProjectHistory;
+using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
-using GitTask.Json;
 using GitTask.Storage.Interface;
 using LibGit2Sharp;
+using Task = System.Threading.Tasks.Task;
 
 namespace GitTask.Git
 {
@@ -22,6 +21,7 @@ namespace GitTask.Git
 
         private readonly IProjectPathsReadonlyService _projectPathsService;
         private readonly IFileService _fileService;
+        private readonly HistoryResolvingService _historyResolvingService;
         private Repository _repository;
 
         public RepositoryService(IProjectPathsReadonlyService projectPathsService, IFileService fileService)
@@ -29,15 +29,13 @@ namespace GitTask.Git
             _projectPathsService = projectPathsService;
             _fileService = fileService;
             _projectPathsService.ProjectPathChanged += OnProjectPathChanged;
+            _historyResolvingService = new HistoryResolvingService(fileService);
             OnProjectPathChanged();
         }
 
-        private void OnProjectPathChanged()
+        public bool RepositoryExists(string projectPath)
         {
-            if (!RepositoryExists(_projectPathsService.BaseProjectPath)) return;
-
-            _repository = new Repository(_projectPathsService.BaseProjectPath);
-            RepositoryInitalized?.Invoke();
+            return projectPath != null && Directory.Exists(projectPath) && Repository.IsValid(projectPath);
         }
 
         public async Task<IEnumerable<ProjectMember>> GetAllUniqueCommiters()
@@ -53,18 +51,64 @@ namespace GitTask.Git
             });
         }
 
-        public async Task<EntityHistory> GetHistory<TModel>(TModel modelObject)
+        public async Task<ProjectHistory> GetProjectHistory()
+        {
+            return await Task.Run(() =>
+            {
+                if (_repository == null) return null;
+
+                var projectHistory = new ProjectHistory { Changes = new List<ProjectCommitChange>()};
+
+                var baseProjectPath = GetBaseEntityPath("Project");
+                var baseTaskPath = GetBaseEntityPath("Task");
+
+                foreach (var commit in _repository.Commits.QueryBy(new CommitFilter { FirstParentOnly = true }))
+                {
+                    try
+                    {
+                        if (!commit.Parents.Any())
+                        {
+                            projectHistory.CreationDate = commit.Committer.When.DateTime;
+                            return projectHistory;
+                        }
+
+                        var parentCommit = commit.Parents.First();
+                        var treeChanges = _repository.Diff.Compare<TreeChanges>(parentCommit.Tree, commit.Tree).ToList();
+
+                        var commitChange = new ProjectCommitChange
+                        {
+                            Author = new ProjectMember(commit.Committer.Name, commit.Committer.Email),
+                            Date = commit.Committer.When.DateTime,
+                            AddedTasks = HistoryResolvingService.GetAddedTasks(treeChanges, baseTaskPath).ToList(),
+                            RemovedTasks = HistoryResolvingService.GetRemovedTasks(treeChanges, baseTaskPath).ToList(),
+                            ProjectMembersChange =
+                                _historyResolvingService.GetProjectMembersChange(parentCommit, commit, treeChanges, baseProjectPath),
+                            TaskStatesChange = _historyResolvingService.GetTaskStatesChange(parentCommit, commit, treeChanges, _projectPathsService.RelativeStoragePath, typeof(TaskState).Name),
+                        };
+                        if (commitChange.AddedTasks.Any() || commitChange.RemovedTasks.Any() ||
+                            commitChange.ProjectMembersChange != null || commitChange.TaskStatesChange != null)
+                        {
+                            projectHistory.Changes.Add(commitChange);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // exception while traversing repo or parsing files. Skip commit
+                    }
+                }
+                projectHistory.CreationDate = DateTime.MinValue;
+                return projectHistory;
+            });
+        }
+
+        public async Task<EntityHistory> GetEntityHistory<TModel>(TModel modelObject)
         {
             return await Task.Run(() =>
             {
                 if (_repository == null) return null;
 
                 var entityHistory = new EntityHistory { Changes = new List<EntityCommitChange>() };
-
                 var objectPath = GetObjectPath(modelObject);
-
-                var commits = _repository.Commits.QueryBy(new CommitFilter { FirstParentOnly = true });
-                if (!commits.Any()) return null;
 
                 foreach (var commit in _repository.Commits.QueryBy(new CommitFilter { FirstParentOnly = true }))
                 {
@@ -99,16 +143,16 @@ namespace GitTask.Git
                         var parentBlob = (Blob)parentTreeEntry.Target;
                         var childBlob = (Blob)childTreeEntry.Target;
 
+                        var propertyChanges = _historyResolvingService.ResolveChangesInBlob<TModel>(parentBlob, childBlob).ToList();
+                        if (!propertyChanges.Any()) continue;
+
                         var entityCommitChange = new EntityCommitChange
                         {
-                            PropertyChanges = ResolveChangesInBlob<TModel>(parentBlob, childBlob).ToList(),
+                            PropertyChanges = propertyChanges,
                             Date = commit.Committer.When.DateTime,
                             Author = new ProjectMember(commit.Committer.Name, commit.Committer.Email)
                         };
-                        if (entityCommitChange.PropertyChanges != null && entityCommitChange.PropertyChanges.Any())
-                        {
-                            entityHistory.Changes.Add(entityCommitChange);
-                        }
+                        entityHistory.Changes.Add(entityCommitChange);
                     }
                     catch (Exception)
                     {
@@ -120,80 +164,25 @@ namespace GitTask.Git
             });
         }
 
-        private IEnumerable<EntityPropertyChange> ResolveChangesInBlob<TModel>(Blob parentBlob, Blob childBlob)
+        private void OnProjectPathChanged()
         {
-            var parentContentStream = parentBlob.GetContentStream();
-            var childContentStream = childBlob.GetContentStream();
+            if (!RepositoryExists(_projectPathsService.BaseProjectPath)) return;
 
-            TModel parentObject;
-            TModel childObject;
-
-            var propertyChanges = new List<EntityPropertyChange>();
-
-            try
-            {
-                using (var streamReader = new StreamReader(parentContentStream, BufferWorker.Encoding))
-                {
-                    var parentContent = streamReader.ReadToEnd();
-                    parentObject = _fileService.ParseString<TModel>(parentContent);
-                }
-
-                using (var streamReader = new StreamReader(childContentStream, BufferWorker.Encoding))
-                {
-                    var childContent = streamReader.ReadToEnd();
-                    childObject = _fileService.ParseString<TModel>(childContent);
-                }
-            }
-            catch (Exception) // exception while parsing
-            {
-                return null;
-            }
-
-            var properties = typeof(TModel).GetProperties();
-
-            foreach (var property in typeof(TModel).GetProperties())
-            {
-                var parentPropertyValue = property.GetValue(parentObject);
-                var childPropertyValue = property.GetValue(childObject);
-                if (typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
-                {
-                    if (!AreEnumerablePropertiesEqual(parentPropertyValue, childPropertyValue))
-                    {
-                        propertyChanges.Add(new EntityPropertyChange { OldValue = parentPropertyValue, NewValue = childPropertyValue, PropertyName = property.Name });
-                    }
-                }
-                else if (!parentPropertyValue.Equals(childPropertyValue))
-                {
-                    propertyChanges.Add(new EntityPropertyChange { OldValue = parentPropertyValue, NewValue = childPropertyValue, PropertyName = property.Name });
-                }
-            }
-
-            return propertyChanges;
-        }
-
-        private static bool AreEnumerablePropertiesEqual(object parentPropertyValue, object childPropertyValue)
-        {
-            var parentEnumerator = ((IEnumerable)parentPropertyValue).GetEnumerator();
-            var childEnumerator = ((IEnumerable)childPropertyValue).GetEnumerator();
-            while (parentEnumerator.MoveNext())
-            {
-                if (!childEnumerator.MoveNext()) return false; // child is shorter
-                if (!parentEnumerator.Current.Equals(childEnumerator.Current)) return false; // different element values
-            }
-            return !childEnumerator.MoveNext(); // check if child is longer;
-        }
-
-        public bool RepositoryExists(string projectPath)
-        {
-            return projectPath != null && Directory.Exists(projectPath) && Repository.IsValid(projectPath);
+            _repository = new Repository(_projectPathsService.BaseProjectPath);
+            RepositoryInitalized?.Invoke();
         }
 
         private string GetObjectPath<TModel>(TModel modelObject)
         {
-            return $"{_projectPathsService.RelativeStoragePath}\\" +
-                   $"{typeof(TModel).Name}\\" +
+            return GetBaseEntityPath(typeof(TModel).Name) +
                    $"{KeyAttribute.GetKeyProperty(typeof(TModel)).GetValue(modelObject)}" +
                    $"{_fileService.FilesExtension}";
+        }
+
+        private string GetBaseEntityPath(string typeName)
+        {
+            return $"{_projectPathsService.RelativeStoragePath}\\" +
+                   $"{typeName}\\";
         }
     }
 }

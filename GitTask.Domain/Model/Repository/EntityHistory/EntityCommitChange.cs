@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using GitTask.Domain.Model.Project;
 
-namespace GitTask.Domain.Model.Repository
+namespace GitTask.Domain.Model.Repository.EntityHistory
 {
     public class EntityCommitChange
     {

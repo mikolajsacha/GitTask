@@ -7,7 +7,6 @@
              xmlns:ignore="http://www.galasoft.ch/ignore"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
-             Width="250"
              d:DataContext="{d:DesignInstance Type=design:DesignTaskDetailsViewModel,
                                               IsDesignTimeCreatable=True}"
              Visibility="{Binding IsVisible,
@@ -32,6 +31,8 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Border x:Name="Main"
+            Margin="2"
+            HorizontalAlignment="Stretch"
             Background="White"
             CornerRadius="1"
             Style="{StaticResource MainBorderStyle}">
@@ -105,10 +106,7 @@
                   Margin="2">
                 <Grid.ToolTip>
                     <ToolTip>
-                        <TextBlock MaxWidth="200"
-                                   Text="{Binding Task.Content,
-                                                  Mode=OneWay}"
-                                   TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding Task.Content, Mode=OneWay}" TextWrapping="Wrap" />
                     </ToolTip>
                 </Grid.ToolTip>
                 <TextBlock x:Name="ShortenedContent"
@@ -133,11 +131,10 @@
                           HorizontalAlignment="Center"
                           HorizontalScrollBarVisibility="Disabled"
                           VerticalScrollBarVisibility="Auto"
-                          x:Name="CommentsScrollViewer"
                           Visibility="{Binding CommentsVisible,
                                                Mode=OneWay,
                                                Converter={StaticResource BoolToVisibilityConverter}}">
-                <StackPanel Orientation="Vertical">
+                <StackPanel x:Name="CommentsPanel" Orientation="Vertical">
                     <TextBlock Margin="0,2,0,2"
                                FontWeight="SemiBold"
                                Text="{x:Static prop:Resources.Comments}" />
@@ -149,13 +146,18 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock MaxWidth="225"
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0"
                                                Margin="2,0,2,0"
                                                FontStyle="Italic"
                                                Text="{Binding}"
                                                TextWrapping="Wrap" />
-                                    <Button Width="16"
+                                    <Button Grid.Column="1"
+                                            Width="16"
                                             Height="16"
                                             Margin="2,0,2,0"
                                             VerticalAlignment="Center"
@@ -170,7 +172,7 @@
                                             <TextBlock Text="{Binding Source={x:Static prop:Resources.Delete}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
                                         </Button.ToolTip>
                                     </Button>
-                                </StackPanel>
+                                </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

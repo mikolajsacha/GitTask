@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using GitTask.Domain.Enum;
 using GitTask.Domain.Model.Project;
-using GitTask.Domain.Model.Repository;
+using GitTask.Domain.Model.Repository.EntityHistory;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
-using GitTask.UI.MVVM.ViewModel.TaskHistory.ChangesPartials;
+using GitTask.UI.MVVM.ViewModel.History.TaskHistory.ChangesPartials;
 
-namespace GitTask.UI.MVVM.ViewModel.TaskHistory
+namespace GitTask.UI.MVVM.ViewModel.History.TaskHistory
 {
     public class CommitChangesViewModel
     {
@@ -14,7 +14,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskHistory
         public ProjectMember Author { get; private set; }
         public string CreationDate { get; private set; }
 
-        public AssignedMembersChangeViewModel AssignedMembersChangeViewModel { get; private set; }
+        public ProjectMembersChangeViewModel AssignedMembersChangeViewModel { get; private set; }
         public CommentsChangeViewModel CommentsChangeViewModel { get; private set; }
         public ContentChangeViewModel ContentChangeViewModel { get; private set; }
         public TaskPriorityChangeViewModel TaskPriorityChangeViewModel { get; private set; }
@@ -47,7 +47,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskHistory
                         break;
                     case "AssignedMembers":
                         AssignedMembersChangeViewModel =
-                            new AssignedMembersChangeViewModel((IEnumerable<ProjectMember>)propertyChange.OldValue,
+                            new ProjectMembersChangeViewModel((IEnumerable<ProjectMember>)propertyChange.OldValue,
                                                                (IEnumerable<ProjectMember>)propertyChange.NewValue);
                         break;
                     case "Priority":

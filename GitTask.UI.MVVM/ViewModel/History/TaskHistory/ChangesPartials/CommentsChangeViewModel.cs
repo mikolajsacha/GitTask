@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GitTask.UI.MVVM.ViewModel.TaskHistory.ChangesPartials
+namespace GitTask.UI.MVVM.ViewModel.History.TaskHistory.ChangesPartials
 {
     public class CommentsChangeViewModel : BaseCollectionChangeViewModel<string>
     {

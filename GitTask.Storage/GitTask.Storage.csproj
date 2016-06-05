@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BufferWorker.cs" />
     <Compile Include="Exception\KeyNotExistsException.cs" />
     <Compile Include="Exception\KeyAlreadyExistsException.cs" />
     <Compile Include="Exception\PropertyNotFoundException.cs" />

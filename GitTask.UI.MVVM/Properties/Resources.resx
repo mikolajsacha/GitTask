@@ -288,4 +288,34 @@
   <data name="ResolveProjectHistory" xml:space="preserve">
     <value>Resolve project history</value>
   </data>
+  <data name="AddedProjectMembers" xml:space="preserve">
+    <value>Added project members:</value>
+  </data>
+  <data name="ChangedProjectMembers" xml:space="preserve">
+    <value>Changed project members</value>
+  </data>
+  <data name="RemovedProjectMembers" xml:space="preserve">
+    <value>Removed project members:</value>
+  </data>
+  <data name="AddedTasks" xml:space="preserve">
+    <value>Added tasks:</value>
+  </data>
+  <data name="ChangesInTasks" xml:space="preserve">
+    <value>Changes in tasks</value>
+  </data>
+  <data name="RemovedTasks" xml:space="preserve">
+    <value>Removed tasks:</value>
+  </data>
+  <data name="ChangesInTaskStates" xml:space="preserve">
+    <value>Changes in task states</value>
+  </data>
+  <data name="TaskStatesAfter" xml:space="preserve">
+    <value>Task states after:</value>
+  </data>
+  <data name="TaskStatesBefore" xml:space="preserve">
+    <value>Task states before:</value>
+  </data>
+  <data name="ProjectHistory" xml:space="preserve">
+    <value>Project history</value>
+  </data>
 </root>

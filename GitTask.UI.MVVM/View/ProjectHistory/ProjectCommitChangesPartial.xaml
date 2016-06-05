@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="GitTask.UI.MVVM.View.ProjectHistory.ProjectCommitChangesPartial"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:designProjectHistory="clr-namespace:GitTask.UI.MVVM.Design.ProjectHistory"
+             xmlns:elements="clr-namespace:GitTask.UI.MVVM.View.Elements"
+             xmlns:ignore="http://www.galasoft.ch/ignore"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:projectHistoryPartials="clr-namespace:GitTask.UI.MVVM.View.ProjectHistory.ChangesPartials"
+             d:DataContext="{d:DesignInstance Type=designProjectHistory:DesignProjectCommitChangesViewModel,
+                                              IsDesignTimeCreatable=True}"
+             mc:Ignorable="d ignore">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    Margin="0,2,0,1"
+                    Orientation="Horizontal">
+            <elements:InitialsBadge Margin="2" DataContext="{Binding Author, Mode=OneWay}" />
+            <TextBlock Margin="2"
+                       VerticalAlignment="Center"
+                       FontWeight="SemiBold"
+                       Foreground="DarkSlateGray"
+                       Text="{Binding CreationDate,
+                                      Mode=OneWay}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1"
+                    Margin="10,1,1,1"
+                    Orientation="Vertical">
+            <projectHistoryPartials:ProjectMembersChangePartial DataContext="{Binding ProjectMembersChangeViewModel, Mode=OneWay}">
+                <projectHistoryPartials:ProjectMembersChangePartial.Style>
+                    <Style TargetType="projectHistoryPartials:ProjectMembersChangePartial">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </projectHistoryPartials:ProjectMembersChangePartial.Style>
+            </projectHistoryPartials:ProjectMembersChangePartial>
+            <projectHistoryPartials:TasksChangePartial DataContext="{Binding TaskChangesViewModel, Mode=OneWay}">
+                <projectHistoryPartials:TasksChangePartial.Style>
+                    <Style TargetType="projectHistoryPartials:TasksChangePartial">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </projectHistoryPartials:TasksChangePartial.Style>
+            </projectHistoryPartials:TasksChangePartial>
+            <projectHistoryPartials:TaskStatesChangePartial DataContext="{Binding TaskStatesChangesViewModel, Mode=OneWay}">
+                <projectHistoryPartials:TaskStatesChangePartial.Style>
+                    <Style TargetType="projectHistoryPartials:TaskStatesChangePartial">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </projectHistoryPartials:TaskStatesChangePartial.Style>
+            </projectHistoryPartials:TaskStatesChangePartial>
+        </StackPanel>
+    </Grid>
+</UserControl>

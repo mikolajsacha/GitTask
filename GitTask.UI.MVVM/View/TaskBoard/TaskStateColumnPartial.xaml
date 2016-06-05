@@ -15,21 +15,19 @@
 
     <Grid VerticalAlignment="Stretch"
           AllowDrop="True"
-          Background="{Binding Background,
-                               Mode=OneWay}"
           Drop="OnDrop">
-        <Grid Margin="2,0,2,0" Visibility="{Binding IsOpened, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+        <Grid Visibility="{Binding IsOpened, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Margin="0,0,8,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" MinWidth="33" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" MinWidth="33" />
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
                         Margin="1,5,0,1"
@@ -52,7 +50,7 @@
                            VerticalAlignment="Center"
                            FontSize="17"
                            FontWeight="Bold"
-                           Foreground="Gray"
+                           Foreground="White"
                            Text="{Binding TaskState.Name,
                                           Converter={StaticResource ToUpperCaseConverter},
                                           Mode=OneWay}"
@@ -75,26 +73,36 @@
                 </Button>
             </Grid>
             <Border Grid.Row="1"
-                    Margin="0,2,0,4"
+                    Margin="0,2,8,4"
                     Background="{Binding TaskState.Color,
                                          Mode=OneWay}"
                     CornerRadius="3" />
-
-            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <ItemsControl ItemsSource="{Binding Tasks, Mode=OneWay}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <taskBoard:TaskPartial Margin="2" DataContext="{Binding Mode=OneWay}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-                        </ScrollViewer>
-            <Grid Grid.Row="3">
+            <ScrollViewer Grid.Row="2"
+                          Margin="0,0,2,0"
+                          HorizontalScrollBarVisibility="Disabled"
+                          Template="{DynamicResource ScrollViewerControlTemplate}"
+                          VerticalScrollBarVisibility="Auto">
+                <ItemsControl Margin="0,0,6,0"
+                              Background="{Binding Background,
+                                                   Mode=OneWay}"
+                              ItemsSource="{Binding Tasks,
+                                                    Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <taskBoard:TaskPartial DataContext="{Binding Mode=OneWay}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            <Grid Grid.Row="3"
+                  Margin="0,0,8,0"
+                  Background="{Binding Background,
+                                       Mode=OneWay}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />

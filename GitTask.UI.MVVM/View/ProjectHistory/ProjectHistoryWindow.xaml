@@ -1,0 +1,54 @@
+﻿<Window x:Class="GitTask.UI.MVVM.View.ProjectHistory.ProjectHistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:designProjectHistory="clr-namespace:GitTask.UI.MVVM.Design.ProjectHistory"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:projectHistory="clr-namespace:GitTask.UI.MVVM.View.ProjectHistory"
+        xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
+        Title="{x:Static prop:Resources.ProjectHistory}"
+        MinWidth="250"
+        MaxWidth="400"
+        MaxHeight="500"
+        d:DataContext="{d:DesignInstance Type=designProjectHistory:DesignProjectHistoryViewModel,
+                                         IsDesignTimeCreatable=True}"
+        SizeToContent="WidthAndHeight"
+        mc:Ignorable="d ignore">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Margin="2"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="17"
+                   FontWeight="SemiBold"
+                   Foreground="DarkSlateGray"
+                   Text="{Binding CreationDate,
+                                  Mode=OneWay}" />
+        <Grid Grid.Row="1" Background="Black" />
+        <ScrollViewer Grid.Row="2"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <ItemsControl>
+                <ItemsControl ItemsSource="{Binding CommitChanges, Mode=OneWay}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <projectHistory:ProjectCommitChangesPartial Margin="2" DataContext="{Binding Mode=OneWay}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>

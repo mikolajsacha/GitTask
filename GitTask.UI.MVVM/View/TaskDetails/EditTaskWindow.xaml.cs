@@ -1,13 +1,17 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
 namespace GitTask.UI.MVVM.View.TaskDetails
 {
     public partial class EditTaskWindow
     {
+        public RelayCommand DeleteCommand { get; }
+
         public EditTaskWindow(EditTaskViewModel editTaskViewModel)
         {
+            DeleteCommand = new RelayCommand(OnDeleteCommand);
             DataContext = editTaskViewModel;
             InitializeComponent();
             OkButton.Click += OkButtonOnClick;
@@ -48,13 +52,15 @@ namespace GitTask.UI.MVVM.View.TaskDetails
             }
         }
 
-        private void RemoveButton_MouseDown(object sender, MouseButtonEventArgs e)
+        private void OnDeleteCommand()
         {
-            Close();
             var editTaskViewModel = DataContext as EditTaskViewModel;
 
             if (editTaskViewModel != null && editTaskViewModel.DeleteCommand.CanExecute(new object()))
             {
+                var messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButton.YesNo);
+                if (messageBoxResult != MessageBoxResult.Yes) return;
+                Close();
                 editTaskViewModel.DeleteCommand.Execute(new object());
             }
         }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GitTask.Domain.Model.Project;
-using GitTask.Domain.Model.Repository;
+using GitTask.Domain.Model.Repository.EntityHistory;
+using GitTask.Domain.Model.Repository.ProjectHistory;
 
 namespace GitTask.Domain.Services.Interface
 {
@@ -11,7 +12,8 @@ namespace GitTask.Domain.Services.Interface
         event Action RepositoryInitalized;
 
         Task<IEnumerable<ProjectMember>> GetAllUniqueCommiters();
-        Task<EntityHistory> GetHistory<TModel>(TModel modelObject);
+        Task<EntityHistory> GetEntityHistory<TModel>(TModel modelObject);
+        Task<ProjectHistory> GetProjectHistory();
         bool RepositoryExists(string projectPath);
     }
 }

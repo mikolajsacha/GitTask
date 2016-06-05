@@ -49,9 +49,11 @@
     <Compile Include="Exception\KeyAttributeNotDefinedException.cs" />
     <Compile Include="Exception\KeyPropertyNotExistsException.cs" />
     <Compile Include="Exception\KeyAttributeException.cs" />
-    <Compile Include="Model\Repository\EntityPropertyChange.cs" />
-    <Compile Include="Model\Repository\EntityCommitChange.cs" />
-    <Compile Include="Model\Repository\EntityHistory.cs" />
+    <Compile Include="Model\Repository\EntityHistory\EntityPropertyChange.cs" />
+    <Compile Include="Model\Repository\EntityHistory\EntityCommitChange.cs" />
+    <Compile Include="Model\Repository\EntityHistory\EntityHistory.cs" />
+    <Compile Include="Model\Repository\ProjectHistory\ProjectCommitChange.cs" />
+    <Compile Include="Model\Repository\ProjectHistory\ProjectHistory.cs" />
     <Compile Include="Services\Interface\IProjectPathsReadonlyService.cs" />
     <Compile Include="Services\Interface\IProjectPathsService.cs" />
     <Compile Include="Model\Project\Project.cs" />
