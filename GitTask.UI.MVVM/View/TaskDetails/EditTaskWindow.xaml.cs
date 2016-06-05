@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using GitTask.UI.MVVM.Locator;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
 
 namespace GitTask.UI.MVVM.View.TaskDetails
@@ -58,7 +59,7 @@ namespace GitTask.UI.MVVM.View.TaskDetails
 
             if (editTaskViewModel != null && editTaskViewModel.DeleteCommand.CanExecute(new object()))
             {
-                var messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButton.YesNo);
+                var messageBoxResult = MessageBox.Show(IocLocator.ResourceManager.GetString("AreYouSure"), IocLocator.ResourceManager.GetString("DeleteConfirmation"), MessageBoxButton.YesNo);
                 if (messageBoxResult != MessageBoxResult.Yes) return;
                 Close();
                 editTaskViewModel.DeleteCommand.Execute(new object());

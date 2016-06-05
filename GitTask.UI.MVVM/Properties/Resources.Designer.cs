@@ -151,6 +151,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure?.
+        /// </summary>
+        public static string AreYouSure {
+            get {
+                return ResourceManager.GetString("AreYouSure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assigned to.
         /// </summary>
         public static string AssignedTo {
@@ -304,6 +313,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete confirmation.
+        /// </summary>
+        public static string DeleteConfirmation {
+            get {
+                return ResourceManager.GetString("DeleteConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Task.
         /// </summary>
         public static string EditTask {
@@ -372,6 +390,24 @@ namespace GitTask.UI.MVVM.Properties {
         public static string NewValue {
             get {
                 return ResourceManager.GetString("NewValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No project history in repository.
+        /// </summary>
+        public static string NoProjectHistoryInRepository {
+            get {
+                return ResourceManager.GetString("NoProjectHistoryInRepository", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No task history in repository.
+        /// </summary>
+        public static string NoTaskHistoryInRepository {
+            get {
+                return ResourceManager.GetString("NoTaskHistoryInRepository", resourceCulture);
             }
         }
         
@@ -574,7 +610,7 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SelectState.
+        ///   Looks up a localized string similar to Select State.
         /// </summary>
         public static string SelectState {
             get {

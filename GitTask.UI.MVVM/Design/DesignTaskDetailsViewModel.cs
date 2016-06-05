@@ -25,6 +25,7 @@ namespace GitTask.UI.MVVM.Design
         public bool AnyComments => true;
         public bool IsFullContentVisible => true;
         public bool CommentsVisible => AnyComments && IsFullContentVisible;
+        public bool IsHistoryBeingResolved => false;
 
         public DesignTaskDetailsViewModel(Task task)
         {

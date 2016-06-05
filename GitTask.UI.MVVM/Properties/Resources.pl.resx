@@ -118,216 +118,216 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddTask" xml:space="preserve">
-    <value>Add task</value>
+    <value>Dodaj zadanie</value>
   </data>
   <data name="AssignedTo" xml:space="preserve">
-    <value>Assigned to</value>
+    <value>Przypisane do</value>
   </data>
   <data name="AssignMembers" xml:space="preserve">
-    <value>Assign members</value>
+    <value>Przypisz użytkowników</value>
   </data>
   <data name="Author" xml:space="preserve">
-    <value>Author</value>
+    <value>Autor</value>
   </data>
   <data name="ChooseRepositoryFolderExplanation" xml:space="preserve">
-    <value>Please choose a folder containing git repository for your project</value>
+    <value>Proszę wybrać folder zawierający repozytorium Git Twojego projektu</value>
   </data>
   <data name="Content" xml:space="preserve">
-    <value>Content:</value>
+    <value>Treść:</value>
   </data>
   <data name="EnterProjectName" xml:space="preserve">
-    <value>Enter a name for your project</value>
+    <value>Wprowadź nazwę Twojego projektu</value>
   </data>
   <data name="Hide" xml:space="preserve">
-    <value>Hide</value>
+    <value>Ukryj</value>
   </data>
   <data name="OpenProject" xml:space="preserve">
-    <value>Open project</value>
+    <value>Otwórz projekt</value>
   </data>
   <data name="OpenRepository" xml:space="preserve">
-    <value>Open repository</value>
+    <value>Otwórz repozytorium</value>
   </data>
   <data name="PendingStorageOperations" xml:space="preserve">
-    <value>Pending storage operations:</value>
+    <value>Trwające operacje na pamięci:</value>
   </data>
   <data name="PriorityBlocker" xml:space="preserve">
-    <value>Blocker</value>
+    <value>Blokujący</value>
   </data>
   <data name="PriorityCritical" xml:space="preserve">
-    <value>Critical</value>
+    <value>Krytyczny</value>
   </data>
   <data name="PriorityMajor" xml:space="preserve">
-    <value>Major</value>
+    <value>Ważny</value>
   </data>
   <data name="PriorityMedium" xml:space="preserve">
-    <value>Medium</value>
+    <value>Normalny</value>
   </data>
   <data name="PriorityMinor" xml:space="preserve">
-    <value>Minor</value>
+    <value>Niski</value>
   </data>
   <data name="ProjectMember" xml:space="preserve">
-    <value>Project Member</value>
+    <value>Członek projektu</value>
   </data>
   <data name="ProjectSetup" xml:space="preserve">
-    <value>Project setup</value>
+    <value>Ustawienia projektu</value>
   </data>
   <data name="RepositoryNotFound" xml:space="preserve">
-    <value>Repository not found</value>
+    <value>Nie znaleziono repozytorium</value>
   </data>
   <data name="RepositoryNotFoundExplanation" xml:space="preserve">
-    <value>Git repository has not been found. Please choose directory with existing Git repository.</value>
+    <value>Repozytorium Git nie zostało odnalezione. Proszę wybrać folder zawierający repozytorium Git</value>
   </data>
   <data name="SelectPriority" xml:space="preserve">
-    <value>Select priority</value>
+    <value>Wybierz priorytet</value>
   </data>
   <data name="SetCurrentUser" xml:space="preserve">
-    <value>Set current user</value>
+    <value>Wybierz aktualnego użytkownika</value>
   </data>
   <data name="SetCurrentUserExplanation" xml:space="preserve">
-    <value>Select current user from the list below:</value>
+    <value>Wybierz użytkownika z poniższej listy:</value>
   </data>
   <data name="TaskDetails" xml:space="preserve">
-    <value>Task Details</value>
+    <value>Szczegóły zadania</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Title:</value>
+    <value>Tytuł:</value>
   </data>
   <data name="SelectState" xml:space="preserve">
-    <value>Select State</value>
+    <value>Wybierz stan</value>
   </data>
   <data name="AddTaskState" xml:space="preserve">
-    <value>Add task state</value>
+    <value>Dodaj status zadania</value>
   </data>
   <data name="Color" xml:space="preserve">
-    <value>Color:</value>
+    <value>Kolor:</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name:</value>
+    <value>Imię:</value>
   </data>
   <data name="SetUser" xml:space="preserve">
-    <value>Set User</value>
+    <value>Wybierz użytkownika</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Usuń</value>
   </data>
   <data name="EditTask" xml:space="preserve">
-    <value>Edit Task</value>
+    <value>Edytuj zadanie</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
-    <value>Save changes</value>
+    <value>Zapisz zmiany</value>
   </data>
   <data name="CurrentUser" xml:space="preserve">
-    <value>Current User</value>
+    <value>Aktualny użytkownik</value>
   </data>
   <data name="Unassigned" xml:space="preserve">
-    <value>Unassigned</value>
+    <value>Nieprzypisane</value>
   </data>
   <data name="AlsoKnownAs" xml:space="preserve">
-    <value>Also known as...</value>
+    <value>Również jako...</value>
   </data>
   <data name="AddComment" xml:space="preserve">
-    <value>Add Comment</value>
+    <value>Dodaj komentarz</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>Add</value>
+    <value>Dodaj</value>
   </data>
   <data name="Comments" xml:space="preserve">
-    <value>Comments:</value>
+    <value>Komentarze:</value>
   </data>
   <data name="MoveLeft" xml:space="preserve">
-    <value>Move left</value>
+    <value>Przesuń w lewo</value>
   </data>
   <data name="MoveRight" xml:space="preserve">
-    <value>Move right</value>
+    <value>Przesuń w prawo</value>
   </data>
   <data name="ResolveHistory" xml:space="preserve">
-    <value>Resolve history</value>
+    <value>Przeszukaj historię</value>
   </data>
   <data name="AddNewUser" xml:space="preserve">
-    <value>Add new user</value>
+    <value>Dodaj nowego użytkownika</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>E-mail</value>
   </data>
   <data name="ChangedAssignedMembers" xml:space="preserve">
-    <value>Changed assigned members</value>
+    <value>Zmieniono przypisanych użytkowników</value>
   </data>
   <data name="ChangedTaskComments" xml:space="preserve">
-    <value>Changed task comments</value>
+    <value>Zmieniono komentarze</value>
   </data>
   <data name="ChangedTaskContent" xml:space="preserve">
-    <value>Changed task content</value>
+    <value>Zmieniono treść zadania</value>
   </data>
   <data name="ChangedTaskPriority" xml:space="preserve">
-    <value>Changed task priority</value>
+    <value>Zmieniono priorytet zadania</value>
   </data>
   <data name="ChangedTaskState" xml:space="preserve">
-    <value>Changed task state</value>
+    <value>Zmieniono stan zadania</value>
   </data>
   <data name="AddedAssignedMembers" xml:space="preserve">
-    <value>Added assigned members:</value>
+    <value>Dodano przypisanych użytkowników:</value>
   </data>
   <data name="RemovedAssignedMembers" xml:space="preserve">
-    <value>Removed assigned members:</value>
+    <value>Usunięci przypisani użytkownicy:</value>
   </data>
   <data name="TaskHistory" xml:space="preserve">
-    <value>Task history</value>
+    <value>Historia zadania</value>
   </data>
   <data name="AddedComments" xml:space="preserve">
-    <value>Added comments:</value>
+    <value>Dodano komentarze:</value>
   </data>
   <data name="NewValue" xml:space="preserve">
-    <value>New value:</value>
+    <value>Nowa wartość:</value>
   </data>
   <data name="OldValue" xml:space="preserve">
-    <value>Old value:</value>
+    <value>Stara wartość:</value>
   </data>
   <data name="RemovedComments" xml:space="preserve">
-    <value>Removed comments:</value>
+    <value>Usunięte komentarze:</value>
   </data>
   <data name="ResolveProjectHistory" xml:space="preserve">
-    <value>Resolve project history</value>
+    <value>Przeszukaj historię projektu</value>
   </data>
   <data name="AddedProjectMembers" xml:space="preserve">
-    <value>Added project members:</value>
+    <value>Dodano członków projektu:</value>
   </data>
   <data name="ChangedProjectMembers" xml:space="preserve">
-    <value>Changed project members</value>
+    <value>Zmieniono członków projektu</value>
   </data>
   <data name="RemovedProjectMembers" xml:space="preserve">
-    <value>Removed project members:</value>
+    <value>Usunięci członkowie projektu:</value>
   </data>
   <data name="AddedTasks" xml:space="preserve">
-    <value>Added tasks:</value>
+    <value>Dodano zadania:</value>
   </data>
   <data name="ChangesInTasks" xml:space="preserve">
-    <value>Changes in tasks</value>
+    <value>Zmiany w zadaniach</value>
   </data>
   <data name="RemovedTasks" xml:space="preserve">
-    <value>Removed tasks:</value>
+    <value>Usunięte zadania:</value>
   </data>
   <data name="ChangesInTaskStates" xml:space="preserve">
-    <value>Changes in task states</value>
+    <value>Zmiany w stanach zadań</value>
   </data>
   <data name="TaskStatesAfter" xml:space="preserve">
-    <value>Task states after:</value>
+    <value>Stany zadań przed:</value>
   </data>
   <data name="TaskStatesBefore" xml:space="preserve">
-    <value>Task states before:</value>
+    <value>Stany zadań przed:</value>
   </data>
   <data name="ProjectHistory" xml:space="preserve">
-    <value>Project history</value>
+    <value>Historia projektu</value>
   </data>
   <data name="AreYouSure" xml:space="preserve">
-    <value>Are you sure?</value>
+    <value>Czy jesteś pewien?</value>
   </data>
   <data name="DeleteConfirmation" xml:space="preserve">
-    <value>Delete confirmation</value>
+    <value>Potwierdzenie usunięcia</value>
   </data>
   <data name="NoProjectHistoryInRepository" xml:space="preserve">
-    <value>No project history in repository</value>
+    <value>Brak historii projektu w repozytorium</value>
   </data>
   <data name="NoTaskHistoryInRepository" xml:space="preserve">
-    <value>No task history in repository</value>
+    <value>Brak historii zadania w repozytorium</value>
   </data>
 </root>

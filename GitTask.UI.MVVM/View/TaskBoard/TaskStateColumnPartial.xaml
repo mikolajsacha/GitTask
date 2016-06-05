@@ -50,7 +50,7 @@
                            VerticalAlignment="Center"
                            FontSize="17"
                            FontWeight="Bold"
-                           Foreground="White"
+                           Foreground="Black"
                            Text="{Binding TaskState.Name,
                                           Converter={StaticResource ToUpperCaseConverter},
                                           Mode=OneWay}"

@@ -3,6 +3,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Services.Interface;
+using GitTask.UI.MVVM.Properties;
 using GitTask.UI.MVVM.View.ProjectHistory;
 using GitTask.UI.MVVM.View.ProjectSettings;
 using GitTask.UI.MVVM.ViewModel.History.ProjectHistory;
@@ -63,13 +64,13 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
 
         private async void OnResolveHistoryCommand()
         {
+            if (_isHistoryBeingResolved) return;
             IsHistoryBeingResolved = true;
             var projectHistory = await _repositoryService.GetProjectHistory();
             IsHistoryBeingResolved = false;
-            //TODO: dodaj pop z loaderem. Również do historii taska
             if (projectHistory == null)
             {
-                MessageBox.Show("No task history in repository.");
+                MessageBox.Show(Resources.NoProjectHistoryInRepository);
                 return;
             }
             var projecHistoryViewModel = new ProjectHistoryViewModel(projectHistory);

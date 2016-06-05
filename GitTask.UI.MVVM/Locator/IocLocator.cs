@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Resources;
+using GalaSoft.MvvmLight;
 using GitTask.UI.MVVM.ViewModel.ActionBar;
 using GitTask.UI.MVVM.ViewModel.Common;
 using GitTask.UI.MVVM.ViewModel.Footer;
@@ -21,6 +22,7 @@ namespace GitTask.UI.MVVM.Locator
             Kernel = new StandardKernel(new IocModule());
         }
 
+        public static ResourceManager ResourceManager => Kernel.Get<ResourceManager>();
         public static MainViewModel MainViewModel => Kernel.Get<MainViewModel>();
         public static ProjectOpeningViewModel ProjectOpeningViewModel => Kernel.Get<ProjectOpeningViewModel>();
         public static TaskBoardViewModel TaskBoardViewModel => Kernel.Get<TaskBoardViewModel>();

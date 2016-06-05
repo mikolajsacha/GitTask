@@ -172,6 +172,11 @@
     <Compile Include="Messages\DeleteTaskStateMessage.cs" />
     <Compile Include="Messages\DistributeTaskStateColumnsMessage.cs" />
     <Compile Include="Model\RegistryProjectInformation.cs" />
+    <Compile Include="Properties\Resources.pl.Designer.cs">
+      <DependentUpon>Resources.pl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ViewModel\ActionBar\FiltersViewModel.cs" />
     <Compile Include="ViewModel\Common\ProjectMembersSetsViewModel.cs" />
     <Compile Include="ViewModel\Common\CurrentUserViewModel.cs" />
@@ -473,6 +478,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

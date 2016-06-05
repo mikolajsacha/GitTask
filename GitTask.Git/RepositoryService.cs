@@ -67,7 +67,7 @@ namespace GitTask.Git
                 {
                     try
                     {
-                        if (!commit.Parents.Any())
+                        if (!commit.Parents.Any() || !CommitContainsGitTaskFolder(commit))
                         {
                             return !projectInRepo ? null : projectHistory;
                         }
@@ -103,6 +103,11 @@ namespace GitTask.Git
             });
         }
 
+        private bool CommitContainsGitTaskFolder(Commit commit)
+        {
+            return commit.Tree.Any(treeEntry => treeEntry.Path.Contains(_projectPathsService.RelativeStoragePath));
+        }
+
         public async Task<EntityHistory> GetEntityHistory<TModel>(TModel modelObject)
         {
             return await Task.Run(() =>
@@ -117,7 +122,7 @@ namespace GitTask.Git
                 {
                     try
                     {
-                        if (!commit.Parents.Any())
+                        if (!commit.Parents.Any() || !CommitContainsGitTaskFolder(commit))
                         {
                             return entityInRepo ? entityHistory : null;
                         }

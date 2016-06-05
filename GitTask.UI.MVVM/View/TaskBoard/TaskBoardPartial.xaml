@@ -10,13 +10,16 @@
                                               IsDesignTimeCreatable=True}"
              d:DesignHeight="730"
              d:DesignWidth="1024"
-             Background="Gray"
+             Background="#FFEAEAEA"
              DataContext="{Binding TaskBoardViewModel,
                                    Source={StaticResource Locator},
                                    Mode=OneWay}"
              mc:Ignorable="d ignore">
 
-    <ItemsControl x:Name="TaskStateColumnsItemsControl" Margin="8,0,0,0" ItemsSource="{Binding TaskStateColumns, Mode=OneWay}">
+    <ItemsControl x:Name="TaskStateColumnsItemsControl"
+                  Margin="8,0,0,0"
+                  ItemsSource="{Binding TaskStateColumns,
+                                        Mode=OneWay}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <StackPanel Orientation="Horizontal" />

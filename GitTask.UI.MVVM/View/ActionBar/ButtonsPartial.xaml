@@ -6,7 +6,6 @@
              xmlns:ignore="http://www.galasoft.ch/ignore"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="50"
              d:DesignWidth="1024"
              Background="Transparent"
@@ -43,10 +42,10 @@
                 </Button.ToolTip>
             </Button>
             <Popup IsOpen="{Binding IsHistoryBeingResolved, Mode=OneWay}">
- <Border Width="50"
- BorderThickness="1"
-                      Height="50"
-                      Background="White">
+                <Border Width="50"
+                        Height="50"
+                        Background="White"
+                        BorderThickness="1">
                     <elements:SpinningWheel Width="36" Height="36" />
                 </Border>
             </Popup>

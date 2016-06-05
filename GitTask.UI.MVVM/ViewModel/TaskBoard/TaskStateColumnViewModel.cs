@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
+using GitTask.UI.MVVM.Locator;
 using GitTask.UI.MVVM.Messages;
 using GitTask.UI.MVVM.View.TaskDetails;
 using GitTask.UI.MVVM.ViewModel.ActionBar;
@@ -147,7 +148,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
 
         private void OnDeleteTaskStateCommand()
         {
-            var messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButton.YesNo);
+            var messageBoxResult = MessageBox.Show(IocLocator.ResourceManager.GetString("AreYouSure"), IocLocator.ResourceManager.GetString("DeleteConfirmation"), MessageBoxButton.YesNo);
             if (messageBoxResult != MessageBoxResult.Yes) return;
             Messenger.Default.Send(new DeleteTaskStateMessage { TaskState = TaskState });
         }

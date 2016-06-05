@@ -1,4 +1,6 @@
-﻿using GitTask.Domain.Model.Project;
+﻿using System.Reflection;
+using System.Resources;
+using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
 using GitTask.Git;
@@ -32,6 +34,8 @@ namespace GitTask.UI.MVVM.Locator
             Bind<IProjectQueryService>().To<ProjectQueryService>().InSingletonScope();
             Bind<IQueryService<TaskState>>().To<QueryService<TaskState>>().InSingletonScope();
             Bind<IQueryService<Task>>().To<QueryService<Task>>().InSingletonScope();
+
+            Bind<ResourceManager>().ToConstant(new ResourceManager("GitTask.UI.MVVM.Properties.Resources", Assembly.GetExecutingAssembly()));
 
             Bind<PendingStorageOperationsViewModel>().ToSelf().InSingletonScope().WithConstructorArgument("storageServices",
                 new IStorageService[]

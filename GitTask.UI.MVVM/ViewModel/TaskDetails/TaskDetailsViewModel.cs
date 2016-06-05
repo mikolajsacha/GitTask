@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
+using GitTask.UI.MVVM.Properties;
 using GitTask.UI.MVVM.View.TaskDetails;
 using GitTask.UI.MVVM.View.TaskHistory;
 using GitTask.UI.MVVM.ViewModel.History.TaskHistory;
@@ -43,6 +44,17 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 
         private readonly RelayCommand<int> _removeCommentCommand;
         public ICommand RemoveCommentCommand => _removeCommentCommand;
+
+        private bool _isHistoryBeingResolved;
+        public bool IsHistoryBeingResolved
+        {
+            get { return _isHistoryBeingResolved; }
+            private set
+            {
+                _isHistoryBeingResolved = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public bool IsAddingCommentEnabled => !string.IsNullOrWhiteSpace(AddedComment);
         public bool AnyComments => Comments != null && Comments.Any();
@@ -88,6 +100,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
             IRepositoryService repositoryService)
         {
             _isFullContentVisible = false;
+            _isHistoryBeingResolved = false;
             Task = task;
 
             Comments = new ObservableCollection<string>(Task.Comments);
@@ -105,10 +118,13 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 
         private async void ResolveHistory()
         {
+            if (_isHistoryBeingResolved) return;
+            IsHistoryBeingResolved = true;
             var taskHistory = await _repositoryService.GetEntityHistory(Task);
+            IsHistoryBeingResolved = false;
             if (taskHistory == null)
             {
-                MessageBox.Show("No task history in repository.");
+                MessageBox.Show(Resources.NoTaskHistoryInRepository);
                 return;
             }
             CreationDate = taskHistory.CreationDate.ToString("g");
