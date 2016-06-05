@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Services.Interface;
@@ -22,6 +21,17 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
         private readonly RelayCommand _resolveHistoryCommand;
         public ICommand ResolveHistoryCommand => _resolveHistoryCommand;
 
+        private bool _isHistoryBeingResolved;
+        public bool IsHistoryBeingResolved
+        {
+            get { return _isHistoryBeingResolved; }
+            private set
+            {
+                _isHistoryBeingResolved = value; 
+                RaisePropertyChanged();
+            }
+        }
+
         private bool _areButtonsEnabled;
         public bool AreButtonsEnabled
         {
@@ -35,6 +45,7 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
 
         public ButtonsViewModel(IProjectPathsReadonlyService projectPathsService, IRepositoryService repositoryService)
         {
+            _isHistoryBeingResolved = false;
             _repositoryService = repositoryService;
 
             _resolveHistoryCommand = new RelayCommand(OnResolveHistoryCommand);
@@ -52,7 +63,15 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
 
         private async void OnResolveHistoryCommand()
         {
+            IsHistoryBeingResolved = true;
             var projectHistory = await _repositoryService.GetProjectHistory();
+            IsHistoryBeingResolved = false;
+            //TODO: dodaj pop z loaderem. Również do historii taska
+            if (projectHistory == null)
+            {
+                MessageBox.Show("No task history in repository.");
+                return;
+            }
             var projecHistoryViewModel = new ProjectHistoryViewModel(projectHistory);
             var projectHistoryWindow = new ProjectHistoryWindow(projecHistoryViewModel) { Owner = Application.Current.MainWindow };
             projectHistoryWindow.Show();

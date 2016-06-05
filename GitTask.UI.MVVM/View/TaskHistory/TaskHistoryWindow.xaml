@@ -15,6 +15,7 @@
         d:DataContext="{d:DesignInstance Type=designTaskHistory:DesignTaskHistoryViewModel,
                                          IsDesignTimeCreatable=True}"
         SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner"
         mc:Ignorable="d ignore">
 
     <Grid>

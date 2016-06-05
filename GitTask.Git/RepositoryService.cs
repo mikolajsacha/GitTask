@@ -57,10 +57,11 @@ namespace GitTask.Git
             {
                 if (_repository == null) return null;
 
-                var projectHistory = new ProjectHistory { Changes = new List<ProjectCommitChange>()};
+                var projectHistory = new ProjectHistory { Changes = new List<ProjectCommitChange>() };
 
                 var baseProjectPath = GetBaseEntityPath("Project");
                 var baseTaskPath = GetBaseEntityPath("Task");
+                var projectInRepo = false;
 
                 foreach (var commit in _repository.Commits.QueryBy(new CommitFilter { FirstParentOnly = true }))
                 {
@@ -68,8 +69,7 @@ namespace GitTask.Git
                     {
                         if (!commit.Parents.Any())
                         {
-                            projectHistory.CreationDate = commit.Committer.When.DateTime;
-                            return projectHistory;
+                            return !projectInRepo ? null : projectHistory;
                         }
 
                         var parentCommit = commit.Parents.First();
@@ -88,7 +88,9 @@ namespace GitTask.Git
                         if (commitChange.AddedTasks.Any() || commitChange.RemovedTasks.Any() ||
                             commitChange.ProjectMembersChange != null || commitChange.TaskStatesChange != null)
                         {
+                            projectInRepo = true;
                             projectHistory.Changes.Add(commitChange);
+                            projectHistory.CreationDate = commit.Committer.When.DateTime;
                         }
                     }
                     catch (Exception)
@@ -109,6 +111,7 @@ namespace GitTask.Git
 
                 var entityHistory = new EntityHistory { Changes = new List<EntityCommitChange>() };
                 var objectPath = GetObjectPath(modelObject);
+                var entityInRepo = false;
 
                 foreach (var commit in _repository.Commits.QueryBy(new CommitFilter { FirstParentOnly = true }))
                 {
@@ -116,9 +119,7 @@ namespace GitTask.Git
                     {
                         if (!commit.Parents.Any())
                         {
-                            entityHistory.CreationDate = commit.Committer.When.DateTime;
-                            entityHistory.Author = new ProjectMember(commit.Committer.Name, commit.Committer.Email);
-                            return entityHistory;
+                            return entityInRepo ? entityHistory : null;
                         }
 
                         var parentCommit = commit.Parents.First();
@@ -153,6 +154,8 @@ namespace GitTask.Git
                             Author = new ProjectMember(commit.Committer.Name, commit.Committer.Email)
                         };
                         entityHistory.Changes.Add(entityCommitChange);
+                        entityInRepo = true;
+                        entityHistory.CreationDate = commit.Committer.When.DateTime;
                     }
                     catch (Exception)
                     {

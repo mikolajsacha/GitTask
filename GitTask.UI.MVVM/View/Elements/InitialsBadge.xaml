@@ -17,7 +17,7 @@
             BorderBrush="{Binding Converter={StaticResource ProjectMemberToBrushConverter},
                                   Mode=OneWay}"
             BorderThickness="2"
-            CornerRadius="4"
+            CornerRadius="6"
             MouseDown="OnMouseDown"
             MouseLeave="OnMouseLeave">
         <Border.ToolTip>

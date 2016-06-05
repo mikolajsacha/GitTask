@@ -128,7 +128,7 @@
             <ScrollViewer Grid.Row="3"
                           Grid.Column="0"
                           Margin="2"
-                          HorizontalAlignment="Center"
+
                           HorizontalScrollBarVisibility="Disabled"
                           VerticalScrollBarVisibility="Auto"
                           Visibility="{Binding CommentsVisible,
