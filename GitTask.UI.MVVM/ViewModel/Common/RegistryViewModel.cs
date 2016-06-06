@@ -93,6 +93,7 @@ namespace GitTask.UI.MVVM.ViewModel.Common
         {
             CreateBaseRegistryKeyIfNotExists();
             _baseRegistryKey.SetValue("CurrentProjectPath", CurrentProject.ProjectPath);
+            if (CurrentProject.CurrentUser == null) return;
             _baseRegistryKey.SetValue("CurrentProjectUserName", CurrentProject.CurrentUser.Name);
             _baseRegistryKey.SetValue("CurrentProjectUserEmail", CurrentProject.CurrentUser.Email);
         }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Repository.EntityHistory;
+using GitTask.Domain.Model.Repository.Merging;
 using GitTask.Domain.Model.Task;
 using GitTask.Json;
 using GitTask.Storage.Interface;
@@ -110,31 +111,16 @@ namespace GitTask.Git
 
         public IEnumerable<EntityPropertyChange> ResolveChangesInBlob<TModel>(Blob parentBlob, Blob childBlob)
         {
-            var parentContentStream = parentBlob.GetContentStream();
-            var childContentStream = childBlob.GetContentStream();
-
-            TModel parentObject;
-            TModel childObject;
             try
             {
-                using (var streamReader = new StreamReader(parentContentStream, BufferWorker.Encoding))
-                {
-                    var parentContent = streamReader.ReadToEnd();
-                    parentObject = _fileService.ParseString<TModel>(parentContent);
-                }
-
-                using (var streamReader = new StreamReader(childContentStream, BufferWorker.Encoding))
-                {
-                    var childContent = streamReader.ReadToEnd();
-                    childObject = _fileService.ParseString<TModel>(childContent);
-                }
+                var parentObject = GetEntityObjectFromStream<TModel>(parentBlob.GetContentStream());
+                var childObject = GetEntityObjectFromStream<TModel>(childBlob.GetContentStream());
+                return ResolveChangesInObjects(parentObject, childObject);
             }
             catch (Exception) // exception while parsing
             {
                 return new List<EntityPropertyChange>();
             }
-
-            return ResolveChangesInObjects(parentObject, childObject);
         }
 
         private IEnumerable<TaskState> GetTaskStatesFromCommit(Commit commit, string baseRepoPath, string relativeTaskStatesPath)
@@ -157,11 +143,7 @@ namespace GitTask.Git
                 TaskState taskStateObject;
                 try
                 {
-                    using (var streamReader = new StreamReader(contentStream, BufferWorker.Encoding))
-                    {
-                        var content = streamReader.ReadToEnd();
-                        taskStateObject = _fileService.ParseString<TaskState>(content);
-                    }
+                    taskStateObject = GetEntityObjectFromStream<TaskState>(contentStream);
                 }
                 catch (Exception) // exception while parsing
                 {
@@ -192,6 +174,17 @@ namespace GitTask.Git
                 }
             }
             return propertyChanges;
+        }
+
+        public T GetEntityObjectFromStream<T>(Stream stream)
+        {
+            T result;
+            using (var streamReader = new StreamReader(stream, BufferWorker.Encoding))
+            {
+                var parentContent = streamReader.ReadToEnd();
+                result = _fileService.ParseString<T>(parentContent);
+            }
+            return result;
         }
     }
 }

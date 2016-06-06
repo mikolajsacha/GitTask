@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Repository.EntityHistory;
+using GitTask.Domain.Model.Repository.Merging;
 using GitTask.Domain.Model.Repository.ProjectHistory;
 
 namespace GitTask.Domain.Services.Interface
@@ -14,6 +15,7 @@ namespace GitTask.Domain.Services.Interface
         Task<IEnumerable<ProjectMember>> GetAllUniqueCommiters();
         Task<EntityHistory> GetEntityHistory<TModel>(TModel modelObject);
         Task<ProjectHistory> GetProjectHistory();
+        Task<MergingConflicts> GetCurrentMergingConflicts();
         bool RepositoryExists(string projectPath);
     }
 }

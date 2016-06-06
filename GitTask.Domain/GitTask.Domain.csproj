@@ -49,6 +49,8 @@
     <Compile Include="Exception\KeyAttributeNotDefinedException.cs" />
     <Compile Include="Exception\KeyPropertyNotExistsException.cs" />
     <Compile Include="Exception\KeyAttributeException.cs" />
+    <Compile Include="Model\Repository\Merging\MergingConflicts.cs" />
+    <Compile Include="Model\Repository\Merging\EntityConflict.cs" />
     <Compile Include="Model\Repository\EntityHistory\EntityPropertyChange.cs" />
     <Compile Include="Model\Repository\EntityHistory\EntityCommitChange.cs" />
     <Compile Include="Model\Repository\EntityHistory\EntityHistory.cs" />

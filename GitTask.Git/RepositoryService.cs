@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GitTask.Domain.Attributes;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Repository.EntityHistory;
+using GitTask.Domain.Model.Repository.Merging;
 using GitTask.Domain.Model.Repository.ProjectHistory;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
@@ -50,6 +51,93 @@ namespace GitTask.Git
                        .Distinct();
             });
         }
+
+        public async Task<MergingConflicts> GetCurrentMergingConflicts()
+        {
+            return await Task.Run(() =>
+            {
+                if (_repository == null || _repository.Index.IsFullyMerged) return null;
+
+                var conflicts = _repository.Index.Conflicts;
+
+                return new MergingConflicts
+                {
+                    TaskConflicts = GetEntityConflicts<Domain.Model.Task.Task>(conflicts).ToList(),
+                    ProjectMembersConfict = GetProjectMembersConflict(conflicts),
+                    TaskStatesConflicts = GetEntityConflicts<TaskState>(conflicts).ToList()
+                };
+            });
+        }
+
+        private EntityConflict<List<ProjectMember>> GetProjectMembersConflict(ConflictCollection conflicts)
+        {
+            var projectConflictQueryResult = conflicts.Where(c => c.Ours.Path.StartsWith(GetBaseEntityPath("Project"))).ToList();
+            if (!projectConflictQueryResult.Any()) return null;
+
+            var projectConflict = projectConflictQueryResult.First();
+            var conflictData = GetConflictData<Project>(projectConflict);
+
+            return new EntityConflict<List<ProjectMember>>
+            {
+                OurValue = conflictData.OurValue?.ProjectMembersNotInRepository,
+                AncestorValue = conflictData.AncestorValue?.ProjectMembersNotInRepository,
+                TheirValue = conflictData.TheirValue?.ProjectMembersNotInRepository
+            };
+        }
+
+        private IEnumerable<EntityConflict<T>> GetEntityConflicts<T>(ConflictCollection conflicts) where T : class
+        {
+            return conflicts.Where(c => c.Ours.Path.StartsWith(GetBaseEntityPath(typeof (T).Name))).Select(GetConflictData<T>);
+        }
+
+        private EntityConflict<T> GetConflictData<T>(Conflict conflict) where T : class
+        {
+            var ours = conflict.Ours;
+            var ancestor = conflict.Ancestor;
+            var theirs = conflict.Theirs;
+
+            var ourBlob = ours != null ? _repository.Lookup(ours.Id) as Blob : null;
+            var ancestorBlob = ancestor != null ? _repository.Lookup(ancestor.Id) as Blob : null;
+            var theirBlob = theirs != null ? _repository.Lookup(theirs.Id) as Blob : null;
+
+            T ourValue;
+            T ancestorValue;
+            T theirValue;
+
+            try
+            {
+                ourValue = ourBlob != null ? _historyResolvingService.GetEntityObjectFromStream<T>(ourBlob.GetContentStream()) : null;
+            }
+            catch (Exception)
+            {
+                ourValue = null;
+            }
+
+            try
+            {
+                ancestorValue = ancestorBlob != null ? _historyResolvingService.GetEntityObjectFromStream<T>(ancestorBlob.GetContentStream()) : null;
+            }
+            catch (Exception)
+            {
+                ancestorValue = null;
+            }
+
+            try
+            {
+                theirValue = theirBlob != null ? _historyResolvingService.GetEntityObjectFromStream<T>(theirBlob.GetContentStream()) : null;
+            }
+            catch (Exception)
+            {
+                theirValue = null;
+            }
+
+            return (new EntityConflict<T>
+            {
+                AncestorValue = ancestorValue,
+                OurValue = ourValue,
+                TheirValue = theirValue
+            });
+        } 
 
         public async Task<ProjectHistory> GetProjectHistory()
         {
