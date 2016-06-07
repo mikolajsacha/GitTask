@@ -6,6 +6,7 @@ namespace GitTask.UI.MVVM.Design
     {
 
         public bool IsTaskBoardVisible => true;
-        public bool IsProjectInitializerVisible => !IsTaskBoardVisible;
+        public bool IsProjectInitializerVisible => false;
+        public bool IsMergingToolVisible => false;
     }
 }

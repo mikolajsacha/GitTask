@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HistoryResolvingService.cs" />
+    <Compile Include="MergingService.cs" />
     <Compile Include="RepositoryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

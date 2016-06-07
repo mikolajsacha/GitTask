@@ -190,6 +190,8 @@
     <Compile Include="ViewModel\History\ProjectHistory\ChangesPartials\TaskStatesChangesViewModel.cs" />
     <Compile Include="ViewModel\History\ProjectHistory\ProjectCommitChangesViewModel.cs" />
     <Compile Include="ViewModel\History\ProjectHistory\ProjectHistoryViewModel.cs" />
+    <Compile Include="ViewModel\Merging\MergingViewModel.cs" />
+    <Compile Include="ViewModel\Merging\TaskContentViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\AddTaskStateViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\SetCurrentUserViewModel.cs" />
     <Compile Include="ViewModel\TaskBoard\TaskBoardViewModel.cs" />
@@ -233,6 +235,12 @@
     <Compile Include="View\Main\ProjectOpeningPartial.xaml.cs">
       <DependentUpon>ProjectOpeningPartial.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Merging\TaskMergingPartial.xaml.cs">
+      <DependentUpon>TaskMergingPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Merging\MergingPartial.xaml.cs">
+      <DependentUpon>MergingPartial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ProjectHistory\ChangesPartials\TaskStatesChangePartial.xaml.cs">
       <DependentUpon>TaskStatesChangePartial.xaml</DependentUpon>
     </Compile>
@@ -274,6 +282,9 @@
     </Compile>
     <Compile Include="View\Footer\FooterPartial.xaml.cs">
       <DependentUpon>FooterPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Merging\TaskContentPartial.xaml.cs">
+      <DependentUpon>TaskContentPartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TaskBoard\TaskStateColumnPartial.xaml.cs">
       <DependentUpon>TaskStateColumnPartial.xaml</DependentUpon>
@@ -375,6 +386,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Merging\TaskMergingPartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Merging\MergingPartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ProjectHistory\ChangesPartials\TaskStatesChangePartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -408,6 +427,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ProjectSettings\ProjectSetupWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Merging\TaskContentPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -23,13 +23,13 @@ namespace GitTask.Storage
         public event Action<TModel> ElementDeleted;
         public event Action ElementsReloaded;
 
-        public QueryService(IStorageService<TModel> storageService, IProjectPathsReadonlyService projectPathsService)
+        public QueryService(IStorageService<TModel> storageService, IMergingService mergingService)
         {
             _storageService = storageService;
             _recentlyChanged = new HashSet<object>();
             _recentlyDeleted = new HashSet<object>();
 
-            projectPathsService.ProjectPathChanged += InitializeDataFromStorage;
+            mergingService.MergingCompleted += InitializeDataFromStorage;
 
             _data = new Dictionary<object, TModel>();
             InitializeDataFromStorage();

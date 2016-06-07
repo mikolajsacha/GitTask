@@ -8,6 +8,7 @@
         xmlns:ignore="http://www.galasoft.ch/ignore"
         xmlns:main="clr-namespace:GitTask.UI.MVVM.View.Main"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:merging="clr-namespace:GitTask.UI.MVVM.View.Merging"
         xmlns:taskBoard="clr-namespace:GitTask.UI.MVVM.View.TaskBoard"
         Title="{StaticResource AppTitle}"
         Width="{StaticResource WindowWidth}"
@@ -46,6 +47,9 @@
         </Grid>
         <Grid Visibility="{Binding IsProjectInitializerVisible, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
             <main:ProjectOpeningPartial />
+        </Grid>
+        <Grid Visibility="{Binding IsMergingToolVisible, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+            <merging:MergingPartial />
         </Grid>
     </Grid>
 </Window>

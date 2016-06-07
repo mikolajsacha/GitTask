@@ -44,7 +44,7 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
             }
         }
 
-        public ButtonsViewModel(IProjectPathsReadonlyService projectPathsService, IRepositoryService repositoryService)
+        public ButtonsViewModel(IRepositoryService repositoryService, IMergingService mergingService)
         {
             _isHistoryBeingResolved = false;
             _repositoryService = repositoryService;
@@ -53,8 +53,8 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
             _addTaskStateCommand = new RelayCommand(OnAddTaskStateCommand);
             _setCurrentUserCommand = new RelayCommand(OnSetCurrentUserCommand);
 
-            projectPathsService.ProjectPathChanged += OnProjectPathChanged;
-            _areButtonsEnabled = projectPathsService.IsProjectPathChosen;
+            mergingService.MergingCompleted += OnProjectPathChanged;
+            _areButtonsEnabled = mergingService.IsMergingCompleted;
         }
 
         private void OnProjectPathChanged()

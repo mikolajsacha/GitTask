@@ -11,6 +11,7 @@ using GitTask.UI.MVVM.ViewModel.ActionBar;
 using GitTask.UI.MVVM.ViewModel.Common;
 using GitTask.UI.MVVM.ViewModel.Footer;
 using GitTask.UI.MVVM.ViewModel.Main;
+using GitTask.UI.MVVM.ViewModel.Merging;
 using GitTask.UI.MVVM.ViewModel.ProjectSettings;
 using GitTask.UI.MVVM.ViewModel.TaskBoard;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
@@ -30,6 +31,7 @@ namespace GitTask.UI.MVVM.Locator
             Bind<IStorageService<Task>>().To<StorageService<Task>>().InSingletonScope();
 
             Bind<IRepositoryService>().To<RepositoryService>().InSingletonScope();
+            Bind<IMergingService>().To<MergingService>().InSingletonScope();
 
             Bind<IProjectQueryService>().To<ProjectQueryService>().InSingletonScope();
             Bind<IQueryService<TaskState>>().To<QueryService<TaskState>>().InSingletonScope();
@@ -59,6 +61,7 @@ namespace GitTask.UI.MVVM.Locator
             Bind<SetCurrentUserViewModel>().ToSelf().InSingletonScope();
             Bind<AddTaskStateViewModel>().ToSelf();
             Bind<AddTaskViewModel>().ToSelf();
+            Bind<MergingViewModel>().ToSelf();
         }
     }
 }

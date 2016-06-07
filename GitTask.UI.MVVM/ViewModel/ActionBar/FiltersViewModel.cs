@@ -65,13 +65,13 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
 
         public IEnumerable<ProjectMember> FilteredUsers { get; private set; }
 
-        public FiltersViewModel(IProjectPathsReadonlyService projectPathsService,
+        public FiltersViewModel(IMergingService mergingService,
                                 ProjectMembersSetsViewModel projectMembersSetsViewModel,
                                 CurrentUserViewModel currentUserViewModel)
         {
             _projectMembersSetsViewModel = projectMembersSetsViewModel;
-            _areFiltersEnabled = projectPathsService.IsProjectPathChosen;
-            projectPathsService.ProjectPathChanged += OnProjectPathChanged;
+            _areFiltersEnabled = mergingService.IsMergingCompleted;
+            mergingService.MergingCompleted += OnProjectPathChanged;
             currentUserViewModel.CurrentUserSet += CurrentUserViewModelOnCurrentUserSet;
             _currentUser = currentUserViewModel.CurrentUser;
         }

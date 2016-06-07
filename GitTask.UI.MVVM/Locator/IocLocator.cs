@@ -4,6 +4,7 @@ using GitTask.UI.MVVM.ViewModel.ActionBar;
 using GitTask.UI.MVVM.ViewModel.Common;
 using GitTask.UI.MVVM.ViewModel.Footer;
 using GitTask.UI.MVVM.ViewModel.Main;
+using GitTask.UI.MVVM.ViewModel.Merging;
 using GitTask.UI.MVVM.ViewModel.ProjectSettings;
 using GitTask.UI.MVVM.ViewModel.TaskBoard;
 using GitTask.UI.MVVM.ViewModel.TaskDetails;
@@ -38,6 +39,7 @@ namespace GitTask.UI.MVVM.Locator
         public static RegistryViewModel RegistryViewModel => Kernel.Get<RegistryViewModel>();
         public static FiltersViewModel FiltersViewModel => Kernel.Get<FiltersViewModel>();
         public static CurrentUserViewModel CurrentUserViewModel => Kernel.Get<CurrentUserViewModel>();
+        public static MergingViewModel MergingViewModel => Kernel.Get<MergingViewModel>();
 
         public static void Cleanup()
         {

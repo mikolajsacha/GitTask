@@ -18,11 +18,11 @@ namespace GitTask.Storage
         public event Action<ProjectMember> UserAdded;
 
         public ProjectQueryService(IStorageService<Project> storageService,
-                                   IProjectPathsReadonlyService projectPathsService)
+                                   IMergingService mergingService)
         {
             _storageService = storageService;
 
-            projectPathsService.ProjectPathChanged += InitializeDataFromStorage;
+            mergingService.MergingCompleted += InitializeDataFromStorage;
             InitializeDataFromStorage();
         }
 
