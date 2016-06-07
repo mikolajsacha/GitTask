@@ -17,5 +17,16 @@ namespace GitTask.UI.MVVM.View.TaskDetails
             var clickedProjectMember = (ProjectMember)((UserControl)sender).DataContext;
             ((SelectUsersViewModel)DataContext).SelectedUsers.Remove(clickedProjectMember);
         }
+
+        private void ScrollViewer_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var scrollviewer = sender as ScrollViewer;
+            if (scrollviewer == null) return;
+            if (e.Delta > 0)
+                scrollviewer.LineLeft();
+            else
+                scrollviewer.LineRight();
+            e.Handled = true;
+        }
     }
 }

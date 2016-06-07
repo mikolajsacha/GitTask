@@ -8,10 +8,24 @@ namespace GitTask.Git
     {
         private int _conflictToBeMerged;
         private readonly IRepositoryService _repositoryService;
+        private bool _isMergingCompleted;
 
         public event Action MergingCompleted;
         public event Action MergingConflictsAquired;
-        public bool IsMergingCompleted { get; private set; }
+
+        public bool IsMergingCompleted
+        {
+            get { return _isMergingCompleted; }
+            private set
+            {
+                _isMergingCompleted = value;
+                if (value)
+                {
+                    MergingCompleted?.Invoke();
+                }
+            }
+        }
+
         public MergingConflicts MergingConflicts { get; private set; }
 
         public MergingService(IRepositoryService repositoryService, IProjectPathsReadonlyService projectPathsService)
@@ -34,7 +48,6 @@ namespace GitTask.Git
             if (_conflictToBeMerged < 1)
             {
                 IsMergingCompleted = true;
-                MergingCompleted?.Invoke();
             }
         }
 
@@ -44,7 +57,6 @@ namespace GitTask.Git
             if (MergingConflicts == null)
             {
                 IsMergingCompleted = true;
-                MergingCompleted?.Invoke();
                 return;
             }
             _conflictToBeMerged = MergingConflicts.TaskConflicts.Count + MergingConflicts.TaskStatesConflicts.Count;
@@ -55,7 +67,6 @@ namespace GitTask.Git
             if (_conflictToBeMerged != 0) return;
 
             IsMergingCompleted = true;
-            MergingCompleted?.Invoke();
         }
     }
 }

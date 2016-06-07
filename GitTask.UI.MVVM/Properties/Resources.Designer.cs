@@ -61,6 +61,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About GitTask.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Add {
@@ -300,6 +309,24 @@ namespace GitTask.UI.MVVM.Properties {
         public static string Content {
             get {
                 return ResourceManager.GetString("Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Icons designer: Lucy G (http://www.flaticon.com/packs/free-basic-ui-elements).
+        /// </summary>
+        public static string CreditsIconAuthorInfo {
+            get {
+                return ResourceManager.GetString("CreditsIconAuthorInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application author: Mikołaj Sacha (mikolajsacha@gmail.com) 2016 ®.
+        /// </summary>
+        public static string CreditsProgramAuthorInfo {
+            get {
+                return ResourceManager.GetString("CreditsProgramAuthorInfo", resourceCulture);
             }
         }
         
@@ -601,11 +628,20 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resolve conflict in tasks.
+        ///   Looks up a localized string similar to Resolve conflict in task.
         /// </summary>
         public static string ResolveMergingTaskConflict {
             get {
                 return ResourceManager.GetString("ResolveMergingTaskConflict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolve conflict in task states.
+        /// </summary>
+        public static string ResolveMergingTaskStatesConflict {
+            get {
+                return ResourceManager.GetString("ResolveMergingTaskStatesConflict", resourceCulture);
             }
         }
         

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Enum;
@@ -21,6 +22,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
 
         public string Title => _task.Title;
         public TaskState TaskState { get; }
+        public Brush TaskStateColor { get; }
 
         private string _content;
         public string Content
@@ -51,6 +53,9 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
         {
             _task = task;
             TaskState = taskStateQueryService.GetByKey(task.State);
+
+            var brushConverter = new BrushConverter();
+            TaskStateColor = (Brush)brushConverter.ConvertFromString(TaskState.Color);
 
             _taskQueryService = taskQueryService;
             _okCommand = new RelayCommand(OnOkClick);

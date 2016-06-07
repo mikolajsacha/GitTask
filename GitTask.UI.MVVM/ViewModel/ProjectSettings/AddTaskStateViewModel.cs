@@ -52,12 +52,13 @@ namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
 
         private async void OnOkClick()
         {
+
             try
             {
                 _taskStateQueryService.AddNew(new TaskState
                 {
                     Name = _name,
-                    Color = _brush,
+                    Color = ((SolidColorBrush)_brush).Color.ToString(),
                     Position = GetLastTaskStatePosition() + 1,
                 });
             }
@@ -66,7 +67,7 @@ namespace GitTask.UI.MVVM.ViewModel.ProjectSettings
                 _taskStateQueryService.Update(new TaskState
                 {
                     Name = _name,
-                    Color = _brush,
+                    Color = ((SolidColorBrush)_brush).Color.ToString(),
                     Position = GetLastTaskStatePosition() + 1,
                 });
             }

@@ -11,7 +11,9 @@
              Background="Transparent"
              mc:Ignorable="d ignore">
 
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                  PreviewMouseWheel="ScrollViewer_OnPreviewMouseWheel"
+                  VerticalScrollBarVisibility="Disabled">
         <ItemsControl x:Name="UsersItemsControl" ItemsSource="{Binding SelectedUsers, Mode=OneWay}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

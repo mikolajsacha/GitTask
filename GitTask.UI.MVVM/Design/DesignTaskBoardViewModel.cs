@@ -18,10 +18,10 @@ namespace GitTask.UI.MVVM.Design
             TaskStateColumns = new ObservableCollection<DesignTaskStateColumnViewModel>
             {
                 new DesignTaskStateColumnViewModel(),
-                new DesignTaskStateColumnViewModel(new TaskState {Color = Brushes.Red, Name = "IN PROGRESS", Position = 1}),
-                new DesignTaskStateColumnViewModel(new TaskState {Color = Brushes.Blue, Name = "TO BE TESTED", Position = 2}),
-                new DesignTaskStateColumnViewModel(new TaskState {Color = Brushes.Orange, Name = "DONE", Position = 3}),
-                new DesignTaskStateColumnViewModel(new TaskState {Color = Brushes.Gray, Name = "CLOSED", Position = 4}, false)
+                new DesignTaskStateColumnViewModel(new TaskState {Color = "#FFFF0000", Name = "IN PROGRESS", Position = 1}),
+                new DesignTaskStateColumnViewModel(new TaskState {Color = "#FF0000FF", Name = "TO BE TESTED", Position = 2}),
+                new DesignTaskStateColumnViewModel(new TaskState {Color = "#FF00FF00", Name = "DONE", Position = 3}),
+                new DesignTaskStateColumnViewModel(new TaskState {Color = "#FFAAAAAA", Name = "CLOSED", Position = 4}, false)
             };
         }
     }

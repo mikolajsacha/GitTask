@@ -7,7 +7,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Model.Task;
 using GitTask.Domain.Services.Interface;
-using GitTask.UI.MVVM.Properties;
+using GitTask.UI.MVVM.Locator;
 using GitTask.UI.MVVM.View.TaskDetails;
 using GitTask.UI.MVVM.View.TaskHistory;
 using GitTask.UI.MVVM.ViewModel.History.TaskHistory;
@@ -124,7 +124,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskDetails
             IsHistoryBeingResolved = false;
             if (taskHistory == null)
             {
-                MessageBox.Show(Resources.NoTaskHistoryInRepository);
+                MessageBox.Show(IocLocator.ResourceManager.GetString("NoTaskHistoryInRepository"));
                 return;
             }
             CreationDate = taskHistory.CreationDate.ToString("g");

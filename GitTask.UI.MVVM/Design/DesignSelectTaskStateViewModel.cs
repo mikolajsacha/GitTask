@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GitTask.Domain.Model.Task;
 
@@ -26,8 +25,8 @@ namespace GitTask.UI.MVVM.Design
         {
             AllTaskStates = new ObservableCollection<TaskState>
             {
-                new TaskState {Color = Brushes.Yellow, Name = "TO DO", Position = 0},
-                new TaskState {Color = Brushes.Green, Name = "IN PROGRESS", Position = 1}
+                new TaskState {Color = "#FFFFFF00", Name = "TO DO", Position = 0},
+                new TaskState {Color = "#FF00FF00", Name = "IN PROGRESS", Position = 1}
             };
         }
     }

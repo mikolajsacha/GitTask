@@ -12,15 +12,28 @@
                                    Source={StaticResource Locator},
                                    Mode=OneWay}"
              mc:Ignorable="d ignore">
-    <merging:TaskMergingPartial DataContext="{Binding CurrentTaskConflictViewModel}">
-        <merging:TaskMergingPartial.Style>
-            <Style TargetType="merging:TaskMergingPartial">
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding}" Value="{x:Null}">
-                        <Setter Property="Visibility" Value="Collapsed" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </merging:TaskMergingPartial.Style>
-    </merging:TaskMergingPartial>
+    <Grid>
+        <merging:TaskStatesMergingPartial DataContext="{Binding TaskStateConflict}">
+            <merging:TaskStatesMergingPartial.Style>
+                <Style TargetType="merging:TaskStatesMergingPartial">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </merging:TaskStatesMergingPartial.Style>
+        </merging:TaskStatesMergingPartial>
+        <merging:TaskMergingPartial DataContext="{Binding CurrentTaskConflictViewModel}">
+            <merging:TaskMergingPartial.Style>
+                <Style TargetType="merging:TaskMergingPartial">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </merging:TaskMergingPartial.Style>
+        </merging:TaskMergingPartial>
+    </Grid>
 </UserControl>

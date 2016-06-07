@@ -74,7 +74,7 @@
             </Grid>
             <Border Grid.Row="1"
                     Margin="0,2,8,4"
-                    Background="{Binding TaskState.Color,
+                    Background="{Binding TaskStateColor,
                                          Mode=OneWay}"
                     CornerRadius="3" />
             <ScrollViewer Grid.Row="2"
@@ -130,7 +130,7 @@
                                               Mode=OneWay}"
                             Style="{StaticResource SmallIconButton}">
                         <Button.Resources>
-                            <ImageSource x:Key="ImageSource">../../Icons/hide.png</ImageSource>
+                            <ImageSource x:Key="ImageSource">../../Icons/visible.png</ImageSource>
                         </Button.Resources>
                         <Button.ToolTip>
                             <TextBlock Text="{Binding Source={x:Static prop:Resources.Hide}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />

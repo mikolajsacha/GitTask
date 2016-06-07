@@ -26,6 +26,7 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
         private readonly FiltersViewModel _filtersViewModel;
 
         public Brush Background { get; private set; }
+        public Brush TaskStateColor { get; private set; }
 
         public TaskState TaskState { get; }
         public ObservableCollection<TaskDetailsViewModel> Tasks { get; }
@@ -73,6 +74,9 @@ namespace GitTask.UI.MVVM.ViewModel.TaskBoard
             _taskStateQueryService = taskStateQueryService;
             _filtersViewModel = filtersViewModel;
             _isOpened = isOpened;
+
+            var brushConverter = new BrushConverter();
+            TaskStateColor = (Brush)brushConverter.ConvertFromString(taskState.Color);
             TaskState = taskState;
 
             _addTaskCommand = new RelayCommand(OnAddTaskCommand);

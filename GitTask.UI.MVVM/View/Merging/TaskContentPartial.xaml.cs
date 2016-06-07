@@ -18,7 +18,10 @@ namespace GitTask.UI.MVVM.View.Merging
             if (taskContent == null) return;
 
             taskContent.IsChosen = !taskContent.IsChosen;
-            IocLocator.MergingViewModel.CurrentlyChosenTask = taskContent.Task;
+            if (taskContent.IsChosen)
+            {
+                IocLocator.MergingViewModel.CurrentlyChosenTask = taskContent.Task;
+            }
         }
     }
 }

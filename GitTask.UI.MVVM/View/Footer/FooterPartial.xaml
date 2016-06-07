@@ -7,6 +7,7 @@
              xmlns:footer="clr-namespace:GitTask.UI.MVVM.View.Footer"
              xmlns:ignore="http://www.galasoft.ch/ignore"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
              Height="40"
              d:DataContext="{d:DesignInstance Type=design:DesignFooterViewModel,
                                               IsDesignTimeCreatable=True}"
@@ -71,14 +72,26 @@
                                            Margin="2,0,2,0"
                                            d:DataContext="{d:DesignInstance Type=design:DesignProjectMembersViewModel,
                                                                             IsDesignTimeCreatable=True}" />
-        <TextBlock Grid.Column="3"
-                   Margin="2,2,4,2"
-                   VerticalAlignment="Center"
-                   FontSize="16"
-                   FontStyle="Italic"
-                   Foreground="WhiteSmoke"
-                   Text="{Binding ProjectName,
-                                  Mode=OneWay}"
-                   TextAlignment="Right" />
+        <StackPanel Grid.Column="3" Orientation="Horizontal">
+            <TextBlock Margin="2"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       FontStyle="Italic"
+                       Foreground="WhiteSmoke"
+                       Text="{Binding ProjectName,
+                                      Mode=OneWay}"
+                       TextAlignment="Right" />
+            <Button Margin="2,2,2,2"
+                    Command="{Binding ShowCreditsCommand,
+                                      Mode=OneWay}"
+                    Style="{StaticResource SmallIconButton}">
+                <Button.Resources>
+                    <ImageSource x:Key="ImageSource">../../Icons/white/info.png</ImageSource>
+                </Button.Resources>
+                <Button.ToolTip>
+                    <TextBlock Text="{Binding Source={x:Static prop:Resources.About}, Converter={StaticResource ToUpperCaseConverter}, Mode=OneTime}" />
+                </Button.ToolTip>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

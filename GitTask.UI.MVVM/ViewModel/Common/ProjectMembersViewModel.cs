@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
@@ -28,6 +27,9 @@ namespace GitTask.UI.MVVM.ViewModel.Common
             }
         }
 
+        private bool _repositoryInitialized;
+        private bool _projectChanged;
+
         public ProjectMembersViewModel(IRepositoryService repositoryService,
                                        IProjectQueryService projectQueryService)
         {
@@ -45,17 +47,28 @@ namespace GitTask.UI.MVVM.ViewModel.Common
 
         private async void ProjectQueryServiceOnProjectChanged(Project project)
         {
-            await InitializeProjectMembers();
+            _projectChanged = true;
+            await TryInitializeProject();
         }
 
         private async void RepositoryServiceOnRepositoryInitalized()
         {
-            await InitializeProjectMembers();
+            _repositoryInitialized = true;
+            await TryInitializeProject();
+        }
+
+        private async Task TryInitializeProject()
+        {
+            if (_repositoryInitialized && _projectChanged)
+            {
+                _repositoryInitialized = false;
+                _projectChanged = false;
+                await InitializeProjectMembers();
+            }
         }
 
         private async Task InitializeProjectMembers()
         {
-            while (_isLoading) Thread.Sleep(100);
             IsLoading = true;
             ProjectMembers.Clear();
 
@@ -72,10 +85,13 @@ namespace GitTask.UI.MVVM.ViewModel.Common
 
         private async void OnAddUserMessage(AddUserMessage message)
         {
-            while (_isLoading) Thread.Sleep(100);
             IsLoading = true;
             if (_projectQueryService.Project.ProjectMembersNotInRepository != null &&
-                _projectQueryService.Project.ProjectMembersNotInRepository.Contains(message.UserToBeAdded)) return;
+                _projectQueryService.Project.ProjectMembersNotInRepository.Contains(message.UserToBeAdded))
+            {
+                IsLoading = false;
+                return;
+            }
 
             AddUserFromProject(message.UserToBeAdded);
 
@@ -86,7 +102,7 @@ namespace GitTask.UI.MVVM.ViewModel.Common
 
         private void AddUserFromProject(ProjectMember user)
         {
-            foreach(var member in ProjectMembers.Where(member => member.Name == user.Name || member.Email == user.Email).ToList())
+            foreach (var member in ProjectMembers.Where(member => member.Name == user.Name || member.Email == user.Email).ToList())
             {
                 ProjectMembers.Remove(member);
             }

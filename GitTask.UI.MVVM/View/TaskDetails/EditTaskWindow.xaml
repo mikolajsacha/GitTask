@@ -9,13 +9,12 @@
         xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
         xmlns:taskDetails="clr-namespace:GitTask.UI.MVVM.View.TaskDetails"
         Title="{x:Static prop:Resources.EditTask}"
-        MinWidth="350"
-        MinHeight="200"
-        MaxWidth="600"
-        MaxHeight="600"
+        MinWidth="250"
+        MaxWidth="400"
         d:DataContext="{d:DesignInstance Type=design:DesignAddTaskViewModel,
                                          IsDesignTimeCreatable=True}"
-        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        SizeToContent="Height"
         WindowStartupLocation="CenterOwner"
         mc:Ignorable="d ignore">
 
@@ -45,7 +44,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition MinHeight="36" MaxHeight="50" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -92,14 +91,18 @@
                            TextAlignment="Center" />
             </Grid>
         </Grid>
-        <StackPanel Grid.Row="1" Orientation="Vertical">
-            <TextBlock Margin="6,0,0,0"
+        <StackPanel Grid.Row="1"
+                    VerticalAlignment="Stretch"
+                    Orientation="Vertical">
+            <TextBlock Height="20"
+                       Margin="6,0,0,0"
                        VerticalAlignment="Center"
                        FontSize="15"
                        FontWeight="SemiBold"
                        Text="{x:Static prop:Resources.Content}" />
-            <TextBox Height="200"
+            <TextBox MaxHeight="300"
                      HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
                      AcceptsReturn="True"
                      AcceptsTab="True"
                      Text="{Binding Content,
@@ -138,8 +141,13 @@
                        Visibility="{Binding SelectUsersViewModel.AnyUserChosen,
                                             Converter={StaticResource BoolToVisibilityReverseConverter}}" />
             <Grid Grid.Column="1">
-                <taskDetails:AssignedMembersInitialsList x:Name="AssignedMembersInitialsList" DataContext="{Binding SelectUsersViewModel, Mode=OneTime}" />
-                <Popup x:Name="SelectAssignedMembersPopup" Grid.Column="0">
+                <taskDetails:AssignedMembersInitialsList x:Name="AssignedMembersInitialsList"
+                                                         MaxWidth="200"
+                                                         DataContext="{Binding SelectUsersViewModel,
+                                                                               Mode=OneTime}" />
+                <Popup x:Name="SelectAssignedMembersPopup"
+                       Grid.Column="0"
+                       HorizontalAlignment="Right">
                     <elements:SelectUsersPartial DataContext="{Binding SelectUsersViewModel, Mode=OneTime}" />
                 </Popup>
             </Grid>
@@ -156,7 +164,7 @@
                         Width="20"
                         Height="20"
                         Margin="2"
-                        Background="{Binding TaskState.Color}"
+                        Background="{Binding TaskStateColor}"
                         CornerRadius="3" />
                 <TextBlock Grid.Column="1"
                            Margin="4"

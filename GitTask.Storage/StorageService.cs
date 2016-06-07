@@ -55,7 +55,10 @@ namespace GitTask.Storage
                 try
                 {
                     var loadedDataObject = await _fileService.Load<TDataObject>(fileName);
-                    result.AddLast(loadedDataObject);
+                    if (loadedDataObject != null)
+                    {
+                        result.AddLast(loadedDataObject);
+                    }
                 }
                 catch (System.Exception)
                 {

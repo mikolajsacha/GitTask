@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using GitTask.UI.MVVM.Locator;
@@ -67,7 +68,6 @@ namespace GitTask.UI.MVVM.View.TaskBoard
             var dependencyObject = sender as DependencyObject;
             if (dependencyObject == null) return;
 
-
             DragDrop.DoDragDrop(dependencyObject, taskDetails.Task.Title, DragDropEffects.Move);
         }
 
@@ -87,6 +87,17 @@ namespace GitTask.UI.MVVM.View.TaskBoard
         {
             AddCommentPopup.IsOpen = true;
             AddCommentPopup.Focus();
+        }
+
+        private void AssignedMembersScrollViewer_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var scrollviewer = sender as ScrollViewer;
+            if (scrollviewer == null) return;
+            if (e.Delta > 0)
+                scrollviewer.LineLeft();
+            else
+                scrollviewer.LineRight();
+            e.Handled = true;
         }
     }
 }

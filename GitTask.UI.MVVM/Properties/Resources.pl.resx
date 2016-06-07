@@ -202,7 +202,7 @@
     <value>Kolor:</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Imię:</value>
+    <value>Nazwa:</value>
   </data>
   <data name="SetUser" xml:space="preserve">
     <value>Wybierz użytkownika</value>
@@ -337,12 +337,24 @@
     <value>Wersja "nasza":</value>
   </data>
   <data name="ResolveMergingTaskConflict" xml:space="preserve">
-    <value>Rozwiąż konflikt w zadaniach</value>
+    <value>Rozwiąż konflikt w zadaniu</value>
   </data>
   <data name="TheirVersion" xml:space="preserve">
     <value>Wersja "ich":</value>
   </data>
   <data name="UseSelectedVersion" xml:space="preserve">
     <value>Użyj wybranej wersji</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Informacje o programie</value>
+  </data>
+  <data name="CreditsIconAuthorInfo" xml:space="preserve">
+    <value>Autorka ikon: Lucy G (http://www.flaticon.com/packs/free-basic-ui-elements)</value>
+  </data>
+  <data name="CreditsProgramAuthorInfo" xml:space="preserve">
+    <value>Autor programu: Mikołaj Sacha (mikolajsacha@gmail.com) 2016 ®</value>
+  </data>
+  <data name="ResolveMergingTaskStatesConflict" xml:space="preserve">
+    <value>Rozwiąż konflikt w stanach zadań</value>
   </data>
 </root>

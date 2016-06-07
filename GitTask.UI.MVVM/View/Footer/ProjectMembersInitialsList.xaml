@@ -17,6 +17,7 @@
     <Grid>
         <ScrollViewer HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Disabled"
+                      PreviewMouseWheel="ScrollViewier_OnPreviewMouseWheel"
                       Visibility="{Binding IsLoading,
                                            Mode=OneWay,
                                            Converter={StaticResource BoolToVisibilityReverseConverter}}">

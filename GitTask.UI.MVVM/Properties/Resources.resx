@@ -337,12 +337,24 @@
     <value>Our version:</value>
   </data>
   <data name="ResolveMergingTaskConflict" xml:space="preserve">
-    <value>Resolve conflict in tasks</value>
+    <value>Resolve conflict in task</value>
   </data>
   <data name="TheirVersion" xml:space="preserve">
     <value>TheirVersion:</value>
   </data>
   <data name="UseSelectedVersion" xml:space="preserve">
     <value>Use selected version</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About GitTask</value>
+  </data>
+  <data name="CreditsIconAuthorInfo" xml:space="preserve">
+    <value>Icons designer: Lucy G (http://www.flaticon.com/packs/free-basic-ui-elements)</value>
+  </data>
+  <data name="CreditsProgramAuthorInfo" xml:space="preserve">
+    <value>Application author: Mikołaj Sacha (mikolajsacha@gmail.com) 2016 ®</value>
+  </data>
+  <data name="ResolveMergingTaskStatesConflict" xml:space="preserve">
+    <value>Resolve conflict in task states</value>
   </data>
 </root>

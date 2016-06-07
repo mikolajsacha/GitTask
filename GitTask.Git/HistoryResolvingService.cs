@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using GitTask.Domain.Model.Project;
 using GitTask.Domain.Model.Repository.EntityHistory;
-using GitTask.Domain.Model.Repository.Merging;
 using GitTask.Domain.Model.Task;
 using GitTask.Json;
 using GitTask.Storage.Interface;

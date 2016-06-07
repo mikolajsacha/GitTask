@@ -134,6 +134,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\HexToBrushConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityReverseConverter.cs" />
     <Compile Include="Converters\IsNullConverter.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="ViewModel\History\ProjectHistory\ProjectCommitChangesViewModel.cs" />
     <Compile Include="ViewModel\History\ProjectHistory\ProjectHistoryViewModel.cs" />
     <Compile Include="ViewModel\Merging\MergingViewModel.cs" />
+    <Compile Include="ViewModel\Merging\TaskStatesCollectionViewModel.cs" />
     <Compile Include="ViewModel\Merging\TaskContentViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\AddTaskStateViewModel.cs" />
     <Compile Include="ViewModel\ProjectSettings\SetCurrentUserViewModel.cs" />
@@ -234,6 +236,12 @@
     </Compile>
     <Compile Include="View\Main\ProjectOpeningPartial.xaml.cs">
       <DependentUpon>ProjectOpeningPartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Merging\TaskStatePartial.xaml.cs">
+      <DependentUpon>TaskStatePartial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Merging\TaskStatesMergingPartial.xaml.cs">
+      <DependentUpon>TaskStatesMergingPartial.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Merging\TaskMergingPartial.xaml.cs">
       <DependentUpon>TaskMergingPartial.xaml</DependentUpon>
@@ -383,6 +391,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Main\ProjectOpeningPartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Merging\TaskStatePartial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Merging\TaskStatesMergingPartial.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -575,7 +591,12 @@
   <ItemGroup>
     <Resource Include="Icons\white\graph.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icons\white\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\visible.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

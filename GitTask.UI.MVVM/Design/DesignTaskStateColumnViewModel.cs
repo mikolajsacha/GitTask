@@ -10,6 +10,7 @@ namespace GitTask.UI.MVVM.Design
     public class DesignTaskStateColumnViewModel : ViewModelBase // based on GitTask.UI.MVVM.ViewModel.TaskBoard.TaskStateColumnViewModel
     {
         public Brush Background => Brushes.LightGray;
+        public Brush TaskStateColor => Brushes.LimeGreen;
 
         public TaskState TaskState { get; }
         public ObservableCollection<DesignTaskDetailsViewModel> Tasks { get; }
@@ -29,7 +30,7 @@ namespace GitTask.UI.MVVM.Design
         public bool CanMoveRight => true;
 
         public DesignTaskStateColumnViewModel()
-            : this(new TaskState { Color = Brushes.Green, Name = "TO DO", Position = 0 })
+            : this(new TaskState { Color = "#FFFF0000", Name = "TO DO", Position = 0 })
         {
         }
 

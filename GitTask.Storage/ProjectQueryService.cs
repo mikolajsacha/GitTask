@@ -23,7 +23,10 @@ namespace GitTask.Storage
             _storageService = storageService;
 
             mergingService.MergingCompleted += InitializeDataFromStorage;
-            InitializeDataFromStorage();
+            if (mergingService.IsMergingCompleted)
+            {
+                InitializeDataFromStorage();
+            }
         }
 
         private async void InitializeDataFromStorage()

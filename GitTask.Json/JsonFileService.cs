@@ -13,7 +13,7 @@ namespace GitTask.Json
 
         public async Task Save(object objectToBeSaved, string filePath)
         {
-            var modelJson = JsonConvert.SerializeObject(objectToBeSaved);
+            var modelJson = JsonConvert.SerializeObject(objectToBeSaved, Formatting.Indented);
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
@@ -27,7 +27,7 @@ namespace GitTask.Json
 
         public Task Delete(string filePath)
         {
-            return Task.Factory.StartNew(() =>
+            return Task.Run(() =>
             {
                 if (File.Exists(filePath))
                 {

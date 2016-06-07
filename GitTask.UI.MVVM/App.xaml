@@ -32,6 +32,7 @@
                     <converters:ToUpperCaseConverter x:Key="ToUpperCaseConverter" />
                     <converters:ProjectMemberToBrushConverter x:Key="ProjectMemberToBrushConverter" />
                     <converters:IsNullConverter x:Key="IsNullConverter" />
+                    <converters:HexToBrushConverter x:Key="HexToBrushConverter" />
                 </ResourceDictionary>
                 <ResourceDictionary Source="Skins\MainSkin.xaml" />
                 <ResourceDictionary Source="Skins\Scrollbar.xaml" />

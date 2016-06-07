@@ -3,6 +3,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Services.Interface;
+using GitTask.UI.MVVM.Locator;
 using GitTask.UI.MVVM.Properties;
 using GitTask.UI.MVVM.View.ProjectHistory;
 using GitTask.UI.MVVM.View.ProjectSettings;
@@ -28,7 +29,7 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
             get { return _isHistoryBeingResolved; }
             private set
             {
-                _isHistoryBeingResolved = value; 
+                _isHistoryBeingResolved = value;
                 RaisePropertyChanged();
             }
         }
@@ -70,7 +71,7 @@ namespace GitTask.UI.MVVM.ViewModel.ActionBar
             IsHistoryBeingResolved = false;
             if (projectHistory == null)
             {
-                MessageBox.Show(Resources.NoProjectHistoryInRepository);
+                MessageBox.Show(IocLocator.ResourceManager.GetString("NoProjectHistoryInRepository"));
                 return;
             }
             var projecHistoryViewModel = new ProjectHistoryViewModel(projectHistory);

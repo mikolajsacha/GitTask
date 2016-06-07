@@ -1,5 +1,4 @@
 ﻿using GitTask.Domain.Attributes;
-using System.Windows.Media;
 
 namespace GitTask.Domain.Model.Task
 {
@@ -8,7 +7,7 @@ namespace GitTask.Domain.Model.Task
     {
         public string Name { get; set; }
         public int Position { get; set; }
-        public Brush Color { get; set; }
+        public string Color { get; set; }
 
         public override bool Equals(object obj)
         {

@@ -61,7 +61,7 @@
                     <Setter Property="Visibility" Value="Hidden" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding SelectTaskStateViewModel.TaskStateChosen}" Value="True">
-                    <Setter Property="Background" Value="{Binding SelectTaskStateViewModel.SelectedTaskState.Color, Mode=OneWay}" />
+                    <Setter Property="Background" Value="{Binding SelectTaskStateViewModel.SelectedTaskState.Color, Converter={StaticResource HexToBrushConverter}, Mode=OneWay}" />
                     <Setter Property="Visibility" Value="Visible" />
                 </DataTrigger>
             </Style.Triggers>
