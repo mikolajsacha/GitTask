@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
@@ -14,9 +15,9 @@ namespace GitTask.UI.MVVM.ViewModel.Common
     {
         private readonly IRepositoryService _repositoryService;
         private readonly IProjectQueryService _projectQueryService;
-        private bool _isLoading;
         public ObservableCollection<ProjectMember> ProjectMembers { get; }
 
+        private bool _isLoading;
         public bool IsLoading
         {
             get { return _isLoading; }
@@ -38,7 +39,6 @@ namespace GitTask.UI.MVVM.ViewModel.Common
 
             _repositoryService.RepositoryInitalized += RepositoryServiceOnRepositoryInitalized;
             _projectQueryService.ProjectChanged += ProjectQueryServiceOnProjectChanged;
-            ProjectQueryServiceOnProjectChanged(projectQueryService.Project);
             Messenger.Default.Register<AddUserMessage>(this, OnAddUserMessage);
             new Task(async () => await InitializeProjectMembers()).RunSynchronously();
         }
@@ -55,6 +55,7 @@ namespace GitTask.UI.MVVM.ViewModel.Common
 
         private async Task InitializeProjectMembers()
         {
+            while (_isLoading) Thread.Sleep(100);
             IsLoading = true;
             ProjectMembers.Clear();
 
@@ -71,6 +72,7 @@ namespace GitTask.UI.MVVM.ViewModel.Common
 
         private async void OnAddUserMessage(AddUserMessage message)
         {
+            while (_isLoading) Thread.Sleep(100);
             IsLoading = true;
             if (_projectQueryService.Project.ProjectMembersNotInRepository != null &&
                 _projectQueryService.Project.ProjectMembersNotInRepository.Contains(message.UserToBeAdded)) return;

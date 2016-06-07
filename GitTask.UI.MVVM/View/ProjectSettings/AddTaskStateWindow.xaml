@@ -56,14 +56,15 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Width="145"
+                Width="Auto"
                 Height="40"
                 Margin="10"
                 HorizontalAlignment="Right"
                 IsEnabled="{Binding IsOkButtonEnabled,
                                     Mode=OneWay}"
                 Style="{StaticResource RoundedCornersButton}">
-            <TextBlock VerticalAlignment="Center"
+            <TextBlock Margin="5"
+                       VerticalAlignment="Center"
                        FontSize="16"
                        FontWeight="SemiBold"
                        Text="{Binding Source={x:Static prop:Resources.AddTaskState},

@@ -13,7 +13,7 @@
             <Style x:Key="MainBorderStyle" TargetType="Border">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding IsChosen, Mode=OneWay}" Value="True">
-                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="BorderThickness" Value="4" />
                         <Setter Property="BorderBrush" Value="DarkViolet" />
                     </DataTrigger>
                     <DataTrigger Binding="{Binding IsChosen, Mode=OneWay}" Value="False">

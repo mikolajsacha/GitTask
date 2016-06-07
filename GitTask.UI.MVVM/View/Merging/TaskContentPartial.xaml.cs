@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using GitTask.UI.MVVM.Locator;
 using GitTask.UI.MVVM.ViewModel.Merging;
 
 namespace GitTask.UI.MVVM.View.Merging
@@ -8,8 +9,7 @@ namespace GitTask.UI.MVVM.View.Merging
         public TaskContentPartial()
         {
             InitializeComponent();
-            ContentGrid.MouseDown += MainOnMouseDown;
-            CommentsPanel.MouseDown += MainOnMouseDown;
+            Main.MouseDown += MainOnMouseDown;
         }
 
         private void MainOnMouseDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
@@ -18,6 +18,7 @@ namespace GitTask.UI.MVVM.View.Merging
             if (taskContent == null) return;
 
             taskContent.IsChosen = !taskContent.IsChosen;
+            IocLocator.MergingViewModel.CurrentlyChosenTask = taskContent.Task;
         }
     }
 }

@@ -6,43 +6,80 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:merging="clr-namespace:GitTask.UI.MVVM.View.Merging"
              xmlns:prop="clr-namespace:GitTask.UI.MVVM.Properties"
-             xmlns:taskBoard="clr-namespace:GitTask.UI.MVVM.View.TaskBoard"
              Background="Transparent"
              mc:Ignorable="d ignore">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ScrollViewer Grid.Row="1" Grid.Column="0">
-            <merging:TaskContentPartial MaxHeight="400"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        DataContext="{Binding OurValue,
-                                                              Mode=OneWay}" />
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   Margin="5"
+                   HorizontalAlignment="Center"
+                   FontSize="20"
+                   Text="{x:Static prop:Resources.ResolveMergingTaskConflict}" />
+        <ScrollViewer Grid.Row="2" Grid.Column="0">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Vertical">
+                <TextBlock Margin="3"
+                           HorizontalAlignment="Center"
+                           Text="{x:Static prop:Resources.OurVersion}" />
+                <merging:TaskContentPartial MaxHeight="400" DataContext="{Binding OurValue, Mode=OneWay}" />
+            </StackPanel>
         </ScrollViewer>
-        <ScrollViewer Grid.Row="1" Grid.Column="1">
-            <merging:TaskContentPartial MaxHeight="400"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        DataContext="{Binding TheirValue,
-                                                              Mode=OneWay}" />
+        <ScrollViewer Grid.Row="2" Grid.Column="1">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Margin="3"
+                           HorizontalAlignment="Center"
+                           Text="{x:Static prop:Resources.TheirVersion}" />
+                <merging:TaskContentPartial MaxHeight="400" DataContext="{Binding TheirValue, Mode=OneWay}" />
+            </StackPanel>
         </ScrollViewer>
-        <ScrollViewer Grid.Row="3"
+        <ScrollViewer Grid.Row="4"
                       Grid.Column="0"
                       Grid.ColumnSpan="2">
-            <merging:TaskContentPartial MaxHeight="400"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        DataContext="{Binding AncestorValue,
-                                                              Mode=OneWay}" />
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Margin="3"
+                           HorizontalAlignment="Center"
+                           Text="{x:Static prop:Resources.AncestorVerson}" />
+                <merging:TaskContentPartial MaxHeight="400" DataContext="{Binding AncestorValue, Mode=OneWay}" />
+            </StackPanel>
         </ScrollViewer>
+        <Button x:Name="OkButton"
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Width="Auto"
+                Height="40"
+                Margin="5"
+                HorizontalAlignment="Center"
+                Command="{Binding OkCommand,
+                                  Mode=OneWay}"
+                DataContext="{Binding MergingViewModel,
+                                      Source={StaticResource Locator},
+                                      Mode=OneWay}"
+                IsEnabled="{Binding IsOkButtonEnabled,
+                                    Mode=OneWay}"
+                Style="{StaticResource RoundedCornersButton}">
+            <TextBlock Margin="5"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       FontWeight="SemiBold"
+                       Text="{Binding Source={x:Static prop:Resources.UseSelectedVersion},
+                                      Converter={StaticResource ToUpperCaseConverter}}"
+                       TextAlignment="Center" />
+        </Button>
     </Grid>
 </UserControl>

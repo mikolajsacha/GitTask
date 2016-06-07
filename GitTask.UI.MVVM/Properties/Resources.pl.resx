@@ -330,4 +330,19 @@
   <data name="NoTaskHistoryInRepository" xml:space="preserve">
     <value>Brak historii zadania w repozytorium</value>
   </data>
+  <data name="AncestorVerson" xml:space="preserve">
+    <value>Wersja wspólnego przodka:</value>
+  </data>
+  <data name="OurVersion" xml:space="preserve">
+    <value>Wersja "nasza":</value>
+  </data>
+  <data name="ResolveMergingTaskConflict" xml:space="preserve">
+    <value>Rozwiąż konflikt w zadaniach</value>
+  </data>
+  <data name="TheirVersion" xml:space="preserve">
+    <value>Wersja "ich":</value>
+  </data>
+  <data name="UseSelectedVersion" xml:space="preserve">
+    <value>Użyj wybranej wersji</value>
+  </data>
 </root>

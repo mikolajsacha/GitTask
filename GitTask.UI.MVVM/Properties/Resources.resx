@@ -330,4 +330,19 @@
   <data name="NoTaskHistoryInRepository" xml:space="preserve">
     <value>No task history in repository</value>
   </data>
+  <data name="AncestorVerson" xml:space="preserve">
+    <value>Ancestor version:</value>
+  </data>
+  <data name="OurVersion" xml:space="preserve">
+    <value>Our version:</value>
+  </data>
+  <data name="ResolveMergingTaskConflict" xml:space="preserve">
+    <value>Resolve conflict in tasks</value>
+  </data>
+  <data name="TheirVersion" xml:space="preserve">
+    <value>TheirVersion:</value>
+  </data>
+  <data name="UseSelectedVersion" xml:space="preserve">
+    <value>Use selected version</value>
+  </data>
 </root>

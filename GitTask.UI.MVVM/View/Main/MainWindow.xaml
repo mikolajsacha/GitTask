@@ -17,7 +17,7 @@
         MinHeight="250"
         d:DataContext="{d:DesignInstance Type=design:DesignMainViewModel,
                                          IsDesignTimeCreatable=True}"
-        Background="Gray"
+        Background="LightGray"
         DataContext="{Binding MainViewModel,
                               Source={StaticResource Locator},
                               Mode=OneWay}"

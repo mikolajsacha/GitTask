@@ -151,6 +151,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ancestor version:.
+        /// </summary>
+        public static string AncestorVerson {
+            get {
+                return ResourceManager.GetString("AncestorVerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure?.
         /// </summary>
         public static string AreYouSure {
@@ -439,6 +448,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Our version:.
+        /// </summary>
+        public static string OurVersion {
+            get {
+                return ResourceManager.GetString("OurVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pending storage operations:.
         /// </summary>
         public static string PendingStorageOperations {
@@ -583,6 +601,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resolve conflict in tasks.
+        /// </summary>
+        public static string ResolveMergingTaskConflict {
+            get {
+                return ResourceManager.GetString("ResolveMergingTaskConflict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resolve project history.
         /// </summary>
         public static string ResolveProjectHistory {
@@ -682,6 +709,15 @@ namespace GitTask.UI.MVVM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TheirVersion:.
+        /// </summary>
+        public static string TheirVersion {
+            get {
+                return ResourceManager.GetString("TheirVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title:.
         /// </summary>
         public static string Title {
@@ -696,6 +732,15 @@ namespace GitTask.UI.MVVM.Properties {
         public static string Unassigned {
             get {
                 return ResourceManager.GetString("Unassigned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use selected version.
+        /// </summary>
+        public static string UseSelectedVersion {
+            get {
+                return ResourceManager.GetString("UseSelectedVersion", resourceCulture);
             }
         }
     }

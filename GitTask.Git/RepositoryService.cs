@@ -39,6 +39,14 @@ namespace GitTask.Git
             return projectPath != null && Directory.Exists(projectPath) && Repository.IsValid(projectPath);
         }
 
+        public async Task SaveInIndex<TModel>(TModel modelObject)
+        {
+            var relativePath = GetObjectPath(modelObject);
+            var basePath = _projectPathsService.BaseProjectPath + "\\" + relativePath;
+            await _fileService.Save(modelObject, basePath);
+            _repository.Index.Add(relativePath);
+        }
+
         public async Task<IEnumerable<ProjectMember>> GetAllUniqueCommiters()
         {
             return await Task.Run(() =>
@@ -87,7 +95,7 @@ namespace GitTask.Git
 
         private IEnumerable<EntityConflict<T>> GetEntityConflicts<T>(ConflictCollection conflicts) where T : class
         {
-            return conflicts.Where(c => c.Ours.Path.StartsWith(GetBaseEntityPath(typeof (T).Name))).Select(GetConflictData<T>);
+            return conflicts.Where(c => c.Ours.Path.StartsWith(GetBaseEntityPath(typeof(T).Name))).Select(GetConflictData<T>);
         }
 
         private EntityConflict<T> GetConflictData<T>(Conflict conflict) where T : class
@@ -137,7 +145,7 @@ namespace GitTask.Git
                 OurValue = ourValue,
                 TheirValue = theirValue
             });
-        } 
+        }
 
         public async Task<ProjectHistory> GetProjectHistory()
         {
