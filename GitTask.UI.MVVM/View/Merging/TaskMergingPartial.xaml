@@ -30,6 +30,15 @@
                    FontSize="20"
                    Text="{x:Static prop:Resources.ResolveMergingTaskConflict}" />
         <ScrollViewer Grid.Row="2" Grid.Column="0">
+            <ScrollViewer.Style>
+                <Style TargetType="ScrollViewer">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding OurValue.Task}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ScrollViewer.Style>
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Orientation="Vertical">
@@ -40,6 +49,15 @@
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer Grid.Row="2" Grid.Column="1">
+            <ScrollViewer.Style>
+                <Style TargetType="ScrollViewer">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding TheirValue.Task}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ScrollViewer.Style>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Margin="3"
                            HorizontalAlignment="Center"
@@ -50,6 +68,15 @@
         <ScrollViewer Grid.Row="4"
                       Grid.Column="0"
                       Grid.ColumnSpan="2">
+            <ScrollViewer.Style>
+                <Style TargetType="ScrollViewer">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding AncestorValue.Task}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ScrollViewer.Style>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Margin="3"
                            HorizontalAlignment="Center"
@@ -63,7 +90,7 @@
                 Grid.ColumnSpan="2"
                 Width="Auto"
                 Height="40"
-                Margin="5"
+                Margin="15"
                 HorizontalAlignment="Center"
                 Command="{Binding OkCommand,
                                   Mode=OneWay}"

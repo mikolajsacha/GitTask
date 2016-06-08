@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using GitTask.Domain.Model.Repository.Merging;
 using GitTask.Domain.Services.Interface;
 
@@ -59,8 +60,8 @@ namespace GitTask.Git
                 IsMergingCompleted = true;
                 return;
             }
-            _conflictToBeMerged = MergingConflicts.TaskConflicts.Count + MergingConflicts.TaskStatesConflicts.Count;
-            if (MergingConflicts.ProjectMembersConfict != null) _conflictToBeMerged++;
+            _conflictToBeMerged = MergingConflicts.TaskConflicts.Count + (MergingConflicts.TaskStatesConflicts.Any() ? 1 : 0);
+            if (MergingConflicts.ProjectConfict != null) _conflictToBeMerged++;
 
             MergingConflictsAquired?.Invoke();
 

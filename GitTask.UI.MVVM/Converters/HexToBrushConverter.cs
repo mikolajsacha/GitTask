@@ -12,7 +12,7 @@ namespace GitTask.UI.MVVM.Converters
             var hex = value as string;
             if (hex == null) return null;
             var converter = new BrushConverter();
-            return (Brush)converter.ConvertFromString("#FFFFFF90");
+            return (Brush)converter.ConvertFromString(hex);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -46,7 +46,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Margin="2,0,2,0" VerticalAlignment="Center">
-                            <Run Text="{Binding Name, Mode=OneWay}" />
+                            <Run Foreground="{Binding Color, Converter={StaticResource HexToBrushConverter}, Mode=OneWay}" Text="{Binding Name, Mode=OneWay}" />
                             <Run Text=" |" />
                         </TextBlock>
                     </DataTemplate>

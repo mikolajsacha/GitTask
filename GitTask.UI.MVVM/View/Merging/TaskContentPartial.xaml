@@ -46,8 +46,18 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Margin="5"
+                               VerticalAlignment="Center"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Text="{Binding Task.Title,
+                                              Mode=OneWay}"
+                               TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="1"
                                Margin="0,2,2,2"
-                               HorizontalAlignment="Right"
+                               HorizontalAlignment="Center"
                                VerticalAlignment="Bottom"
                                FontSize="12"
                                FontStyle="Italic"
@@ -56,15 +66,6 @@
                                                     Mode=OneWay}"
                                Text="{Binding Task.Priority,
                                               Converter={StaticResource TaskPriorityToStringConverter},
-                                              Mode=OneWay}"
-                               TextWrapping="Wrap" />
-                    <TextBlock Grid.Row="0"
-                               Grid.Column="0"
-                               Margin="5"
-                               VerticalAlignment="Center"
-                               FontSize="16"
-                               FontWeight="SemiBold"
-                               Text="{Binding Task.Title,
                                               Mode=OneWay}"
                                TextWrapping="Wrap" />
                 </Grid>

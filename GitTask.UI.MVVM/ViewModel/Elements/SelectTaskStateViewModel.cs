@@ -81,7 +81,7 @@ namespace GitTask.UI.MVVM.ViewModel.Elements
 
         private void TaskStateQueryServiceOnElementDeleted(TaskState deletedTaskState)
         {
-            var elementsToBeDeleted = AllTaskStates.Where(taskState => taskState.Name == deletedTaskState.Name);
+            var elementsToBeDeleted = AllTaskStates.Where(taskState => taskState.Name == deletedTaskState.Name).ToList();
             foreach (var element in elementsToBeDeleted)
             {
                 AllTaskStates.Remove(element);

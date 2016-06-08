@@ -17,7 +17,7 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="0,0,2,0" Text="{x:Static prop:Resources.OldValue}" />
-                        <TextBlock Foreground="{Binding OldTaskState.Color, Mode=OneWay}" Text="{Binding OldTaskState.Name, Mode=OneWay}">
+                        <TextBlock Foreground="{Binding OldTaskState.Color, Converter={StaticResource HexToBrushConverter}, Mode=OneWay}" Text="{Binding OldTaskState.Name, Mode=OneWay}">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Style.Triggers>
@@ -42,7 +42,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="0,0,2,0" Text="{x:Static prop:Resources.NewValue}" />
-                        <TextBlock Foreground="{Binding NewTaskState.Color, Mode=OneWay}" Text="{Binding NewTaskState.Name, Mode=OneWay}">
+                        <TextBlock Foreground="{Binding NewTaskState.Color, Converter={StaticResource HexToBrushConverter}, Mode=OneWay}" Text="{Binding NewTaskState.Name, Mode=OneWay}">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Style.Triggers>

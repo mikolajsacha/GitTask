@@ -71,13 +71,13 @@ namespace GitTask.Git
                 return new MergingConflicts
                 {
                     TaskConflicts = GetEntityConflicts<Domain.Model.Task.Task>(conflicts).ToList(),
-                    ProjectMembersConfict = GetProjectMembersConflict(conflicts),
+                    ProjectConfict = GetProjectConflict(conflicts),
                     TaskStatesConflicts = GetEntityConflicts<TaskState>(conflicts).ToList()
                 };
             });
         }
 
-        private EntityConflict<List<ProjectMember>> GetProjectMembersConflict(ConflictCollection conflicts)
+        private EntityConflict<Project> GetProjectConflict(ConflictCollection conflicts)
         {
             var projectConflictQueryResult = conflicts.Where(c => c.Ours.Path.StartsWith(GetBaseEntityPath("Project"))).ToList();
             if (!projectConflictQueryResult.Any()) return null;
@@ -85,11 +85,11 @@ namespace GitTask.Git
             var projectConflict = projectConflictQueryResult.First();
             var conflictData = GetConflictData<Project>(projectConflict);
 
-            return new EntityConflict<List<ProjectMember>>
+            return new EntityConflict<Project>
             {
-                OurValue = conflictData.OurValue?.ProjectMembersNotInRepository,
-                AncestorValue = conflictData.AncestorValue?.ProjectMembersNotInRepository,
-                TheirValue = conflictData.TheirValue?.ProjectMembersNotInRepository
+                OurValue = conflictData.OurValue,
+                AncestorValue = conflictData.AncestorValue,
+                TheirValue = conflictData.TheirValue
             };
         }
 

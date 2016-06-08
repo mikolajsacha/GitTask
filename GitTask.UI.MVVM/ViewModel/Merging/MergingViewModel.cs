@@ -2,7 +2,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows.Media;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GitTask.Domain.Model.Project;
@@ -16,7 +15,7 @@ namespace GitTask.UI.MVVM.ViewModel.Merging
     {
         private readonly IMergingService _mergingService;
         private readonly IRepositoryService _repositoryService;
-        private readonly IStorageService<Project> _projectStorageService;
+        private readonly IStorageService<TaskState> _taskStateStorageService;
         private MergingConflicts _mergingConflicts;
 
         private bool _isLoading;
@@ -121,11 +120,11 @@ namespace GitTask.UI.MVVM.ViewModel.Merging
         public MergingViewModel(IMergingService mergingService,
                                 IProjectPathsReadonlyService projectPathsService,
                                 IRepositoryService repositoryService,
-                                IStorageService<Project> projectStorageService)
+                                IStorageService<TaskState> taskStateStorageService)
         {
             _mergingService = mergingService;
             _repositoryService = repositoryService;
-            _projectStorageService = projectStorageService;
+            _taskStateStorageService = taskStateStorageService;
             _isLoading = mergingService.IsMergingCompleted;
             _isOkButtonEnabled = false;
             _okCommand = new RelayCommand(OnOkCommand);
@@ -156,17 +155,22 @@ namespace GitTask.UI.MVVM.ViewModel.Merging
         {
             _mergingConflicts = _mergingService.MergingConflicts;
 
-            if (_mergingConflicts.ProjectMembersConfict != null)
+            if (_mergingConflicts.ProjectConfict != null)
             {
-                await ResolveProjectMembersConflict();
+                await ResolveProjectConflict();
             }
             if (_mergingConflicts.TaskStatesConflicts.Any())
             {
+                var unconflictedTaskStates = (await _taskStateStorageService.GetAll()).ToList();
+
                 TaskStateConflict = new EntityConflict<TaskStatesCollectionViewModel>
                 {
-                    OurValue = new TaskStatesCollectionViewModel(_mergingConflicts.TaskStatesConflicts.Select(x => x.OurValue).Where(x => x != null).OrderBy(x => x.Position)),
-                    AncestorValue = new TaskStatesCollectionViewModel(_mergingConflicts.TaskStatesConflicts.Select(x => x.AncestorValue).Where(x => x != null).OrderBy(x => x.Position)),
-                    TheirValue = new TaskStatesCollectionViewModel(_mergingConflicts.TaskStatesConflicts.Select(x => x.TheirValue).Where(x => x != null).OrderBy(x => x.Position))
+                    OurValue = new TaskStatesCollectionViewModel(_mergingConflicts.TaskStatesConflicts.Select(x => x.OurValue).Where(x => x != null)
+                                                                    .Concat(unconflictedTaskStates).Distinct().OrderBy(x => x.Position)),
+                    AncestorValue = new TaskStatesCollectionViewModel(_mergingConflicts.TaskStatesConflicts.Select(x => x.AncestorValue).Where(x => x != null)
+                                                                    .Concat(unconflictedTaskStates).Distinct().OrderBy(x => x.Position)),
+                    TheirValue = new TaskStatesCollectionViewModel(_mergingConflicts.TaskStatesConflicts.Select(x => x.TheirValue).Where(x => x != null)
+                                                                    .Concat(unconflictedTaskStates).Distinct().OrderBy(x => x.Position))
                 };
             }
             else
@@ -200,14 +204,19 @@ namespace GitTask.UI.MVVM.ViewModel.Merging
             }
         }
 
-        private async System.Threading.Tasks.Task ResolveProjectMembersConflict()
+        private async System.Threading.Tasks.Task ResolveProjectConflict()
         {
             // project members are resolved automatically by taking sum of project members sets from both versions
             var mergedProjectMembers =
-                _mergingConflicts.ProjectMembersConfict.TheirValue.Concat(
-                    _mergingConflicts.ProjectMembersConfict.OurValue).Distinct();
-            var project = (await _projectStorageService.GetAll()).First();
-            project.ProjectMembersNotInRepository = mergedProjectMembers.ToList();
+                _mergingConflicts.ProjectConfict.TheirValue.ProjectMembersNotInRepository.Concat(
+                    _mergingConflicts.ProjectConfict.OurValue.ProjectMembersNotInRepository).Distinct().ToList();
+
+            var project = new Project
+            {
+                Title = _mergingConflicts.ProjectConfict.OurValue.Title,
+                ProjectMembersNotInRepository = mergedProjectMembers
+            };
+
             await _repositoryService.SaveInIndex(project);
             _mergingService.MarkMergedConflict();
         }

@@ -27,13 +27,13 @@
         <ListBox.ItemTemplate>
             <DataTemplate>
                 <StackPanel Margin="1" Orientation="Horizontal">
-                    <!--  <Border Width="10"
+                    <Border Width="10"
                             Height="10"
                             Margin="0,1,5,0"
                             Background="{Binding Color,
                                                  Converter={StaticResource HexToBrushConverter},
                                                  Mode=OneWay}"
-                            CornerRadius="3" />-->
+                            CornerRadius="3" />
                     <TextBlock Margin="0,1,0,1"
                                FontSize="13"
                                Text="{Binding Name,

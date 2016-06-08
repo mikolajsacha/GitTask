@@ -23,7 +23,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="2,1,2,1">
-                                    <Run Text="{Binding Name, Mode=OneWay}" />
+                                    <Run Foreground="{Binding Color, Converter={StaticResource HexToBrushConverter}, Mode=OneWay}" Text="{Binding Name, Mode=OneWay}" />
                                     <Run Text=" |" />
                                 </TextBlock>
                             </DataTemplate>
@@ -39,7 +39,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="2,1,2,1">
-                                    <Run Text="{Binding Name, Mode=OneWay}" />
+                                    <Run Foreground="{Binding Color, Converter={StaticResource HexToBrushConverter}, Mode=OneWay}" Text="{Binding Name, Mode=OneWay}" />
                                     <Run Text=" |" />
                                 </TextBlock>
                             </DataTemplate>
