@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using GitTask.Json.Exception;
+using GitTask.Storage;
 using GitTask.Storage.Interface;
 using Newtonsoft.Json;
 

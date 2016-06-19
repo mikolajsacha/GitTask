@@ -50,7 +50,6 @@
     <Compile Include="ProjectPathsService.cs" />
     <Compile Include="ProjectQueryService.cs" />
     <Compile Include="QueryService.cs" />
-    <Compile Include="KeyGeneratorService.cs" />
     <Compile Include="StorageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

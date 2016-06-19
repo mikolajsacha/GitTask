@@ -9,24 +9,36 @@ namespace GitTask.UI.MVVM.ViewModel.Common
 {
     public class ProjectMembersSetsViewModel : ViewModelBase
     {
-        private readonly IRepositoryService _repositoryService;
-        private readonly IProjectQueryService _projectQueryService;
-        private readonly Dictionary<ProjectMember, int> _projectMembersSetsDictionary;
+        private readonly ProjectMembersViewModel _projectMembersViewModel;
+        private readonly Dictionary<string, int> _projectMembersNamesSetsDictionary;
         private readonly List<HashSet<ProjectMember>> _projectMembersSets;
 
-        public ProjectMembersSetsViewModel(IRepositoryService repositoryService, IProjectQueryService projectQueryService)
+        public ProjectMembersSetsViewModel(IProjectQueryService projectQueryService,
+                                           IProjectPathsReadonlyService projectPathsService,
+                                           ProjectMembersViewModel projectMembersViewModel)
         {
-            _repositoryService = repositoryService;
-            _projectQueryService = projectQueryService;
-            _projectMembersSetsDictionary = new Dictionary<ProjectMember, int>();
+            _projectMembersViewModel = projectMembersViewModel;
+            _projectMembersNamesSetsDictionary = new Dictionary<string, int>();
             _projectMembersSets = new List<HashSet<ProjectMember>>();
             projectQueryService.UserAdded += ProjectQueryServiceOnUserAdded;
+            projectPathsService.ProjectPathChanged += ProjectPathsServiceOnProjectPathChanged;
+        }
+
+        private void ProjectPathsServiceOnProjectPathChanged()
+        {
+            _projectMembersNamesSetsDictionary.Clear();
+            _projectMembersSets.Clear();
         }
 
         private void ProjectQueryServiceOnUserAdded(ProjectMember projectMember)
         {
             foreach (var membersSet in _projectMembersSets
-                     .Where(membersSet => membersSet.Any(memberFromSet => memberFromSet.Name == projectMember.Name || memberFromSet.Email == projectMember.Email)))
+                .Where(
+                    membersSet =>
+                        membersSet.Any(
+                            memberFromSet =>
+                                memberFromSet.Name == projectMember.Name || memberFromSet.Email == projectMember.Email))
+                )
             {
                 membersSet.Add(projectMember);
             }
@@ -34,74 +46,47 @@ namespace GitTask.UI.MVVM.ViewModel.Common
 
         public async Task<HashSet<ProjectMember>> Resolve(ProjectMember projectMember)
         {
-            return await Task.Run(async () =>
+            return await Task.Run(() =>
             {
-                if (_projectMembersSetsDictionary.ContainsKey(projectMember))
+                if (_projectMembersNamesSetsDictionary.ContainsKey(projectMember.Name))
                 {
-                    return _projectMembersSets[_projectMembersSetsDictionary[projectMember]];
-                }
-                foreach (var key in _projectMembersSetsDictionary.Keys.Where(
-                            key => key.Name == projectMember.Name || key.Email == projectMember.Email))
-                {
-                    _projectMembersSetsDictionary.Add(projectMember, _projectMembersSetsDictionary[key]);
-                    return _projectMembersSets[_projectMembersSetsDictionary[key]];
+                    return _projectMembersSets[_projectMembersNamesSetsDictionary[projectMember.Name]];
                 }
 
-                _projectMembersSets.Add(new HashSet<ProjectMember>());
+                var alreadyResolved = new HashSet<ProjectMember>();
+                var toBeResolved = new HashSet<ProjectMember>();
+                var other = new HashSet<ProjectMember>(_projectMembersViewModel.ProjectMembers);
+                Move(projectMember, other, toBeResolved);
 
-                var namesHashSet = new HashSet<string>();
-                var emailsHashSet = new HashSet<string>();
-
-                foreach (var newProjectMember in
-                            (from commiter in await _repositoryService.GetAllUniqueCommiters()
-                             where commiter.Name == projectMember.Name || commiter.Email == projectMember.Email
-                               || namesHashSet.Contains(commiter.Name) || emailsHashSet.Contains(commiter.Email)
-                             select new ProjectMember(commiter.Name, commiter.Email)))
+                while (toBeResolved.Any())
                 {
-                    if (!namesHashSet.Contains(newProjectMember.Name)) namesHashSet.Add(newProjectMember.Name);
-                    if (!emailsHashSet.Contains(newProjectMember.Email)) emailsHashSet.Add(newProjectMember.Email);
-                }
-
-                foreach (var newProjectMember in
-                            (from commiter in await _repositoryService.GetAllUniqueCommiters()
-                             where commiter.Name == projectMember.Name || commiter.Email == projectMember.Email
-                               || namesHashSet.Contains(commiter.Name) || emailsHashSet.Contains(commiter.Email)
-                             select new ProjectMember(commiter.Name, commiter.Email)))
-                {
-                    if (!namesHashSet.Contains(newProjectMember.Name)) namesHashSet.Add(newProjectMember.Name);
-                    if (!emailsHashSet.Contains(newProjectMember.Email)) emailsHashSet.Add(newProjectMember.Email);
-
-                    _projectMembersSetsDictionary.Add(newProjectMember, _projectMembersSets.Count - 1);
-                    _projectMembersSets[_projectMembersSets.Count - 1].Add(newProjectMember);
-                }
-
-                if (_projectQueryService.Project?.ProjectMembersNotInRepository != null)
-                {
-                    foreach (var newProjectMember in _projectQueryService.Project.ProjectMembersNotInRepository
-                            .Where(member => member.Name == projectMember.Name || member.Email == projectMember.Email
-                                         || namesHashSet.Contains(member.Name) || emailsHashSet.Contains(member.Email))
-                            .Select(member => new ProjectMember(member.Name, member.Email))
-                            .Distinct())
+                    var current = toBeResolved.First();
+                    if (alreadyResolved.Any(x => x.Name == current.Name) &&
+                        alreadyResolved.Any(x => x.Email == current.Email))
                     {
-                        if (!namesHashSet.Contains(newProjectMember.Name)) namesHashSet.Add(newProjectMember.Name);
-                        if (!emailsHashSet.Contains(newProjectMember.Email)) emailsHashSet.Add(newProjectMember.Email);
+                        Move(current, toBeResolved, alreadyResolved);
+                        continue;
                     }
 
-                    foreach (var newProjectMember in _projectQueryService.Project.ProjectMembersNotInRepository
-                            .Where(member => member.Name == projectMember.Name || member.Email == projectMember.Email
-                                         || namesHashSet.Contains(member.Name) || emailsHashSet.Contains(member.Email))
-                            .Select(member => new ProjectMember(member.Name, member.Email))
-                            .Distinct())
-                    {
-                        if (!namesHashSet.Contains(newProjectMember.Name)) namesHashSet.Add(newProjectMember.Name);
-                        if (!emailsHashSet.Contains(newProjectMember.Email)) emailsHashSet.Add(newProjectMember.Email);
+                    _projectMembersNamesSetsDictionary[current.Name] = _projectMembersSets.Count;
+                    Move(current, toBeResolved, alreadyResolved);
 
-                        _projectMembersSetsDictionary.Add(newProjectMember, _projectMembersSets.Count - 1);
-                        _projectMembersSets[_projectMembersSets.Count - 1].Add(newProjectMember);
+                    foreach (var duplicate in
+                        other.Where(x => x.Name == current.Name || x.Email == current.Email).ToList())
+                    {
+                        Move(duplicate, other, toBeResolved);
                     }
                 }
+
+                _projectMembersSets.Add(alreadyResolved);
                 return _projectMembersSets[_projectMembersSets.Count - 1];
             });
+        }
+
+        private static void Move<T>(T element, ICollection<T> from, ISet<T> to)
+        {
+            from.Remove(element);
+            to.Add(element);
         }
     }
 }

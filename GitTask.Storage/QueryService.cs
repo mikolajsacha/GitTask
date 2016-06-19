@@ -16,7 +16,6 @@ namespace GitTask.Storage
         private readonly HashSet<object> _recentlyDeleted;
 
         private Dictionary<object, TModel> _data;
-        private KeyGeneratorService _keyGeneratorService;
 
         public event Action<TModel> ElementAdded;
         public event Action<TModel> ElementUpdated;
@@ -41,11 +40,6 @@ namespace GitTask.Storage
             _recentlyDeleted.Clear();
 
             _data = GetKeySortedData(await _storageService.GetAll());
-
-            if (GetKeyType().IsAssignableFrom(typeof(int)))
-            {
-                _keyGeneratorService = new KeyGeneratorService(_data.Keys.Select(keyValue => (int)keyValue));
-            }
 
             ElementsReloaded?.Invoke();
         }
@@ -81,10 +75,6 @@ namespace GitTask.Storage
 
         public void AddNew(TModel modelObject)
         {
-            if (_keyGeneratorService != null)
-            {
-                KeyAttribute.GetKeyProperty(typeof(TModel)).SetValue(modelObject, _keyGeneratorService.GenerateKey());
-            }
             var modelObjectKeyValue = KeyAttribute.GetKeyValue(modelObject);
             AssertKeyNotExists(modelObjectKeyValue);
             UpdateCollection(modelObjectKeyValue, modelObject);
@@ -139,11 +129,6 @@ namespace GitTask.Storage
         {
             _data.Remove(keyValue);
             _recentlyDeleted.Add(keyValue);
-        }
-
-        private static Type GetKeyType()
-        {
-            return KeyAttribute.GetKeyProperty(typeof(TModel)).PropertyType;
         }
 
         private static Dictionary<object, TModel> GetKeySortedData(IEnumerable<TModel> data)
