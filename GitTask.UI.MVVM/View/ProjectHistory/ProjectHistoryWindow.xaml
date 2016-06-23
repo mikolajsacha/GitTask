@@ -13,6 +13,7 @@
         MaxHeight="500"
         d:DataContext="{d:DesignInstance Type=designProjectHistory:DesignProjectHistoryViewModel,
                                          IsDesignTimeCreatable=True}"
+        Icon="../../Icons/graph.png"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"
         mc:Ignorable="d ignore">

@@ -12,6 +12,7 @@
         DataContext="{Binding ProjectSetupViewModel,
                               Source={StaticResource Locator},
                               Mode=OneWay}"
+        Icon="../../Icons/padnote.png"
         WindowStartupLocation="CenterOwner"
         mc:Ignorable="d ignore">
 

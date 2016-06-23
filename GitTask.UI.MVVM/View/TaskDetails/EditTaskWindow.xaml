@@ -13,6 +13,7 @@
         MaxWidth="400"
         d:DataContext="{d:DesignInstance Type=design:DesignAddTaskViewModel,
                                          IsDesignTimeCreatable=True}"
+        Icon="../../Icons/edit.png"
         ResizeMode="NoResize"
         SizeToContent="Height"
         WindowStartupLocation="CenterOwner"

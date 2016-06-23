@@ -18,6 +18,7 @@
         DataContext="{Binding AddTaskViewModel,
                               Source={StaticResource Locator},
                               Mode=OneWay}"
+        Icon="../../Icons/add.png"
         SizeToContent="Width"
         WindowStartupLocation="CenterOwner"
         mc:Ignorable="d ignore">
