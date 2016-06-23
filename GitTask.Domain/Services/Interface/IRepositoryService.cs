@@ -17,6 +17,7 @@ namespace GitTask.Domain.Services.Interface
         Task<ProjectHistory> GetProjectHistory();
         Task<MergingConflicts> GetCurrentMergingConflicts();
         bool RepositoryExists(string projectPath);
+        bool IsRepositoryInitialized { get; }
         Task SaveInIndex<TModel>(TModel modelObject);
     }
 }

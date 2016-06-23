@@ -36,7 +36,7 @@ namespace GitTask.UI.MVVM.ViewModel.Main
 
         private static void ProjectQueryServiceOnChanged(Project newProject)
         {
-            if (!string.IsNullOrWhiteSpace(newProject.Title)) return;
+            if (!string.IsNullOrWhiteSpace(newProject?.Title)) return;
             var projectSetupWindow = new ProjectSetupWindow();
             if (Application.Current.MainWindow.IsActive) projectSetupWindow.Owner = Application.Current.MainWindow;
             projectSetupWindow.ShowDialog();

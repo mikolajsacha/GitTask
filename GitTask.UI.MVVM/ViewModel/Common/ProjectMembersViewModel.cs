@@ -42,16 +42,35 @@ namespace GitTask.UI.MVVM.ViewModel.Common
             _repositoryService.RepositoryInitalized += RepositoryServiceOnRepositoryInitalized;
             _projectQueryService.ProjectChanged += ProjectQueryServiceOnProjectChanged;
             Messenger.Default.Register<AddUserMessage>(this, OnAddUserMessage);
-            new Task(async () => await InitializeProjectMembers()).RunSynchronously();
+            new Task(async () =>
+            {
+                if (projectQueryService.Project != null)
+                {
+                    await UpdateProjectMembers();
+                }
+                if (repositoryService.IsRepositoryInitialized)
+                {
+                    await UpdateRepositoryMembers();
+                }
+            }).RunSynchronously();
         }
 
         private async void ProjectQueryServiceOnProjectChanged(Project project)
+        {
+            await UpdateProjectMembers();
+        }
+        private async void RepositoryServiceOnRepositoryInitalized()
+        {
+            await UpdateRepositoryMembers();
+        }
+
+        private async Task UpdateProjectMembers()
         {
             _projectChanged = true;
             await TryInitializeProject();
         }
 
-        private async void RepositoryServiceOnRepositoryInitalized()
+        private async Task UpdateRepositoryMembers()
         {
             _repositoryInitialized = true;
             await TryInitializeProject();

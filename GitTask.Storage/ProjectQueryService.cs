@@ -33,9 +33,9 @@ namespace GitTask.Storage
         {
             var data = (await _storageService.GetAll()).ToList();
             Project = data.Any() ? data.First() : null;
+            ProjectChanged?.Invoke(Project);
             if (Project != null)
             {
-                ProjectChanged?.Invoke(Project);
                 ProjectTitleChanged?.Invoke(Project.Title);
             }
         }

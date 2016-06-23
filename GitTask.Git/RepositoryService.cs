@@ -19,6 +19,7 @@ namespace GitTask.Git
     public class RepositoryService : IRepositoryService
     {
         public event Action RepositoryInitalized;
+        public bool IsRepositoryInitialized { get; private set; }
 
         private readonly IProjectPathsReadonlyService _projectPathsService;
         private readonly IFileService _fileService;
@@ -27,6 +28,7 @@ namespace GitTask.Git
 
         public RepositoryService(IProjectPathsReadonlyService projectPathsService, IFileService fileService)
         {
+            IsRepositoryInitialized = false;
             _projectPathsService = projectPathsService;
             _fileService = fileService;
             _projectPathsService.ProjectPathChanged += OnProjectPathChanged;
@@ -232,6 +234,7 @@ namespace GitTask.Git
 
             _repository = new Repository(_projectPathsService.BaseProjectPath);
             RepositoryInitalized?.Invoke();
+            IsRepositoryInitialized = true;
         }
 
         private string GetObjectPath<TModel>(TModel modelObject)

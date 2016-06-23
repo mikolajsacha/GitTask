@@ -39,7 +39,8 @@ namespace GitTask.Git
             var addedTasks = new List<string>();
             foreach (var taskAddedChange in
                 treeChanges.Where(treeEntryChange => treeEntryChange.Path.StartsWith(baseTaskPath)
-                                                     && treeEntryChange.Exists && !treeEntryChange.OldExists))
+                                                     && treeEntryChange.Exists && (!treeEntryChange.OldExists ||
+                                                         treeEntryChange.Path != treeEntryChange.OldPath)))
             {
                 var taskName = Path.GetFileNameWithoutExtension(taskAddedChange.Path);
                 addedTasks.Add(taskName);
